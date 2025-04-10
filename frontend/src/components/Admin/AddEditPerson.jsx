@@ -1,13 +1,13 @@
 // src/components/Admin/AddEditPerson.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // Importa useAuth
-import './AddEditPerson.css'; // Asegúrate de tener estilos para el formulario
+import { useAuth } from '../../context/AuthContext';
+import './AddEditPerson.css';
 
 const AddEditPerson = () => {
-  const { tipo, id } = useParams(); // 'jugador' o 'entrenador', y el ID para editar
+  const { tipo, id } = useParams();
   const navigate = useNavigate();
-  const { token } = useAuth(); // Usa el hook para acceder al token
+  const { token, isAuthenticated } = useAuth();
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -16,7 +16,8 @@ const AddEditPerson = () => {
     nacionalidad: '',
     categoria: '',
     equipo: '',
-    posicion: '', // Solo para jugadores
+    posicion: '',
+    inst: '', // Added 'inst' to formData
   });
   const [error, setError] = useState('');
 
@@ -43,7 +44,6 @@ const AddEditPerson = () => {
     if (id) {
       fetchPersona();
     } else {
-      // Resetear el formulario para agregar, incluyendo el tipo si viene de la ruta
       setFormData({
         nombre: '',
         apellido: '',
@@ -53,6 +53,7 @@ const AddEditPerson = () => {
         categoria: '',
         equipo: '',
         posicion: '',
+        inst: '', // Initialize 'inst'
       });
     }
   }, [tipo, id, token]);
@@ -65,6 +66,8 @@ const AddEditPerson = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    console.log('Token antes de la petición:', token); // <---- LOG 1
+    console.log('Estado isAuthenticated:', isAuthenticated); // <---- LOG 2
     try {
       const url = id ?
         (tipo === 'jugador' ? `/api/jugadores/${id}` : `/api/entrenadores/${id}`) :
@@ -75,9 +78,9 @@ const AddEditPerson = () => {
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Incluye el token del contexto
+          'Authorization': `Bearer ${token}`, // Asegúrate de enviar el token aquí
         },
-        body: JSON.stringify({ ...formData, tipo }), // Incluye el tipo al crear
+        body: JSON.stringify({ ...formData, tipo }),
       });
 
       if (!response.ok) {
@@ -85,7 +88,7 @@ const AddEditPerson = () => {
         throw new Error(errorData.message || `Error al ${id ? 'editar' : 'agregar'} ${tipo}`);
       }
 
-      navigate('/admin'); // Redirige a la lista
+      navigate('/admin');
     } catch (err) {
       setError(err.message);
     }
@@ -125,16 +128,28 @@ const AddEditPerson = () => {
           <input type="text" id="equipo" name="equipo" className="form-control" value={formData.equipo} onChange={handleChange} />
         </div>
         {tipo === 'jugador' && (
+          <>
+            <div className="form-group">
+              <label htmlFor="posicion">Posición:</label>
+              <select id="posicion" name="posicion" className="form-control" value={formData.posicion} onChange={handleChange} required>
+                <option value="">Seleccionar</option>
+                <option value="base">Base</option>
+                <option value="escolta">Escolta</option>
+                <option value="alero">Alero</option>
+                <option value="ala-pivot">Ala-Pivot</option>
+                <option value="pivot">Pivot</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="inst">Instagram:</label>
+              <input type="text" id="inst" name="inst" className="form-control" value={formData.inst} onChange={handleChange} />
+            </div>
+          </>
+        )}
+        {tipo === 'entrenador' && (
           <div className="form-group">
-            <label htmlFor="posicion">Posición:</label>
-            <select id="posicion" name="posicion" className="form-control" value={formData.posicion} onChange={handleChange} required>
-              <option value="">Seleccionar</option>
-              <option value="base">Base</option>
-              <option value="escolta">Escolta</option>
-              <option value="alero">Alero</option>
-              <option value="ala-pivot">Ala-Pivot</option>
-              <option value="pivot">Pivot</option>
-            </select>
+            <label htmlFor="inst">Instagram:</label>
+            <input type="text" id="inst" name="inst" className="form-control" value={formData.inst} onChange={handleChange} />
           </div>
         )}
         <div className="form-actions">

@@ -1,7 +1,11 @@
+// src/components/Admin/PersonList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // Importa useAuth
-import './PersonList.css'; // Asegúrate de tener estilos para la lista
+import { useAuth } from '../../context/AuthContext';
+import './PersonList.css';
+// Import de iconos (prueba con estos primero)
+// Si los anteriores no funcionan, prueba con estos:
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const PersonList = () => {
   const [personas, setPersonas] = useState([]);
@@ -9,7 +13,7 @@ const PersonList = () => {
   const [filtroTipo, setFiltroTipo] = useState('todos');
   const [filtroPosicion, setFiltroPosicion] = useState('todos');
   const [error, setError] = useState('');
-  const { token, logout } = useAuth(); // Usa el hook para acceder al token y la función logout
+  const { token, logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +29,7 @@ const PersonList = () => {
           throw new Error('Error al cargar jugadores');
         }
         const jugadoresData = await responseJugadores.json();
+        jugadoresData.forEach(jugador => jugador.tipo = 'jugador');
 
         const responseEntrenadores = await fetch('/api/entrenadores', {
           headers: {
@@ -35,6 +40,7 @@ const PersonList = () => {
           throw new Error('Error al cargar entrenadores');
         }
         const entrenadoresData = await responseEntrenadores.json();
+        entrenadoresData.forEach(entrenador => entrenador.tipo = 'entrenador');
 
         setPersonas([...jugadoresData, ...entrenadoresData]);
       } catch (err) {
@@ -45,7 +51,7 @@ const PersonList = () => {
     if (token) {
       fetchPersonas();
     } else {
-      navigate('/login'); // Redirige si no hay token
+      navigate('/login');
     }
   }, [token, navigate]);
 
@@ -62,8 +68,8 @@ const PersonList = () => {
     navigate(`/admin/${tipo}/editar/${id}`);
   };
 
-  const handleEliminar = async (id, tipo) => {
-    if (window.confirm(`¿Seguro que quieres eliminar a ${tipo} con ID ${id}?`)) {
+  const handleEliminar = async (id, tipo, nombre, apellido) => {
+    if (window.confirm(`¿Seguro que quieres eliminar a ${tipo} ${nombre} ${apellido}?`)) {
       try {
         const url = tipo === 'jugador' ? `/api/jugadores/${id}` : `/api/entrenadores/${id}`;
         const response = await fetch(url, {
@@ -84,8 +90,8 @@ const PersonList = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Llama a la función de logout del contexto
-    navigate('/login'); // Redirige al login
+    logout();
+    navigate('/login');
   };
 
   return (
@@ -127,10 +133,15 @@ const PersonList = () => {
               <span className="person-name">{persona.nombre} {persona.apellido}</span>
               <span className="person-type">({persona.tipo})</span>
               {persona.posicion && <span className="person-position"> - {persona.posicion}</span>}
+              {persona.edad && <span className="person-instagram"> - Edad: {persona.edad}</span>}
             </span>
             <div className="person-actions">
-              <button className="edit-button" onClick={() => handleEditar(persona._id, persona.tipo)}>Editar</button>
-              <button className="delete-button" onClick={() => handleEliminar(persona._id, persona.tipo)}>Eliminar</button>
+              <button className="edit-button" onClick={() => handleEditar(persona._id, persona.tipo)}>
+                <FaEdit /> {/* Icono de editar */}
+              </button>
+              <button className="delete-button" onClick={() => handleEliminar(persona._id, persona.tipo, persona.nombre, persona.apellido)}>
+                <FaTrash /> {/* Icono de eliminar */}
+              </button>
             </div>
           </li>
         ))}

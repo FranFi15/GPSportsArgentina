@@ -1,0 +1,157 @@
+/* src/components/Admin/Basketball.css */
+.basketball-list-container {
+  padding: 150px 50px;
+  background-image: url("../../assets/fondo2.png");
+  background-size: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+}
+
+.basketball-list-title {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.basketball-filter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.basketball-filter-label {
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.basketball-filter-input,
+.basketball-filter-select {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ffffff;
+  font-size: 1em;
+  color: #ffffff;
+}
+
+.basketball-filter-select option{
+  color: #999; /* Estilo para la opción "Seleccionar posición" */
+  background-color: #545b62;
+}
+
+.basketball-filter-input:focus,
+.basketball-filter-select:focus {
+  outline: none;
+}
+
+.basketball-person-list {
+  list-style: none;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.basketball-person-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr; /* Added fraction for Edad */
+  padding: 10px 0;
+  font-weight: bold;
+  border-bottom: 2px solid #ffffff;
+  margin-bottom: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  
+}
+
+.basketball-person-item {
+  color: #ffffff;
+  
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid #ecf0f1;
+  margin-bottom: 15px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr; /* Match header grid */
+  align-items: center;
+  transition:scale, background-color 0.8s ease-in-out;
+  transition: font-weight 0.8s ease-in-out;
+}
+.basketball-person-item:hover {
+  scale: 1.02;
+  background-color: rgba(0, 0, 0, 0.6);
+  font-weight: 900;
+}
+
+.person-name-header,
+.person-type-header,
+.person-position-header,
+.person-age-header, /* Nuevo header Edad */
+.person-instagram-header,
+.basketball-person-name,
+.basketball-person-type,
+.basketball-person-position,
+.basketball-person-age, /* Nueva celda Edad */
+.basketball-person-instagram {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.person-type-header,
+.person-position-header,
+.person-age-header, /* Centrar header Edad */
+.person-instagram-header,
+.basketball-person-type,
+.basketball-person-position,
+.basketball-person-age, /* Centrar celda Edad */
+.basketball-person-instagram {
+  justify-content: center;
+}
+
+
+
+.instagram-icon {
+  font-size: 1.5em;
+  color: white;
+  transition: color 0.5s ease-in-out
+}
+.instagram-icon:hover {
+  font-size: 1.5em;
+  color: #C13584;
+}
+
+.basketball-person-instagram a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Adjust padding for better visual spacing */
+.person-name-header,
+.basketball-person-name {
+  padding-right: 20px;
+}
+
+.person-type-header,
+.basketball-person-type {
+  padding-right: 10px;
+}
+
+.person-position-header,
+.basketball-person-position {
+  padding-right: 10px;
+}
+
+.person-age-header,
+.basketball-person-age {
+  padding-right: 10px;
+}
+
+.person-instagram-header,
+.basketball-person-instagram {
+  padding-right: 10px;
+}

@@ -8,7 +8,7 @@
     font-family: "Roboto", sans-serif;
     color: #ffffff;
     height: 100vh;
-    padding: 5%;
+    padding: 150px 50px;
   }
   
   .add-edit-person-container h2 {
@@ -52,6 +52,7 @@
     border: none;
     color: #ffffff;
     width: 60%;
+    border-bottom: 1px solid #ffffff;
   }
   
   .add-edit-person-container form select option {

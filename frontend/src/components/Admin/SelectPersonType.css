@@ -1,17 +1,21 @@
 /* src/components/Admin/SelectPersonType.css */
 .select-person-type-container {
+    height: 100%;
     max-width: 400px;
     margin: 30px auto;
-    padding: 30px;
-    background-color: #f9f9f9;
+    padding: 150px 50px;
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
   }
   
   .select-person-type-container h2 {
-    color: #333;
     margin-bottom: 25px;
+    text-transform: uppercase;
+    font-weight: 900;
   }
   
   .select-person-type-container .buttons-container {
@@ -29,24 +33,17 @@
     transition: background-color 0.3s ease;
   }
   
-  .select-person-type-container .add-jugador-button {
-    background-color: #007bff;
+  .select-person-type-container .add-jugador-button,.select-person-type-container .add-entrenador-button {
+    background-color: #cc6f04;
     color: white;
   }
   
-  .select-person-type-container .add-jugador-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .select-person-type-container .add-entrenador-button {
-    background-color: #28a745;
-    color: white;
-  }
-  
+  .select-person-type-container .add-jugador-button:hover,
   .select-person-type-container .add-entrenador-button:hover {
-    background-color: #1e7e34;
+    background-color: #a95b01;
   }
   
+
   .select-person-type-container .cancel-button {
     background-color: #6c757d;
     color: white;

@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100%;
   padding: 30px;
-  background-color: #000000;
+  background-image: url("../../assets/fondo2.png");
+  background-size: cover;
   border-radius: 8px;
   text-transform: uppercase;
-  font-family: 'Arial', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -20,7 +20,6 @@
   font-size: 4rem;
   text-align: center;
   margin-bottom: 25px;
-  
 }
 
 .person-list-container .error-message {
@@ -37,18 +36,32 @@
 }
 
 .person-list-container .filter-controls input[type="text"],
-.person-list-container .filter-controls select {
+.person-list-container .filter-controls select,
+.person-list-container .filter-controls input[type="text"]::placeholder,
+.person-list-container .filter-controls select::placeholder {
+  color: #ffffff;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  background-color: transparent;
   font-size: 16px;
+}
+.person-list-container .filter-controls input[type="text"]:focus,
+.person-list-container .filter-controls select:focus {
+  outline: none;
+  border-bottom: 1px solid #cc6f04; /* Color de la línea inferior al enfocar */
+}
+
+.person-list-container .filter-controls select option{
+  color: #999; /* Estilo para la opción "Seleccionar posición" */
+    background-color: #545b62;
 }
 
 .person-list-container .filter-controls button {
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #cc6f04;
   color: white;
   cursor: pointer;
   font-size: 16px;
@@ -56,12 +69,12 @@
 }
 
 .person-list-container .filter-controls button:hover {
-  background-color: #0056b3;
+  background-color: #a95b01;
 }
 
 /* Estilo específico para el botón de cerrar sesión */
 .person-list-container .filter-controls .logout-button {
-  background-color: #dc3545; /* Color rojo para indicar cierre de sesión */
+  background-color: #955d63; /* Color rojo para indicar cierre de sesión */
   color: white;
 }
 
@@ -72,10 +85,12 @@
 .person-list-container ul {
   list-style: none;
   padding: 0;
+  width: 100%;
 }
 
 .person-list-container ul li {
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 15px;
@@ -87,52 +102,47 @@
 
 .person-list-container ul li > span {
   flex-grow: 1;
+  display: flex;
+  gap: 15px; /* Espacio entre los elementos de información */
+  align-items: center; /* Alineación vertical */
 }
 
-.person-list-container ul li button {
-  padding: 8px 12px;
+.person-list-container ul li .person-actions {
+  display: flex;
+  gap: 10px; /* Espacio entre los iconos */
+}
+
+.person-list-container ul li .person-actions button {
+  padding: 8px; /* Reduce el padding para los iconos */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  margin-left: 10px;
   transition: background-color 0.3s ease;
+  display: flex; /* Para centrar el icono */
+  align-items: center;
+  justify-content: center;
 }
 
-.person-list-container ul li button:first-of-type {
+.person-list-container ul li .person-actions button:first-of-type {
   background-color: #28a745; /* Color para el botón Editar */
   color: white;
 }
 
-.person-list-container ul li button:first-of-type:hover {
+.person-list-container ul li .person-actions button:first-of-type:hover {
   background-color: #1e7e34;
 }
 
-.person-list-container ul li button:last-of-type {
+.person-list-container ul li .person-actions button:last-of-type {
   background-color: #dc3545; /* Color para el botón Eliminar */
   color: white;
 }
 
-.person-list-container ul li button:last-of-type:hover {
+.person-list-container ul li .person-actions button:last-of-type:hover {
   background-color: #c82333;
 }
 
-/* Estilos para la información de la persona (nombre, tipo, posición) */
-.person-info {
-  flex-grow: 1;
-}
-
-.person-info .person-name {
-  font-weight: bold;
-  color: #333;
-}
-
-.person-info .person-type {
-  color: #777;
-  font-size: 0.9em;
-}
-
-.person-info .person-position {
-  color: #555;
-  font-style: italic;
+/* Estilo para los iconos */
+.person-list-container ul li .person-actions button svg {
+  font-size: 1.2em; /* Tamaño de los iconos */
 }

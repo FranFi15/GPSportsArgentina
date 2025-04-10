@@ -89,10 +89,6 @@ const Navbar = () => {
                 <li className="navbar-nav-item">
                     <Link to="/charlas" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].charlas}</Link>
                 </li>
-                <li className="navbar-nav-item">
-                    <Link to="/admin" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].admin}</Link>
-                </li>
-
                 <li className="navbar-nav-item navbar-dropdown" onClick={handleDeportesToggle}>
                         <button
                             className="navbar-dropdown-trigger"
@@ -106,7 +102,7 @@ const Navbar = () => {
                             <ul className="navbar-dropdown-menu">
                                 <li className="navbar-dropdown-item">
                                     <Link
-                                        to="/deportes/basketball"
+                                        to="/basketball"
                                         className="navbar-nav-link"
                                         onMouseLeave={handleDeportesLinkClick}
                                     >
@@ -116,6 +112,9 @@ const Navbar = () => {
                             </ul>
                         )}
                     </li>
+                    <li className="navbar-nav-item">
+                    <Link to="/admin" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].admin}</Link>
+                </li>
                 <li className="navbar-nav-item navbar-language-buttons">
                     <button onClick={() => toggleLanguage('es')} className={`navbar-button lang-button ${language === 'es' ? 'active' : ''}`}>
                         <img src={eng} alt="Español" className="lang-icon" />
