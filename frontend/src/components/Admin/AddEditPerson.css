@@ -1,0 +1,100 @@
+/* src/components/Admin/AddEditPerson.css */
+.add-edit-person-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    height: 100vh;
+    padding: 5%;
+  }
+  
+  .add-edit-person-container h2 {
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+  }
+  
+  .add-edit-person-container .error-message {
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .add-edit-person-container form {
+    background-color: rgba(83, 83, 83, 0.6);
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .add-edit-person-container form > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-edit-person-container form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .add-edit-person-container form input[type="text"],
+  .add-edit-person-container form input[type="number"],
+  .add-edit-person-container form select {
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    width: 60%;
+  }
+  
+  .add-edit-person-container form select option {
+    color: #999; /* Estilo para la opción "Seleccionar posición" */
+    background-color: #545b62;
+  }
+  
+  .add-edit-person-container form > div:last-child {
+    grid-column: 1 / -1; /* Los botones ocupan toda la fila */
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .add-edit-person-container form button[type="submit"],
+  .add-edit-person-container form button[type="button"] {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-edit-person-container form button[type="submit"] {
+    background-color: #cc6f04;
+    color: white;
+  }
+  
+  .add-edit-person-container form button[type="submit"]:hover {
+    background-color: #a95b01;
+  }
+  
+  .add-edit-person-container form button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .add-edit-person-container form button[type="button"]:hover {
+    background-color: #545b62;
+  }
+  
+  /* Estilos específicos para el campo de posición del jugador */
+  .add-edit-person-container form > div:nth-child(8) { /* Ajusta el número si cambias el orden de los campos */
+    /* Puedes añadir estilos específicos si lo necesitas */
+  }

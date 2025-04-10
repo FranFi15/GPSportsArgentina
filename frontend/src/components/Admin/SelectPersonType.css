@@ -1,0 +1,57 @@
+/* src/components/Admin/SelectPersonType.css */
+.select-person-type-container {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .select-person-type-container h2 {
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .select-person-type-container .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .select-person-type-container button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .select-person-type-container .add-jugador-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .select-person-type-container .add-jugador-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .select-person-type-container .add-entrenador-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .select-person-type-container .add-entrenador-button:hover {
+    background-color: #1e7e34;
+  }
+  
+  .select-person-type-container .cancel-button {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .select-person-type-container .cancel-button:hover {
+    background-color: #545b62;
+  }

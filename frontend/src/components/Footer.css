@@ -1,0 +1,127 @@
+/* FooterSimple.css */
+/* FooterSimple.css */
+.footer-simple {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; /* Cambia align-items a flex-start */
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  .social-links,
+  .legal-links,
+  .address-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .social-links h3,
+  .legal-links h3,
+  .address-link h3 {
+    margin-top: 0;
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+    color: #ddd;
+    text-align: center; /* Center the title */
+  }
+  
+  .social-links a {
+    color: #ddd;
+    font-size: 1.2em;
+    margin-bottom: 5px; /* Añade margen inferior para espaciar los iconos */
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  .legal-links {
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+  }
+  
+  .legal-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .legal-links li {
+    margin-top: 10px;
+  }
+  
+  .legal-links li a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+  }
+  
+  .legal-links li a:hover {
+    color: #cc6f04;
+  }
+  
+  .address-link {
+    align-items: center; /* Center the link */
+  }
+  
+  .address-link a {
+    margin-top: 10px;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+  }
+  
+  .address-link a:hover {
+    color: #cc6f04;
+  }
+  
+  /* Adjust layout for smaller screens */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .social-links,
+    .legal-links,
+    .address-link {
+      margin-bottom: 20px;
+      align-items: center; /* Center items on smaller screens */
+    }
+  
+    .legal-links {
+      align-items: center;
+    }
+  
+    .social-links a {
+      margin: 0 10px;
+    }
+  
+    .legal-links ul {
+      padding-left: 0;
+    }
+  
+    .legal-links li {
+      margin-left: 0;
+    }
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 0.8em;
+    color: #aaa;
+    margin: 0;
+  }
