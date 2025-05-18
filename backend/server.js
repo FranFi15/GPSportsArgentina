@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log('Conectado a MongoDB'))
   .catch(err => console.error('Error de conexión a MongoDB:', err));
 
-
+  console.log('Middleware global CORS y bodyParser aplicados.');
 // Rutas
 app.use('/api/jugadores', jugadorRoutes);
 app.use('/api/entrenadores', entrenadorRoutes);

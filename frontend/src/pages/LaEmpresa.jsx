@@ -7,11 +7,9 @@ import playersGroupLogo from "../assets/PGI.png"
 import oneWorldLogo from "../assets/OW.png";
 import duranLogo from "../assets/DM.png";
 import bestBallerLogo from "../assets/BB.png";
+import Gallery from '../components/Gallery';
 
-// Importa las imágenes para el carrusel de Marketing y Eventos
-import evento1 from '../assets/1.jpg';
-import evento2 from '../assets/12.jpg';
-import evento3 from '../assets/2.jpg';
+
 
 const LaEmpresa = () => {
     const { language } = useLanguage();
@@ -23,15 +21,13 @@ const LaEmpresa = () => {
     const addressRef = useRef(null);
     const mktEventRef = useRef(null);
     const [isVisible, setIsVisible] = useState({ img: false, description: false, description2: false, staff: false, partners: false, address: false, mktEvent: false });
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const carouselInterval = useRef(null);
+   
 
     const textos = {
         es: {
             titulo: 'La Empresa',
-            contenido1: 'Conectamos talento con oportunidades globales.',
-            contenido2: "GP SPORTS pone a disposición del jugador más de 30 años de experiencia en la negociación de contratos con Clubes de todo el mundo y el conocimiento de las reglamentaciones deportivas y de las normas que regulan los contratos profesionales en las diferentes competencias, niveles y países.",
-            contenido3: "Cuidamos cada detalle de tu carrera, desde contratos hasta tu marca personal, con un equipo experto dedicado a superar tus expectativas. Representamos a más de cien atletas mundialmente, ofreciendo soluciones personalizadas y oportunidades para maximizar tu potencial. Deja que nuestra experiencia impulse tu leyenda. Contáctanos y lleva tu talento al siguiente nivel.",
+            contenido1: 'Nos une el deporte, pero sobre todo, una manera de vivirlo.',
+            contenido2: "GP Sports es una compañía de representación y management de jugadores, entrenadores y atletas con mas de 30 años de experiencia en la gestión y negociación de contratos con clubes y empresas de todo el mundo. Acompañamos carreras en un concepto 360, desde la negociación de contratos hasta la implementación comercial de los atletas con un staff de profesionales capacitado para cada una de las áreas de gestión. El objetivo con nuestros clientes es continuar con los valores que caracterizan la empresa desde su fundación: planificación, conocimiento, pasión,innovación y compromiso.",
             staff1: "Carlos Prunes",
             staff2: "Matias Novoa",
             staff3: "Ariel Eslava",
@@ -62,9 +58,8 @@ const LaEmpresa = () => {
         },
         en: {
             titulo: 'The Company',
-            contenido1: 'Connecting talent with global opportunities.',
-            contenido2: "GP SPORTS offers players over 30 years of experience in negotiating contracts with clubs worldwide, along with in-depth knowledge of sports regulations and the rules governing professional contracts across different competitions, levels, and countries.",
-            contenido3: "We meticulously manage every detail of your career, from contracts to your personal brand, with an expert team dedicated to exceeding your expectations. Representing over a hundred athletes globally, we offer personalized solutions and opportunities to maximize your potential. Let our experience drive your legend. Contact us and take your talent to the next level.",
+            contenido1: 'We are united by sports, but above all, by a way of living it.',
+            contenido2: "GP Sports is a representation and management company for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
             staff1: "Carlos Prunes",
             staff2: "Matias Novoa",
             staff3: "Ariel Eslava",
@@ -95,7 +90,13 @@ const LaEmpresa = () => {
         }
     };
 
-    const carouselImages = [evento1, evento2, evento3];
+    const galleryItems = [
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/2allLNcNMCo' },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/IgIeKtkECek' },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Xtae7OBUKGg' },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Rl2YjjTH1pE' },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA'} ,
+    ];
 
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
@@ -133,22 +134,6 @@ const LaEmpresa = () => {
         return () => observer.disconnect();
     }, []);
 
-    useEffect(() => {
-        carouselInterval.current = setInterval(() => {
-            setCurrentSlide(prevSlide => (prevSlide + 1) % carouselImages.length);
-        }, 2000); // Cambia de imagen cada 3 segundos
-
-        return () => clearInterval(carouselInterval.current); // Limpia el intervalo al desmontar
-    }, [carouselImages.length]);
-
-    const nextSlide = () => {
-        setCurrentSlide(prevSlide => (prevSlide + 1) % carouselImages.length);
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide(prevSlide => (prevSlide - 1 + carouselImages.length) % carouselImages.length);
-    };
-
     const currentText = textos[language];
     const googleMapsUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.189904482318!2d-58.45030162341898!3d-34.5972082803011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb0cca8e31884474f%3A0x992589390011289a!2sBoyac%C3%A1%20152%2C%20C1405BWE%20CABA!5e0!3m2!1ses-419!2sar!4v1681928749354?q=${currentText.direccionCalle?.replace(/ /g, '+')},+${currentText.direccionCiudad?.replace(/ /g, '+')}&output=embed`;
 
@@ -158,8 +143,8 @@ const LaEmpresa = () => {
                 <h2>{currentText.titulo}</h2>
             </div>
             <div ref={descriptionRef} className={`description ${isVisible.description ? 'slide-in' : ''}`}>
-                <p className='content1'>{currentText.contenido1}</p>
-                <p className='content2'>{currentText.contenido2}</p>
+                <p className='content1'>{textos[language].contenido1}</p>
+                <p className='content2'>{textos[language].contenido2}</p>
             </div>
             <div ref={description2Ref} className={`description2 ${isVisible.description2 ? 'fade-in' : ''}`}>
                 <p className='content3'>{currentText.contenido3}</p>
@@ -167,27 +152,10 @@ const LaEmpresa = () => {
             <div ref={mktEventRef} className={`mkt-event ${isVisible.mktEvent ? 'fade-in-bottom' : ''}`}>
                 <h2>{currentText.mktEventTitulo}</h2>
                 <p className='mkt-event-content'>{currentText.mktEventContenido}</p>
-                <div className='carousel-container'>
-                    <button className='carousel-button prev' onClick={prevSlide}>&#10094;</button>
-                    <div className='carousel-slide' style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                        {carouselImages.map((image, index) => (
-                            <img key={index} src={image} alt={`Evento ${index + 1}`} className='carousel-image' />
-                        ))}
-                    </div>
-                    <button className='carousel-button next' onClick={nextSlide}>&#10095;</button>
-                    <div className='carousel-dots'>
-                        {carouselImages.map((_, index) => (
-                            <span
-                                key={index}
-                                className={`dot ${index === currentSlide ? 'active' : ''}`}
-                                onClick={() => setCurrentSlide(index)}
-                            ></span>
-                        ))}
-                    </div>
-                </div>
+                <Gallery items={galleryItems} />
             </div>
             <div ref={staffRef} className={`staff ${isVisible.staff ? 'fade-in-bottom' : ''}`}>
-                <h2>STAFF</h2>
+                <div className='title-staff'><h2>STAFF</h2></div>
                 <div className='staff-members'>
                     <div className='member'>
                         <div className='staff-img-m'></div>

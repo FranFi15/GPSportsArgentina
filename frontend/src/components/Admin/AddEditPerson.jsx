@@ -1,4 +1,3 @@
-// src/components/Admin/AddEditPerson.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -12,12 +11,12 @@ const AddEditPerson = () => {
     nombre: '',
     apellido: '',
     dni: '',
-    edad: '',
+    fechaNacimiento: '', // Cambiado de 'edad' a 'fechaNacimiento'
     nacionalidad: '',
     categoria: '',
     equipo: '',
     posicion: '',
-    inst: '', // Added 'inst' to formData
+    inst: '',
   });
   const [error, setError] = useState('');
 
@@ -48,12 +47,12 @@ const AddEditPerson = () => {
         nombre: '',
         apellido: '',
         dni: '',
-        edad: '',
+        fechaNacimiento: '', // Inicializado como string vacía
         nacionalidad: '',
         categoria: '',
         equipo: '',
         posicion: '',
-        inst: '', // Initialize 'inst'
+        inst: '',
       });
     }
   }, [tipo, id, token]);
@@ -66,8 +65,8 @@ const AddEditPerson = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    console.log('Token antes de la petición:', token); // <---- LOG 1
-    console.log('Estado isAuthenticated:', isAuthenticated); // <---- LOG 2
+    console.log('Token antes de la petición:', token);
+    console.log('Estado isAuthenticated:', isAuthenticated);
     try {
       const url = id ?
         (tipo === 'jugador' ? `/api/jugadores/${id}` : `/api/entrenadores/${id}`) :
@@ -78,7 +77,7 @@ const AddEditPerson = () => {
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Asegúrate de enviar el token aquí
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ ...formData, tipo }),
       });
@@ -112,16 +111,16 @@ const AddEditPerson = () => {
           <input type="number" id="dni" name="dni" className="form-control" value={formData.dni} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="edad">Edad:</label>
-          <input type="number" id="edad" name="edad" className="form-control" value={formData.edad} onChange={handleChange} required />
+          <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label> {/* Etiqueta actualizada */}
+          <input type="date" id="fechaNacimiento" name="fechaNacimiento" className="form-control" value={formData.fechaNacimiento} onChange={handleChange} /> {/* Tipo actualizado */}
         </div>
         <div className="form-group">
           <label htmlFor="nacionalidad">Nacionalidad:</label>
-          <input type="text" id="nacionalidad" name="nacionalidad" className="form-control" value={formData.nacionalidad} onChange={handleChange} required />
+          <input type="text" id="nacionalidad" name="nacionalidad" className="form-control" value={formData.nacionalidad} onChange={handleChange}  />
         </div>
         <div className="form-group">
           <label htmlFor="categoria">Categoría:</label>
-          <input type="text" id="categoria" name="categoria" className="form-control" value={formData.categoria} onChange={handleChange} required />
+          <input type="text" id="categoria" name="categoria" className="form-control" value={formData.categoria} onChange={handleChange}  />
         </div>
         <div className="form-group">
           <label htmlFor="equipo">Equipo:</label>

@@ -133,7 +133,7 @@ const PersonList = () => {
               <span className="person-name">{persona.nombre} {persona.apellido}</span>
               <span className="person-type">({persona.tipo})</span>
               {persona.posicion && <span className="person-position"> - {persona.posicion}</span>}
-              {persona.edad && <span className="person-instagram"> - Edad: {persona.edad}</span>}
+              {persona.fechaNacimiento && <span className="person-instagram"> - Edad: {persona.fechaNacimiento}</span>}
             </span>
             <div className="person-actions">
               <button className="edit-button" onClick={() => handleEditar(persona._id, persona.tipo)}>

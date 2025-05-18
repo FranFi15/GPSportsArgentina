@@ -1,6 +1,8 @@
 /* LaEmpresa.css */
 .laempresa {
     width: 100%;
+    padding: 90px 0;
+    font-family: "Roboto", sans-serif;
 }
 
 .img {
@@ -24,8 +26,6 @@
 
 .img h2 {
     color: #ffffff;
-    font-family: "Roboto", sans-serif;
-    font-weight: 900;
     font-size: 6rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -40,11 +40,11 @@
     justify-content: center;
     align-items: center;
     transform: translateY(30px);
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
     text-align: center;
     min-height: auto;
     height: 50vh;
-    opacity: 0; /* Initially hidden */
+    opacity: 0;
 }
 
 .description.slide-in {
@@ -52,69 +52,41 @@
     transform: translateY(0);
 }
 
-.description2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0; /* Initially hidden */
-    transition: opacity 1s ease-in-out;
-}
-
-.description2.fade-in {
-    opacity: 1;
-}
-
 .content1 {
-    width: 40%;
     padding: 20px;
+    width: 30%;
     font-size: 2rem;
     color: #ffffff;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    text-align: center;
+    font-weight: 900;
+    text-align: start;
+    text-transform: uppercase;
 }
 
 .content2 {
     width: 40%;
     padding: 20px;
-    font-size: 1rem;
     color: #ffffff;
-    font-family: "Roboto", sans-serif;
     font-weight: 200;
-    letter-spacing: 1px;
+    font-size: 1.1rem;
     border-left: 1px solid #ffffff;
     margin-top: 20px;
     text-align: start;
-    line-height: 1.8rem;
-}
-
-.content3 {
-    width: 80%;
-    font-size: 1.1rem;
-    color: #ffffff;
-    font-family: "Roboto", sans-serif;
-    font-weight: 200;
-    letter-spacing: 1px;
-    text-align: center;
     line-height: 2rem;
+    letter-spacing: 0.5px;
 }
 
 .staff {
     height: auto; /* Adjust height to content */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align items at the start */
     align-items: center;
+
     width: 100%;
-    padding: 60px 0;
     font-family: "Roboto", sans-serif;
     color: #ffffff;
-    text-align: center;
     opacity: 0; /* Initially hidden */
     transform: translateY(30px);
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
     margin-bottom: 50px; /* Add some margin below */
 }
 
@@ -124,16 +96,13 @@
 }
 
 .staff h2 {
-    font-size: 4rem;
+    font-size: 6rem;
     font-weight: 900;
-    margin-bottom: 40px;
 }
 
 .staff-members {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: row;
+    justify-content: start;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -141,17 +110,16 @@
 .member {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items */
-    width: calc(33% - 40px); /* Adjust width for 3 columns with margin */
+    align-items: start;
+    width: calc(30% - 40px);
     padding: 20px;
     border-bottom: 0.5px solid #ffffff;
     margin: 20px;
-    text-align: center;
 }
 
 .member h3 {
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: 900;
     letter-spacing: 0.5px;
     margin: 0;
     text-transform: uppercase;
@@ -159,7 +127,7 @@
 
 .member p {
     font-size: 1rem;
-    font-weight: 100;
+    font-weight: 400;
     letter-spacing: 0.5px;
     margin: 0;
     padding-top: 5px;
@@ -208,7 +176,7 @@
     text-align: center;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
     margin-bottom: 50px;
 }
 
@@ -364,6 +332,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 40px 0; /* Añadido padding vertical */
 }
 
 .mkt-event.fade-in-bottom {
@@ -380,75 +350,28 @@
 
 .mkt-event-content {
     font-size: 1.1rem;
+    font-weight: 200;
     line-height: 2rem;
+    letter-spacing: 0.5px;
     margin-bottom: 40px;
-    width: 80%;
+    width: 70%;
 }
-
-/* Estilos para el carrusel */
-.carousel-container {
-    position: relative;
-    width: 50%;
-    overflow: hidden;
-}
-
-.carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-image {
-    min-width: 100%;
-    height: auto;
-    object-fit: cover; /* O contain si prefieres que no se recorte */
-}
-
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    z-index: 10;
-}
-
-.carousel-button.prev {
-    left: 10px;
-}
-
-.carousel-button.next {
-    right: 10px;
-}
-
-.carousel-dots {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.dot.active {
-    background-color: white;
-}
-
 
 @media (max-width: 768px) {
+    .laempresa {
+    width: 100%;
+    }
+    .mkt-event h2 {
+        font-size: 3.5rem;
+    }
+
+    .mkt-event-content {
+        font-size: 1rem;
+        width: 90%;
+    }
+
     .img h2 {
         font-size: 3rem;
-        padding-right: 15px;
-        padding-left: 15px;
     }
 
     .description {
@@ -457,13 +380,14 @@
         height: auto;
     }
 
-    .content1 {
+    .content1 { /* Estilos para pantallas pequeñas */
         font-size: 1.8rem;
         padding: 20px;
         width: 90%;
+        text-align: center; /* Centrar el texto en pantallas pequeñas */
     }
 
-    .content2 {
+    .content2 { /* Estilos para pantallas pequeñas */
         font-size: 0.8rem;
         padding: 20px;
         width: 90%;
@@ -472,7 +396,6 @@
         margin-top: 20px;
         text-align: center;
     }
-
     .staff h2 {
         font-size: 3.5rem;
     }
@@ -500,7 +423,6 @@
         flex-direction: column;
         align-items: center;
         height: auto;
-        padding: 40px 20px;
     }
 
     .direccion h2 {
@@ -537,13 +459,9 @@
     }
 
     .mkt-event-content {
-        font-size: 1rem;
-        width: 90%;
+        font-size: 1rem;   
     }
 
-    .carousel-container {
-        width: 90%;
-    }
 }
 
 @media (max-width: 480px) {
@@ -573,4 +491,11 @@
 
     .direccion-calle {
         font-size: 0.9rem;
-    }   }
+    }
+    .mkt-event h2 {
+        font-size: 2.5rem;
+    }
+    .partners h2 {
+        font-size: 2.5rem;
+    }
+}

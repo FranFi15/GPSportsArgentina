@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import useLanguage from '../hooks/useLanguage';
-import logo from '../assets/images.png';
+import logo from '../assets/imagenes.png';
 import './Navbar.css';
 import esp from "../assets/esp.png";
 import eng from "../assets/eeuu.png";
@@ -15,8 +15,8 @@ const Navbar = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
 
     const textos = {
-        es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: 'Team GP SPORT', charlas: 'Charlas', admin:"Admin", deportes: 'Deportes', basketball: 'Basketball' },
-        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: 'Team GP SPORT', charlas: 'Talks', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
+        es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', admin:"Admin", deportes: 'Deportes', basketball: 'Basketball' },
+        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
     };
 
     useEffect(() => {
@@ -89,29 +89,7 @@ const Navbar = () => {
                 <li className="navbar-nav-item">
                     <Link to="/charlas" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].charlas}</Link>
                 </li>
-                <li className="navbar-nav-item navbar-dropdown" onClick={handleDeportesToggle}>
-                        <button
-                            className="navbar-dropdown-trigger"
-                            aria-haspopup="true"
-                            aria-expanded={isDeportesDropdownOpen}
-                        >
-                            {textos[language].deportes}
-                            <span className={`dropdown-arrow ${isDeportesDropdownOpen ? 'open' : ''}`}></span>
-                        </button>
-                        {isDeportesDropdownOpen && (
-                            <ul className="navbar-dropdown-menu">
-                                <li className="navbar-dropdown-item">
-                                    <Link
-                                        to="/basketball"
-                                        className="navbar-nav-link"
-                                        onMouseLeave={handleDeportesLinkClick}
-                                    >
-                                        {textos[language].basketball}
-                                    </Link>
-                                </li>
-                            </ul>
-                        )}
-                    </li>
+                <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>
                     <li className="navbar-nav-item">
                     <Link to="/admin" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].admin}</Link>
                 </li>

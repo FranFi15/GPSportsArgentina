@@ -12,16 +12,18 @@ const Inicio = () => {
 
     const textos = {
         es: {
-            linea1b: "TEAMGPSPORTS",
+            linea1b: "#TeamGPSports",
             linea2: "UN GRUPO APASIONADO DE PROFESIONALES",
             linea3: "COMPROMETIDOS CON LA EXCELENCIA EN",
             linea4: "REPRESENTACIÓN DEPORTIVA",
+            description:'El #TeamGPSports está formado por jugadores, entrenadores y deportistas de distintas disciplinas, unidos por una misma filosofía: compromiso, dedicación, trabajo en equipo y pasión por lo que hacen. Desde jóvenes promesas hasta referentes consagrados, acompañamos a cada integrante en su camino, brindando un respaldo cercano y profesional en cada etapa de su carrera. Nuestro equipo no se define solo por lo que logra dentro de la cancha, sino por los valores que representa fuera de ella.',
         },
         en: {
-            linea1b: "TEAMGPSPORTS",
+            linea1b: "#TeamGPSports",
             linea2: "A PASSIONATE GROUP OF PROFESSIONALS",
             linea3: "COMMITTED TO EXCELLENCE IN",
             linea4: "SPORTS REPRESENTATION",
+            description:'The #TeamGPSports is made of players, coaches, and athletes from different disciplines, united by a common philosophy: commitment, dedication, teamwork, and passion for what they do. From young talents to established stars, we support each member on their journey, providing close and professional backing at every stage of their career. Our team is defined not only by what they achieve on the field but also by the values they represent off it.',
         }
     };
 
@@ -69,6 +71,9 @@ const Inicio = () => {
                 <p ref={el => lineasRef.current[2] = el} className={`linea-bienvenida ${lineasVisible[2] ? 'slide-up' : ''}`}>{textos[language].linea3}</p>
                 <p ref={el => lineasRef.current[3] = el} className={`linea-bienvenida ${lineasVisible[3] ? 'slide-up' : ''}`}>{textos[language].linea4}</p>
                 <SocialButtons /> 
+            </div>
+            <div  className= 'description'>
+                <p>{textos[language].description}</p>
             </div>
         </div>
     );

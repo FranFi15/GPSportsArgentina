@@ -5,17 +5,14 @@
     align-items: center;
     color: #ffffff;
     position: fixed;
-    height: 90px;
+    height: 70px;
     width: 100%;
     font-family: "Roboto", sans-serif;
     z-index: 1000;
-    background-color:transparent;
-    transition: opacity 0.5s ease-in-out;
+    background-color:#000000;
     opacity: 1;
+    margin-bottom: 20px;
   }
-  .navbar-hidden {
-   opacity: 0; /* Ajusta a la altura de tu navbar */
-}
   
   .navbar-logo-link {
     display: flex;
@@ -27,10 +24,10 @@
   
   .navbar-logo-img {
     margin-left: 20%;
-    height: 70px; /* Ajusta según el tamaño deseado */
+    height: 100px; /* Ajusta según el tamaño deseado */
     width: auto;
-    border-radius: 50%;
-    opacity: 0.6;
+
+    opacity: 0.8;
     transition: opacity 0.3s ease-in-out;
   }
   .navbar-logo-img:hover {
@@ -77,10 +74,9 @@
   .navbar-nav-link,
   .navbar-dropdown-trigger,
   .navbar-button {
-    text-transform: uppercase;
     text-decoration: none;
     color: inherit;
-    padding: 5px 0; /* Mantenemos padding base */
+    padding: 5px 10px 0; /* Mantenemos padding base */
     /* Aumentamos ligeramente el padding inferior para dejar espacio visual a la línea */
     padding-bottom: 7px; /* (5px base + 2px espacio) - Ajustar si es necesario */
     display: inline-block; /* Importante para que ::after se posicione correctamente */
@@ -89,7 +85,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-family: inherit;
     font-weight: 800;
     /* border-bottom: 1px solid transparent; -> ELIMINADO */
@@ -110,7 +106,7 @@
     left: 0; /* Comienza desde la izquierda */
     height: 1px; /* Grosor de la línea */
     width: 0; /* Ancho inicial CERO */
-    background-color: #ffffff; /* Color de la línea */
+    background-color: #cc6f04; /* Color de la línea */
     /* Transición para la propiedad width */
     transition: 0.3s ease-in-out;
   }
@@ -192,6 +188,7 @@
     .navbar-container {
       padding: 10px 15px;
       height: 40px;
+      width: 100%;
       background-color: #000000;
     }
 

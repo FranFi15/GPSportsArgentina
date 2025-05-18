@@ -1,201 +1,113 @@
-/* TeamGPSPORT.css */
-.full-screen-carousel-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
+/* TeamGPSPORTS.css */
+.team-gpsports-container {
     font-family: 'Roboto', sans-serif;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.full-screen-carousel-container.fade-in {
-    opacity: 1;
-}
-
-.carousel-title {
-    color: #ffffff;
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px; /* Aumenta el margen para dar espacio a la animación */
-    z-index: 2;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-
-.carousel-title.slide-down {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.carousel-wrapper {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    height: 100%;
-}
-
-.slide {
-    flex-shrink: 0;
-    height: 100%;
+    color: #fff;
+    background-color: #000;
+    padding: 40px;
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    position: relative;
+}
+
+h2 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    text-shadow: #000000 0px 3px 8px;
+    padding: 50px;
+}
+
+.section {
+    display: flex;
+    margin-bottom: 60px;
+    align-items: center;
     opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 
-.slide.slide-in {
+.section.reversed {
+    flex-direction: row-reverse;
+}
+.section.visible {
     opacity: 1;
-    transform: translateX(0);
 }
 
-.slide-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.slide-image-overlay img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    opacity: 0.5;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.slide-content {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    padding: 20px;
+.image-container {
+    flex: 1;
+    margin-right: 30px;
     border-radius: 8px;
-    text-align: center;
-    width: 90%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.slide-content h2 {
-    font-size: 4.5em;
+.section.reversed .image-container {
+    margin-left: 30px;
+    margin-right: 0;
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    filter: brightness(0.8); /* Slightly dim the images */
+}
+
+.text-container {
+    flex: 1;
+    padding: 30px;
+    border-radius: 8px;
+    
+}
+
+.text-container h3 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    color: #ddd;
     text-transform: uppercase;
-    width: 50%;
-    text-align: left;
-    top: 10%;
-    text-shadow: #000000 0px 0px 15px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-in-out 0.2s, transform 0.5s ease-in-out 0.2s; /* Retraso para sincronizar */
+    font-weight: 900;
 }
 
-.slide-content h2.fade-in-up {
-    opacity: 1;
-    transform: translateY(0);
+.text-container p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
-.slide-content p {
-    font-size: 1.2em;
-    margin: 0;
-    font-weight: 100;
-    letter-spacing: 1px;
-    line-height: 1.5;
-    width: 40%;
-    text-shadow: #000000 0px 5px 15px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-in-out 0.4s, transform 0.5s ease-in-out 0.4s; /* Mayor retraso */
-}
-
-.slide-content p.fade-in-up {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.carousel-controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    z-index: 2;
-    transform: translateY(-50%);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out 0.7s; /* Retraso para aparecer al final */
-}
-
-.carousel-controls.fade-in {
-    opacity: 1;
-}
-
-.carousel-controls button {
-    border: none;
-    font-size: 2em;
-    color: white;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 15px;
-    margin: 10px;
-    opacity: 0.7; /* Ligeramente transparente inicialmente */
-    transition: opacity 0.3s ease-in-out;
-}
-
-.carousel-controls button:hover {
-    opacity: 1;
-}
-
-/* Estilos responsivos (opcional) */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .carousel-title {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
-
-    .slide-content {
-        top: 20%;
-        width: 90%;
-        padding: 15px;
+    .section {
         flex-direction: column;
-        align-items: center;
     }
 
-    .slide-content h2 {
-        font-size: 2.5em;
+    .section.reversed {
+        flex-direction: column;
+    }
+
+    .image-container {
+        margin-right: 0;
         margin-bottom: 20px;
-        width: 100%;
-        text-align: center;
+        max-width: 100%;
     }
 
-    .slide-content p {
+    .section.reversed .image-container {
+        margin-left: 0;
+    }
+
+    .text-container {
+        padding: 20px;
+    }
+
+    .text-container h3 {
+        font-size: 1.8em;
+    }
+
+    .text-container p {
         font-size: 1em;
-        width: 100%;
-    }
-
-    .carousel-controls button {
-        font-size: 1.5em;
-        padding: 10px;
-        margin: 5px;
     }
 }

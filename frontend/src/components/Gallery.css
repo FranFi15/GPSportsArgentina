@@ -1,0 +1,31 @@
+.gallery-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 95%;
+}
+
+.gallery-item {
+    border-radius: 8px;
+    overflow:hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Responsive design para la galería */
+@media (max-width: 768px) {
+    .gallery-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
+        gap: 10px;
+        width: 100%;
+    }
+}

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import Entrenador from '../models/entrenador.js';
-import authenticateAdmin from '../middleware/authMiddleware.js';
+// import authenticateAdmin from '../middleware/authMiddleware.js'; // Comentado
 
 // Obtener todos los entrenadores
 router.get('/', async (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // Agregar un nuevo entrenador (requiere autenticación)
-router.post('/', authenticateAdmin, async (req, res) => {
+router.post('/', /* authenticateAdmin, */ async (req, res) => { // Comentado
   const entrenador = new Entrenador(req.body);
   try {
     const nuevoEntrenador = await entrenador.save();
@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Editar un entrenador por ID (requiere autenticación)
-router.put('/:id', authenticateAdmin, async (req, res) => {
+router.put('/:id', /* authenticateAdmin, */ async (req, res) => { // Comentado
   try {
     const entrenador = await Entrenador.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!entrenador) {
@@ -51,7 +51,7 @@ router.put('/:id', authenticateAdmin, async (req, res) => {
 });
 
 // Eliminar un entrenador por ID (requiere autenticación)
-router.delete('/:id', authenticateAdmin, async (req, res) => {
+router.delete('/:id', /* authenticateAdmin, */ async (req, res) => { // Comentado
   try {
     const entrenador = await Entrenador.findByIdAndDelete(req.params.id);
     if (!entrenador) {
