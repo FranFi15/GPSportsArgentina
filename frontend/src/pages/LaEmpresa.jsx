@@ -103,19 +103,19 @@ const LaEmpresa = () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (entry.target === imgRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, img: true })), 100);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, img: true })), 50);
                     } else if (entry.target === descriptionRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, description: true })), 300);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, description: true })), 100);
                     } else if (entry.target === description2Ref.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, description2: true })), 500);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, description2: true })), 150);
                     } else if (entry.target === staffRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, staff: true })), 700);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, staff: true })), 200);
                     } else if (entry.target === partnersRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, partners: true })), 900);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, partners: true })), 250);
                     } else if (entry.target === addressRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, address: true })), 1100);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, address: true })), 300);
                     } else if (entry.target === mktEventRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, mktEvent: true })), 1300);
+                        setTimeout(() => setIsVisible(prev => ({ ...prev, mktEvent: true })), 350);
                     }
                 }
             });

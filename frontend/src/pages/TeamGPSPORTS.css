@@ -2,7 +2,10 @@
 .team-gpsports-container {
     font-family: 'Roboto', sans-serif;
     color: #fff;
-    background-color: #000;
+    background-image: url('../src/assets/fondo3.png');
+    background-attachment: fixed;
+    backdrop-filter: blur(5px);
+    background-size: cover;
     padding: 40px;
     padding-top: 90px;
     display: flex;
@@ -10,12 +13,9 @@
     align-items: center;
 }
 
-h2 {
-    color: #ffffff;
-    font-family: "Roboto", sans-serif;
+.team-gpsports-container h2 {
     font-weight: 900;
     font-size: 4rem;
-    letter-spacing: 2px;
     text-shadow: #000000 0px 3px 8px;
     padding: 50px;
 }

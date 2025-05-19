@@ -7,8 +7,10 @@ const Inicio = () => {
     const { language } = useLanguage();
     const bienvenidaRef = useRef(null);
     const lineasRef = useRef([]);
+    const descriptionRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
     const [lineasVisible, setLineasVisible] = useState([]);
+    const [descriptionVisible, setDescriptionVisible] = useState(false);
 
     const textos = {
         es: {
@@ -40,7 +42,9 @@ const Inicio = () => {
                                 return newState;
                             });
                         }, 800 + index * 300); // Aparición escalonada de las líneas
+
                     });
+                    setTimeout(() => setDescriptionVisible(true), 1200 + lineasRef.current.length * 300); // Fade in de la descripción después de las líneas
                     observer.unobserve(entry.target); // Deja de observar una vez que es visible
                 }
             });
@@ -51,14 +55,12 @@ const Inicio = () => {
         if (bienvenidaRef.current) {
             observer.observe(bienvenidaRef.current);
         }
-
-        lineasRef.current = lineasRef.current.slice(0, Object.keys(textos[language]).length); // Asegura que el array de refs tenga la longitud correcta
-
     }, [language]); // Dependencia del idioma para recargar las animaciones si cambia
 
     useEffect(() => {
         // Asegura que lineasVisible tenga la misma longitud que los textos y se inicialice en false
         setLineasVisible(Array(Object.keys(textos[language]).length).fill(false));
+        setDescriptionVisible(false); // Reinicia la visibilidad de la descripción al cambiar el idioma
     }, [language]);
 
     return (
@@ -70,9 +72,9 @@ const Inicio = () => {
                 <p ref={el => lineasRef.current[1] = el} className={`linea-bienvenida ${lineasVisible[1] ? 'slide-up' : ''}`}>{textos[language].linea2}</p>
                 <p ref={el => lineasRef.current[2] = el} className={`linea-bienvenida ${lineasVisible[2] ? 'slide-up' : ''}`}>{textos[language].linea3}</p>
                 <p ref={el => lineasRef.current[3] = el} className={`linea-bienvenida ${lineasVisible[3] ? 'slide-up' : ''}`}>{textos[language].linea4}</p>
-                <SocialButtons /> 
+                <SocialButtons />
             </div>
-            <div  className= 'description'>
+            <div ref={descriptionRef} className={`description ${descriptionVisible ? 'fade-in' : ''}`}>
                 <p>{textos[language].description}</p>
             </div>
         </div>

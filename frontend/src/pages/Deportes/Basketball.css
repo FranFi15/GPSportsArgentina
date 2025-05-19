@@ -2,9 +2,12 @@
 .basketball-list-container {
     padding: 150px 50px;
     background-color: #000;
-    background-size: contain;
+    background-image: url('../src/assets/fondo3.png');
+    background-attachment: fixed;
+    backdrop-filter: blur(5px);
+    background-size: cover;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(63, 45, 45, 0.1);
     font-family: "Roboto", sans-serif;
     color: #ffffff;
 }
@@ -67,7 +70,7 @@
 
 .basketball-person-item {
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.644);
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 15px;

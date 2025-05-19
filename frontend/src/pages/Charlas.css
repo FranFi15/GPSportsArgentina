@@ -1,14 +1,25 @@
 .charlas-container {
+    background-image: url('../src/assets/fondo3.png');
+    background-attachment: fixed;
+    backdrop-filter: blur(5px);
+    background-size: cover;
     font-family: 'Roboto', sans-serif;
     padding: 80px 20px;
     margin: 0 auto;
-    max-width: 1200px; /* Aumenta el ancho máximo para la galería */
-    color: #333;
+    width: 100%;
+    color: #ffffff;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 1s ease-in-out; /* Transición de opacidad */
 }
+
+.charlas-container.fade-in {
+    opacity: 1; /* Al aparecer, se vuelve visible */
+}
+
 
 .charlas-title {
     font-size: 4em;
@@ -33,14 +44,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.charlas-gallery-title {
-    font-size: 2em;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 100%;
 }
 
 /* Responsive design para la sección principal */

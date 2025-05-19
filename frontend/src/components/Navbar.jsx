@@ -16,7 +16,7 @@ const Navbar = () => {
 
     const textos = {
         es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', admin:"Admin", deportes: 'Deportes', basketball: 'Basketball' },
-        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
+        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSports: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
     };
 
     useEffect(() => {
@@ -27,16 +27,7 @@ const Navbar = () => {
     const handleLinkClick = () => {
         setIsMobileMenuOpen(false);
         setIsDeportesDropdownOpen(false);
-    }
-
-    const handleDeportesToggle = (e) => {
-        e.stopPropagation();
-        setIsDeportesDropdownOpen(!isDeportesDropdownOpen);
-    }
-
-    const handleDeportesLinkClick = () => {
-        setIsMobileMenuOpen(false);
-        setIsDeportesDropdownOpen(false);
+        window.scrollTo(0, 0); // Scroll to the top of the page
     }
 
     useEffect(() => {
@@ -89,8 +80,10 @@ const Navbar = () => {
                 <li className="navbar-nav-item">
                     <Link to="/charlas" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].charlas}</Link>
                 </li>
-                <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>
-                    <li className="navbar-nav-item">
+                <li className="navbar-nav-item">
+                    <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>
+                </li>
+                <li className="navbar-nav-item">
                     <Link to="/admin" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].admin}</Link>
                 </li>
                 <li className="navbar-nav-item navbar-language-buttons">
