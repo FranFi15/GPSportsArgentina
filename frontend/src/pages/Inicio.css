@@ -1,120 +1,138 @@
-/* Inicio.css */
-.inicio{
+.inicio {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
+    padding: 60px 0;
     background-image: url('../src/assets/fondo3.png');
     background-attachment: fixed;
     backdrop-filter: blur(5px);
-    background-size: cover; /* Asegúrate de que haya un fondo oscuro para el texto blanco */
-}
-.bienvenida {
-    background-image: url("../assets/fondo2.png");
     background-size: cover;
+    min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos el 100% de la altura de la ventana */
+    box-sizing: border-box; /* Incluye el padding en el cálculo de la altura */
+}
+
+.bienvenida {
     color: #ffffff;
     font-family: "Roboto", sans-serif;
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    opacity: 0; /* Inicialmente invisible para la animación de fondo */
-    transition: opacity 0.5s ease-in-out; /* Transición para el fondo */
+    justify-content: center; /* Centra el contenido verticalmente */
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    padding: 100px 0 500px 0; /* Añade espacio en la parte superior para empujar el texto hacia abajo */
+    box-sizing: border-box;
+    background-image: url('../assets/inicio.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center; 
 }
 
 .bienvenida.fade-in {
-    opacity: 1; /* Fondo visible */
+    opacity: 1;
 }
 
 .bienvenida .linea-bienvenida {
-    font-size: 2rem;
-    line-height: 1.4;
-    margin-bottom: 0.5em;
-    font-weight: 100;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    font-weight: 200;
     letter-spacing: 1px;
-    text-shadow: #000000 2px 2px 8px; /* Sombra más suave */
-    opacity: 0; /* Inicialmente invisibles */
-    transform: translateY(20px); /* Empiezan ligeramente abajo */
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Transición para las líneas */
+    text-shadow: #000000 2px 2px 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    text-align: center; /* Centra el texto de las líneas */
 }
 
 .bienvenida .linea-bienvenida.slide-up {
-    opacity: 1; /* Líneas visibles */
-    transform: translateY(0); /* Líneas en su posición final */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .bienvenida .highlight {
     font-weight: 900;
-    font-size: 3.5rem;
-    text-shadow: #000000 2px 2px 8px; /* Sombra más suave */
+    font-size: 6rem;
+    text-shadow: #000000 2px 2px 8px;
 }
 
 .bienvenida .linea-bienvenida:last-child {
     margin-bottom: 0;
 }
-.description { 
-    height: 50vh; /* Ajusta la altura automáticamente */
+
+.description {
     color: #ffffff;
     font-family: "Roboto", sans-serif;
-    font-size: 1.5rem;
-    line-height: 1.5;
+    max-width: 90%;
+    margin: 80px auto 0 auto; /* Añade margen superior y centra horizontalmente */
+    padding: 20px;
+    font-size: 1.1rem;
     font-weight: 200;
-    opacity: 0; /* Inicialmente invisible */
-    transform: translateY(20px); /* Empieza ligeramente abajo */
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Transición para el fade-in */ 
+    line-height: 1.7;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    text-align: justify;/* Coloca la imagen en la parte inferior derecha */
+    min-height: 40vh; /* Asegura una altura mínima para que la imagen de fondo se muestre */
+    box-sizing: border-box;
 }
 
+
 .description.fade-in {
-    opacity: 1; /* Visible */
-    transform: translateY(0); /* En su posición final */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @media (max-width: 768px) {
     .inicio {
-        width: 100%;
-        margin: 0;
+        padding: 40px 0;
     }
 
     .bienvenida {
+        padding-top: 80px;
         text-align: center;
-        width: 100%;
-        margin: 15px auto;
-        padding: 15px;
-        height: auto; /* Ajusta la altura para contenido más pequeño */
     }
 
     .bienvenida .linea-bienvenida {
-        font-size: 1.2rem; /* Ajuste de tamaño */
-        line-height: 1.3;
-        margin-bottom: 0.4em;
-    }
-
-    .bienvenida .highlight {
-        font-size: 1.8rem; /* Ajuste de tamaño */
-    }
-
-    .description {
         font-size: 1.2rem;
-        margin-top: 1.5em;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .bienvenida .linea-bienvenida {
-        font-size: 1rem; /* Ajuste de tamaño */
-        letter-spacing: 0.5px;
+        line-height: 1.3;
+        margin-bottom: 16px;
     }
 
     .bienvenida .highlight {
-        font-size: 1.5rem; /* Ajuste de tamaño */
+        font-size: 3rem;
     }
 
     .description {
         font-size: 1rem;
-        margin-top: 1em;
+        margin-top: 40px;
         padding: 15px;
         text-align: center;
+        background-position: bottom center; /* Centra la imagen en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .bienvenida {
+        padding-top: 60px;
+    }
+
+    .bienvenida .linea-bienvenida {
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+
+    .bienvenida .highlight {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+        padding: 10px;
+        margin-top: 30px;
     }
 }

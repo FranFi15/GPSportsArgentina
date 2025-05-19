@@ -16,7 +16,7 @@ const Navbar = () => {
 
     const textos = {
         es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', admin:"Admin", deportes: 'Deportes', basketball: 'Basketball' },
-        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSports: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
+        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
     };
 
     useEffect(() => {
