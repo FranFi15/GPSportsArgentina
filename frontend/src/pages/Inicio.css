@@ -5,16 +5,15 @@
     justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
     padding: 60px 0;
     background-image: url('../src/assets/fondo3.png');
+    color: #ffffff;
     background-attachment: fixed;
     backdrop-filter: blur(5px);
     background-size: cover;
-    min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos el 100% de la altura de la ventana */
-    box-sizing: border-box; /* Incluye el padding en el cálculo de la altura */
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif; /* Incluye el padding en el cálculo de la altura */
 }
 
 .bienvenida {
-    color: #ffffff;
-    font-family: "Roboto", sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -27,7 +26,7 @@
     background-image: url('../assets/inicio.png');
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: bottom center; 
+    background-position: bottom center;
 }
 
 .bienvenida.fade-in {
@@ -62,29 +61,157 @@
     margin-bottom: 0;
 }
 
-.description {
-    color: #ffffff;
-    font-family: "Roboto", sans-serif;
-    max-width: 90%;
-    margin: 80px auto 0 auto; /* Añade margen superior y centra horizontalmente */
-    padding: 20px;
-    font-size: 1.1rem;
-    font-weight: 200;
-    line-height: 1.7;
-    letter-spacing: 1px;
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px; /* Añade un poco de espacio alrededor del contenido */
+    margin: 20px; /* Espacio entre la bienvenida y el contenido */
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(20px);
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    text-align: justify;/* Coloca la imagen en la parte inferior derecha */
-    min-height: 40vh; /* Asegura una altura mínima para que la imagen de fondo se muestre */
-    box-sizing: border-box;
 }
 
+.content.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.description {
+    width: 90%;
+    height: 80vh;
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    text-align: center;
+    min-height: auto;
+    opacity: 0;
+    font-weight: 200;
+    font-size: 1.1rem;
+    line-height: 2rem;
+    letter-spacing: 0.5px;
+    text-align: justify;
+}
 
 .description.fade-in {
     opacity: 1;
     transform: translateY(0);
 }
+
+.content1 {
+    padding: 20px;
+    width: 30%;
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: start;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border-right: 1px solid #ffffff;
+}
+
+.content1.fade-in-left {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content2 {
+    width: 50%;
+    padding-left: 80px;
+    font-weight: 200;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-align: start;
+    line-height: 2rem;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.content3 {
+    width: 90%;
+    font-weight: 200;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-align: start;
+    line-height: 2rem;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.content2.fade-in-right {
+    opacity: 1;
+    transform: translateY(0);
+}
+.content3.fade-in-right {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.direccion {
+  width: 100%;
+  height: auto; /* Ajusta la altura al contenido */
+  display: flex;
+  flex-direction: column; /* Cambia a columna */
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+  margin-bottom: 50px;
+}
+
+.direccion.fade-in-bottom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.direccion h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.direccion-detalles {
+    margin-bottom: 20px;
+}
+
+.direccion-calle {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.direccion-ciudad {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.map-container {
+  width: 60%; /* Aumenta el ancho del mapa */
+  height: 600px; /* Aumenta la altura del mapa */
+  margin-top: 30px;
+  overflow: hidden;
+}
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  filter: grayscale(60%);
+}
+
+
 
 @media (max-width: 768px) {
     .inicio {
@@ -92,8 +219,7 @@
     }
 
     .bienvenida {
-        padding-top: 80px;
-        text-align: center;
+        height: 100vh; /* Ajusta la altura para pantallas más pequeñas */
     }
 
     .bienvenida .linea-bienvenida {
@@ -106,12 +232,41 @@
         font-size: 3rem;
     }
 
-    .description {
-        font-size: 1rem;
-        margin-top: 40px;
-        padding: 15px;
-        text-align: center;
-        background-position: bottom center; /* Centra la imagen en pantallas pequeñas */
+    .content {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0; 
+    }
+
+    .content1 {
+        width: 100%;
+        text-align: left;
+        border-right: none;
+    }
+
+    .content2 {
+        width: 100%;
+    }
+
+    .content3 {
+        width: 100%;
+    }
+
+    .direccion {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .map-container {
+        width: 80%;
+        height: 400px;
+        margin-top: 30px;
+    }
+
+    .datos-direccion {
+        margin-bottom: 40px;
     }
 }
 
@@ -129,10 +284,29 @@
     .bienvenida .highlight {
         font-size: 2.5rem;
     }
+    .content {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Centra el contenido verticalmente */
+    }
+    .content1 {
+        font-size: 1.5rem;
+        padding: 10px 0;
+    }
+
+    .content2 {
+        font-size: 0.9rem;
+        padding: 10px 0;
+        line-height: 1.5rem;
+    }
 
     .description {
         font-size: 0.9rem;
         padding: 10px;
         margin-top: 30px;
+    }
+
+    .map-container {
+        height: 300px;
     }
 }

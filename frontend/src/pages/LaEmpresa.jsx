@@ -18,7 +18,6 @@ const LaEmpresa = () => {
     const description2Ref = useRef(null);
     const staffRef = useRef(null);
     const partnersRef = useRef(null);
-    const addressRef = useRef(null);
     const mktEventRef = useRef(null);
     const [isVisible, setIsVisible] = useState({ img: false, description: false, description2: false, staff: false, partners: false, address: false, mktEvent: false });
    
@@ -26,8 +25,7 @@ const LaEmpresa = () => {
     const textos = {
         es: {
             titulo: 'La Empresa',
-            contenido1: 'Nos une el deporte, pero sobre todo, una manera de vivirlo.',
-            contenido2: "GP Sports es una compañía de representación y management de jugadores, entrenadores y atletas con mas de 30 años de experiencia en la gestión y negociación de contratos con clubes y empresas de todo el mundo. Acompañamos carreras en un concepto 360, desde la negociación de contratos hasta la implementación comercial de los atletas con un staff de profesionales capacitado para cada una de las áreas de gestión. El objetivo con nuestros clientes es continuar con los valores que caracterizan la empresa desde su fundación: planificación, conocimiento, pasión,innovación y compromiso.",
+            staffTitulo: 'Nuestro Equipo',
             staff1: "Carlos Prunes",
             staff2: "Matias Novoa",
             staff3: "Ariel Eslava",
@@ -42,9 +40,6 @@ const LaEmpresa = () => {
             staff7I: "Diseñador Digital",
             staff4: "Ricardo Prunes",
             staff4I: "Fútbol",
-            direccionTitulo: 'Nuestra Dirección',
-            direccionCalle: 'Boyacá 152 6°E',
-            direccionCiudad: 'Ciudad Autónoma de Bs.As, Buenos Aires, Argentina',
             partnersTitulo: 'Nuestros Partners',
             partners: [
                 { name: 'Players Group S.R.L.', address: 'P.zza Garibaldi, 54\n60044 Fabriano (AN)\nItalia', image: playersGroupLogo, link: 'https://www.instagram.com/playersgroupitalia/' },
@@ -58,8 +53,7 @@ const LaEmpresa = () => {
         },
         en: {
             titulo: 'The Company',
-            contenido1: 'We are united by sports, but above all, by a way of living it.',
-            contenido2: "GP Sports is a representation and management company for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
+            staffTitulo: 'Our Team',
             staff1: "Carlos Prunes",
             staff2: "Matias Novoa",
             staff3: "Ariel Eslava",
@@ -74,9 +68,6 @@ const LaEmpresa = () => {
             staff7I: "Digital Designer",
             staff4: "Ricardo Prunes",
             staff4I: "Football",
-            direccionTitulo: 'Our Address',
-            direccionCalle: 'Boyacá 152 6°E',
-            direccionCiudad: 'Ciudad Autónoma de Bs.As, Buenos Aires, Argentina',
             partnersTitulo: 'Our Partners',
             partners: [
                 { name: 'Players Group S.R.L.', address: 'P.zza Garibaldi, 54\n60044 Fabriano (AN)\nItaly', image: playersGroupLogo, link: 'https://www.instagram.com/playersgroupitalia/' },
@@ -112,8 +103,6 @@ const LaEmpresa = () => {
                         setTimeout(() => setIsVisible(prev => ({ ...prev, staff: true })), 200);
                     } else if (entry.target === partnersRef.current) {
                         setTimeout(() => setIsVisible(prev => ({ ...prev, partners: true })), 250);
-                    } else if (entry.target === addressRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, address: true })), 300);
                     } else if (entry.target === mktEventRef.current) {
                         setTimeout(() => setIsVisible(prev => ({ ...prev, mktEvent: true })), 350);
                     }
@@ -128,14 +117,13 @@ const LaEmpresa = () => {
         if (description2Ref.current) observer.observe(description2Ref.current);
         if (staffRef.current) observer.observe(staffRef.current);
         if (partnersRef.current) observer.observe(partnersRef.current);
-        if (addressRef.current) observer.observe(addressRef.current);
         if (mktEventRef.current) observer.observe(mktEventRef.current);
 
         return () => observer.disconnect();
     }, []);
 
     const currentText = textos[language];
-    const googleMapsUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.189904482318!2d-58.45030162341898!3d-34.5972082803011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb0cca8e31884474f%3A0x992589390011289a!2sBoyac%C3%A1%20152%2C%20C1405BWE%20CABA!5e0!3m2!1ses-419!2sar!4v1681928749354?q=${currentText.direccionCalle?.replace(/ /g, '+')},+${currentText.direccionCiudad?.replace(/ /g, '+')}&output=embed`;
+   
 
     return (
         <div className="laempresa">
@@ -149,13 +137,8 @@ const LaEmpresa = () => {
             <div ref={description2Ref} className={`description2 ${isVisible.description2 ? 'fade-in' : ''}`}>
                 <p className='content3'>{currentText.contenido3}</p>
             </div>
-            <div ref={mktEventRef} className={`mkt-event ${isVisible.mktEvent ? 'fade-in-bottom' : ''}`}>
-                <h2>{currentText.mktEventTitulo}</h2>
-                <p className='mkt-event-content'>{currentText.mktEventContenido}</p>
-                <Gallery items={galleryItems} />
-            </div>
             <div ref={staffRef} className={`staff ${isVisible.staff ? 'fade-in-bottom' : ''}`}>
-                <div className='title-staff'><h2>STAFF</h2></div>
+                <div className='title-staff'><h2>{currentText.staffTitulo}</h2></div>
                 <div className='staff-members'>
                     <div className='member'>
                         <div className='staff-img-m'></div>
@@ -224,26 +207,10 @@ const LaEmpresa = () => {
                     ))}
                 </div>
             </div>
-            <div ref={addressRef} className={`direccion ${isVisible.address ? 'fade-in-bottom' : ''}`}>
-                <div className='datos-direccion'>
-                    <h2>{currentText.direccionTitulo}</h2>
-                    <div className="direccion-detalles">
-                        <p className="direccion-calle">{currentText.direccionCalle}</p>
-                        <p className="direccion-ciudad">{currentText.direccionCiudad}</p>
-                    </div>
-                </div>
-                <div className="map-container">
-                    <iframe
-                        src={googleMapsUrl}
-                        width="600"
-                        height="450"
-                        style={{ border: 0 }}
-                        allowFullScreen=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title="Ubicación de la empresa"
-                    ></iframe>
-                </div>
+             <div ref={mktEventRef} className={`mkt-event ${isVisible.mktEvent ? 'fade-in-bottom' : ''}`}>
+                <h2>{currentText.mktEventTitulo}</h2>
+                <p className='mkt-event-content'>{currentText.mktEventContenido}</p>
+                <Gallery items={galleryItems} />
             </div>
         </div>
     );

@@ -37,48 +37,6 @@
     padding: 0 20px;
 }
 
-.description {
-    width: 100%;
-    padding: 80px 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    text-align: center;
-    min-height: auto;
-    opacity: 0;
-}
-
-.description.slide-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.content1 {
-    padding: 20px;
-    width: 40%;
-    font-size: 2rem;
-    color: #ffffff;
-    font-weight: 900;
-    text-align: start;
-    text-transform: uppercase;
-}
-
-.content2 {
-    width: 40%;
-    padding: 20px;
-    color: #ffffff;
-    font-weight: 200;
-    font-size: 1.1rem;
-    border-left: 1px solid #ffffff;
-    margin-top: 20px;
-    text-align: start;
-    line-height: 2rem;
-    letter-spacing: 0.5px;
-}
-
 .staff {
     height: auto; /* Adjust height to content */
     display: flex;
@@ -98,8 +56,9 @@
 }
 
 .staff h2 {
-    font-size: 6rem;
+    font-size: 4rem;
     font-weight: 900;
+    text-transform: uppercase;
 }
 
 .staff-members {
@@ -167,65 +126,11 @@
 }
 
 
-.direccion {
-    width: 100%;
-    height: 60vh; /* Adjust height to content */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    font-family: "Roboto", sans-serif;
-    color: #ffffff;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
-    margin-bottom: 50px;
-}
-
-.direccion.fade-in-bottom {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.direccion h2 {
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
-
-.direccion-detalles {
-    margin-bottom: 20px;
-}
-
-.direccion-calle {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.direccion-ciudad {
-    font-size: 1.1rem;
-    font-weight: 300;
-}
-
-.map-container {
-    width: 30%;
-    height: 50%;
-    margin-top: 20px;
-    border-radius: 20px;
-    overflow: hidden; /* Para que el borde redondeado funcione en el iframe */
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 300px; /* Ajusta la altura del mapa según sea necesario */
-    border: 0;
-}
-
 /* Styles for Partners Section */
 .partners {
     width: 100%;
+    height: auto; 
+    padding: 80px 0;
     font-family: "Roboto", sans-serif;
     color: #ffffff;
     text-align: center;

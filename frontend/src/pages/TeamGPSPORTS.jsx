@@ -15,6 +15,7 @@ import yazImage from '../assets/yaz.png';
 import molinariImage from '../assets/molinari.png';
 import paredesImage from '../assets/paredes.png';
 import chiaraImage from '../assets/chiara.png';
+import simonetImage from '../assets/simonet.png';
 
 const TeamGPSPORT = () => {
     const { language } = useLanguage();
@@ -93,6 +94,13 @@ const TeamGPSPORT = () => {
                 descripcionLarga2: 'Con una extensa y exitosa carrera en ligas de Italia y Polonia, De Cecco continúa demostrando su vigencia y pasión por el voleibol, inspirando a nuevas generaciones de jugadores en Argentina y en todo el mundo.',
                 imagen: ceccoImage,
                 alt: 'Luciano De Cecco'
+            },
+            {
+                nombre: 'Diego Simonet',
+                descripcionCorta: 'Diego Simonet es un talentoso y reconocido jugador argentino de handball, destacado por su rol como armador central en importantes clubes europeos y en la selección argentina. Su visión de juego, asistencias y capacidad goleadora lo convierten en una figura clave.',
+                descripcionLarga: 'Con la selección, Simonet ha sido fundamental en logros históricos como el oro panamericano de 2011 y participaciones olímpicas. Su liderazgo y carisma lo han convertido en un referente e ídolo del handball argentino.',
+                imagen: simonetImage,
+                alt: 'Diego Simonet'
             },
             {
                 nombre: 'Yamila Nizetich',
@@ -194,6 +202,13 @@ const TeamGPSPORT = () => {
                 descripcionLarga2: 'With an extensive and successful career in leagues in Italy and Poland, De Cecco continues to demonstrate his relevance and passion for volleyball, inspiring new generations of players in Argentina and around the world.',
                 imagen: ceccoImage,
                 alt: 'Luciano De Cecco'
+            },
+            {
+                nombre: 'Diego Simonet',
+                descripcionCorta: 'Diego Simonet is a talented and recognized Argentine handball player, known for his role as a central playmaker in important European clubs and the Argentine national team. His game vision, assists, and scoring ability make him a key figure.',
+                descripcionLarga: 'With the national team, Simonet has been fundamental in historic achievements such as the Pan American gold in 2011 and Olympic participations. His leadership and charisma have made him a reference and idol of Argentine handball.',
+                imagen: simonetImage,
+                alt: 'Diego Simonet'
             },
             {
                 nombre: 'Yamila Nizetich',
