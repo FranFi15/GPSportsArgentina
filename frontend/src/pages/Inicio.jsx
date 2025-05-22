@@ -19,6 +19,7 @@ const Inicio = () => {
     const content1Ref = useRef(null);
     const content2Ref = useRef(null);
     const content3Ref = useRef(null);
+    const carouselRef = useRef(null);
 
     const [descriptionVisible, setDescriptionVisible] = useState(false);
     const [addressVisible, setAddressVisible] = useState(false);
@@ -105,6 +106,7 @@ const Inicio = () => {
             {/* Carousel Section */}
             <div className="carousel-section">
                 <Carousel
+                ref={carouselRef}
                     showArrows={false}
                     showIndicators={false}
                     infiniteLoop={true}
