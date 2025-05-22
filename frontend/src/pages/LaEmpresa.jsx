@@ -130,13 +130,6 @@ const LaEmpresa = () => {
             <div ref={imgRef} className={`img ${isVisible.img ? 'fade-in' : ''}`}>
                 <h2>{currentText.titulo}</h2>
             </div>
-            <div ref={descriptionRef} className={`description ${isVisible.description ? 'slide-in' : ''}`}>
-                <p className='content1'>{textos[language].contenido1}</p>
-                <p className='content2'>{textos[language].contenido2}</p>
-            </div>
-            <div ref={description2Ref} className={`description2 ${isVisible.description2 ? 'fade-in' : ''}`}>
-                <p className='content3'>{currentText.contenido3}</p>
-            </div>
             <div ref={staffRef} className={`staff ${isVisible.staff ? 'fade-in-bottom' : ''}`}>
                 <div className='title-staff'><h2>{currentText.staffTitulo}</h2></div>
                 <div className='staff-members'>

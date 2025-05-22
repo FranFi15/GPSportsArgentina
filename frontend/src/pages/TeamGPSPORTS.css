@@ -2,7 +2,6 @@
 .team-gpsports-container {
     font-family: 'Roboto', sans-serif;
     color: #fff;
-    background-image: url('../src/assets/fondo3.png');
     background-attachment: fixed;
     backdrop-filter: blur(5px);
     background-size: cover;
@@ -14,10 +13,9 @@
 }
 
 .team-gpsports-container h2 {
-    font-weight: 900;
-    font-size: 4rem;
-    text-shadow: #000000 0px 3px 8px;
-    padding: 50px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 10rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
 }
 
 .section {
@@ -64,7 +62,8 @@
 }
 
 .text-container h3 {
-    font-size: 2.2em;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3em;
     margin-bottom: 15px;
     color: #ddd;
     text-transform: uppercase;

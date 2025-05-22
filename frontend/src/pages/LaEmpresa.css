@@ -3,10 +3,10 @@
     width: 100%;
     padding: 60px 0;
     font-family: "Roboto", sans-serif;
-    background-image: url('../src/assets/fondo3.png');
     background-attachment: fixed;
     backdrop-filter: blur(5px);
     background-size: cover;
+    color: #ffffff;
 }
 
 .img {
@@ -29,22 +29,19 @@
 }
 
 .img h2 {
-    color: #ffffff;
-    font-size: 6rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: #000000 0px 3px 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
     padding: 0 20px;
 }
 
 .staff {
+    padding-top: 50px;
     height: auto; /* Adjust height to content */
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    font-family: "Roboto", sans-serif;
-    color: #ffffff;
     opacity: 0; /* Initially hidden */
     transform: translateY(30px);
     transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
@@ -56,9 +53,9 @@
 }
 
 .staff h2 {
-    font-size: 4rem;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
 }
 
 .staff-members {
@@ -80,16 +77,16 @@
 }
 
 .member h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 900;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     margin: 0;
     text-transform: uppercase;
 }
 
 .member p {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 200;
     letter-spacing: 0.5px;
     margin: 0;
     padding-top: 5px;
@@ -150,10 +147,9 @@
 }
 
 .partners h2 {
-    font-size: 4rem;
-    font-weight: 900;
-    margin-bottom: 30px;
-    text-transform: uppercase;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
 }
 
 .partners-image {
@@ -249,10 +245,9 @@
 }
 
 .mkt-event h2 {
-    font-size: 4rem;
-    font-weight: 900;
-    margin-bottom: 30px;
-    text-transform: uppercase;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
 }
 
 .mkt-event-content {

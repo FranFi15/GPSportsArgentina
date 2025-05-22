@@ -2,32 +2,42 @@ import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./Inicio.css";
 import SocialButtons from '../components/SocialButtons';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+import laproImg from '../assets/LaproI.png';
+import redivoImg from '../assets/Redivo.png';
+import garinoImg from '../assets/Garino.png';
+import giorgiImg from '../assets/Girogi.png';
+import deliaImg from '../assets/Delia.png';
+
 
 const Inicio = () => {
     const { language } = useLanguage();
-    const bienvenidaRef = useRef(null);
-    const lineasRef = useRef([]);
     const descriptionRef = useRef(null);
     const addressRef = useRef(null);
-    const contentRef = useRef(null); // Referencia para el div contenedor del contenido
+    const contentRef = useRef(null);
     const content1Ref = useRef(null);
     const content2Ref = useRef(null);
     const content3Ref = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
-    const [lineasVisible, setLineasVisible] = useState([]);
+
     const [descriptionVisible, setDescriptionVisible] = useState(false);
     const [addressVisible, setAddressVisible] = useState(false);
-    const [contentVisible, setContentVisible] = useState(false); // Estado para la visibilidad del contenedor content
+    const [contentVisible, setContentVisible] = useState(false);
     const [content1Visible, setContent1Visible] = useState(false);
     const [content2Visible, setContent2Visible] = useState(false);
     const [content3Visible, setContent3Visible] = useState(false);
 
+    const carouselImages = [
+        { src: laproImg, alt: 'Laprovíttola' },
+        { src: redivoImg, alt: 'Redivo' },
+        { src: garinoImg, alt: 'Garino' },
+        { src: giorgiImg, alt: 'Giorgetti' },
+        { src: deliaImg, alt: 'Delia' },        
+    ];
+
     const textos = {
         es: {
             linea1b: "#TeamGPSports",
-            linea2: "Un grupo de profesionales apasionados",
-            linea3: "comprometidos con la excelencia en",
-            linea4: "representación deportiva",
             description: 'El #TeamGPSports está formado por jugadores, entrenadores y deportistas de distintas disciplinas, unidos por una misma filosofía: compromiso, dedicación, trabajo en equipo y pasión por lo que hacen. Desde jóvenes promesas hasta referentes consagrados, acompañamos a cada integrante en su camino, brindando un respaldo cercano y profesional en cada etapa de su carrera. Nuestro equipo no se define solo por lo que logra dentro de la cancha, sino por los valores que representa fuera de ella.',
             direccionTitulo: 'Nuestra Ubicación',
             direccionCalle: 'Boyacá 152 6°E',
@@ -37,9 +47,6 @@ const Inicio = () => {
         },
         en: {
             linea1b: "#TeamGPSports",
-            linea2: "A group of passionate professionals",
-            linea3: "committed to excellence in",
-            linea4: "sports representation",
             description: 'The #TeamGPSports is made of players, coaches, and athletes from different disciplines, united by a common philosophy: commitment, dedication, teamwork, and passion for what they do. From young talents to established stars, we support each member on their journey, providing close and professional backing at every stage of their career. Our team is defined not only by what they achieve on the field but also by the values they represent off it.',
             direccionTitulo: 'Our Location',
             direccionCalle: 'Boyacá 152 6°E',
@@ -53,18 +60,7 @@ const Inicio = () => {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (entry.target === bienvenidaRef.current) {
-                        setTimeout(() => setIsVisible(true), 500);
-                        lineasRef.current.forEach((linea, index) => {
-                            setTimeout(() => {
-                                setLineasVisible(prev => {
-                                    const newState = [...prev];
-                                    newState[index] = true;
-                                    return newState;
-                                });
-                            }, 800 + index * 300);
-                        });
-                    } else if (entry.target === descriptionRef.current) {
+                    if (entry.target === descriptionRef.current) {
                         setTimeout(() => setDescriptionVisible(true), 500);
                     } else if (entry.target === addressRef.current) {
                         setTimeout(() => setAddressVisible(true), 500);
@@ -81,13 +77,11 @@ const Inicio = () => {
             threshold: 0.1
         });
 
-        if (bienvenidaRef.current) observer.observe(bienvenidaRef.current);
         if (descriptionRef.current) observer.observe(descriptionRef.current);
         if (addressRef.current) observer.observe(addressRef.current);
         if (contentRef.current) observer.observe(contentRef.current);
 
         return () => {
-            if (bienvenidaRef.current) observer.unobserve(bienvenidaRef.current);
             if (descriptionRef.current) observer.unobserve(descriptionRef.current);
             if (addressRef.current) observer.unobserve(addressRef.current);
             if (contentRef.current) observer.unobserve(contentRef.current);
@@ -95,29 +89,48 @@ const Inicio = () => {
     }, [language]);
 
     useEffect(() => {
-        setLineasVisible(Array(Object.keys(textos[language]).filter(key => key.startsWith('linea')).length).fill(false));
         setDescriptionVisible(false);
         setAddressVisible(false);
-        setIsVisible(false);
         setContentVisible(false);
         setContent1Visible(false);
         setContent2Visible(false);
         setContent3Visible(false);
     }, [language]);
 
-    const googleMapsUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.189904482318!2d-58.45030162341898!3d-34.5972082803011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb0cca8e31884474f%3A0x992589390011289a!2sBoyac%C3%A1%20152%2C%20C1405BWE%20CABA!5e0!3m2!1ses-419!2sar!4v1681928749354?q=${textos[language].direccionCalle?.replace(/ /g, '+')},+${textos[language].direccionCiudad?.replace(/ /g, '+')}&output=embed`;
+    // Ensure your Google Maps URL is correct and includes your API key if needed
+    const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY_HERE&q=${textos[language].direccionCalle?.replace(/ /g, '+')},+${textos[language].direccionCiudad?.replace(/ /g, '+')}`;
 
     return (
         <div className='inicio'>
-            <div ref={bienvenidaRef} className={`bienvenida ${isVisible ? 'fade-in' : ''}`}>
-                <p ref={el => lineasRef.current[0] = el} className={`linea-bienvenida linea-titulo ${lineasVisible[0] ? 'slide-up' : ''}`}>
-                    <strong className="highlight">{textos[language].linea1b}</strong>
-                </p>
-                <p ref={el => lineasRef.current[1] = el} className={`linea-bienvenida ${lineasVisible[1] ? 'slide-up' : ''}`}>{textos[language].linea2}</p>
-                <p ref={el => lineasRef.current[2] = el} className={`linea-bienvenida ${lineasVisible[2] ? 'slide-up' : ''}`}>{textos[language].linea3}</p>
-                <p ref={el => lineasRef.current[3] = el} className={`linea-bienvenida ${lineasVisible[3] ? 'slide-up' : ''}`}>{textos[language].linea4}</p>
-                <SocialButtons />
+            {/* Carousel Section */}
+            <div className="carousel-section">
+                <Carousel
+                    showArrows={false}
+                    showIndicators={false}
+                    infiniteLoop={true}
+                    showThumbs={false}
+                    showStatus={false}
+                    autoPlay={true} 
+                    interval={4000}
+                    transitionTime={0}
+                    swipeable={true}
+                >
+                    {/* Only the images are inside the Carousel component */}
+                    {carouselImages.map((image, index) => (
+                        <div key={index}>
+                            <img src={image.src} alt={image.alt} />
+                        </div>
+                    ))}
+                </Carousel>
+
+                {/* The overlay is now a sibling to the Carousel, making it static */}
+                <div className="carousel-overlay">
+                    <p className="highlight">{textos[language].linea1b}</p>
+                    <SocialButtons />
+                </div>
             </div>
+
+            {/* Description Section (retained) */}
             <div ref={descriptionRef} className={`description ${descriptionVisible ? 'fade-in' : ''}`}>
                 <div ref={contentRef} className={`content ${contentVisible ? 'slide-in' : ''}`}>
                     <p ref={content1Ref} className={`content1 ${content1Visible ? 'fade-in-left' : ''}`}>{textos[language].contenido1}</p>
@@ -125,6 +138,8 @@ const Inicio = () => {
                 </div>
                 <p ref={content3Ref} className={`content3 ${content3Visible ? 'fade-in-right' : ''}`}>{textos[language].description}</p>
             </div>
+
+            {/* Address Section (retained) */}
             <div ref={addressRef} className={`direccion ${addressVisible ? 'fade-in-bottom' : ''}`}>
                 <div className='datos-direccion'>
                     <h2>{textos[language].direccionTitulo}</h2>
