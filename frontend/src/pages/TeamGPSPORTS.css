@@ -80,6 +80,9 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .team-gpsports-container h2{
+        font-size: 6rem; /* Adjust size for smaller screens */
+    }
     .section {
         flex-direction: column;
     }

@@ -99,8 +99,6 @@ const Inicio = () => {
     }, [language]);
 
     // Ensure your Google Maps URL is correct and includes your API key if needed
-    const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY_HERE&q=${textos[language].direccionCalle?.replace(/ /g, '+')},+${textos[language].direccionCiudad?.replace(/ /g, '+')}`;
-
     return (
         <div className='inicio'>
             {/* Carousel Section */}
@@ -108,7 +106,7 @@ const Inicio = () => {
                 <Carousel
                 ref={carouselRef}
                     showArrows={false}
-                    showIndicators={false}
+                    showIndicators={true}
                     infiniteLoop={true}
                     showThumbs={false}
                     showStatus={false}
@@ -150,17 +148,7 @@ const Inicio = () => {
                         <p className="direccion-ciudad">{textos[language].direccionCiudad}</p>
                     </div>
                 </div>
-                <div className="map-container">
-                    <iframe
-                        src={googleMapsUrl}
-                        width="600"
-                        height="450"
-                        style={{ border: 0 }}
-                        allowFullScreen=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title="Ubicación de la empresa"
-                    ></iframe>
+                <div className="map">
                 </div>
             </div>
         </div>
