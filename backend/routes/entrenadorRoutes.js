@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import Entrenador from '../models/entrenador.js';
+import Entrenador from '../models/Entrenador.js';
 // import authenticateAdmin from '../middleware/authMiddleware.js'; // Comentado
 
 // Obtener todos los entrenadores
