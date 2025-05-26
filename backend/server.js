@@ -22,10 +22,7 @@ console.log('CORS_ORIGIN from .env:', process.env.CORS_ORIGIN);
 // Configuración de CORS
 const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
 
-if (process.env.NODE_ENV !== 'production') {
-    corsOrigins.push('http://localhost:5173');
-    console.log('Adding localhost:5173 to CORS origins for development.');
-}
+
 
 console.log('Final CORS Origins allowed:', corsOrigins);
 
