@@ -12,7 +12,7 @@ import PersonList from './components/Admin/PersonList';
 import AddEditPerson from './components/Admin/AddEditPerson';
 import SelectPersonType from './components/Admin/SelectPersonType'; // Importa el nuevo componente
 import { LanguageProvider } from './context/LanguageContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import  AuthProvider, { useAuth } from './context/AuthContext';
 import './App.css';
 import Footer from './components/Footer';
 
