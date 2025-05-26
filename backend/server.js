@@ -16,14 +16,17 @@ const port = process.env.PORT || 5000;
 
 // Configuración de CORS (modificado)
 const corsOrigin = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];// Cambia esto a tu origen permitido
+
 if(process.env.NODE_ENV === 'production'){
-  corsOrigin.push('http://localhost:5173')
+  corsOrigin.push('http://localhost:5173')};
+
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || corsOrigin.includes(origin)) {
       callback(null, true);
     }
     else {
+      console.error(`CORS: Solicitud de origen no permitido: ${origin}. Orígenes permitidos: ${corsOrigins.join(', ')}`);
       callback(new Error(`No permitido por CORS : ${origin}`));
     }
   },
