@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import laproImg from '../assets/LaproI.png';
 import redivoImg from '../assets/Redivo.png';
 import garinoImg from '../assets/Garino.png';
-import deliaImg from '../assets/delia.png';
+import deliaImg from '../assets/Delia.png';
 import scalaImg from '../assets/scala.png';
 import ramellaImg from '../assets/ramella.png';
 import lucasImg from '../assets/lucas.png'
