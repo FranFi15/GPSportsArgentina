@@ -16,11 +16,13 @@ const PersonList = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchPersonas = async () => {
       setError('');
       try {
-        const responseJugadores = await fetch('/api/jugadores', {
+        const responseJugadores = await fetch(`${API_BASE_URL}/api/jugadores`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -31,7 +33,7 @@ const PersonList = () => {
         const jugadoresData = await responseJugadores.json();
         jugadoresData.forEach(jugador => jugador.tipo = 'jugador');
 
-        const responseEntrenadores = await fetch('/api/entrenadores', {
+        const responseEntrenadores = await fetch(`${API_BASE_URL}/api/entrenadores`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -44,6 +46,7 @@ const PersonList = () => {
 
         setPersonas([...jugadoresData, ...entrenadoresData]);
       } catch (err) {
+        console.error("Fetch error in PersonList:", err);
         setError(err.message);
       }
     };

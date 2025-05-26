@@ -14,6 +14,8 @@ const Basketball = () => {
     const navigate = useNavigate();
     const { language } = useLanguage();
 
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
+
     const textos = {
         es: {
             title: 'Nuestros Clientes',
@@ -77,14 +79,14 @@ const Basketball = () => {
         const fetchPersonas = async () => {
             setError('');
             try {
-                const responseJugadores = await fetch('/api/jugadores');
+                const responseJugadores = await fetch(`${API_BASE_URL}/api/jugadores`);
                 if (!responseJugadores.ok) {
                     throw new Error('Error loading players');
                 }
                 const jugadoresData = await responseJugadores.json();
                 jugadoresData.forEach(jugador => jugador.tipo = 'jugador');
 
-                const responseEntrenadores = await fetch('/api/entrenadores');
+                const responseEntrenadores = await fetch(`${API_BASE_URL}/api/entrenadores`);
                 if (!responseEntrenadores.ok) {
                     throw new Error('Error loading coaches');
                 }
@@ -99,6 +101,7 @@ const Basketball = () => {
                 });
                 setPersonas(combined);
             } catch (err) {
+                console.error("Fetch error:", err);
                 setError(err.message);
             }
         };

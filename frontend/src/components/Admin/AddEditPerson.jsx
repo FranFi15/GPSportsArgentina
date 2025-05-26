@@ -20,11 +20,13 @@ const AddEditPerson = () => {
   });
   const [error, setError] = useState('');
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchPersona = async () => {
       setError('');
       try {
-        const url = tipo === 'jugador' ? `/api/jugadores/${id}` : `/api/entrenadores/${id}`;
+        const url = tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores/${id}` :`${API_BASE_URL}/api/entrenadores/${id}`;
         const response = await fetch(url, {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -55,7 +57,7 @@ const AddEditPerson = () => {
         inst: '',
       });
     }
-  }, [tipo, id, token]);
+  }, [tipo, id, token, API_BASE_URL]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,8 +71,8 @@ const AddEditPerson = () => {
     console.log('Estado isAuthenticated:', isAuthenticated);
     try {
       const url = id ?
-        (tipo === 'jugador' ? `/api/jugadores/${id}` : `/api/entrenadores/${id}`) :
-        (tipo === 'jugador' ? `/api/jugadores` : `/api/entrenadores`);
+        (tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores/${id}` : `${API_BASE_URL}/api/entrenadores/${id}`) :
+        (tipo === 'jugador' ?  `${API_BASE_URL}/api/jugadores`: `${API_BASE_URL}/api/entrenadores`);
       const method = id ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
