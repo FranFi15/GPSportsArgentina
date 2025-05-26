@@ -6,11 +6,12 @@ import { FaInstagram } from 'react-icons/fa6'; // Import the Instagram icon
 
 const Basketball = () => {
     const [personas, setPersonas] = useState([]);
-    const [edades, setEdades] = useState({}); // Objeto para almacenar las edades por _id
+    const [edades, setEdades] = useState({});
     const [filtroNombre, setFiltroNombre] = useState('');
     const [filtroTipo, setFiltroTipo] = useState('todos');
     const [filtroPosicion, setFiltroPosicion] = useState('todos');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true); // Nuevo estado para la carga
     const navigate = useNavigate();
     const { language } = useLanguage();
 
@@ -37,6 +38,7 @@ const Basketball = () => {
             instagram: 'Instagram',
             equipo: 'Equipo',
             años: 'años',
+            loading: 'Cargando datos...', // Nuevo texto para el loading
         },
         en: {
             title: 'Our Clients',
@@ -58,6 +60,7 @@ const Basketball = () => {
             instagram: 'Instagram',
             equipo: 'Team',
             años: 'years',
+            loading: 'Loading data...', // Nuevo texto para el loading
         },
     };
 
@@ -78,6 +81,7 @@ const Basketball = () => {
     useEffect(() => {
         const fetchPersonas = async () => {
             setError('');
+            setIsLoading(true); // Establecer isLoading a true al iniciar el fetch
             try {
                 const responseJugadores = await fetch(`${API_BASE_URL}/api/jugadores`);
                 if (!responseJugadores.ok) {
@@ -103,11 +107,13 @@ const Basketball = () => {
             } catch (err) {
                 console.error("Fetch error:", err);
                 setError(err.message);
+            } finally {
+                setIsLoading(false); // Establecer isLoading a false al finalizar (éxito o error)
             }
         };
 
         fetchPersonas();
-    }, []);
+    }, [API_BASE_URL]); // Añadir API_BASE_URL a las dependencias
 
     useEffect(() => {
         const nuevasEdades = {};
@@ -125,7 +131,7 @@ const Basketball = () => {
         }, 1000 * 60 * 60 * 24); // Actualizar cada 24 horas
 
         return () => clearInterval(intervalId); // Limpiar el intervalo
-    }, [personas]); // Dependencia de 'personas' para recalcular al cambiar la lista
+    }, [personas]);
 
     const formatName = (name) => {
         if (!name) return '';
@@ -151,72 +157,81 @@ const Basketball = () => {
             <h2 className="basketball-list-title">{textos[language].title}</h2>
             {error && <p className="basketball-error-message">{error}</p>}
 
-            <div className="basketball-filter-controls">
-                <label htmlFor="filterNombre" className="basketball-filter-label">{textos[language].filterName}:</label>
-                <input
-                    type="text"
-                    id="filterNombre"
-                    className="basketball-filter-input"
-                    value={filtroNombre}
-                    onChange={(e) => setFiltroNombre(e.target.value)}
-                />
+            {isLoading ? ( // Mostrar spinner si está cargando
+                <div className="loading-spinner-container">
+                    <div className="loading-spinner"></div>
+                    <p>{textos[language].loading}</p>
+                </div>
+            ) : ( // Mostrar contenido normal si no está cargando
+                <>
+                    <div className="basketball-filter-controls">
+                        <label htmlFor="filterNombre" className="basketball-filter-label">{textos[language].filterName}:</label>
+                        <input
+                            type="text"
+                            id="filterNombre"
+                            className="basketball-filter-input"
+                            value={filtroNombre}
+                            onChange={(e) => setFiltroNombre(e.target.value)}
+                        />
 
-                <label htmlFor="filterTipo" className="basketball-filter-label">{textos[language].tipo}:</label>
-                <select
-                    id="filterTipo"
-                    className="basketball-filter-select"
-                    value={filtroTipo}
-                    onChange={(e) => setFiltroTipo(e.target.value)}
-                >
-                    <option value="todos">{textos[language].all}</option>
-                    <option value="jugador">{textos[language].players}</option>
-                    <option value="entrenador">{textos[language].coaches}</option>
-                </select>
-
-                {filtroTipo === 'jugador' && (
-                    <>
-                        <label htmlFor="filterPosicion" className="basketball-filter-label">{textos[language].posicion}:</label>
+                        <label htmlFor="filterTipo" className="basketball-filter-label">{textos[language].tipo}:</label>
                         <select
-                            id="filterPosicion"
+                            id="filterTipo"
                             className="basketball-filter-select"
-                            value={filtroPosicion}
-                            onChange={(e) => setFiltroPosicion(e.target.value)}
+                            value={filtroTipo}
+                            onChange={(e) => setFiltroTipo(e.target.value)}
                         >
-                            <option value="todos">{textos[language].allPositions}</option>
-                            <option value="base">{textos[language].base}</option>
-                            <option value="escolta">{textos[language].escolta}</option>
-                            <option value="alero">{textos[language].alero}</option>
-                            <option value="ala-pivot">{textos[language].alaPivot}</option>
-                            <option value="pivot">{textos[language].pivot}</option>
+                            <option value="todos">{textos[language].all}</option>
+                            <option value="jugador">{textos[language].players}</option>
+                            <option value="entrenador">{textos[language].coaches}</option>
                         </select>
-                    </>
-                )}
-            </div>
 
-            <ul className="basketball-person-list">
-                <li className="basketball-person-header">
-                    <span className="person-name-header">{textos[language].filterName}</span>
-                    <span className="person-team-header">{textos[language].equipo}</span>
-                    <span className="person-age-header">{textos[language].edad}</span>
-                    <span className="person-instagram-header">{textos[language].instagram}</span>
-                </li>
-                {filteredPersonas.map(persona => (
-                    <li key={persona._id} className="basketball-person-item">
-                        <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
-                        <span className="basketball-person-team">{persona.equipo}</span>
-                        <span className="basketball-person-age">{edades[persona._id] + ' ' + textos[language].años || '-'}</span>
-                        <span className="basketball-person-instagram">
-                            {persona.inst ? (
-                                <a href={`${persona.inst}`} target="_blank" rel="noopener noreferrer">
-                                    <FaInstagram className="instagram-icon" />
-                                </a>
-                            ) : (
-                                '-'
-                            )}
-                        </span>
-                    </li>
-                ))}
-            </ul>
+                        {filtroTipo === 'jugador' && (
+                            <>
+                                <label htmlFor="filterPosicion" className="basketball-filter-label">{textos[language].posicion}:</label>
+                                <select
+                                    id="filterPosicion"
+                                    className="basketball-filter-select"
+                                    value={filtroPosicion}
+                                    onChange={(e) => setFiltroPosicion(e.target.value)}
+                                >
+                                    <option value="todos">{textos[language].allPositions}</option>
+                                    <option value="base">{textos[language].base}</option>
+                                    <option value="escolta">{textos[language].escolta}</option>
+                                    <option value="alero">{textos[language].alero}</option>
+                                    <option value="ala-pivot">{textos[language].alaPivot}</option>
+                                    <option value="pivot">{textos[language].pivot}</option>
+                                </select>
+                            </>
+                        )}
+                    </div>
+
+                    <ul className="basketball-person-list">
+                        <li className="basketball-person-header">
+                            <span className="person-name-header">{textos[language].filterName}</span>
+                            <span className="person-team-header">{textos[language].equipo}</span>
+                            <span className="person-age-header">{textos[language].edad}</span>
+                            <span className="person-instagram-header">{textos[language].instagram}</span>
+                        </li>
+                        {filteredPersonas.map(persona => (
+                            <li key={persona._id} className="basketball-person-item">
+                                <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
+                                <span className="basketball-person-team">{persona.equipo}</span>
+                                <span className="basketball-person-age">{edades[persona._id] + ' ' + textos[language].años || '-'}</span>
+                                <span className="basketball-person-instagram">
+                                    {persona.inst ? (
+                                        <a href={`${persona.inst}`} target="_blank" rel="noopener noreferrer">
+                                            <FaInstagram className="instagram-icon" />
+                                        </a>
+                                    ) : (
+                                        '-'
+                                    )}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
         </div>
     );
 };
