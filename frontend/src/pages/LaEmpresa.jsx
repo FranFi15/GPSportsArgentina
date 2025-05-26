@@ -1,3 +1,5 @@
+// src/components/LaEmpresa/LaEmpresa.jsx
+
 import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./LaEmpresa.css";
@@ -9,7 +11,13 @@ import duranLogo from "../assets/DM.png";
 import bestBallerLogo from "../assets/BB.png";
 import Gallery from '../components/Gallery';
 
-
+import carlosPrunesImg from '../assets/cprunes.png';
+import matiasNovoaImg from '../assets/novoa.png';
+import arielEslavaImg from '../assets/eslava.png';
+import ricardoPrunesImg from '../assets/rprunes.png';
+import gonzaloZamudioImg from '../assets/contador.png';
+import edgardoMagnaghiImg from '../assets/abogado.png';
+import franciscoFilippaImg from '../assets/diseñador.png';
 
 const LaEmpresa = () => {
     const { language } = useLanguage();
@@ -20,33 +28,55 @@ const LaEmpresa = () => {
     const partnersRef = useRef(null);
     const mktEventRef = useRef(null);
     const [isVisible, setIsVisible] = useState({ img: false, description: false, description2: false, staff: false, partners: false, address: false, mktEvent: false });
-   
 
     const textos = {
         es: {
             titulo: 'La Empresa',
             staffTitulo: 'Nuestro Equipo',
-            staff1: "Carlos Prunes",
-            staff2: "Matias Novoa",
-            staff3: "Ariel Eslava",
-            staff1I: "Director General",
-            staff2I: "Básquetbol y Marketing",
-            staff3I: "Básquetbol",
-            staff5: "Gonzalo Zamudio",
-            staff6: "Edgardo Magnaghi",
-            staff7: "Francisco Filippa",
-            staff5I: "Contador",
-            staff6I: "Abogado",
-            staff7I: "Diseñador Digital",
-            staff4: "Ricardo Prunes",
-            staff4I: "Fútbol",
+            staff: [
+                {
+                    name: "Carlos Prunes",
+                    role: "Director General",
+                    image: carlosPrunesImg
+                },
+                {
+                    name: "Matias Novoa",
+                    role: "Básquetbol y Marketing",
+                    image: matiasNovoaImg
+                },
+                {
+                    name: "Ariel Eslava",
+                    role: "Básquetbol",
+                    image: arielEslavaImg
+                },
+                {
+                    name: "Ricardo Prunes",
+                    role: "Fútbol",
+                    image: ricardoPrunesImg
+                },
+                {
+                    name: "Gonzalo Zamudio",
+                    role: "Contador",
+                    image: gonzaloZamudioImg
+                },
+                {
+                    name: "Edgardo Magnaghi",
+                    role: "Abogado",
+                    image: edgardoMagnaghiImg
+                },
+                {
+                    name: "Francisco Filippa",
+                    role: "Diseñador Digital",
+                    image: franciscoFilippaImg
+                },
+            ],
             partnersTitulo: 'Nuestros Partners',
             partners: [
                 { name: 'Players Group S.R.L.', address: 'P.zza Garibaldi, 54\n60044 Fabriano (AN)\nItalia', image: playersGroupLogo, link: 'https://www.instagram.com/playersgroupitalia/' },
                 { name: 'One World', address: 'Río Danubio 395-B-Ote., Del Valle,\n66220 San Pedro Garza García, N.L.\nMonterrey, Mexico', image: oneWorldLogo, link: 'https://www.instagram.com/oneworldsportsgroup/' },
                 { name: 'Duran International', address: 'Calle Alcobendas 25\n28914, Madrid, España', image: duranLogo, link: 'https://www.instagram.com/duranmanagement/' },
                 { name: 'Best Baller', address: 'Torre Tepuy Piso 1 Ofic 1C, Sabana Grande, Caracas, Venezuela', image: bestBallerLogo, link: 'https://www.instagram.com/bestballeragency/' },
-                { name: 'Nasta Sports', address: "Brasil" , image: nastaLogo, link: 'https://www.instagram.com/nastasports/' },
+                { name: 'Nasta Sports', address: "Brasil", image: nastaLogo, link: 'https://www.instagram.com/nastasports/' },
             ],
             mktEventTitulo: 'Marketing y Eventos',
             mktEventContenido: 'Queremos que tu imagen fuera de la cancha sea tan valiosa como tus logros deportivos. En GP SPORTS, te ayudamos a construir una marca personal sólida y atractiva para los patrocinadores. Analizamos tu perfil y necesidades para crear una estrategia de imagen a tu medida, incrementando tu reconocimiento y abriendo puertas a oportunidades de ingresos adicionales. Buscamos las marcas ideales para vos, gestionamos tu relación con los medios y potenciamos tus redes sociales para conectar con tus fans. Con nosotros, tu éxito deportivo se traduce en un crecimiento económico y de imagen imparable.',
@@ -54,27 +84,50 @@ const LaEmpresa = () => {
         en: {
             titulo: 'The Company',
             staffTitulo: 'Our Team',
-            staff1: "Carlos Prunes",
-            staff2: "Matias Novoa",
-            staff3: "Ariel Eslava",
-            staff1I: "General Director",
-            staff2I: "Basketball and Marketing",
-            staff3I: "Basketball",
-            staff5: "Gonzalo Zamudio",
-            staff6: "Edgardo Magnaghi",
-            staff7: "Francisco Filippa",
-            staff5I: "Accountant",
-            staff6I: "Lawyer",
-            staff7I: "Digital Designer",
-            staff4: "Ricardo Prunes",
-            staff4I: "Football",
+            staff: [
+                {
+                    name: "Carlos Prunes",
+                    role: "General Director",
+                    image: carlosPrunesImg
+                },
+                {
+                    name: "Matias Novoa",
+                    role: "Basketball and Marketing",
+                    image: matiasNovoaImg
+                },
+                {
+                    name: "Ariel Eslava",
+                    role: "Basketball",
+                    image: arielEslavaImg
+                },
+                {
+                    name: "Ricardo Prunes",
+                    role: "Football",
+                    image: ricardoPrunesImg
+                },
+                {
+                    name: "Gonzalo Zamudio",
+                    role: "Accountant",
+                    image: gonzaloZamudioImg
+                },
+                {
+                    name: "Edgardo Magnaghi",
+                    role: "Lawyer",
+                    image: edgardoMagnaghiImg
+                },
+                {
+                    name: "Francisco Filippa",
+                    role: "Digital Designer",
+                    image: franciscoFilippaImg
+                },
+            ],
             partnersTitulo: 'Our Partners',
             partners: [
                 { name: 'Players Group S.R.L.', address: 'P.zza Garibaldi, 54\n60044 Fabriano (AN)\nItaly', image: playersGroupLogo, link: 'https://www.instagram.com/playersgroupitalia/' },
                 { name: 'One World', address: 'Río Danubio 395-B-Ote., Del Valle,\n66220 San Pedro Garza García, N.L.\nMonterrey, Mexico', image: oneWorldLogo, link: 'https://www.instagram.com/oneworldsportsgroup/' },
                 { name: 'Duran International', address: 'Calle Alcobendas 25\n28914, Madrid, Spain', image: duranLogo, link: 'https://www.instagram.com/duranmanagement/' },
-                { name: 'Best Baller', address: 'Torre Tepuy Piso 1 Ofic 1C, Sabana Grande, Caracas, Venezuela', image: bestBallerLogo, link:'https://www.instagram.com/bestballeragency/' },
-                { name: 'Nasta Sports', address: "Brasil" , image: nastaLogo, link: 'https://www.instagram.com/nastasports/' },
+                { name: 'Best Baller', address: 'Torre Tepuy Piso 1 Ofic 1C, Sabana Grande, Caracas, Venezuela', image: bestBallerLogo, link: 'https://www.instagram.com/bestballeragency/' },
+                { name: 'Nasta Sports', address: "Brasil", image: nastaLogo, link: 'https://www.instagram.com/nastasports/' },
             ],
             mktEventTitulo: 'Marketing & Events',
             mktEventContenido: 'We want your off-field image to be as valuable as your sporting achievements. At GP SPORTS, we help you build a solid and attractive personal brand for sponsors. We analyze your profile and needs to create a tailored image strategy, increasing your recognition and opening doors to additional income opportunities. We seek out the ideal brands for you, manage your media relations, and boost your social media to connect with your fans. With us, your sporting success translates into unstoppable economic and image growth.',
@@ -86,7 +139,7 @@ const LaEmpresa = () => {
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/IgIeKtkECek' },
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Xtae7OBUKGg' },
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Rl2YjjTH1pE' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA'} ,
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA' },
     ];
 
     useEffect(() => {
@@ -123,7 +176,6 @@ const LaEmpresa = () => {
     }, []);
 
     const currentText = textos[language];
-   
 
     return (
         <div className="laempresa">
@@ -133,41 +185,22 @@ const LaEmpresa = () => {
             <div ref={staffRef} className={`staff ${isVisible.staff ? 'fade-in-bottom' : ''}`}>
                 <div className='title-staff'><h2>{currentText.staffTitulo}</h2></div>
                 <div className='staff-members'>
-                    <div className='member'>
-                        <div className='staff-img-m'></div>
-                        <h3>{currentText.staff1}</h3>
-                        <p>{currentText.staff1I}</p>
-                    </div>
-                    <div className='member'>
-                        <div className='staff-img-p'></div>
-                        <h3>{currentText.staff2}</h3>
-                        <p>{currentText.staff2I}</p>
-                    </div>
-                    <div className='member'>
-                        <div className='staff-img-e'></div>
-                        <h3>{currentText.staff3}</h3>
-                        <p>{currentText.staff3I}</p>
-                    </div>
-                    <div className='member'>
-                        <div className='staff-img-e'></div>
-                        <h3>{currentText.staff4}</h3>
-                        <p>{currentText.staff4I}</p>
-                    </div>
-                    <div className='member'>
-                        <div className='staff-img-e'></div>
-                        <h3>{currentText.staff5}</h3>
-                        <p>{currentText.staff5I}</p>
-                    </div>
-                    <div className='member'>
-                        <div className='staff-img-e'></div>
-                        <h3>{currentText.staff6}</h3>
-                        <p>{currentText.staff6I}</p>
-                    </div>
-                    <div className='member'>
-                        <div className='staff-img-e'></div>
-                        <h3>{currentText.staff7}</h3>
-                        <p>{currentText.staff7I}</p>
-                    </div>
+                    {currentText.staff.map((member, index) => (
+                        <div className='member' key={index}>
+                            {/* NUEVA ESTRUCTURA: Contenedor para imagen y texto */}
+                            <div className="member-content">
+                                {member.image && (
+                                    <div className='staff-img-container'>
+                                        <img src={member.image} alt={member.name} className='staff-member-img' />
+                                    </div>
+                                )}
+                                <div className="staff-details">
+                                    <h3>{member.name}</h3>
+                                    <p>{member.role}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
             <div ref={partnersRef} className={`partners ${isVisible.partners ? 'fade-in-bottom' : ''}`}>
@@ -200,7 +233,7 @@ const LaEmpresa = () => {
                     ))}
                 </div>
             </div>
-             <div ref={mktEventRef} className={`mkt-event ${isVisible.mktEvent ? 'fade-in-bottom' : ''}`}>
+            <div ref={mktEventRef} className={`mkt-event ${isVisible.mktEvent ? 'fade-in-bottom' : ''}`}>
                 <h2>{currentText.mktEventTitulo}</h2>
                 <p className='mkt-event-content'>{currentText.mktEventContenido}</p>
                 <Gallery items={galleryItems} />

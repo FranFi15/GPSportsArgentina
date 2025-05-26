@@ -15,8 +15,8 @@ const Navbar = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
 
     const textos = {
-        es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', admin:"Admin", deportes: 'Deportes', basketball: 'Basketball' },
-        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball' }
+        es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', admin:"Admin", deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto' },
+        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: '#TeamGPSports', charlas: 'Conferences', admin:"Admin", deportes: 'Sports', basketball: 'Basketball', contact: 'Contact' }
     };
 
     useEffect(() => {
@@ -84,7 +84,7 @@ const Navbar = () => {
                     <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>
                 </li>
                 <li className="navbar-nav-item">
-                    <Link to="/admin" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].admin}</Link>
+                    <Link to="/admin" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].contact}</Link>
                 </li>
                 <li className="navbar-nav-item navbar-language-buttons">
                     <button onClick={() => toggleLanguage('es')} className={`navbar-button lang-button ${language === 'es' ? 'active' : ''}`}>

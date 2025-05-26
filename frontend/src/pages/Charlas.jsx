@@ -35,15 +35,15 @@ const Charlas = () => {
     };
 
     const galleryItems = [
-        { type: 'image', src: cImage1 },
-        { type: 'image', src: cImage2 },
+        { type: 'image', src: cImage9 },
+        { type: 'image', src: cImage6 },
         { type: 'image', src: cImage3 },
         { type: 'image', src: cImage4 },
         { type: 'image', src: cImage5 },
-        { type: 'image', src: cImage6 },
         { type: 'image', src: cImage7 },
+        { type: 'image', src: cImage1 },
         { type: 'image', src: cImage8 },
-        { type: 'image', src: cImage9 },
+        { type: 'image', src: cImage2 },
     ];
 
     return (

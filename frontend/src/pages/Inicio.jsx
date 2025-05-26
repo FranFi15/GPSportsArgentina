@@ -7,8 +7,10 @@ import { Carousel } from 'react-responsive-carousel';
 import laproImg from '../assets/LaproI.png';
 import redivoImg from '../assets/Redivo.png';
 import garinoImg from '../assets/Garino.png';
-import giorgiImg from '../assets/Girogi.png';
-import deliaImg from '../assets/Delia.png';
+import deliaImg from '../assets/delia.png';
+import scalaImg from '../assets/scala.png';
+import ramellaImg from '../assets/ramella.png';
+import lucasImg from '../assets/lucas.png'
 
 
 const Inicio = () => {
@@ -32,7 +34,9 @@ const Inicio = () => {
         { src: laproImg, alt: 'Laprovíttola' },
         { src: redivoImg, alt: 'Redivo' },
         { src: garinoImg, alt: 'Garino' },
-        { src: giorgiImg, alt: 'Giorgetti' },
+        { src: scalaImg, alt: 'Scala' },
+        { src: ramellaImg, alt: 'Ramella' },
+        { src: lucasImg, alt: 'Lucas' },
         { src: deliaImg, alt: 'Delia' },        
     ];
 
