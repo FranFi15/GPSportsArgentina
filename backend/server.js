@@ -15,8 +15,18 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Configuración de CORS (modificado)
+const corsOrigin = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];// Cambia esto a tu origen permitido
+if(process.env.NODE_ENV === 'production'){
+  corsOrigin.push('http://localhost:5173')
 const corsOptions = {
-  origin: 'http://localhost:5173', // Sin la barra al final
+  origin: function (origin, callback) {
+    if (!origin || corsOrigin.includes(origin)) {
+      callback(null, true);
+    }
+    else {
+      callback(new Error(`No permitido por CORS : ${origin}`));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Si necesitas manejar cookies o autenticación con credenciales
   allowedHeaders: 'Content-Type, Authorization', // Los headers que permites
