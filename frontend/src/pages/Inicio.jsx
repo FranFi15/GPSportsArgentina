@@ -1,3 +1,5 @@
+// src/components/Inicio/Inicio.jsx
+
 import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./Inicio.css";
@@ -16,7 +18,7 @@ import lucasImg from '../assets/lucas.png'
 const Inicio = () => {
     const { language } = useLanguage();
     const descriptionRef = useRef(null);
-    const addressRef = useRef(null);
+    // const addressRef = useRef(null); // No longer needed
     const contentRef = useRef(null);
     const content1Ref = useRef(null);
     const content2Ref = useRef(null);
@@ -24,7 +26,7 @@ const Inicio = () => {
     const carouselRef = useRef(null);
 
     const [descriptionVisible, setDescriptionVisible] = useState(false);
-    const [addressVisible, setAddressVisible] = useState(false);
+    // const [addressVisible, setAddressVisible] = useState(false); // No longer needed
     const [contentVisible, setContentVisible] = useState(false);
     const [content1Visible, setContent1Visible] = useState(false);
     const [content2Visible, setContent2Visible] = useState(false);
@@ -37,25 +39,25 @@ const Inicio = () => {
         { src: scalaImg, alt: 'Scala' },
         { src: ramellaImg, alt: 'Ramella' },
         { src: lucasImg, alt: 'Lucas' },
-        { src: deliaImg, alt: 'Delia' },        
+        { src: deliaImg, alt: 'Delia' },
     ];
 
     const textos = {
         es: {
             linea1b: "#TeamGPSports",
             description: 'El #TeamGPSports está formado por jugadores, entrenadores y deportistas de distintas disciplinas, unidos por una misma filosofía: compromiso, dedicación, trabajo en equipo y pasión por lo que hacen. Desde jóvenes promesas hasta referentes consagrados, acompañamos a cada integrante en su camino, brindando un respaldo cercano y profesional en cada etapa de su carrera. Nuestro equipo no se define solo por lo que logra dentro de la cancha, sino por los valores que representa fuera de ella.',
-            direccionTitulo: 'Nuestra Ubicación',
-            direccionCalle: 'Boyacá 152 6°E',
-            direccionCiudad: 'Ciudad Autónoma de Bs.As, Buenos Aires, Argentina',
+            // direccionTitulo: 'Nuestra Ubicación', // No longer needed
+            // direccionCalle: 'Boyacá 152 6°E', // No longer needed
+            // direccionCiudad: 'Ciudad Autónoma de Bs.As, Buenos Aires, Argentina', // No longer needed
             contenido1: 'Nos une el deporte, pero sobre todo, una manera de vivirlo.',
             contenido2: "GP Sports es una compañía de representación y management de jugadores, entrenadores y atletas con mas de 30 años de experiencia en la gestión y negociación de contratos con clubes y empresas de todo el mundo. Acompañamos carreras en un concepto 360, desde la negociación de contratos hasta la implementación comercial de los atletas con un staff de profesionales capacitado para cada una de las áreas de gestión. El objetivo con nuestros clientes es continuar con los valores que caracterizan la empresa desde su fundación: planificación, conocimiento, pasión,innovación y compromiso.",
         },
         en: {
             linea1b: "#TeamGPSports",
             description: 'The #TeamGPSports is made of players, coaches, and athletes from different disciplines, united by a common philosophy: commitment, dedication, teamwork, and passion for what they do. From young talents to established stars, we support each member on their journey, providing close and professional backing at every stage of their career. Our team is defined not only by what they achieve on the field but also by the values they represent off it.',
-            direccionTitulo: 'Our Location',
-            direccionCalle: 'Boyacá 152 6°E',
-            direccionCiudad: 'Ciudad Autónoma de Bs.As, Buenos Aires, Argentina',
+            // direccionTitulo: 'Our Location', // No longer needed
+            // direccionCalle: 'Boyacá 152 6°E', // No longer needed
+            // direccionCiudad: 'Ciudad Autónoma de Bs.As, Buenos Aires, Argentina', // No longer needed
             contenido1: 'We are united by sports, but above all, by a way of living it.',
             contenido2: "GP Sports is a representation and management company for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
         }
@@ -67,9 +69,11 @@ const Inicio = () => {
                 if (entry.isIntersecting) {
                     if (entry.target === descriptionRef.current) {
                         setTimeout(() => setDescriptionVisible(true), 500);
-                    } else if (entry.target === addressRef.current) {
-                        setTimeout(() => setAddressVisible(true), 500);
-                    } else if (entry.target === contentRef.current) {
+                    }
+                    // else if (entry.target === addressRef.current) { // No longer needed
+                    //     setTimeout(() => setAddressVisible(true), 500);
+                    // }
+                    else if (entry.target === contentRef.current) {
                         setTimeout(() => setContentVisible(true), 500);
                         setTimeout(() => setContent1Visible(true), 700);
                         setTimeout(() => setContent2Visible(true), 900);
@@ -83,43 +87,41 @@ const Inicio = () => {
         });
 
         if (descriptionRef.current) observer.observe(descriptionRef.current);
-        if (addressRef.current) observer.observe(addressRef.current);
+        // if (addressRef.current) observer.observe(addressRef.current); // No longer needed
         if (contentRef.current) observer.observe(contentRef.current);
 
         return () => {
             if (descriptionRef.current) observer.unobserve(descriptionRef.current);
-            if (addressRef.current) observer.unobserve(addressRef.current);
+            // if (addressRef.current) observer.unobserve(addressRef.current); // No longer needed
             if (contentRef.current) observer.unobserve(contentRef.current);
         };
     }, [language]);
 
     useEffect(() => {
         setDescriptionVisible(false);
-        setAddressVisible(false);
+        // setAddressVisible(false); // No longer needed
         setContentVisible(false);
         setContent1Visible(false);
         setContent2Visible(false);
         setContent3Visible(false);
     }, [language]);
 
-    // Ensure your Google Maps URL is correct and includes your API key if needed
     return (
         <div className='inicio'>
             {/* Carousel Section */}
             <div className="carousel-section">
                 <Carousel
-                ref={carouselRef}
+                    ref={carouselRef}
                     showArrows={false}
                     showIndicators={true}
                     infiniteLoop={true}
                     showThumbs={false}
                     showStatus={false}
-                    autoPlay={true} 
+                    autoPlay={true}
                     interval={4000}
                     transitionTime={0}
                     swipeable={true}
                 >
-                    {/* Only the images are inside the Carousel component */}
                     {carouselImages.map((image, index) => (
                         <div key={index}>
                             <img src={image.src} alt={image.alt} />
@@ -127,7 +129,6 @@ const Inicio = () => {
                     ))}
                 </Carousel>
 
-                {/* The overlay is now a sibling to the Carousel, making it static */}
                 <div className="carousel-overlay">
                     <p className="highlight">{textos[language].linea1b}</p>
                     <SocialButtons />
@@ -143,18 +144,6 @@ const Inicio = () => {
                 <p ref={content3Ref} className={`content3 ${content3Visible ? 'fade-in-right' : ''}`}>{textos[language].description}</p>
             </div>
 
-            {/* Address Section (retained) */}
-            <div ref={addressRef} className={`direccion ${addressVisible ? 'fade-in-bottom' : ''}`}>
-                <div className='datos-direccion'>
-                    <h2>{textos[language].direccionTitulo}</h2>
-                    <div className="direccion-detalles">
-                        <p className="direccion-calle">{textos[language].direccionCalle}</p>
-                        <p className="direccion-ciudad">{textos[language].direccionCiudad}</p>
-                    </div>
-                </div>
-                <div className="map">
-                </div>
-            </div>
         </div>
     );
 };

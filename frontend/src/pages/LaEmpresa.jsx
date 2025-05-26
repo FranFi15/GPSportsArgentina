@@ -9,7 +9,7 @@ import playersGroupLogo from "../assets/PGI.png"
 import oneWorldLogo from "../assets/OW.png";
 import duranLogo from "../assets/DM.png";
 import bestBallerLogo from "../assets/BB.png";
-import Gallery from '../components/Gallery';
+
 
 import carlosPrunesImg from '../assets/cprunes.png';
 import matiasNovoaImg from '../assets/novoa.png';
@@ -26,8 +26,8 @@ const LaEmpresa = () => {
     const description2Ref = useRef(null);
     const staffRef = useRef(null);
     const partnersRef = useRef(null);
-    const mktEventRef = useRef(null);
-    const [isVisible, setIsVisible] = useState({ img: false, description: false, description2: false, staff: false, partners: false, address: false, mktEvent: false });
+    // const mktEventRef = useRef(null); // No longer needed
+    const [isVisible, setIsVisible] = useState({ img: false, description: false, description2: false, staff: false, partners: false, address: false /*, mktEvent: false*/ }); // Remove mktEvent
 
     const textos = {
         es: {
@@ -78,8 +78,7 @@ const LaEmpresa = () => {
                 { name: 'Best Baller', address: 'Torre Tepuy Piso 1 Ofic 1C, Sabana Grande, Caracas, Venezuela', image: bestBallerLogo, link: 'https://www.instagram.com/bestballeragency/' },
                 { name: 'Nasta Sports', address: "Brasil", image: nastaLogo, link: 'https://www.instagram.com/nastasports/' },
             ],
-            mktEventTitulo: 'Marketing y Eventos',
-            mktEventContenido: 'Queremos que tu imagen fuera de la cancha sea tan valiosa como tus logros deportivos. En GP SPORTS, te ayudamos a construir una marca personal sólida y atractiva para los patrocinadores. Analizamos tu perfil y necesidades para crear una estrategia de imagen a tu medida, incrementando tu reconocimiento y abriendo puertas a oportunidades de ingresos adicionales. Buscamos las marcas ideales para vos, gestionamos tu relación con los medios y potenciamos tus redes sociales para conectar con tus fans. Con nosotros, tu éxito deportivo se traduce en un crecimiento económico y de imagen imparable.',
+
         },
         en: {
             titulo: 'The Company',
@@ -129,18 +128,8 @@ const LaEmpresa = () => {
                 { name: 'Best Baller', address: 'Torre Tepuy Piso 1 Ofic 1C, Sabana Grande, Caracas, Venezuela', image: bestBallerLogo, link: 'https://www.instagram.com/bestballeragency/' },
                 { name: 'Nasta Sports', address: "Brasil", image: nastaLogo, link: 'https://www.instagram.com/nastasports/' },
             ],
-            mktEventTitulo: 'Marketing & Events',
-            mktEventContenido: 'We want your off-field image to be as valuable as your sporting achievements. At GP SPORTS, we help you build a solid and attractive personal brand for sponsors. We analyze your profile and needs to create a tailored image strategy, increasing your recognition and opening doors to additional income opportunities. We seek out the ideal brands for you, manage your media relations, and boost your social media to connect with your fans. With us, your sporting success translates into unstoppable economic and image growth.',
         }
     };
-
-    const galleryItems = [
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/2allLNcNMCo' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/IgIeKtkECek' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Xtae7OBUKGg' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Rl2YjjTH1pE' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA' },
-    ];
 
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
@@ -156,8 +145,6 @@ const LaEmpresa = () => {
                         setTimeout(() => setIsVisible(prev => ({ ...prev, staff: true })), 200);
                     } else if (entry.target === partnersRef.current) {
                         setTimeout(() => setIsVisible(prev => ({ ...prev, partners: true })), 250);
-                    } else if (entry.target === mktEventRef.current) {
-                        setTimeout(() => setIsVisible(prev => ({ ...prev, mktEvent: true })), 350);
                     }
                 }
             });
@@ -170,7 +157,6 @@ const LaEmpresa = () => {
         if (description2Ref.current) observer.observe(description2Ref.current);
         if (staffRef.current) observer.observe(staffRef.current);
         if (partnersRef.current) observer.observe(partnersRef.current);
-        if (mktEventRef.current) observer.observe(mktEventRef.current);
 
         return () => observer.disconnect();
     }, []);
@@ -187,7 +173,6 @@ const LaEmpresa = () => {
                 <div className='staff-members'>
                     {currentText.staff.map((member, index) => (
                         <div className='member' key={index}>
-                            {/* NUEVA ESTRUCTURA: Contenedor para imagen y texto */}
                             <div className="member-content">
                                 {member.image && (
                                     <div className='staff-img-container'>
@@ -217,9 +202,14 @@ const LaEmpresa = () => {
                             rel="noopener noreferrer"
                             className='partner-link'
                         >
-                            <div className='partner'>
-                                {partner.image && <div className='partner-image'><img src={partner.image} alt={partner.name} /></div>}
-                                <div className='partner-details'>
+                            {/* Updated structure to use distinct partner classes */}
+                            <div className="partner-content"> {/* New class for partner content */}
+                                {partner.image && (
+                                    <div className='partner-logo-container'> {/* New class for partner image container */}
+                                        <img src={partner.image} alt={partner.name} className='partner-logo-img' /> {/* New class for partner image */}
+                                    </div>
+                                )}
+                                <div className="partner-text-details"> {/* New class for partner text details */}
                                     <h3>{partner.name}</h3>
                                     <p className='partner-address'>{partner.address.split('\n').map((line, i) => (
                                         <React.Fragment key={i}>
@@ -232,11 +222,6 @@ const LaEmpresa = () => {
                         </a>
                     ))}
                 </div>
-            </div>
-            <div ref={mktEventRef} className={`mkt-event ${isVisible.mktEvent ? 'fade-in-bottom' : ''}`}>
-                <h2>{currentText.mktEventTitulo}</h2>
-                <p className='mkt-event-content'>{currentText.mktEventContenido}</p>
-                <Gallery items={galleryItems} />
             </div>
         </div>
     );

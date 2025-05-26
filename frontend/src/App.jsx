@@ -5,8 +5,10 @@ import Navbar from './components/Navbar';
 import Inicio from './pages/Inicio';
 import LaEmpresa from './pages/LaEmpresa';
 import TeamGPSPORTS from './pages/TeamGPSPORTS';
+import MKT from './pages/MKT';
 import Charlas from './pages/Charlas';
 import Basketball from './pages/Deportes/Basketball';
+import Contacto from './pages/Contacto';
 import LoginPage from './components/Auth/LoginPage';
 import PersonList from './components/Admin/PersonList';
 import AddEditPerson from './components/Admin/AddEditPerson';
@@ -33,8 +35,10 @@ function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="/la-empresa" element={<LaEmpresa />} />
             <Route path="/team-gp-sport" element={<TeamGPSPORTS />} />
+            <Route path="/mkt-eventos" element={<MKT />} />
             <Route path="/charlas" element={<Charlas />} />
             <Route path="/basketball" element={<Basketball />} />
+            <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/admin" element={<PrivateRoute><PersonList /></PrivateRoute>} />
             <Route path="/admin/agregar" element={<PrivateRoute><SelectPersonType /></PrivateRoute>} /> {/* Nueva ruta para la selección de tipo */}

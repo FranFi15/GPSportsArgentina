@@ -1,0 +1,57 @@
+/* src/components/MarketingEventos/MarketingEventos.css */
+
+.marketing-eventos {
+    width: 100%;
+    padding: 60px 0;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.marketing-eventos.fade-in-bottom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.marketing-eventos h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
+}
+
+.marketing-eventos-content {
+    font-size: 1.1rem;
+    font-weight: 200;
+    line-height: 2rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+    width: 70%;
+}
+
+@media (max-width: 768px) {
+    .marketing-eventos {
+        padding: 40px 0;
+    }
+
+    .marketing-eventos h2 {
+        font-size: 3.5rem;
+    }
+
+    .marketing-eventos-content {
+        font-size: 1rem;
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .marketing-eventos h2 {
+        font-size: 2.5rem;
+    }
+}

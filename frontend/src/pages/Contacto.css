@@ -1,0 +1,229 @@
+/* src/components/Contacto/Contacto.css */
+
+.contacto {
+    width: 100%;
+    padding: 60px 0;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* New container for side-by-side layout */
+.contacto-content {
+    display: flex;
+    flex-direction: row; /* Default to row for larger screens */
+    justify-content: space-around;
+    align-items: flex-start; /* Align items to the top */
+    width: 100%; /* Max width for the content area */
+    
+    margin-top: 50px;
+    gap: 40px; /* Space between the two sections */
+}
+
+/* Styles for Address Section */
+.direccion {
+    flex: 1; /* Allows it to grow and shrink */
+    min-width: 300px; /* Minimum width before wrapping */
+    height: auto; /* Adjust height to content */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the top */
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+    margin-bottom: 0; /* Remove bottom margin as it's now part of flex gap */
+}
+
+.direccion.fade-in-bottom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.direccion h2 {
+    font-size: 6rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    text-shadow: #000000 2px 2px 8px;
+}
+
+.direccion-detalles {
+    margin-bottom: 20px;
+}
+
+.direccion-calle {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.direccion-ciudad {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.map {
+    width: 80%; /* Take full width of its container */
+    height: 450px; /* Fixed height for the map image */
+    background-image: url('../assets/direccion.png'); /* Corrected path */
+    background-size: cover; /* Ensure image covers the area */
+    background-position: center;
+    border: none;
+    border-radius: 8px;
+    filter: grayscale(60%);
+    transition: filter 1s ease-in-out, transform 1s ease-in-out;
+    cursor: pointer;
+}
+
+.map:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* Styles for Contact Form Section */
+.contact-form-section {
+    flex: 1; /* Allows it to grow and shrink */
+    min-width: 300px; /* Minimum width before wrapping */
+    padding: 20px; /* Adjusted padding */
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.contact-form-section.fade-in-bottom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-form-section h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem;
+    text-shadow: #000000 2px 2px 8px;
+    margin-bottom: 50px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Take full width of its container */
+    max-width: 600px; /* Limit form width */
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--color-primario, #f39c12);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button {
+    background-color: var(--color-primario, #f39c12);
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.contact-form button:hover {
+    background-color: #e08e0b;
+    transform: translateY(-2px);
+}
+
+/* Media Queries */
+@media (max-width: 1024px) { /* Adjust breakpoint for side-by-side */
+    .contacto-content {
+        flex-direction: column; /* Stack vertically on smaller screens */
+        align-items: center;
+        gap: 60px; /* Increase gap when stacked */
+    }
+    .direccion, .contact-form-section {
+        width: 90%; /* Take more width when stacked */
+        max-width: 600px; /* Limit max width even when stacked */
+    }
+    .direccion h2, .contact-form-section h2 {
+        font-size: 4.5rem; /* Slightly smaller for tablets */
+    }
+    .map {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .direccion h2, .contact-form-section h2 {
+        font-size: 3.5rem;
+    }
+    .map {
+        height: 250px;
+    }
+    .contact-form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .direccion h2, .contact-form-section h2 {
+        font-size: 2.5rem;
+    }
+    .map {
+        height: 200px;
+    }
+    .form-group label {
+        font-size: 1rem;
+    }
+    .form-group input, .form-group textarea {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .contact-form button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
