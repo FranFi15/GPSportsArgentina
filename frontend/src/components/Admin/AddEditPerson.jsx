@@ -17,6 +17,7 @@ const AddEditPerson = () => {
     equipo: '',
     posicion: '',
     inst: '',
+    googleDriveLink: '',
   });
   const [error, setError] = useState('');
 
