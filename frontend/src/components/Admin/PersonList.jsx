@@ -16,7 +16,7 @@ const PersonList = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL;
+  const API_BASE_URL = import.meta.env.API_BASE_URL;
 
   useEffect(() => {
     const fetchPersonas = async () => {

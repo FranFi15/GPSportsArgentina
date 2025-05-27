@@ -9,8 +9,6 @@ import playersGroupLogo from "../assets/PGI.png"
 import oneWorldLogo from "../assets/OW.png";
 import duranLogo from "../assets/DM.png";
 import bestBallerLogo from "../assets/BB.png";
-
-
 import carlosPrunesImg from '../assets/cprunes.png';
 import matiasNovoaImg from '../assets/novoa.png';
 import arielEslavaImg from '../assets/eslava.png';
