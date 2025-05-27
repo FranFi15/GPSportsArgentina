@@ -164,9 +164,6 @@
     margin-bottom: 15px;
 }
 
-.basketball-person-instagram {
-    margin-top: auto; /* Empuja el icono de Instagram al final de la tarjeta */
-}
 
 .instagram-icon {
     font-size: 1.8em; /* Icono más grande */
@@ -184,44 +181,6 @@
     text-decoration: none;
 }
 
-/* Eliminar o ajustar estos si ya no son necesarios con el nuevo layout de flexbox */
-/*
-.person-name-header,
-.person-type-header,
-.person-position-header,
-.person-age-header,
-.person-instagram-header,
-.basketball-person-name,
-.basketball-person-type,
-.basketball-person-position,
-.basketball-person-age,
-.basketball-person-instagram {
-    // Estos estilos se manejarán mejor con flex-direction: column y text-align: center
-}
-*/
-/* Eliminar o ajustar estos paddings si ya no son necesarios */
-/*
-.person-name-header,
-.basketball-person-name {
-    padding-right: 20px;
-}
-.person-type-header,
-.basketball-person-type {
-    padding-right: 10px;
-}
-.person-position-header,
-.basketball-person-position {
-    padding-right: 10px;
-}
-.person-age-header,
-.basketball-person-age {
-    padding-right: 10px;
-}
-.person-instagram-header,
-.basketball-person-instagram {
-    padding-right: 10px;
-}
-*/
 
 /* Media Queries para responsividad */
 @media (max-width: 768px) {
