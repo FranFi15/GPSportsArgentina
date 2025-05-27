@@ -11,7 +11,7 @@ export default function AuthProvider({ children }) { // Cambiado a exportación 
     const [isAuthenticated, setIsAuthenticated] = useState(!!token);
     const navigate = useNavigate();
     const location = useLocation();
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'; // Añade un fallback para desarrollo
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Añade un fallback para desarrollo
 
     const login = async (usuario, contraseña) => {
         try {
