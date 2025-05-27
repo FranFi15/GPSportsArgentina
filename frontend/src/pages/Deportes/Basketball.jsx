@@ -11,7 +11,7 @@ const Basketball = () => {
     const [filtroTipo, setFiltroTipo] = useState('todos');
     const [filtroPosicion, setFiltroPosicion] = useState('todos');
     const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(true); // Nuevo estado para la carga
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const { language } = useLanguage();
 
@@ -38,7 +38,7 @@ const Basketball = () => {
             instagram: 'Instagram',
             equipo: 'Equipo',
             años: 'años',
-            loading: 'Cargando datos...', // Nuevo texto para el loading
+            loading: 'Cargando datos...',
         },
         en: {
             title: 'Our Clients',
@@ -60,7 +60,7 @@ const Basketball = () => {
             instagram: 'Instagram',
             equipo: 'Team',
             años: 'years',
-            loading: 'Loading data...', // Nuevo texto para el loading
+            loading: 'Loading data...',
         },
     };
 
@@ -81,7 +81,7 @@ const Basketball = () => {
     useEffect(() => {
         const fetchPersonas = async () => {
             setError('');
-            setIsLoading(true); // Establecer isLoading a true al iniciar el fetch
+            setIsLoading(true);
             try {
                 const responseJugadores = await fetch(`${API_BASE_URL}/api/jugadores`);
                 if (!responseJugadores.ok) {
@@ -108,12 +108,12 @@ const Basketball = () => {
                 console.error("Fetch error:", err);
                 setError(err.message);
             } finally {
-                setIsLoading(false); // Establecer isLoading a false al finalizar (éxito o error)
+                setIsLoading(false);
             }
         };
 
         fetchPersonas();
-    }, [API_BASE_URL]); // Añadir API_BASE_URL a las dependencias
+    }, [API_BASE_URL]);
 
     useEffect(() => {
         const nuevasEdades = {};
@@ -128,9 +128,9 @@ const Basketball = () => {
                 nuevasEdadesInterval[persona._id] = calcularEdad(persona.fechaNacimiento);
             });
             setEdades(nuevasEdadesInterval);
-        }, 1000 * 60 * 60 * 24); // Actualizar cada 24 horas
+        }, 1000 * 60 * 60 * 24);
 
-        return () => clearInterval(intervalId); // Limpiar el intervalo
+        return () => clearInterval(intervalId);
     }, [personas]);
 
     const formatName = (name) => {
@@ -157,12 +157,12 @@ const Basketball = () => {
             <h2 className="basketball-list-title">{textos[language].title}</h2>
             {error && <p className="basketball-error-message">{error}</p>}
 
-            {isLoading ? ( // Mostrar spinner si está cargando
+            {isLoading ? (
                 <div className="loading-spinner-container">
                     <div className="loading-spinner"></div>
                     <p>{textos[language].loading}</p>
                 </div>
-            ) : ( // Mostrar contenido normal si no está cargando
+            ) : (
                 <>
                     <div className="basketball-filter-controls">
                         <label htmlFor="filterNombre" className="basketball-filter-label">{textos[language].filterName}:</label>
@@ -208,6 +208,7 @@ const Basketball = () => {
 
                     <ul className="basketball-person-list">
                         <li className="basketball-person-header">
+                            <span className="person-image-header"></span> {/* Added header for image */}
                             <span className="person-name-header">{textos[language].filterName}</span>
                             <span className="person-team-header">{textos[language].equipo}</span>
                             <span className="person-age-header">{textos[language].edad}</span>
@@ -215,12 +216,21 @@ const Basketball = () => {
                         </li>
                         {filteredPersonas.map(persona => (
                             <li key={persona._id} className="basketball-person-item">
+                                <span className="basketball-person-image">
+                                    {persona.googleDriveLink && (
+                                        <img
+                                            src={persona.googleDriveLink}
+                                            alt={`${persona.nombre} ${persona.apellido}`}
+                                            className="person-thumbnail" // Add a class for styling
+                                        />
+                                    )}
+                                </span>
                                 <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
                                 <span className="basketball-person-team">{persona.equipo}</span>
                                 <span className="basketball-person-age">{edades[persona._id] + ' ' + textos[language].años || '-'}</span>
                                 <span className="basketball-person-instagram">
                                     {persona.inst ? (
-                                        <a href={`${persona.inst}`} target="_blank" rel="noopener noreferrer">
+                                        <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer">
                                             <FaInstagram className="instagram-icon" />
                                         </a>
                                     ) : (

@@ -55,6 +55,7 @@ const AddEditPerson = () => {
         equipo: '',
         posicion: '',
         inst: '',
+        googleDriveLink: '',
       });
     }
   }, [tipo, id, token, API_BASE_URL]);
@@ -144,6 +145,10 @@ const AddEditPerson = () => {
             <div className="form-group">
               <label htmlFor="inst">Instagram:</label>
               <input type="text" id="inst" name="inst" className="form-control" value={formData.inst} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="googleDriveLink">Google Drive Link:</label>
+              <input type="text" id="googleDriveLink" name="googleDriveLink" className="form-control" value={formData.googleDriveLink} onChange={handleChange}/>
             </div>
           </>
         )}

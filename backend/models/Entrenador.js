@@ -11,6 +11,7 @@ const EntrenadorSchema = new mongoose.Schema({
   inst: {type:String},
   fechaAlta: { type: Date, default: Date.now },
   tipo: { type: String, default: 'entrenador' },
+  googleDriveLink: { type: String, required: false },
 });
 
 const Entrenador = mongoose.model('Entrenador', EntrenadorSchema);

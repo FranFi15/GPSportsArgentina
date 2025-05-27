@@ -12,6 +12,7 @@ const JugadorSchema = new mongoose.Schema({
   inst: {type:String},
   fechaAlta: { type: Date, default: Date.now },
   tipo: { type: String, default: 'jugador' },
+  googleDriveLink: { type: String, required: false },
 });
 
 const Jugador = mongoose.model('Jugador', JugadorSchema);
