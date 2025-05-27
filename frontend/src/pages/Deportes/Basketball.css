@@ -139,7 +139,7 @@
     width: 150px; /* Tamaño fijo para el thumbnail */
     height: 150px; /* Altura fija para el thumbnail */
     object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsionar */
-    border-radius: 12px; /* Hace la imagen redonda */
+    border-radius: 50%; /* Hace la imagen redonda */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para la imagen */
 }
 
