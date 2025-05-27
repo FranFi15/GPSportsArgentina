@@ -154,10 +154,16 @@ const AddEditPerson = () => {
           </>
         )}
         {tipo === 'entrenador' && (
+          <>
           <div className="form-group">
             <label htmlFor="inst">Instagram:</label>
             <input type="text" id="inst" name="inst" className="form-control" value={formData.inst} onChange={handleChange} />
           </div>
+          <div className="form-group">
+              <label htmlFor="googleDriveLink">Google Drive Link:</label>
+              <input type="text" id="googleDriveLink" name="googleDriveLink" className="form-control" value={formData.googleDriveLink} onChange={handleChange}/>
+            </div>
+          </>
         )}
         <div className="form-actions">
           <button type="submit" className="submit-button">{id ? 'Guardar Cambios' : 'Agregar'}</button>
