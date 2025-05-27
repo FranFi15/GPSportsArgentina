@@ -88,38 +88,28 @@ const Basketball = () => {
                     throw new Error('Error loading players');
                 }
                 let jugadoresData = await responseJugadores.json();
-                // --- MODIFICACIÓN CLAVE AQUÍ ---
+                // --- CAMBIO AQUÍ: ¡ELIMINA LA TRANSFORMACIÓN SI LAS URLS YA SON DE CLOUDINARY! ---
                 jugadoresData = jugadoresData.map(jugador => {
-                    if (jugador.googleDriveLink) {
-                        // Extrae el ID del archivo del link de Google Drive
-                        // El ID está en la posición 5 del array después de dividir por '/'
-                        const parts = jugador.googleDriveLink.split('/');
-                        const fileId = parts[5];
-                        // Construye el link de descarga directa
-                        jugador.googleDriveLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
-                    }
+                    // No necesitas transformar jugador.googleDriveLink si ya es una URL de Cloudinary
+                    // Si tus URLs de Cloudinary ya están en la DB, solo necesitas esto:
                     jugador.tipo = 'jugador';
                     return jugador;
                 });
-                // --- FIN DE LA MODIFICACIÓN ---
-
+                // --- FIN DEL CAMBIO ---
 
                 const responseEntrenadores = await fetch(`${API_BASE_URL}/api/entrenadores`);
                 if (!responseEntrenadores.ok) {
                     throw new Error('Error loading coaches');
                 }
                 let entrenadoresData = await responseEntrenadores.json();
-                // --- MODIFICACIÓN CLAVE AQUÍ ---
-                entrenadoresData = entrenadoresData.map(entrenador => {
-                    if (entrenador.googleDriveLink) {
-                        const parts = entrenador.googleDriveLink.split('/');
-                        const fileId = parts[5];
-                        entrenador.googleDriveLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
-                    }
+                // --- CAMBIO AQUÍ: ¡ELIMINA LA TRANSFORMACIÓN SI LAS URLS YA SON DE CLOUDINARY! ---
+                 entrenadoresData = entrenadoresData.map(entrenador => {
+                    // No necesitas transformar entrenador.googleDriveLink si ya es una URL de Cloudinary
+                    // Si tus URLs de Cloudinary ya están en la DB, solo necesitas esto:
                     entrenador.tipo = 'entrenador';
                     return entrenador;
                 });
-                // --- FIN DE LA MODIFICACIÓN ---
+                // --- FIN DEL CAMBIO ---
 
                 const combined = [...jugadoresData, ...entrenadoresData];
                 combined.sort((a, b) => {
@@ -243,7 +233,7 @@ const Basketball = () => {
                                 <span className="basketball-person-image">
                                     {persona.googleDriveLink && (
                                         <img
-                                            src={persona.googleDriveLink} // Este 'src' ahora usa el link transformado
+                                            src={persona.googleDriveLink} // Esta URL debe ser ahora la de Cloudinary directamente
                                             alt={`${persona.nombre} ${persona.apellido}`}
                                             className="person-thumbnail" // Add a class for styling
                                         />
