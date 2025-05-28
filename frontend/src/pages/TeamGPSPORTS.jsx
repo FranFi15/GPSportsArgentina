@@ -20,10 +20,15 @@ import simonetImage from '../assets/simonet.png';
 const TeamGPSPORT = () => {
     const { language } = useLanguage();
     const sectionRefs = useRef([]);
+    const content3Ref = useRef(null);
+
     const [visibleSections, setVisibleSections] = useState([]);
+    const [content3Visible, setContent3Visible] = useState(false); // Initial state set to false
 
     const atletasInfo = {
-        es: [
+        es: {
+            description: 'El #TeamGPSports está formado por jugadores, entrenadores y deportistas de distintas disciplinas, unidos por una misma filosofía: compromiso, dedicación, trabajo en equipo y pasión por lo que hacen. Desde jóvenes promesas hasta referentes consagrados, acompañamos a cada integrante en su camino, brindando un respaldo cercano y profesional en cada etapa de su carrera. Nuestro equipo no se define solo por lo que logra dentro de la cancha, sino por los valores que representa fuera de ella.',
+            atletas: [
             {
                 nombre: 'Emanuel “Manu” Ginóbili',
                 descripcionCorta: 'Manu Ginóbili es uno de los máximos referentes del deporte argentino a nivel mundial. Ícono del básquet internacional, campeón olímpico, leyenda de la NBA y miembro del Salón de la Fama, su trayectoria trascendió generaciones y fronteras.',
@@ -130,8 +135,10 @@ const TeamGPSPORT = () => {
                 imagen: paredesImage,
                 alt: 'Matias Paredes'
             }
-        ],
-        en: [
+        ]},
+        en: {
+            description: 'The #TeamGPSports is made of players, coaches, and athletes from different disciplines, united by a common philosophy: commitment, dedication, teamwork, and passion for what they do. From young talents to established stars, we support each member on their journey, providing close and professional backing at every stage of their career. Our team is defined not only by what they achieve on the field but also by the values they represent off it.',
+            atletas: [
             {
                 nombre: 'Emanuel “Manu” Ginóbili',
                 descripcionCorta: 'Manu Ginóbili is one of the greatest references of Argentine sports worldwide. An icon of international basketball, Olympic champion, NBA legend, and member of the Hall of Fame, his career transcended generations and borders.',
@@ -212,7 +219,7 @@ const TeamGPSPORT = () => {
             },
             {
                 nombre: 'Yamila Nizetich',
-                descripcionCorta: 'With a distinguished career as a wing receiver, her attacking power, defensive solidity, and charisma have made her a fundamental player for the Argentine national team and various clubs internationally.',
+                descripcionCorta: 'Con una destacada trayectoria como receptora punta, su potencia en ataque, solidez en defensa y carisma la han convertido en una jugadora fundamental para la selección argentina y en diversos clubes a nivel internacional.',
                 descripcionLarga: 'An emblematic captain of "Las Panteras", Nizetich has led the team in important competitions, including the Olympic Games and World Championships. Her dedication, fighting spirit, and ability to motivate her teammates have made her a symbol of Argentine women\'s volleyball.',
                 imagen: yazImage,
                 alt: 'Yamila Nizetich'
@@ -238,34 +245,47 @@ const TeamGPSPORT = () => {
                 imagen: paredesImage,
                 alt: 'Matias Paredes'
             }
-        ],
-        // Puedes añadir más idiomas aquí
+        ]},
     };
 
-    const atletas = atletasInfo[language] || atletasInfo.es; // Fallback al español si el idioma no está definido
+    const currentAtletas = atletasInfo[language]?.atletas || atletasInfo.es.atletas;
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
+                    // Handle athlete sections
                     const index = sectionRefs.current.indexOf(entry.target);
-                    if (entry.isIntersecting) {
-                        setVisibleSections((prev) => {
-                            if (!prev.includes(index)) {
-                                return [...prev, index];
-                            }
-                            return prev;
-                        });
-                    } else {
-                        setVisibleSections((prev) => prev.filter((item) => item !== index));
+                    if (index !== -1) { // Check if it's an athlete section
+                        if (entry.isIntersecting) {
+                            setVisibleSections((prev) => {
+                                if (!prev.includes(index)) {
+                                    return [...prev, index];
+                                }
+                                return prev;
+                            });
+                        } else {
+                            setVisibleSections((prev) => prev.filter((item) => item !== index));
+                        }
+                    }
+
+                    // Handle content3Ref (the main description)
+                    if (entry.target === content3Ref.current) {
+                        setContent3Visible(entry.isIntersecting);
                     }
                 });
             },
             {
-                threshold: 0.3, // Ajusta este valor según necesites
+                threshold: 0.3, // Adjust this value as needed
             }
         );
 
+        // Observe the content3Ref
+        if (content3Ref.current) {
+            observer.observe(content3Ref.current);
+        }
+
+        // Observe all athlete sections
         sectionRefs.current.forEach((section) => {
             if (section) {
                 observer.observe(section);
@@ -278,7 +298,8 @@ const TeamGPSPORT = () => {
     return (
         <div className="team-gpsports-container">
             <h2>#TeamGPSports</h2>
-            {atletas.map((atleta, index) => (
+            <p ref={content3Ref} className={`content3 ${content3Visible ? 'fade-in-right' : ''}`}>{atletasInfo[language].description}</p>
+            {currentAtletas.map((atleta, index) => (
                 <div
                     className={`section ${index % 2 !== 0 ? 'reversed' : ''}`}
                     key={index}

@@ -16,6 +16,33 @@
     font-family: "Bebas Neue", sans-serif;
     font-size: 10rem; /* Adjust size as desired */
     text-shadow: #000000 2px 2px 8px;
+    opacity: 0;
+    animation: fade-in-down 2s ease-out forwards;
+}
+@keyframes fade-in-down {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.content3 {
+    width: 90%;
+    font-weight: 200;
+    font-size: 1.1rem;
+    margin: 20px 0 200px 0;
+    text-align: start;
+    line-height: 2rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.content3.fade-in-right {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section {

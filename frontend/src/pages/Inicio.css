@@ -66,7 +66,7 @@
 /* Keep all styles for .description, .content, etc. as they were */
 .description {
     width: 90%;
-    height: 80vh;
+    margin: 200px 0 100px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -105,7 +105,7 @@
 }
 
 .content1 {
-    width: 30%;
+    width: 40%;
     font-size: 3rem;
     font-weight: 900;
     text-align: start;
@@ -122,21 +122,10 @@
 }
 
 .content2 {
-    width: 30%;
+    width: 50%;
     padding-left: 80px;
     font-weight: 200;
-    font-size: 1.1rem;
-    margin-top: 20px;
-    text-align: start;
-    line-height: 2rem;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-.content3 {
-    width: 90%;
-    font-weight: 200;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-top: 20px;
     text-align: start;
     line-height: 2rem;
@@ -149,10 +138,7 @@
     opacity: 1;
     transform: translateY(0);
 }
-.content3.fade-in-right {
-    opacity: 1;
-    transform: translateY(0);
-}
+
 
 
 /* Media Queries (Adjusted for carousel height and existing sections) */

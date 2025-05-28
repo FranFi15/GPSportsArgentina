@@ -78,13 +78,13 @@ const Navbar = () => {
                     <Link to="/team-gp-sport" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].teamGPSport}</Link>
                 </li>
                 <li className="navbar-nav-item">
+                    <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>
+                </li>
+                <li className="navbar-nav-item">
                     <Link to="/mkt-eventos" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].mkt}</Link>
                 </li>
                 <li className="navbar-nav-item">
                     <Link to="/charlas" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].charlas}</Link>
-                </li>
-                <li className="navbar-nav-item">
-                    <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>
                 </li>
                 <li className="navbar-nav-item">
                     <Link to="/contacto" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].contact}</Link>
