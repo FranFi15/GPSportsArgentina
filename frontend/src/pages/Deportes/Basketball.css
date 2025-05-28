@@ -67,7 +67,7 @@
 .basketball-filter-select {
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 0.1px solid #ffffff;
     font-size: 1em;
     color: #ffffff;
     padding: 5px 0; /* Un poco de padding para mejor visualización */
