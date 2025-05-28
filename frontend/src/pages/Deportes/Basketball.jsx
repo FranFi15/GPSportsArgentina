@@ -6,7 +6,8 @@ import { FaInstagram } from 'react-icons/fa6'; // Import the Instagram icon
 
 const Basketball = () => {
     const [personas, setPersonas] = useState([]);
-    const [edades, setEdades] = useState({});
+    // Eliminamos el estado de edades, ya no se necesita
+    // const [edades, setEdades] = useState({});
     const [filtroNombre, setFiltroNombre] = useState('');
     const [filtroTipo, setFiltroTipo] = useState('todos');
     const [filtroPosicion, setFiltroPosicion] = useState('todos');
@@ -28,17 +29,18 @@ const Basketball = () => {
             base: 'Base',
             escolta: 'Escolta',
             alero: 'Alero',
-            alaPivot: 'Ala-Pivot',
-            pivot: 'Pivot',
+            alaPivot: 'Ala-Pívot', // Corregido a "Ala-Pívot" con tilde y guion
+            pivot: 'Pívot',      // Corregido a "Pívot" con tilde
             jugador: 'Jugador',
             entrenador: 'Entrenador',
             tipo: 'Tipo',
-            posicion: 'Posición',
-            edad: 'Edad',
+            posicion: 'Posición', // Texto para el encabezado
+            // edad: 'Edad', // Eliminado
             instagram: 'Instagram',
             equipo: 'Equipo',
-            años: 'años',
+            // años: 'años', // Eliminado
             loading: 'Cargando datos...',
+            noPosition: 'Entrenador', // Nuevo texto para entrenadores sin posición
         },
         en: {
             title: 'Our Clients',
@@ -55,28 +57,30 @@ const Basketball = () => {
             jugador: 'Player',
             entrenador: 'Coach',
             tipo: 'Type',
-            posicion: 'Position',
-            edad: 'Age',
+            posicion: 'Position', // Texto para el encabezado
+            // edad: 'Age', // Eliminado
             instagram: 'Instagram',
             equipo: 'Team',
-            años: 'years',
+            // años: 'years', // Eliminado
             loading: 'Loading data...',
+            noPosition: 'Coach', // Nuevo texto para entrenadores sin posición
         },
     };
 
-    const calcularEdad = (fechaNacimiento) => {
-        if (!fechaNacimiento) {
-            return '-';
-        }
-        const hoy = new Date();
-        const nacimiento = new Date(fechaNacimiento);
-        let edad = hoy.getFullYear() - nacimiento.getFullYear();
-        const mes = hoy.getMonth() - nacimiento.getMonth();
-        if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
-            edad--;
-        }
-        return edad;
-    };
+    // Eliminamos la función calcularEdad
+    // const calcularEdad = (fechaNacimiento) => {
+    //     if (!fechaNacimiento) {
+    //         return '-';
+    //     }
+    //     const hoy = new Date();
+    //     const nacimiento = new Date(fechaNacimiento);
+    //     let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    //     const mes = hoy.getMonth() - nacimiento.getMonth();
+    //     if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+    //         edad--;
+    //     }
+    //     return edad;
+    // };
 
     useEffect(() => {
         const fetchPersonas = async () => {
@@ -104,9 +108,8 @@ const Basketball = () => {
                 });
 
                 const combined = [...jugadoresData, ...entrenadoresData];
-                // --- CAMBIO CLAVE AQUÍ: Ordenar por el campo 'order' ---
+                // Ordenar por el campo 'order' 
                 combined.sort((a, b) => a.order - b.order);
-                // --- FIN DEL CAMBIO ---
                 setPersonas(combined);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -119,23 +122,24 @@ const Basketball = () => {
         fetchPersonas();
     }, [API_BASE_URL]);
 
-    useEffect(() => {
-        const nuevasEdades = {};
-        personas.forEach(persona => {
-            nuevasEdades[persona._id] = calcularEdad(persona.fechaNacimiento);
-        });
-        setEdades(nuevasEdades);
+    // Eliminamos el useEffect relacionado con el cálculo y actualización de edades
+    // useEffect(() => {
+    //     const nuevasEdades = {};
+    //     personas.forEach(persona => {
+    //         nuevasEdades[persona._id] = calcularEdad(persona.fechaNacimiento);
+    //     });
+    //     setEdades(nuevasEdades);
 
-        const intervalId = setInterval(() => {
-            const nuevasEdadesInterval = {};
-            personas.forEach(persona => {
-                nuevasEdadesInterval[persona._id] = calcularEdad(persona.fechaNacimiento);
-            });
-            setEdades(nuevasEdadesInterval);
-        }, 1000 * 60 * 60 * 24);
+    //     const intervalId = setInterval(() => {
+    //         const nuevasEdadesInterval = {};
+    //         personas.forEach(persona => {
+    //             nuevasEdadesInterval[persona._id] = calcularEdad(persona.fechaNacimiento);
+    //         });
+    //         setEdades(nuevasEdadesInterval);
+    //     }, 1000 * 60 * 60 * 24);
 
-        return () => clearInterval(intervalId);
-    }, [personas]);
+    //     return () => clearInterval(intervalId);
+    // }, [personas]);
 
     const formatName = (name) => {
         if (!name) return '';
@@ -145,6 +149,13 @@ const Basketball = () => {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
     };
+
+    // Función auxiliar para traducir la posición
+    const translatePosition = (positionKey) => {
+        if (!positionKey || positionKey === 'N/A') return textos[language].noPosition;
+        return textos[language][positionKey] || positionKey;
+    };
+
 
     const filteredPersonas = personas.filter(persona => {
         const nombreCompleto = `${persona.nombre} ${persona.apellido}`.toLowerCase();
@@ -215,7 +226,7 @@ const Basketball = () => {
                             <span className="person-image-header"></span> {/* Added header for image */}
                             <span className="person-name-header">{textos[language].filterName}</span>
                             <span className="person-team-header">{textos[language].equipo}</span>
-                            <span className="person-age-header">{textos[language].edad}</span>
+                            <span className="person-position-header">{textos[language].posicion}</span> {/* CAMBIO AQUÍ: Encabezado de Posición */}
                             <span className="person-instagram-header">{textos[language].instagram}</span>
                         </li>
                         {filteredPersonas.map(persona => (
@@ -223,15 +234,19 @@ const Basketball = () => {
                                 <span className="basketball-person-image">
                                     {persona.googleDriveLink && (
                                         <img
-                                            src={persona.googleDriveLink} // Esta URL debe ser ahora la de Cloudinary directamente
+                                            src={persona.googleDriveLink}
                                             alt={`${persona.nombre} ${persona.apellido}`}
-                                            className="person-thumbnail" // Add a class for styling
+                                            className="person-thumbnail"
                                         />
                                     )}
                                 </span>
                                 <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
                                 <span className="basketball-person-team">{persona.equipo}</span>
-                                <span className="basketball-person-age">{edades[persona._id] + ' ' + textos[language].años || '-'}</span>
+                                <span className="basketball-person-position"> {/* CAMBIO AQUÍ: Clase para la columna de posición */}
+                                    {persona.tipo === 'jugador'
+                                        ? translatePosition(persona.posicion) // Muestra la posición para jugadores
+                                        : textos[language].noPosition} {/* Muestra "N/A" o similar para entrenadores */}
+                                </span>
                                 <span className="basketball-person-instagram">
                                     {persona.inst ? (
                                         <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer">
