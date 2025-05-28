@@ -42,13 +42,13 @@ const Inicio = () => {
     const textos = {
         es: {
             linea1b: "#TeamGPSports",
-            contenido1: 'Nos une el deporte, pero sobre todo,\nuna manera de vivirlo.',
+            contenido1: 'Nos une el deporte, pero sobre todo,una manera de vivirlo.',
             contenido2: "GP Sports es una agencia de representación y management de jugadores, entrenadores y atletas con mas de 30 años de experiencia en la gestión y negociación de contratos con clubes y empresas de todo el mundo. Acompañamos carreras en un concepto 360, desde la negociación de contratos hasta la implementación comercial de los atletas con un staff de profesionales capacitado para cada una de las áreas de gestión. El objetivo con nuestros clientes es continuar con los valores que caracterizan la empresa desde su fundación: planificación, conocimiento, pasión,innovación y compromiso.",
         },
         en: {
             linea1b: "#TeamGPSports",
            
-            contenido1: 'We are united by sports, but above all,\nby a way of living it.',
+            contenido1: 'We are united by sports, but above all,by a way of living it.',
             contenido2: "GP Sports is a representation and management agency for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
         }
     };
