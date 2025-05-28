@@ -4,6 +4,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage'; // Assuming you still need language context
 import Gallery from '../components/Gallery'; // Assuming Gallery is used here
 import "./MKT.css"; // Create this CSS file for styling
+import manGil from '../assets/gillettemanu.jpg';
+import luchagat from '../assets/gatelucha.jpg';
+import paretocol from '../assets/paretocolchon.jpg';
+import img1 from '../assets/IMG_2450.png';
+import img2 from '../assets/IMG_2453.png';
+import img3 from '../assets/IMG_2454.png'
 
 const MarketingEventos = () => {
     const { language } = useLanguage();
@@ -22,13 +28,20 @@ const MarketingEventos = () => {
     };
 
     const galleryItems = [
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/2allLNcNMCo' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/IgIeKtkECek' },
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Xtae7OBUKGg' },
+        { type: 'image', src: luchagat, caption: 'Lucha Aymar' },
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Rl2YjjTH1pE' },
-        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA' },
+        { type: 'image', src: img1, },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/2allLNcNMCo' },
+        { type: 'image', src: img2, },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/IgIeKtkECek' },
+        { type: 'image', src: manGil, caption: 'Manu Ginóbili' },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA'},
+        { type: 'image', src: img3, },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/mp0SHWGWYEg' },
+        { type: 'image', src: paretocol, caption: 'Pareto' },
+      
     ];
-
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {

@@ -15,8 +15,8 @@ const Navbar = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
 
     const textos = {
-        es: { inicio: 'Inicio', laEmpresa: 'La Empresa', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', mkt: 'MKT y Eventos', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
-        en: { inicio: 'Home', laEmpresa: 'The Company', teamGPSport: '#TeamGPSports', charlas: 'Conferences', mkt: 'MKT and Events', deportes: 'Sports', basketball: 'Basketball', contact: 'Contact', admin: 'Admin' }
+        es: { inicio: 'Inicio', laEmpresa: 'La Agencia', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', mkt: 'MKT y Eventos', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
+        en: { inicio: 'Home', laEmpresa: 'The Agency', teamGPSport: '#TeamGPSports', charlas: 'Conferences', mkt: 'MKT and Events', deportes: 'Sports', basketball: 'Basketball', contact: 'Contact', admin: 'Admin' }
     };
 
     useEffect(() => {
