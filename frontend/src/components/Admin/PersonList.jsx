@@ -186,17 +186,6 @@ const PersonList = () => {
                 <Droppable droppableId="person-list-droppable">
                     {(provided) => (
                         <ul className="person-list" {...provided.droppableProps} ref={provided.innerRef}>
-                            <li className="person-item person-list-header">
-                                <span className="header-image">Imagen</span>
-                                <span className="header-name">Nombre Completo</span>
-                                <span className="header-type">Tipo</span>
-                                <span className="header-position">Posición</span>
-                                <span className="header-dob">Fecha Nacimiento</span>
-                                <span className="header-drive-link">Drive Link</span>
-                                <span className="header-actions">Acciones</span>
-                            </li>
-                            {/* Mapeamos sobre `filteredPersonas` para mostrar solo los elementos filtrados */}
-                            {/* pero `onDragEnd` opera sobre el estado `personas` completo para guardar el orden global */}
                             {filteredPersonas.map((persona, index) => (
                                 <Draggable key={persona._id} draggableId={`${persona.tipo}-${persona._id}`} index={index}>
                                     {(provided) => (
