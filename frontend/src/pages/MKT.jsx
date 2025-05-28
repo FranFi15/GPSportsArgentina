@@ -39,7 +39,8 @@ const MarketingEventos = () => {
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/Q89QZlTl-IA'},
         { type: 'image', src: img3, },
         { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/mp0SHWGWYEg' },
-        { type: 'image', src: paretocol, caption: 'Pareto' },
+        { type: 'video', source: 'youtube', videoId: 'https://www.youtube.com/embed/OtyiNEiETno' },
+        
     ];
 
     useEffect(() => {

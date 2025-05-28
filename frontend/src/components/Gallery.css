@@ -26,7 +26,7 @@
 .gallery-item video {
     width: 100%; /* Make image/video fill the item container */
     height: 100%; /* Make image/video fill the item container */
-    object-fit: cover; /* Cover the area, cropping if necessary */
+    object-fit: contain; /* Cover the area, cropping if necessary */
     border-radius: 8px; /* Apply border-radius to the media itself */
     display: block; /* Remove extra space below images/videos */
 }
