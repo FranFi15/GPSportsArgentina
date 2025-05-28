@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import jugadorRoutes from './routes/jugadorRoutes.js';
 import entrenadorRoutes from './routes/entrenadorRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import personasRoutes from './routes/personasRoutes.js';
 
 dotenv.config();
 

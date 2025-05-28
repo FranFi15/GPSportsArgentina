@@ -6,8 +6,6 @@ import auth from '../middleware/authMiddleware.js'; // <-- Cambio aquí (asumien
 
 const router = express.Router();
 
-// ... tus otras rutas (GET, POST, PUT, DELETE)
-
 // Ruta para actualizar el orden de las personas
 router.put('/personas/reorder', auth, async (req, res) => {
   try {
@@ -30,4 +28,4 @@ router.put('/personas/reorder', auth, async (req, res) => {
   }
 });
 
-export default router; // <-- Cambio aquí
+export default router; 
