@@ -150,11 +150,6 @@ const Contacto = () => {
                             <label htmlFor="message">{textos[language].formMessage}:</label>
                             <textarea id="message" name="message" rows="5" required></textarea> {/* name attribute is crucial */}
                         </div>
-
-                        {/* Optional Formsubmit.co fields */}
-                        {/* <input type="hidden" name="_captcha" value="false" /> Disable reCAPTCHA if you don't want it */}
-                        {/* <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html" /> Redirect to a specific URL after submission */}
-
                         <button type="submit">{textos[language].formSend}</button>
 
                         {submissionMessage && (

@@ -1,9 +1,9 @@
-// src/components/Admin/PersonList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './PersonList.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'; // Importar de @hello-pangea/dnd
 
 const PersonList = () => {
     const [personas, setPersonas] = useState([]);
@@ -14,7 +14,7 @@ const PersonList = () => {
     const { token, logout } = useAuth();
     const navigate = useNavigate();
 
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'; // Default to localhost if not set
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const fetchPersonas = async () => {
@@ -42,7 +42,9 @@ const PersonList = () => {
                 const entrenadoresData = await responseEntrenadores.json();
                 entrenadoresData.forEach(entrenador => entrenador.tipo = 'entrenador');
 
-                setPersonas([...jugadoresData, ...entrenadoresData]);
+                // Combinar y ordenar por el campo 'order' que viene de la base de datos
+                const combinedPersonas = [...jugadoresData, ...entrenadoresData].sort((a, b) => a.order - b.order);
+                setPersonas(combinedPersonas);
             } catch (err) {
                 console.error("Fetch error in PersonList:", err);
                 setError(err.message);
@@ -54,14 +56,16 @@ const PersonList = () => {
         } else {
             navigate('/login');
         }
-    }, [token, navigate, API_BASE_URL]); // Added API_BASE_URL to dependencies
+    }, [token, navigate, API_BASE_URL]);
 
+    // **IMPORTANTE**: Los filtros se aplican sobre el estado `personas` original.
+    // El arrastrar y soltar afectará el `personas` original, que luego se filtra.
     const filteredPersonas = personas.filter(persona => {
         const nombreMatch = persona.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) ||
                             persona.apellido.toLowerCase().includes(filtroNombre.toLowerCase());
         const tipoMatch = filtroTipo === 'todos' || persona.tipo === filtroTipo;
         const posicionMatch = filtroTipo === 'jugador' ?
-                              (filtroPosicion === 'todos' || persona.posicion === filtroPosicion) : true;
+                                (filtroPosicion === 'todos' || persona.posicion === filtroPosicion) : true;
         return nombreMatch && tipoMatch && posicionMatch;
     });
 
@@ -72,7 +76,6 @@ const PersonList = () => {
     const handleEliminar = async (id, tipo, nombre, apellido) => {
         if (window.confirm(`¿Seguro que quieres eliminar a ${tipo} ${nombre} ${apellido}?`)) {
             try {
-                // Ensure correct URL for delete based on tipo
                 const url = tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores/${id}` : `${API_BASE_URL}/api/entrenadores/${id}`;
                 const response = await fetch(url, {
                     method: 'DELETE',
@@ -84,7 +87,14 @@ const PersonList = () => {
                     const errorData = await response.json();
                     throw new Error(errorData.message || `Error al eliminar ${tipo}`);
                 }
-                setPersonas(personas.filter(p => !(p._id === id && p.tipo === tipo)));
+                // Actualiza el estado y luego el orden si es necesario
+                const updatedPersonas = personas.filter(p => !(p._id === id && p.tipo === tipo));
+                setPersonas(updatedPersonas);
+                // Opcional: Re-enviar el orden actualizado al backend después de eliminar
+                // Esto es importante si el orden es crítico y la eliminación afecta el orden de los demás.
+                // Si el orden es crucial, deberías recalcular y enviar el nuevo orden de 'updatedPersonas'
+                // a tu endpoint /api/personas/reorder. Por simplicidad, no lo incluyo aquí,
+                // pero tenlo en cuenta para un sistema robusto.
             } catch (err) {
                 setError(err.message);
             }
@@ -94,6 +104,50 @@ const PersonList = () => {
     const handleLogout = () => {
         logout();
         navigate('/login');
+    };
+
+    // Función para manejar el final del arrastre
+    const onDragEnd = async (result) => {
+        if (!result.destination) return; // Si no se soltó en un lugar válido
+        if (result.destination.index === result.source.index) return; // Si no se movió de posición
+
+        const reorderedPersonas = Array.from(personas); // Trabaja con el estado original de personas
+        const [removed] = reorderedPersonas.splice(result.source.index, 1);
+        reorderedPersonas.splice(result.destination.index, 0, removed);
+
+        // Actualiza el estado local inmediatamente para una buena UX
+        setPersonas(reorderedPersonas);
+
+        // Prepara los datos para enviar al backend
+        const updatedOrder = reorderedPersonas.map((p, index) => ({
+            id: p._id,
+            tipo: p.tipo,
+            order: index, // El nuevo índice como su orden
+        }));
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/personas/reorder`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ order: updatedOrder }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al actualizar el orden.');
+            }
+            // console.log('Orden actualizado en el backend con éxito');
+            // No necesitas hacer nada más si la actualización fue exitosa,
+            // ya que el estado local `personas` ya está actualizado.
+        } catch (err) {
+            console.error("Error al guardar el nuevo orden:", err);
+            setError("No se pudo guardar el nuevo orden. Por favor, inténtalo de nuevo.");
+            // Opcional: Revertir el estado si el guardado falla
+            // setPersonas(personasSnapshot); // Si hubieras guardado el estado antes del arrastre
+        }
     };
 
     return (
@@ -128,55 +182,73 @@ const PersonList = () => {
                 <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
             </div>
 
-            <ul className="person-list">
-                <li className="person-item person-list-header"> {/* Added a header class */}
-                    <span className="header-image">Imagen</span> {/* Header for image */}
-                    <span className="header-name">Nombre Completo</span>
-                    <span className="header-type">Tipo</span>
-                    <span className="header-position">Posición</span>
-                    <span className="header-dob">Fecha Nacimiento</span>
-                    <span className="header-drive-link">Drive Link</span> {/* Header for Drive Link */}
-                    <span className="header-actions">Acciones</span>
-                </li>
-                {filteredPersonas.map(persona => (
-                    <li key={persona._id} className="person-item">
-                        <span className="person-image">
-                            {persona.googleDriveLink && (
-                                <img
-                                    src={persona.googleDriveLink}
-                                    alt={`${persona.nombre} ${persona.apellido}`}
-                                    className="person-thumbnail" // Add a class for styling
-                                />
-                            )}
-                        </span>
-                        <span className="person-name">{persona.nombre} {persona.apellido}</span>
-                        <span className="person-type">({persona.tipo})</span>
-                        <span className="person-position">
-                            {persona.tipo === 'jugador' && persona.posicion ? persona.posicion : '-'}
-                        </span>
-                        <span className="person-dob">
-                            {persona.fechaNacimiento ? new Date(persona.fechaNacimiento).toLocaleDateString() : '-'}
-                        </span>
-                        <span className="person-drive-link">
-                            {persona.googleDriveLink ? (
-                                <a href={persona.googleDriveLink} target="_blank" rel="noopener noreferrer">
-                                    Ver Imagen
-                                </a>
-                            ) : (
-                                '-'
-                            )}
-                        </span>
-                        <div className="person-actions">
-                            <button className="edit-button" onClick={() => handleEditar(persona._id, persona.tipo)}>
-                                <FaEdit />
-                            </button>
-                            <button className="delete-button" onClick={() => handleEliminar(persona._id, persona.tipo, persona.nombre, persona.apellido)}>
-                                <FaTrash />
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="person-list-droppable">
+                    {(provided) => (
+                        <ul className="person-list" {...provided.droppableProps} ref={provided.innerRef}>
+                            <li className="person-item person-list-header">
+                                <span className="header-image">Imagen</span>
+                                <span className="header-name">Nombre Completo</span>
+                                <span className="header-type">Tipo</span>
+                                <span className="header-position">Posición</span>
+                                <span className="header-dob">Fecha Nacimiento</span>
+                                <span className="header-drive-link">Drive Link</span>
+                                <span className="header-actions">Acciones</span>
+                            </li>
+                            {/* Mapeamos sobre `filteredPersonas` para mostrar solo los elementos filtrados */}
+                            {/* pero `onDragEnd` opera sobre el estado `personas` completo para guardar el orden global */}
+                            {filteredPersonas.map((persona, index) => (
+                                <Draggable key={persona._id} draggableId={`${persona.tipo}-${persona._id}`} index={index}>
+                                    {(provided) => (
+                                        <li
+                                            className="person-item"
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                        >
+                                            <span className="person-image">
+                                                {persona.googleDriveLink && (
+                                                    <img
+                                                        src={persona.googleDriveLink}
+                                                        alt={`${persona.nombre} ${persona.apellido}`}
+                                                        className="person-thumbnail"
+                                                    />
+                                                )}
+                                            </span>
+                                            <span className="person-name">{persona.nombre} {persona.apellido}</span>
+                                            <span className="person-type">({persona.tipo})</span>
+                                            <span className="person-position">
+                                                {persona.tipo === 'jugador' && persona.posicion ? persona.posicion : '-'}
+                                            </span>
+                                            <span className="person-dob">
+                                                {persona.fechaNacimiento ? new Date(persona.fechaNacimiento).toLocaleDateString() : '-'}
+                                            </span>
+                                            <span className="person-drive-link">
+                                                {persona.googleDriveLink ? (
+                                                    <a href={persona.googleDriveLink} target="_blank" rel="noopener noreferrer">
+                                                        Ver Imagen
+                                                    </a>
+                                                ) : (
+                                                    '-'
+                                                )}
+                                            </span>
+                                            <div className="person-actions">
+                                                <button className="edit-button" onClick={() => handleEditar(persona._id, persona.tipo)}>
+                                                    <FaEdit />
+                                                </button>
+                                                <button className="delete-button" onClick={() => handleEliminar(persona._id, persona.tipo, persona.nombre, persona.apellido)}>
+                                                    <FaTrash />
+                                                </button>
+                                            </div>
+                                        </li>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </ul>
+                    )}
+                </Droppable>
+            </DragDropContext>
         </div>
     );
 };

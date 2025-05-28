@@ -88,35 +88,25 @@ const Basketball = () => {
                     throw new Error('Error loading players');
                 }
                 let jugadoresData = await responseJugadores.json();
-                // --- CAMBIO AQUÍ: ¡ELIMINA LA TRANSFORMACIÓN SI LAS URLS YA SON DE CLOUDINARY! ---
                 jugadoresData = jugadoresData.map(jugador => {
-                    // No necesitas transformar jugador.googleDriveLink si ya es una URL de Cloudinary
-                    // Si tus URLs de Cloudinary ya están en la DB, solo necesitas esto:
                     jugador.tipo = 'jugador';
                     return jugador;
                 });
-                // --- FIN DEL CAMBIO ---
 
                 const responseEntrenadores = await fetch(`${API_BASE_URL}/api/entrenadores`);
                 if (!responseEntrenadores.ok) {
                     throw new Error('Error loading coaches');
                 }
                 let entrenadoresData = await responseEntrenadores.json();
-                // --- CAMBIO AQUÍ: ¡ELIMINA LA TRANSFORMACIÓN SI LAS URLS YA SON DE CLOUDINARY! ---
-                 entrenadoresData = entrenadoresData.map(entrenador => {
-                    // No necesitas transformar entrenador.googleDriveLink si ya es una URL de Cloudinary
-                    // Si tus URLs de Cloudinary ya están en la DB, solo necesitas esto:
+                entrenadoresData = entrenadoresData.map(entrenador => {
                     entrenador.tipo = 'entrenador';
                     return entrenador;
                 });
-                // --- FIN DEL CAMBIO ---
 
                 const combined = [...jugadoresData, ...entrenadoresData];
-                combined.sort((a, b) => {
-                    const nameA = `${a.nombre} ${a.apellido}`.toLowerCase();
-                    const nameB = `${b.nombre} ${b.apellido}`.toLowerCase();
-                    return nameA.localeCompare(nameB);
-                });
+                // --- CAMBIO CLAVE AQUÍ: Ordenar por el campo 'order' ---
+                combined.sort((a, b) => a.order - b.order);
+                // --- FIN DEL CAMBIO ---
                 setPersonas(combined);
             } catch (err) {
                 console.error("Fetch error:", err);

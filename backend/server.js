@@ -46,7 +46,7 @@ app.use(cors(corsOptions));
 console.log('Middleware CORS aplicado.');
 // =========================================================
 
-app.use(bodyParser.json());
+app.use(express.json());
 console.log('Middleware bodyParser aplicado.');
 
 // Conectar a MongoDB
@@ -58,6 +58,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 app.use('/api/jugadores', jugadorRoutes);
 app.use('/api/entrenadores', entrenadorRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/personas', personasRoutes);
+
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
