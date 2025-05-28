@@ -29,16 +29,14 @@ const Basketball = () => {
             base: 'Base',
             escolta: 'Escolta',
             alero: 'Alero',
-            alaPivot: 'Ala-Pívot', // Corregido a "Ala-Pívot" con tilde y guion
+            'ala-pivot': 'Ala-Pívot', // Corregido a "Ala-Pívot" con tilde y guion
             pivot: 'Pívot',      // Corregido a "Pívot" con tilde
             jugador: 'Jugador',
             entrenador: 'Entrenador',
             tipo: 'Tipo',
-            posicion: 'Posición', // Texto para el encabezado
-            // edad: 'Edad', // Eliminado
+            posicion: 'Posición', 
             instagram: 'Instagram',
             equipo: 'Equipo',
-            // años: 'años', // Eliminado
             loading: 'Cargando datos...',
             noPosition: 'Entrenador', // Nuevo texto para entrenadores sin posición
         },
@@ -52,18 +50,16 @@ const Basketball = () => {
             base: 'Point Guard',
             escolta: 'Shooting Guard',
             alero: 'Small Forward',
-            alaPivot: 'Power Forward',
+            'ala-pivot': 'Power Forward',
             pivot: 'Center',
             jugador: 'Player',
             entrenador: 'Coach',
             tipo: 'Type',
-            posicion: 'Position', // Texto para el encabezado
-            // edad: 'Age', // Eliminado
+            posicion: 'Position', 
             instagram: 'Instagram',
             equipo: 'Team',
-            // años: 'years', // Eliminado
             loading: 'Loading data...',
-            noPosition: 'Coach', // Nuevo texto para entrenadores sin posición
+            noPosition: 'Coach', 
         },
     };
 
@@ -214,7 +210,7 @@ const Basketball = () => {
                                     <option value="base">{textos[language].base}</option>
                                     <option value="escolta">{textos[language].escolta}</option>
                                     <option value="alero">{textos[language].alero}</option>
-                                    <option value="ala-pivot">{textos[language].alaPivot}</option>
+                                    <option value="ala-pivot">{textos[language]['ala-pivot']}</option>
                                     <option value="pivot">{textos[language].pivot}</option>
                                 </select>
                             </>
