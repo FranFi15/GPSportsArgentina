@@ -121,7 +121,7 @@
 }
 
 .basketball-person-item:hover {
-    background-color: #cc6f0460; /* Color de fondo al pasar el ratón */
+    background-color: #ec8c1e60; /* Color de fondo al pasar el ratón */
     transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada al pasar el ratón */
 }

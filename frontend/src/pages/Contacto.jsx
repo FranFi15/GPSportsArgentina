@@ -7,9 +7,10 @@ import "./Contacto.css"; // Create this CSS file for styling
 const Contacto = () => {
     const { language } = useLanguage();
     const addressRef = useRef(null);
-    const formRef = useRef(null);
+    const formRef = useRef(null); // Keep this ref for accessing form elements if needed, or remove if not used for direct form submission
     const [addressVisible, setAddressVisible] = useState(false);
     const [formVisible, setFormVisible] = useState(false);
+    const [submissionMessage, setSubmissionMessage] = useState(''); // State for success/error messages
 
     const textos = {
         es: {
@@ -21,7 +22,7 @@ const Contacto = () => {
             formEmail: 'Email',
             formMessage: 'Mensaje',
             formSend: 'Enviar Mensaje',
-            formSuccess: '¡Mensaje enviado con éxito!',
+            formSuccess: '¡Mensaje enviado con éxito! Te contactaremos pronto.',
             formError: 'Hubo un error al enviar tu mensaje. Inténtalo de nuevo.',
         },
         en: {
@@ -33,7 +34,7 @@ const Contacto = () => {
             formEmail: 'Email',
             formMessage: 'Message',
             formSend: 'Send Message',
-            formSuccess: 'Message sent successfully!',
+            formSuccess: 'Message sent successfully! We will contact you soon.',
             formError: 'There was an error sending your message. Please try again.',
         }
     };
@@ -47,9 +48,7 @@ const Contacto = () => {
                     } else if (entry.target === formRef.current) {
                         setTimeout(() => setFormVisible(true), 700);
                     }
-                    // No unobserve here, as we want the animation to trigger every time it comes into view
                 } else {
-                    // Reset visibility when out of view to re-trigger animation on scroll back
                     if (entry.target === addressRef.current) {
                         setAddressVisible(false);
                     } else if (entry.target === formRef.current) {
@@ -58,59 +57,58 @@ const Contacto = () => {
                 }
             });
         }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.1
         });
 
         if (addressRef.current) observer.observe(addressRef.current);
         if (formRef.current) observer.observe(formRef.current);
 
         return () => {
-            if (addressRef.current) observer.disconnect(); // Disconnect all observers on unmount
+            if (addressRef.current) observer.disconnect();
             if (formRef.current) observer.disconnect();
         };
-    }, [language]); // Re-run effect if language changes
+    }, [language]);
 
-    // No need to reset visibility on language change if observer handles it
-    // useEffect(() => {
-    //     setAddressVisible(false);
-    //     setFormVisible(false);
-    // }, [language]);
+    // For Formsubmit.co, you generally let the browser handle the form submission,
+    // which causes a page reload. If you want a smoother UX without reload,
+    // you'd use Formsubmit's AJAX feature (see note below).
+    // For simplicity, we'll remove the custom handleSubmit for now,
+    // and rely on Formsubmit's default redirection or built-in thank you page.
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Here you would typically send the form data to a backend service
-        // For demonstration, we'll just log it and show a success message
+    // If you wish to handle the form submission with AJAX (no page reload)
+    // and show a custom message, you'd use a structure like this:
+    const handleAjaxSubmit = async (e) => {
+        e.preventDefault(); // Prevent default form submission (page reload)
+
         const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-        console.log('Form data submitted:', data);
+        // Formsubmit requires the 'name' attributes on inputs for correct data parsing.
+        // It also accepts _captcha, _next, etc. as hidden fields.
 
-        // Using a custom modal or message box instead of alert()
-        // For simplicity, I'll use a basic console log and a temporary message state.
-        // In a real app, you'd have a dedicated modal component.
-        const messageBox = document.createElement('div');
-        messageBox.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            font-family: 'Roboto', sans-serif;
-            text-align: center;
-        `;
-        messageBox.textContent = textos[language].formSuccess;
-        document.body.appendChild(messageBox);
+        try {
+            // Formsubmit AJAX submission requires POST request to the action URL
+            const response = await fetch(e.target.action, {
+                method: 'POST',
+                body: formData, // FormData directly
+                // Formsubmit handles content-type for FormData automatically
+            });
 
-        setTimeout(() => {
-            document.body.removeChild(messageBox);
-        }, 3000); // Message disappears after 3 seconds
-
-        e.target.reset(); // Clear the form
+            if (response.ok) { // Formsubmit returns 200 OK for successful submissions
+                setSubmissionMessage(textos[language].formSuccess);
+                e.target.reset(); // Clear the form
+            } else {
+                setSubmissionMessage(textos[language].formError);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setSubmissionMessage(textos[language].formError);
+        } finally {
+            // Clear message after a few seconds
+            setTimeout(() => {
+                setSubmissionMessage('');
+            }, 5000);
+        }
     };
+
 
     return (
         <div className='contacto'>
@@ -133,20 +131,37 @@ const Contacto = () => {
                 {/* Contact Form Section */}
                 <div ref={formRef} className={`contact-form-section ${formVisible ? 'fade-in-bottom' : ''}`}>
                     <h2>{textos[language].contactTitulo}</h2>
-                    <form className="contact-form" onSubmit={handleSubmit}>
+                    {/* Using Formsubmit.co with AJAX submission for better UX */}
+                    <form
+                        className="contact-form"
+                        action="https://formsubmit.co/info@gpsports.com.ar" // Replace with your target email
+                        method="POST"
+                        onSubmit={handleAjaxSubmit} // Use the AJAX handler
+                    >
                         <div className="form-group">
                             <label htmlFor="name">{textos[language].formName}:</label>
-                            <input type="text" id="name" name="name" required />
+                            <input type="text" id="name" name="name" required /> {/* name attribute is crucial */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">{textos[language].formEmail}:</label>
-                            <input type="email" id="email" name="email" required />
+                            <input type="email" id="email" name="email" required /> {/* name attribute is crucial */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="message">{textos[language].formMessage}:</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <textarea id="message" name="message" rows="5" required></textarea> {/* name attribute is crucial */}
                         </div>
+
+                        {/* Optional Formsubmit.co fields */}
+                        {/* <input type="hidden" name="_captcha" value="false" /> Disable reCAPTCHA if you don't want it */}
+                        {/* <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html" /> Redirect to a specific URL after submission */}
+
                         <button type="submit">{textos[language].formSend}</button>
+
+                        {submissionMessage && (
+                            <p className={`form-submission-message ${submissionMessage.includes('éxito') || submissionMessage.includes('success') ? 'success' : 'error'}`}>
+                                {submissionMessage}
+                            </p>
+                        )}
                     </form>
                 </div>
             </div>
