@@ -6,13 +6,13 @@ import "./Inicio.css";
 import SocialButtons from '../components/SocialButtons';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import laproImg from '../assets/LaproI.png';
-import redivoImg from '../assets/Redivo.png';
-import garinoImg from '../assets/Garino.png';
-import deliaImg from '../assets/Delia.png';
-import scalaImg from '../assets/scala.png';
-import ramellaImg from '../assets/ramella.png';
-import lucasImg from '../assets/lucas.png'
+import laproImg from '../assets/Inicio/LaproI.png';
+import redivoImg from '../assets/Inicio/Redivo.png';
+import garinoImg from '../assets/Inicio/Garino.png';
+import deliaImg from '../assets/Inicio/Delia.png';
+import scalaImg from '../assets/Inicio/scala.png';
+import ramellaImg from '../assets/Inicio/ramella.png';
+import lucasImg from '../assets/Inicio/lucas.png'
 
 
 const Inicio = () => {
@@ -42,13 +42,13 @@ const Inicio = () => {
     const textos = {
         es: {
             linea1b: "#TeamGPSports",
-            contenido1: 'Nos une el deporte, pero sobre todo, una manera de vivirlo.',
+            contenido1: 'Nos une el deporte, pero sobre todo,\nuna manera de vivirlo.',
             contenido2: "GP Sports es una compañía de representación y management de jugadores, entrenadores y atletas con mas de 30 años de experiencia en la gestión y negociación de contratos con clubes y empresas de todo el mundo. Acompañamos carreras en un concepto 360, desde la negociación de contratos hasta la implementación comercial de los atletas con un staff de profesionales capacitado para cada una de las áreas de gestión. El objetivo con nuestros clientes es continuar con los valores que caracterizan la empresa desde su fundación: planificación, conocimiento, pasión,innovación y compromiso.",
         },
         en: {
             linea1b: "#TeamGPSports",
-            description: 'The #TeamGPSports is made of players, coaches, and athletes from different disciplines, united by a common philosophy: commitment, dedication, teamwork, and passion for what they do. From young talents to established stars, we support each member on their journey, providing close and professional backing at every stage of their career. Our team is defined not only by what they achieve on the field but also by the values they represent off it.',
-            contenido1: 'We are united by sports, but above all, by a way of living it.',
+           
+            contenido1: 'We are united by sports, but above all,\nby a way of living it.',
             contenido2: "GP Sports is a representation and management company for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
         }
     };

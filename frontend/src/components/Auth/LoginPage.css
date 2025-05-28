@@ -1,82 +1,214 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana */
-    background-image: url("../../assets/fondo2.png"); /* Un color de fondo suave */
-    background-size: cover;
-    font-family: "Roboto", sans-serif;
-    color: #ffffff;
-  }
-  
-  .login-form {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px; /* Ancho del formulario */
-    text-align: center;
-  }
-  
-  .login-form h2 {
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 100;
-  }
-  
-  .form-group input[type="text"],
-  .form-group input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: transparent;
-    border: none;
-    border-bottom: solid 0.5px #ffffff;
-    color: #ffffff;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    }
-  
+/* src/components/Auth/LoginPage.css */
 
-  .form-group input[type="text"]:focus,
-  .form-group input[type="password"]:focus,
-  .form-group input[type="number"]:focus,
-  .form-group input[type="select"]:focus  {
-    outline: none;
-    border-bottom: solid 0.5px #cc6f04; /* Cambia el color del borde al hacer foco */
+/* Estilos generales del contenedor principal de la página de login */
+.login-container {
+  display: flex; /* Utiliza flexbox para centrar y organizar los elementos */
+  flex-direction: column; /* Apila los elementos (botones y formulario) verticalmente */
+  justify-content: center; /* Centra el contenido verticalmente */
+  align-items: center; /* Centra el contenido horizontalmente */
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana (viewport height) */
+  background-image: url("../../assets/fondo2.png"); /* Ruta a tu imagen de fondo */
+  background-size: cover; /* Asegura que la imagen de fondo cubra todo el área */
+  background-position: center; /* Centra la imagen de fondo */
+  font-family: "Roboto", sans-serif; /* Define la fuente principal para el texto */
+  color: #ffffff; /* Color de texto general para la página */
+  padding: 20px; /* Añade un poco de padding alrededor para mejor visualización en dispositivos pequeños */
+}
+
+/* Contenedor para los botones "Iniciar Sesión" y "Registrarse" en la parte superior */
+.auth-buttons {
+  display: flex; /* Utiliza flexbox para que los botones se alineen horizontalmente */
+  margin-bottom: 30px; /* Espacio debajo de los botones para separar del formulario */
+  border-radius: 5px; /* Bordes ligeramente redondeados para el grupo de botones */
+  overflow: hidden; /* Asegura que el border-radius se aplique correctamente a los botones internos */
+}
+
+/* Estilo base para los botones dentro de .auth-buttons */
+.auth-buttons button {
+  padding: 10px 25px; /* Relleno interno para los botones */
+  font-size: 16px; /* Tamaño de la fuente */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+  color: #ffffff; /* Color del texto del botón */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves para efectos hover */
+}
+
+/* Estilo específico para el botón activo (Iniciar Sesión) */
+.auth-buttons .active {
+  background-color: #cc6f04; /* Color de tu marca (naranja oscuro) */
+  font-weight: bold; /* Texto en negrita para el botón que representa el estado actual */
+}
+
+/* Estilo específico para el botón inactivo (Registrarse) */
+.auth-buttons .inactive {
+  background-color: #444; /* Un color gris oscuro para el botón inactivo */
+}
+
+/* Efecto hover para todos los botones dentro de .auth-buttons */
+.auth-buttons button:hover {
+  opacity: 0.9; /* Reduce ligeramente la opacidad al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
+}
+
+/* Estilos del contenedor del formulario de inicio de sesión */
+.login-form {
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro para el formulario */
+  padding: 30px; /* Relleno interno del formulario */
+  border-radius: 8px; /* Bordes redondeados del formulario */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada para darle profundidad */
+  width: 90%; /* Ancho del formulario, responsivo hasta cierto punto */
+  max-width: 400px; /* Ancho máximo del formulario */
+  text-align: center; /* Centra el texto dentro del formulario (como el título) */
+}
+
+/* Estilo para el título "Iniciar Sesión" dentro del formulario */
+.login-form h2 {
+  font-family: 'Bebas Neue', sans-serif; /* Fuente estilizada para el título */
+  margin-bottom: 30px; /* Espacio debajo del título */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  font-weight: 500; /* Peso de la fuente del título */
+  font-size: 3rem; /* Tamaño de fuente del título */
+}
+
+/* Estilo para cada grupo de formulario (label + input) */
+.form-group {
+  margin-bottom: 25px; /* Mayor espacio entre cada grupo de formulario */
+  text-align: left; /* Alinea el texto de las etiquetas a la izquierda */
+}
+
+/* Estilo para las etiquetas de los campos de entrada */
+.form-group label {
+  display: block; /* Hace que la etiqueta ocupe su propia línea */
+  margin-bottom: 8px; /* Espacio entre la etiqueta y el campo de entrada */
+  font-weight: 300; /* Fuente más ligera para las etiquetas */
+  font-size: 15px; /* Tamaño de fuente para las etiquetas */
+}
+
+/* Estilo base para todos los campos de entrada (input) dentro de .form-group */
+.form-group input {
+  width: 100%; /* Ambos inputs heredarán este 100% de ancho, asegurando uniformidad */
+  padding: 10px; /* Relleno interno para los campos de entrada */
+  font-size: 16px; /* Tamaño de fuente para el texto dentro de los inputs */
+  background-color: transparent; /* Fondo transparente para los inputs */
+  border: none; /* Sin bordes */
+  border-bottom: solid 1px #ffffff; /* Borde inferior blanco delgado */
+  color: #ffffff; /* Color del texto dentro de los inputs */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total, crucial para el 100% */
+}
+
+/* Estilo para quitar las flechas de los inputs tipo number en navegadores webkit (Chrome, Safari) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Elimina la apariencia por defecto de las flechas */
+  margin: 0; /* Elimina el margen */
+}
+
+/* Estilo al enfocar los campos de entrada (cuando el usuario hace clic o tabula sobre ellos) */
+.form-group input:focus {
+  outline: none; /* Quita el contorno por defecto del navegador */
+  border-bottom: solid 1px #cc6f04; /* Cambia el color del borde inferior al color de tu marca */
+}
+
+/* Contenedor específico para el input de contraseña y el botón de alternar visibilidad */
+.password-input-container {
+  position: relative; /* Necesario para posicionar el botón de forma absoluta */
+  display: flex; /* Usa flexbox para alinear el input y el botón */
+  align-items: center; /* Centra verticalmente los elementos dentro */
+}
+
+/* Estilo para el input de contraseña dentro de su contenedor */
+.password-input-container input {
+  /* ¡NO SE MODIFICA EL ANCHO AQUÍ! Hereda width: 100% de .form-group input */
+  padding-right: 60px; /* AUMENTADO: Añade más padding a la derecha para el botón "Ver/Ocultar" */
+}
+
+/* Estilo del botón "Ver/Ocultar" contraseña */
+.password-toggle-button {
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  color: #ffffff; /* Color del texto del botón */
+  cursor: pointer; /* Cambia el cursor a una mano */
+  position: absolute; /* Posicionamiento absoluto dentro de .password-input-container */
+  right: 10px; /* AJUSTADO: A 10px del borde derecho del input */
+  top: 50%; /* A la mitad de la altura del input */
+  transform: translateY(-50%); /* Ajusta la posición vertical para centrarlo */
+  padding: 5px 15px; /* Relleno interno del botón */
+  font-size: 14px; /* Tamaño de fuente */
+  opacity: 0.8; /* Ligeramente transparente por defecto */
+  transition: opacity 0.2s ease; /* Transición suave de la opacidad */
+  white-space: nowrap; /* Evita que el texto "Ver/Ocultar" se rompa en varias líneas */
+}
+
+/* Efecto hover para el botón "Ver/Ocultar" */
+.password-toggle-button:hover {
+  opacity: 1; /* Opacidad completa al pasar el ratón */
+}
+
+/* Estilo para el enlace "¿Se te olvidó la contraseña?" */
+.forgot-password {
+  text-align: right; /* Alinea el enlace a la derecha */
+  margin-bottom: 25px; /* Espacio debajo del enlace */
+  font-size: 14px; /* Tamaño de fuente */
+}
+
+.forgot-password a {
+  color: #ffffff; /* Color del texto del enlace */
+  text-decoration: none; /* Sin subrayado por defecto */
+  transition: text-decoration 0.2s ease; /* Transición suave para el subrayado */
+}
+
+.forgot-password a:hover {
+  text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+/* Estilo del botón de Iniciar Sesión principal */
+.login-button {
+  background-color: #cc6f04; /* Color de tu marca */
+  color: white; /* Color del texto */
+  padding: 15px 20px; /* Mayor padding para un botón más grande */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  cursor: pointer; /* Cambia el cursor a una mano */
+  font-size: 20px; /* Tamaño de fuente más grande */
+  font-weight: bold; /* Texto en negrita */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+/* Efecto hover para el botón de Iniciar Sesión */
+.login-button:hover {
+  background-color: #a95b01; /* Color más oscuro al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
+}
+
+/* Mensaje de error (si hay) */
+.error-message {
+  color: #ff4d4d; /* Un rojo vibrante para errores */
+  margin-bottom: 15px; /* Espacio debajo del mensaje */
+  font-size: 14px; /* Tamaño de fuente */
+  background-color: rgba(255, 0, 0, 0.1); /* Fondo ligero para el mensaje de error */
+  padding: 8px; /* Relleno del mensaje */
+  border-radius: 4px; /* Bordes redondeados del mensaje */
+}
+
+/* Media Queries para responsividad: Ajustes para pantallas más pequeñas (ej. móviles) */
+@media (max-width: 500px) {
+  .login-form {
+    padding: 25px; /* Reduce un poco el padding del formulario */
   }
-  
+
+  .auth-buttons button {
+    padding: 8px 15px; /* Reduce el padding de los botones superiores */
+    font-size: 14px; /* Reduce el tamaño de la fuente de los botones superiores */
+  }
+
+  .login-form h2 {
+    font-size: 24px; /* Reduce el tamaño del título */
+    margin-bottom: 25px; /* Ajusta el margen del título */
+  }
+
   .login-button {
-    background-color: #cc6f04;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
-    width: 100%;
-    transition: background-color 0.3s ease;
+    font-size: 18px; /* Reduce el tamaño de la fuente del botón principal */
+    padding: 12px 15px; /* Reduce el padding del botón principal */
   }
-  
-  .login-button:hover {
-    background-color: #a95b01;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
+}

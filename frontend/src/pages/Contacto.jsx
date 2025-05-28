@@ -1,16 +1,15 @@
-// src/components/Contacto/Contacto.jsx
-
 import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./Contacto.css"; // Create this CSS file for styling
 
+
 const Contacto = () => {
     const { language } = useLanguage();
     const addressRef = useRef(null);
-    const formRef = useRef(null); // Keep this ref for accessing form elements if needed, or remove if not used for direct form submission
+    const formRef = useRef(null);
     const [addressVisible, setAddressVisible] = useState(false);
     const [formVisible, setFormVisible] = useState(false);
-    const [submissionMessage, setSubmissionMessage] = useState(''); // State for success/error messages
+    const [submissionMessage, setSubmissionMessage] = useState('');
 
     const textos = {
         es: {
@@ -69,32 +68,20 @@ const Contacto = () => {
         };
     }, [language]);
 
-    // For Formsubmit.co, you generally let the browser handle the form submission,
-    // which causes a page reload. If you want a smoother UX without reload,
-    // you'd use Formsubmit's AJAX feature (see note below).
-    // For simplicity, we'll remove the custom handleSubmit for now,
-    // and rely on Formsubmit's default redirection or built-in thank you page.
-
-    // If you wish to handle the form submission with AJAX (no page reload)
-    // and show a custom message, you'd use a structure like this:
     const handleAjaxSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission (page reload)
+        e.preventDefault();
 
         const formData = new FormData(e.target);
-        // Formsubmit requires the 'name' attributes on inputs for correct data parsing.
-        // It also accepts _captcha, _next, etc. as hidden fields.
 
         try {
-            // Formsubmit AJAX submission requires POST request to the action URL
             const response = await fetch(e.target.action, {
                 method: 'POST',
-                body: formData, // FormData directly
-                // Formsubmit handles content-type for FormData automatically
+                body: formData,
             });
 
-            if (response.ok) { // Formsubmit returns 200 OK for successful submissions
+            if (response.ok) {
                 setSubmissionMessage(textos[language].formSuccess);
-                e.target.reset(); // Clear the form
+                e.target.reset();
             } else {
                 setSubmissionMessage(textos[language].formError);
             }
@@ -102,7 +89,6 @@ const Contacto = () => {
             console.error("Error submitting form:", error);
             setSubmissionMessage(textos[language].formError);
         } finally {
-            // Clear message after a few seconds
             setTimeout(() => {
                 setSubmissionMessage('');
             }, 5000);
@@ -131,7 +117,6 @@ const Contacto = () => {
                 {/* Contact Form Section */}
                 <div ref={formRef} className={`contact-form-section ${formVisible ? 'fade-in-bottom' : ''}`}>
                     <h2>{textos[language].contactTitulo}</h2>
-                    {/* Using Formsubmit.co with AJAX submission for better UX */}
                     <form
                         className="contact-form"
                         action="https://formsubmit.co/info@gpsports.com.ar" // Replace with your target email
@@ -140,15 +125,15 @@ const Contacto = () => {
                     >
                         <div className="form-group">
                             <label htmlFor="name">{textos[language].formName}:</label>
-                            <input type="text" id="name" name="name" required /> {/* name attribute is crucial */}
+                            <input type="text" id="name" name="name" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">{textos[language].formEmail}:</label>
-                            <input type="email" id="email" name="email" required /> {/* name attribute is crucial */}
+                            <input type="email" id="email" name="email" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="message">{textos[language].formMessage}:</label>
-                            <textarea id="message" name="message" rows="5" required></textarea> {/* name attribute is crucial */}
+                            <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
                         <button type="submit">{textos[language].formSend}</button>
 

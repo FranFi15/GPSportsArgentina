@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import './TeamGPSPORTS.css';
-import manuImage from '../assets/manu.png';
-import pumaImage from '../assets/puma.png';
-import laproImage from '../assets/lapro.png';
-import obertoImage from '../assets/oberto.png';
-import rubenImage from '../assets/ruben.png';
-import delfiImage from '../assets/delfi.png';
-import sebaImage from '../assets/seba.png';
-import paretoImage from '../assets/pareto.png';
-import luchaImage from '../assets/lucha.png';
-import ceccoImage from '../assets/cecco.png';
-import yazImage from '../assets/yaz.png';
-import molinariImage from '../assets/molinari.png';
-import paredesImage from '../assets/paredes.png';
-import chiaraImage from '../assets/chiara.png';
-import simonetImage from '../assets/simonet.png';
+import manuImage from '../assets/TeamGPS/manu.png';
+import pumaImage from '../assets/TeamGPS/puma.png';
+import laproImage from '../assets/TeamGPS/lapro.png';
+import obertoImage from '../assets/TeamGPS/oberto.png';
+import rubenImage from '../assets/TeamGPS/ruben.png';
+import delfiImage from '../assets/TeamGPS/delfi.png';
+import sebaImage from '../assets/TeamGPS/seba.png';
+import paretoImage from '../assets/TeamGPS/pareto.png';
+import luchaImage from '../assets/TeamGPS/lucha.png';
+import ceccoImage from '../assets/TeamGPS/cecco.png';
+import yazImage from '../assets/TeamGPS/yaz.png';
+import molinariImage from '../assets/TeamGPS/molinari.png';
+import paredesImage from '../assets/TeamGPS/paredes.png';
+import chiaraImage from '../assets/TeamGPS/chiara.png';
+import simonetImage from '../assets/TeamGPS/simonet.png';
 
 const TeamGPSPORT = () => {
     const { language } = useLanguage();
@@ -76,7 +76,9 @@ const TeamGPSPORT = () => {
             },
             {
                 nombre: 'Rubén Magnano',
-                descripcionCorta: 'Entrenador de básquet reconocido a nivel mundial. Condujo a la Selección Argentina a la histórica medalla de oro en los Juegos Olímpicos de Atenas 2004, y a la medalla de plata en el Mundial de Indianápolis 2002. También fue entrenador de las selecciones nacionales de Brasil y Uruguay. Su legado se sostiene en el trabajo, la disciplina táctica y la formación de equipos de élite.',
+                descripcionCorta: 'Rubén Magnano, un entrenador de baloncesto reconocido a nivel mundial, dejó y sigue dejando una huella imborrable en la historia del deporte. Llevó a la Selección Argentina a la histórica medalla de oro en los Juegos Olímpicos de Atenas 2004, un hito sin precedentes para el baloncesto argentino. Su brillantez táctica también se hizo evidente al conseguir la medalla de plata en el Mundial de Indianápolis 2002.',
+                descripcionLarga: 'Más allá de sus logros con Argentina, Magnano extendió su influencia a otras selecciones nacionales, dirigiendo a Brasil y Uruguay. Su legado se forjó sobre los pilares del trabajo incansable, la disciplina táctica y una habilidad innata para la formación de equipos de élite.',
+                descripcionLarga2: 'En reconocimiento a su destacada trayectoria y sus inmensas contribuciones al baloncesto, Rubén Magnano fue incluido en el Salón de la Fama de la FIBA en el año 2021. Este honor consagra su lugar entre las más grandes figuras de la historia del baloncesto mundial.',                
                 imagen: rubenImage,
                 alt: 'Rubén Magnano'
             },
@@ -186,7 +188,9 @@ const TeamGPSPORT = () => {
             },
             {
                 nombre: 'Rubén Magnano',
-                descripcionCorta: 'World-renowned basketball coach. He led the Argentine National Team to the historic gold medal at the Athens 2004 Olympic Games and the silver medal at the Indianapolis 2002 World Cup. He has also coached the national teams of Brazil and Uruguay. His legacy is based on work, tactical discipline, and the formation of elite teams.',
+                descripcionCorta: "Rubén Magnano, a globally recognized basketball coach, has left and continues to leave an indelible mark on the sport's history. He led the Argentine National Team to the historic gold medal at the Athens 2004 Olympic Games, an unprecedented achievement for Argentine basketball. His tactical brilliance was also evident in securing the silver medal at the 2002 Indianapolis World Championship.",
+                descripcionLarga: "Beyond his accomplishments with Argentina, Magnano extended his influence to other national teams, coaching Brazil and Uruguay. His legacy was built upon the pillars of tireless work, tactical discipline, and an innate ability to develop elite teams.",
+                descripcionLarga2: "In recognition of his outstanding career and immense contributions to basketball, Rubén Magnano was inducted into the FIBA Hall of Fame in 2021. This honor solidifies his place among the greatest figures in the history of global basketball.",
                 imagen: rubenImage,
                 alt: 'Rubén Magnano'
             },

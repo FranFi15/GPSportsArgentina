@@ -45,7 +45,7 @@
 /* Responsive design para la sección principal */
 @media (max-width: 768px) {
     .charlas-container {
-        padding: 60px 15px;
+        padding: 60px 0px;
     }
 
     .charlas-title {
@@ -54,7 +54,7 @@
 
     .charlas-content {
         font-size: 1em;
-        width: 95%;
+        width: 90%;
     }
 
     .charlas-gallery-title {

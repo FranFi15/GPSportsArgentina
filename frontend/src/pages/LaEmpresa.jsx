@@ -3,19 +3,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./LaEmpresa.css";
-import PartnersImage from '../assets/mapa.png'; // Import your partners image
-import nastaLogo from "../assets/NS.png";
-import playersGroupLogo from "../assets/PGI.png"
-import oneWorldLogo from "../assets/OW.png";
-import duranLogo from "../assets/DM.png";
-import bestBallerLogo from "../assets/BB.png";
-import carlosPrunesImg from '../assets/cprunes.png';
-import matiasNovoaImg from '../assets/novoa.png';
-import arielEslavaImg from '../assets/eslava.png';
-import ricardoPrunesImg from '../assets/rprunes.png';
-import gonzaloZamudioImg from '../assets/contador.png';
-import edgardoMagnaghiImg from '../assets/abogado.png';
-import franciscoFilippaImg from '../assets/diseñador.png';
+import PartnersImage from '../assets/Agencia/mapa.png'; // Import your partners image
+import nastaLogo from "../assets/Agencia/NS.png";
+import playersGroupLogo from "../assets/Agencia/PGI.png"
+import oneWorldLogo from "../assets/Agencia/OW.png";
+import duranLogo from "../assets/Agencia/DM.png";
+import bestBallerLogo from "../assets/Agencia/BB.png";
+import carlosPrunesImg from '../assets/Agencia/cprunes.png';
+import matiasNovoaImg from '../assets/Agencia/novoa.png';
+import arielEslavaImg from '../assets/Agencia/eslava.png';
+import ricardoPrunesImg from '../assets/Agencia/rprunes.png';
+import gonzaloZamudioImg from '../assets/Agencia/contador.png';
+import edgardoMagnaghiImg from '../assets/Agencia/abogado.png';
+import franciscoFilippaImg from '../assets/Agencia/diseñador.png';
 
 const LaEmpresa = () => {
     const { language } = useLanguage();
@@ -29,7 +29,7 @@ const LaEmpresa = () => {
 
     const textos = {
         es: {
-            titulo: 'La Empresa',
+            titulo: 'La Agencia',
             staffTitulo: 'Nuestro Equipo',
             staff: [
                 {
@@ -79,7 +79,7 @@ const LaEmpresa = () => {
 
         },
         en: {
-            titulo: 'The Company',
+            titulo: 'The Agency',
             staffTitulo: 'Our Team',
             staff: [
                 {

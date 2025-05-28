@@ -1,229 +1,280 @@
 /* src/components/Contacto/Contacto.css */
 
+/*
+  Asegúrate de que la fuente 'Roboto' y 'Bebas Neue' estén importadas
+  en tu proyecto (ej. en index.html o tu archivo CSS global)
+  Ejemplo para Google Fonts:
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+*/
+
+/* Contenedor principal de la página de contacto */
 .contacto {
-    width: 100%;
-    padding: 60px 0;
-    font-family: "Roboto", sans-serif;
-    color: #ffffff;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Removido para que el contenido empiece desde arriba con padding */
+  min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la ventana */
+  width: 100%;
+  padding: 40px 20px; /* Padding superior/inferior para el contenido, y lateral */
+  font-family: "Roboto", sans-serif; /* Fuente principal para el texto general */
+  color: #ffffff; /* Color de texto general */
+  box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
 }
 
-/* New container for side-by-side layout */
+/* Contenedor para las secciones de dirección y formulario (layout lado a lado) */
 .contacto-content {
-    display: flex;
-    flex-direction: row; /* Default to row for larger screens */
-    justify-content: space-around;
-    align-items: flex-start; /* Align items to the top */
-    width: 100%; /* Max width for the content area */
-    
-    margin-top: 50px;
-    gap: 40px; /* Space between the two sections */
+  display: flex;
+  flex-wrap: wrap; /* Permite que las secciones se envuelvan en pantallas pequeñas */
+  justify-content: space-between; /* Centra las secciones horizontalmente */
+  width: 100%;
+  
+  gap: 40px; /* Espacio entre las dos secciones */
+  margin-top: 30px; /* Espacio superior para separar de un posible header */
 }
 
-/* Styles for Address Section */
-.direccion {
-    flex: 1; /* Allows it to grow and shrink */
-    min-width: 300px; /* Minimum width before wrapping */
-    height: auto; /* Adjust height to content */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Align content to the top */
-    text-align: center;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
-    margin-bottom: 0; /* Remove bottom margin as it's now part of flex gap */
+/* Estilos base para las secciones de Dirección y Formulario */
+.direccion,
+.contact-form-section {
+  flex: 1; /* Permite que cada sección ocupe espacio flexible */
+  min-width: 300px; /* Ancho mínimo antes de que las secciones se apilen */
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro (como el login) */
+  padding: 30px; /* Relleno interno de las secciones */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+  box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
+  text-align: center; /* Centra el contenido de la sección */
+  display: flex; /* Añadido: Convierte en flex container */
+  flex-direction: column; /* Añadido: Apila su contenido */
+  justify-content: space-between; /* Añadido: Distribuye el espacio verticalmente */
+
+  /* Animaciones de entrada (fade-in-bottom) */
+  opacity: 0;
+  transform: translateY(20px); /* Ligeramente desplazado para el efecto */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transiciones suaves */
 }
 
-.direccion.fade-in-bottom {
-    opacity: 1;
-    transform: translateY(0);
+/* Estado activo de las animaciones */
+.direccion.fade-in-bottom,
+.contact-form-section.fade-in-bottom {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.direccion h2 {
-    font-size: 6rem;
-    font-weight: 900;
-    margin-bottom: 30px;
-    font-family: 'Bebas Neue', sans-serif;
-    text-shadow: #000000 2px 2px 8px;
+/* Estilo para los títulos (h2) de ambas secciones */
+.direccion h2,
+.contact-form-section h2 {
+  font-family: 'Bebas Neue', sans-serif; /* Fuente específica para títulos */
+  font-size: 6rem; /* Tamaño grande para el título */
+  font-weight: 900; /* Peso de la fuente */
+  margin-bottom: 30px; /* Espacio debajo del título */
+  text-shadow: #000000 2px 2px 8px; /* Sombra al texto para mayor visibilidad */
+  color: #ffffff; /* Asegura el color blanco */
 }
 
-.direccion-detalles {
-    margin-bottom: 20px;
+/* Contenedor de los detalles de la dirección */
+.datos-direccion {
+  /* margin-bottom: 30px; */ /* Removido, el justify-content se encargará */
 }
 
+/* Estilo para el texto de la calle */
 .direccion-calle {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 400;
 }
 
+/* Estilo para el texto de la ciudad */
 .direccion-ciudad {
-    font-size: 1.1rem;
-    font-weight: 300;
+  font-size: 1.1rem;
+  font-weight: 300;
 }
 
+/* Estilo para el "mapa" clickeable */
 .map {
-    width: 80%; /* Take full width of its container */
-    height: 450px; /* Fixed height for the map image */
-    background-image: url('../assets/direccion.png'); /* Corrected path */
-    background-size: cover; /* Ensure image covers the area */
-    background-position: center;
-    border: none;
-    border-radius: 8px;
-    filter: grayscale(60%);
-    transition: filter 1s ease-in-out, transform 1s ease-in-out;
-    cursor: pointer;
+  width: 80%; /* Ocupa todo el ancho de su contenedor */
+  height: 450px; /* Altura fija para el mapa */
+  background-image: url('../assets/direccion.png'); /* Ruta a tu imagen de mapa */
+  background-size: cover; /* Asegura que la imagen cubra el área */
+  background-position: center;
+  border: none; /* Sin borde */
+  border-radius: 8px; /* Bordes redondeados */
+  filter: grayscale(60%); /* Efecto de escala de grises inicial */
+  transition: filter 1s ease-in-out, transform 1s ease-in-out; /* Transición suave */
+  cursor: pointer; /* Cambia el cursor a una mano */
+  margin-top: 20px; /* Espacio superior */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .map:hover {
-    filter: grayscale(0%);
-    transform: scale(1.05);
+  filter: grayscale(0%); /* Quita la escala de grises al pasar el ratón */
+  transform: scale(1.02); /* Ligeramente más grande al pasar el ratón */
 }
 
-/* Styles for Contact Form Section */
-.contact-form-section {
-    flex: 1; /* Allows it to grow and shrink */
-    min-width: 300px; /* Minimum width before wrapping */
-    padding: 20px; /* Adjusted padding */
-    text-align: center;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-}
-
-.contact-form-section.fade-in-bottom {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.contact-form-section h2 {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 6rem;
-    text-shadow: #000000 2px 2px 8px;
-    margin-bottom: 50px;
-}
-
+/* Estilo del formulario de contacto */
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; /* Take full width of its container */
-    max-width: 600px; /* Limit form width */
-    margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column; /* Apila los elementos del formulario verticalmente */
+  align-items: center; /* Centra los elementos del formulario */
+  width: 100%; /* Ocupa todo el ancho de su contenedor */
+  max-width: 600px; /* Ancho máximo para el formulario */
+  margin: 0 auto; /* Centra el formulario si es más pequeño que el max-width */
+  /* El fondo y sombra del formulario ya están en .contact-form-section */
 }
 
+/* Estilo para cada grupo de formulario (label + input/textarea) */
 .form-group {
-    width: 100%;
-    margin-bottom: 25px;
-    text-align: left;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  margin-bottom: 25px; /* Espacio entre cada campo del formulario */
+  text-align: left; /* Alinea el texto de las etiquetas a la izquierda */
 }
 
+/* Estilo para las etiquetas de los campos de entrada */
 .form-group label {
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    font-weight: 300;
+  display: block; /* Hace que la etiqueta ocupe su propia línea */
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-weight: 300;
+  color: #ffffff;
 }
 
+/* Estilo para los inputs de texto, email y el textarea */
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group textarea {
-    width: calc(100% - 20px);
-    padding: 12px 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease;
+  width: 100%; /* Ocupa el 100% del ancho del .form-group */
+  padding: 10px; /* Relleno interno (como el login) */
+  font-size: 16px; /* Tamaño de fuente (como el login) */
+  background-color: transparent; /* Fondo transparente (como el login) */
+  border: none; /* Sin bordes */
+  border-bottom: solid 1px #ffffff; /* Borde inferior blanco delgado (como el login) */
+  color: #ffffff; /* Color del texto */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  outline: none; /* Quita el contorno por defecto */
+  transition: border-color 0.3s ease; /* Transición para el color del borde */
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group textarea:focus {
-    border-color: var(--color-primario, #f39c12);
-}
-
+/* Permite redimensionar el textarea verticalmente */
 .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
+  resize: vertical;
+  min-height: 120px; /* Altura mínima para el textarea */
 }
 
-.contact-form button {
-    background-color: var(--color-primario, #f39c12);
-    color: #ffffff;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: bold;
-    text-transform: uppercase;
+/* Estilo al enfocar los inputs y textareas */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom-color: #cc6f04; /* Color de tu marca al enfocar (como el login) */
 }
 
-.contact-form button:hover {
-    background-color: #e08e0b;
-    transform: translateY(-2px);
+/* Estilo del botón de enviar mensaje */
+.contact-form button[type="submit"] {
+  background-color: #cc6f04; /* Color de tu marca (como el login) */
+  color: #ffffff;
+  border: none;
+  padding: 15px 20px; /* Relleno como el botón de login */
+  border-radius: 5px;
+  font-size: 20px; /* Tamaño de fuente como el botón de login */
+  font-weight: bold; /* Texto en negrita como el botón de login */
+  cursor: pointer;
+  width: 100%; /* Ocupa todo el ancho */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  margin-top: 20px; /* Espacio superior para separar del último campo */
+  text-transform: uppercase; /* Convertir a mayúsculas para un look consistente con titulos Bebas Neue */
 }
 
-/* Media Queries */
-@media (max-width: 1024px) { /* Adjust breakpoint for side-by-side */
-    .contacto-content {
-        flex-direction: column; /* Stack vertically on smaller screens */
-        align-items: center;
-        gap: 60px; /* Increase gap when stacked */
-    }
-    .direccion, .contact-form-section {
-        width: 90%; /* Take more width when stacked */
-        max-width: 600px; /* Limit max width even when stacked */
-    }
-    .direccion h2, .contact-form-section h2 {
-        font-size: 4.5rem; /* Slightly smaller for tablets */
-    }
-    .map {
-        height: 300px;
-    }
+/* Efecto hover para el botón de enviar mensaje */
+.contact-form button[type="submit"]:hover {
+  background-color: #a95b01; /* Color más oscuro al pasar el ratón (como el login) */
+  transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
 }
 
-@media (max-width: 768px) {
-    .direccion h2, .contact-form-section h2 {
-        font-size: 3.5rem;
-    }
-    .map {
-        height: 250px;
-    }
-    .contact-form {
-        padding: 30px;
-    }
+/* Mensajes de éxito/error de envío del formulario */
+.form-submission-message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 15px;
+  text-align: center;
+  width: 100%; /* Ocupa todo el ancho */
+  box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
-    .direccion h2, .contact-form-section h2 {
-        font-size: 2.5rem;
-    }
-    .map {
-        height: 200px;
-    }
-    .form-group label {
-        font-size: 1rem;
-    }
-    .form-group input, .form-group textarea {
-        font-size: 0.9rem;
-        padding: 10px;
-    }
-    .contact-form button {
-        padding: 12px 20px;
-        font-size: 1rem;
-    }
+.form-submission-message.success {
+  background-color: rgba(76, 175, 80, 0.2); /* Fondo verde semitransparente */
+  color: #4CAF50; /* Texto verde brillante */
+}
+
+.form-submission-message.error {
+  background-color: rgba(255, 77, 77, 0.2); /* Fondo rojo semitransparente */
+  color: #ff4d4d; /* Texto rojo brillante */
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 1024px) { /* Para tablets y pantallas un poco más pequeñas */
+  .contacto-content {
+    flex-direction: column; /* Apila las secciones verticalmente */
+    align-items: center; /* Centra las secciones cuando están apiladas */
+    gap: 60px; /* Aumenta el espacio entre secciones apiladas */
+  }
+
+  .direccion,
+  .contact-form-section {
+    width: 100%; /* Ocupa más ancho cuando está apilado */
+    max-width: 600px; /* Limita el ancho máximo para evitar que sea demasiado grande */
+  }
+
+  .direccion h2,
+  .contact-form-section h2 {
+    font-size: 4.5rem; /* Reduce el tamaño del título */
+  }
+
+  .map {
+    height: 300px; /* Reduce la altura del mapa */
+  }
+}
+
+@media (max-width: 768px) { /* Para la mayoría de las tablets en vertical y algunos móviles grandes */
+  .direccion h2,
+  .contact-form-section h2 {
+    font-size: 3.5rem; /* Reduce aún más el tamaño del título */
+  }
+
+  .map {
+    height: 250px; /* Más reducción en la altura del mapa */
+  }
+
+  .contact-form {
+    width: 90%; /* Ajusta el ancho del formulario */
+    padding: 20px; /* Reduce el padding interno del formulario */
+  }
+}
+
+@media (max-width: 480px) { /* Para móviles pequeños */
+  .contacto {
+    padding: 20px 15px; /* Reduce el padding general de la página */
+  }
+
+  .direccion h2,
+  .contact-form-section h2 {
+    font-size: 2.5rem; /* Tamaño de título más pequeño para móviles */
+    margin-bottom: 20px; /* Ajusta el margen inferior del título */
+  }
+
+  .map {
+    height: 200px; /* Altura del mapa más pequeña */
+  }
+
+  .form-group label {
+    font-size: 1rem; /* Ajusta el tamaño de la etiqueta */
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.9rem; /* Ajusta el tamaño del texto en los campos */
+    padding: 10px; /* Ajusta el padding de los campos */
+  }
+
+  .contact-form button[type="submit"] {
+    padding: 12px 20px; /* Ajusta el padding del botón de envío */
+    font-size: 1rem; /* Ajusta el tamaño de la fuente del botón */
+  }
 }

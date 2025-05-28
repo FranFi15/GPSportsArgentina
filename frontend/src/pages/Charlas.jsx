@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import './Charlas.css';
 import Gallery from '../components/Gallery';
-import cImage1 from '../assets/1.png';
-import cImage2 from '../assets/2.png';
-import cImage3 from '../assets/3.png';
-import cImage4 from '../assets/4.png';
-import cImage5 from '../assets/5.png';
-import cImage6 from '../assets/6.png';
-import cImage7 from '../assets/7.png';
-import cImage8 from '../assets/8.png';
-import cImage9 from '../assets/9.png';
+import cImage1 from '../assets/Conferencias/1.png';
+import cImage2 from '../assets/Conferencias/2.png';
+import cImage3 from '../assets/Conferencias/3.png';
+import cImage4 from '../assets/Conferencias/4.png';
+import cImage5 from '../assets/Conferencias/5.png';
+import cImage6 from '../assets/Conferencias/6.png';
+import cImage7 from '../assets/Conferencias/7.png';
+import cImage8 from '../assets/Conferencias/8.png';
+import cImage9 from '../assets/Conferencias/9.png';
 
 
 const Charlas = () => {
