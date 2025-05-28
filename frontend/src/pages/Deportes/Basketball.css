@@ -165,6 +165,7 @@
 
 
 .instagram-icon {
+    margin-top: 5px;
     font-size: 1.8em; /* Icono más grande */
     color: #ffffff;
     transition: color 0.3s ease-in-out;
