@@ -1,7 +1,6 @@
 // server.js
 import express from 'express';
 import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import jugadorRoutes from './routes/jugadorRoutes.js';
@@ -48,7 +47,7 @@ console.log('Middleware CORS aplicado.');
 // =========================================================
 
 app.use(express.json());
-console.log('Middleware bodyParser aplicado.');
+console.log('Middleware express.json() para JSON aplicado.');
 
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })

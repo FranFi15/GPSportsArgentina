@@ -7,7 +7,7 @@ import auth from '../middleware/authMiddleware.js'; // <-- Cambio aquí (asumien
 const router = express.Router();
 
 // Ruta para actualizar el orden de las personas
-router.put('/personas/reorder', auth, async (req, res) => {
+router.put('/reorder', auth, async (req, res) => {
   try {
     const { order } = req.body;
 
