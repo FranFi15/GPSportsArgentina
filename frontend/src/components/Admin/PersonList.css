@@ -1,148 +1,266 @@
 /* src/components/Admin/PersonList.css */
 .person-list-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  padding: 30px;
-  background-image: url("../../assets/fondo2.png");
-  background-size: cover;
-  border-radius: 8px;
-  text-transform: uppercase;
-  font-family: "Roboto", sans-serif;
-  color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background-image: url("../../assets/fondo2.png");
+    background-size: cover;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh; /* Ensure it takes full viewport height for better background cover */
+    box-sizing: border-box; /* Include padding in element's total width/height */
 }
 
 .person-list-container h2 {
-  font-weight: 900;
-  font-size: 4rem;
-  text-align: center;
-  margin-bottom: 25px;
+    font-weight: 900;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
 .person-list-container .error-message {
-  color: red;
-  margin-bottom: 15px;
-  text-align: center;
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .person-list-container .filter-controls {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 15px;
+    align-items: center;
+    justify-content: center; /* Center items when they wrap */
+    margin-bottom: 20px;
+    width: 100%; /* Ensure filter controls can use full width */
+    max-width: 900px; /* Limit max width for desktop */
 }
 
 .person-list-container .filter-controls input[type="text"],
-.person-list-container .filter-controls select,
+.person-list-container .filter-controls select {
+    flex-grow: 1; /* Allow inputs/selects to grow and fill space */
+    min-width: 150px; /* Minimum width before wrapping */
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    background-color: transparent;
+    font-size: 16px;
+}
+
 .person-list-container .filter-controls input[type="text"]::placeholder,
 .person-list-container .filter-controls select::placeholder {
-  color: #ffffff;
-  padding: 10px;
-  border: none;
-  border-bottom: 1px solid #ffffff;
-  background-color: transparent;
-  font-size: 16px;
+    color: #ffffff;
 }
+
 .person-list-container .filter-controls input[type="text"]:focus,
 .person-list-container .filter-controls select:focus {
-  outline: none;
-  border-bottom: 1px solid #cc6f04; /* Color de la línea inferior al enfocar */
+    outline: none;
+    border-bottom: 1px solid #cc6f04;
 }
 
 .person-list-container .filter-controls select option{
-  color: #999; /* Estilo para la opción "Seleccionar posición" */
+    color: #999;
     background-color: #545b62;
 }
 
 .person-list-container .filter-controls button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: #cc6f04;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #cc6f04;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* Prevent buttons from shrinking too much */
 }
 
 .person-list-container .filter-controls button:hover {
-  background-color: #a95b01;
+    background-color: #a95b01;
 }
 
-/* Estilo específico para el botón de cerrar sesión */
 .person-list-container .filter-controls .logout-button {
-  background-color: #955d63; /* Color rojo para indicar cierre de sesión */
-  color: white;
+    background-color: #955d63;
+    color: white;
 }
 
 .person-list-container .filter-controls .logout-button:hover {
-  background-color: #c82333;
+    background-color: #c82333;
 }
 
-.person-list-container ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
+.person-list-container ul.person-list { /* Explicitly target the ul with this class */
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 1000px; /* Limit max width for the list on desktop */
 }
 
-.person-list-container ul li {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.person-list-container ul.person-list li.person-item { /* Explicitly target the li with this class */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* Prevent items from wrapping by default on larger screens */
+    gap: 15px; /* Adjust as needed */
 }
 
-.person-list-container ul li > span {
-  flex-grow: 1;
-  display: flex;
-  gap: 15px; /* Espacio entre los elementos de información */
-  align-items: center; /* Alineación vertical */
+.person-list-container ul.person-list li.person-item > span {
+    /* flex-grow: 1; - removed this, as it can cause uneven spacing on smaller screens */
+    display: flex; /* Make children of span flex too to control internal spacing */
+    gap: 15px; /* Espacio entre los elementos de información */
+    align-items: center; /* Alineación vertical */
+    flex-wrap: nowrap; /* Prevent individual info items from wrapping */
 }
 
-.person-list-container ul li .person-actions {
-  display: flex;
-  gap: 10px; /* Espacio entre los iconos */
+.person-list-container ul.person-list li.person-item .person-image {
+    flex-shrink: 0; /* Prevent image from shrinking */
 }
 
-.person-list-container ul li .person-actions button {
-  padding: 8px; /* Reduce el padding para los iconos */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-  display: flex; /* Para centrar el icono */
-  align-items: center;
-  justify-content: center;
+.person-list-container ul.person-list li.person-item .person-thumbnail {
+    width: 50px; /* Fixed width for thumbnail */
+    height: 50px; /* Fixed height for thumbnail */
+    border-radius: 50%; /* Make it round */
+    object-fit: cover; /* Ensure image covers the area */
 }
 
-.person-list-container ul li .person-actions button:first-of-type {
-  background-color: #28a745; /* Color para el botón Editar */
-  color: white;
+.person-list-container ul.person-list li.person-item .person-name {
+    font-weight: bold;
+    flex-grow: 1; /* Allow name to take available space */
+    white-space: nowrap; /* Prevent name from wrapping on larger screens */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if name is too long */
 }
 
-.person-list-container ul li .person-actions button:first-of-type:hover {
-  background-color: #1e7e34;
+.person-list-container ul.person-list li.person-item .person-type,
+.person-list-container ul.person-list li.person-item .person-position,
+.person-list-container ul.person-list li.person-item .person-dob {
+    flex-shrink: 0; /* Prevent these from shrinking */
+    white-space: nowrap; /* Keep them on one line */
 }
 
-.person-list-container ul li .person-actions button:last-of-type {
-  background-color: #dc3545; /* Color para el botón Eliminar */
-  color: white;
+.person-list-container ul.person-list li.person-item .person-drive-link {
+    flex-shrink: 0; /* Prevent link from shrinking */
+    white-space: nowrap;
 }
 
-.person-list-container ul li .person-actions button:last-of-type:hover {
-  background-color: #c82333;
+.person-list-container ul.person-list li.person-item .person-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0; /* Prevent actions from shrinking */
 }
 
-/* Estilo para los iconos */
-.person-list-container ul li .person-actions button svg {
-  font-size: 1.2em; /* Tamaño de los iconos */
+.person-list-container ul.person-list li.person-item .person-actions button {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.person-list-container ul.person-list li.person-item .person-actions button:first-of-type {
+    background-color: #28a745;
+    color: white;
+}
+
+.person-list-container ul.person-list li.person-item .person-actions button:first-of-type:hover {
+    background-color: #1e7e34;
+}
+
+.person-list-container ul.person-list li.person-item .person-actions button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+.person-list-container ul.person-list li.person-item .person-actions button:last-of-type:hover {
+    background-color: #c82333;
+}
+
+.person-list-container ul.person-list li.person-item .person-actions button svg {
+    font-size: 1.2em;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Tablet and smaller screens */
+@media (max-width: 768px) {
+    .person-list-container {
+        padding: 20px;
+    }
+
+    .person-list-container h2 {
+        font-size: 2.8rem;
+    }
+
+    .person-list-container .filter-controls {
+        flex-direction: column; /* Stack filters vertically */
+        align-items: stretch; /* Make them fill width */
+    }
+
+    .person-list-container .filter-controls input[type="text"],
+    .person-list-container .filter-controls select,
+    .person-list-container .filter-controls button {
+        width: 100%; /* Make them take full width */
+        margin-bottom: 5px; /* Add some space between stacked items */
+        box-sizing: border-box; /* Ensure padding is included in width */
+    }
+
+    .person-list-container ul.person-list li.person-item {
+        flex-direction: column; /* Stack details vertically */
+        align-items: flex-start; /* Align text to the left */
+        padding: 10px; /* Reduce padding */
+    }
+
+    .person-list-container ul.person-list li.person-item > span {
+        flex-direction: column; /* Stack individual info elements */
+        align-items: flex-start; /* Align text to the left */
+        gap: 5px; /* Reduce gap between info lines */
+        width: 100%; /* Ensure info section takes full width */
+        margin-bottom: 10px; /* Space between info section and actions */
+    }
+
+    .person-list-container ul.person-list li.person-item .person-name {
+        white-space: normal; /* Allow name to wrap */
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    .person-list-container ul.person-list li.person-item .person-image {
+        margin-bottom: 10px; /* Space below image when stacked */
+    }
+
+    .person-list-container ul.person-list li.person-item .person-actions {
+        width: 100%; /* Make action buttons take full width */
+        justify-content: center; /* Center buttons horizontally */
+    }
+
+    .person-list-container ul.person-list li.person-item .person-actions button {
+        flex-grow: 1; /* Allow buttons to grow evenly */
+    }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+    .person-list-container h2 {
+        font-size: 2rem;
+    }
+
+    .person-list-container ul.person-list li.person-item .person-thumbnail {
+        width: 40px; /* Smaller thumbnail */
+        height: 40px;
+    }
 }
