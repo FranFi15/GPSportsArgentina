@@ -27,11 +27,12 @@
 }
 
 .charlas-content {
-    font-size: 1.1em;
-    margin-bottom: 40px;
-    width: 80%;
-    text-align: center;
     font-family: 'Roboto', sans-serif;
+    text-align: start;
+    line-height: 2rem;
+     width: 90%;
+    font-weight: 200;
+    font-size: 1.1rem;
 }
 
 .charlas-gallery-section {
