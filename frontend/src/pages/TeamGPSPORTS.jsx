@@ -47,6 +47,12 @@ const TeamGPSPORT = () => {
                 imagen: laproImage,
                 alt: 'Nicolás Laprovittola'
             },
+             {
+                nombre: 'Paula Pareto',
+                descripcionCorta: 'Campeona olímpica en judo en Río 2016 y medallista de bronce en Beijing 2008. Primera mujer argentina en lograr un oro olímpico. También médica, Paula combina la excelencia deportiva con la vocación por ayudar. Un emblema del deporte argentino y un ejemplo de esfuerzo, valores y resiliencia.',
+                imagen: paretoImage,
+                alt: 'Paula Pareto'
+            },
             {
                 nombre: 'Alejandro “Puma” Montecchia',
                 descripcionCorta: 'Alejandro Montecchia es una figura emblemática del básquet argentino. Base de enorme inteligencia, carácter y visión de juego, fue una pieza clave de la mítica Generación Dorada, con la que conquistó la medalla de oro en los Juegos Olímpicos de Atenas 2004.',
@@ -80,12 +86,6 @@ const TeamGPSPORT = () => {
                 descripcionCorta: 'Campeón olímpico en taekwondo en Londres 2012, convirtiéndose en el primer argentino en lograrlo en este deporte. Su consagración marcó un antes y un después para las artes marciales en el país. Ejemplo de perseverancia, superación y humildad dentro y fuera del tatami.',
                 imagen: sebaImage,
                 alt: 'Sebastián Crismanich'
-            },
-            {
-                nombre: 'Paula Pareto',
-                descripcionCorta: 'Campeona olímpica en judo en Río 2016 y medallista de bronce en Beijing 2008. Primera mujer argentina en lograr un oro olímpico. También médica, Paula combina la excelencia deportiva con la vocación por ayudar. Un emblema del deporte argentino y un ejemplo de esfuerzo, valores y resiliencia.',
-                imagen: paretoImage,
-                alt: 'Paula Pareto'
             },
             {
                 nombre: 'Luciano De Cecco',
@@ -156,6 +156,12 @@ const TeamGPSPORT = () => {
                 alt: 'Nicolás Laprovittola'
             },
             {
+                nombre: 'Paula Pareto',
+                descripcionCorta: 'Olympic judo champion in Rio 2016 and bronze medalist in Beijing 2008. First Argentine woman to achieve an Olympic gold. Also a medical doctor, Paula combines sporting excellence with a vocation for helping. An emblem of Argentine sport and an example of effort, values, and resilience.',
+                imagen: paretoImage,
+                alt: 'Paula Pareto'
+            },
+            {
                 nombre: 'Alejandro “Puma” Montecchia',
                 descripcionCorta: 'Alejandro Montecchia is an emblematic figure of Argentine basketball. A point guard with great intelligence, character, and game vision, he was a key piece of the legendary Golden Generation, with which he won the gold medal at the Athens 2004 Olympic Games.',
                 descripcionLarga: 'His career developed in high-level leagues such as those in Italy and Spain, and he left an indelible mark on every team for his dedication, leadership, and ability to make the team play.',
@@ -188,12 +194,6 @@ const TeamGPSPORT = () => {
                 descripcionCorta: 'Olympic champion in taekwondo in London 2012, becoming the first Argentine to achieve this in this sport. His consecration marked a before and after for martial arts in the country. An example of perseverance, overcoming, and humility both inside and outside the tatami.',
                 imagen: sebaImage,
                 alt: 'Sebastián Crismanich'
-            },
-            {
-                nombre: 'Paula Pareto',
-                descripcionCorta: 'Olympic judo champion in Rio 2016 and bronze medalist in Beijing 2008. First Argentine woman to achieve an Olympic gold. Also a medical doctor, Paula combines sporting excellence with a vocation for helping. An emblem of Argentine sport and an example of effort, values, and resilience.',
-                imagen: paretoImage,
-                alt: 'Paula Pareto'
             },
             {
                 nombre: 'Luciano De Cecco',
