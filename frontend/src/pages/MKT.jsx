@@ -18,11 +18,11 @@ const MarketingEventos = () => {
 
     const textos = {
         es: {
-            mktEventTitulo: 'Marketing y Eventos',
+            mktEventTitulo: 'Marketing',
             mktEventContenido: 'En GP SPORTS trabajamos para que la imagen de cada deportista fuera de la cancha sea tan valiosa como sus logros dentro de ella.\nOfrecemos un servicio integral de desarrollo de marca personal, orientado a maximizar el atractivo frente a patrocinadores, medios y audiencias.\nAnalizamos en profundidad el perfil, la historia y los objetivos de cada atleta, para diseñar una estrategia de posicionamiento a medida que potencie su visibilidad y genere nuevas fuentes de ingresos.\nIdentificamos las marcas más afines a sus valores, gestionamos vínculos comerciales estratégicos, potenciamos su presencia en medios y optimizamos el uso de redes sociales para fortalecer la conexión con sus seguidores.\nEn GP SPORTS, el rendimiento deportivo se convierte en una plataforma de crecimiento económico, impacto cultural y consolidación de imagen.',
         },
         en: {
-            mktEventTitulo: 'Marketing & Events',
+            mktEventTitulo: 'Marketing',
             mktEventContenido: 'At GP SPORTS, we work to ensure that the image of each athlete off the field is as valuable as their achievements on it.\nWe offer a comprehensive personal brand development service, aimed at maximizing appeal to sponsors, media, and audiences.\nWe deeply analyze the profile, history, and goals of each athlete to design a tailored positioning strategy that enhances their visibility and generates new income streams.\nWe identify brands that align with their values, manage strategic commercial links, boost their media presence, and optimize social media use to strengthen their connection with followers.\nAt GP SPORTS, sports performance becomes a platform for economic growth, cultural impact, and image consolidation.',
         }
     };
