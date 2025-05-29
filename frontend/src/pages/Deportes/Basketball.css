@@ -27,7 +27,7 @@
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: spin 1s linear infinite; /* Animación de giro */
+    animation: spin 2s linear infinite; /* Animación de giro */
     margin-bottom: 15px;
 }
 
