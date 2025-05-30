@@ -182,7 +182,6 @@ const Inicio = () => {
 
             {/* Nueva sección para Publicaciones de Redes Sociales */}
             <div className="social-posts-section">
-                <h2>Nuestras Últimas Actualizaciones Sociales</h2>
                 {loadingSocialPosts && <p>Cargando publicaciones...</p>}
                 {errorSocialPosts && <p>Error al cargar publicaciones: {errorSocialPosts.message}</p>}
                 {!loadingSocialPosts && !errorSocialPosts && socialPosts.length === 0 && (

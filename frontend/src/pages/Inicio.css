@@ -151,21 +151,13 @@
     max-width: 1200px; /* Limita el ancho máximo para pantallas grandes */
     margin: 100px auto; /* Espacio superior e inferior, y centrado horizontal */
     padding: 40px 20px; /* Padding interno */
-    background-color: #f8f8f8; /* Un fondo claro para esta sección */
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     text-align: center; /* Centra el título y mensajes */
     color: #333; /* Color de texto oscuro para buen contraste */
 }
 
-.social-posts-section h2 {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 3.5rem; /* Título grande y prominente */
-    color: #cc6f04; /* Usa tu color naranja para el título */
-    margin-bottom: 50px; /* Espacio debajo del título */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+
 
 .social-posts-section p {
     font-size: 1.1rem;
