@@ -39,8 +39,8 @@
 }
 
 .carousel-overlay .highlight {
-    font-size: 3em;
-    font-weight: bold;
+    font-family: "Bebas Neue", sans-serif; /* Use a bold, modern font for emphasis */
+    font-size: 6rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
