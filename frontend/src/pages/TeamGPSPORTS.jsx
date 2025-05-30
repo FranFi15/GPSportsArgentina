@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import './TeamGPSPORTS.css';
-import manuImage from '../assets/TeamGPS/manu.png';
-import pumaImage from '../assets/TeamGPS/puma.png';
-import laproImage from '../assets/TeamGPS/lapro.png';
-import obertoImage from '../assets/TeamGPS/oberto.png';
-import rubenImage from '../assets/TeamGPS/ruben.png';
-import delfiImage from '../assets/TeamGPS/delfi.png';
-import sebaImage from '../assets/TeamGPS/seba.png';
-import paretoImage from '../assets/TeamGPS/pareto.png';
-import luchaImage from '../assets/TeamGPS/lucha.png';
-import ceccoImage from '../assets/TeamGPS/cecco.png';
-import yazImage from '../assets/TeamGPS/yaz.png';
-import molinariImage from '../assets/TeamGPS/molinari.png';
-import paredesImage from '../assets/TeamGPS/paredes.png';
-import chiaraImage from '../assets/TeamGPS/chiara.png';
-import simonetImage from '../assets/TeamGPS/simonet.png';
+import manuImage from '../assets/TeamGPS/manu.avif';
+import pumaImage from '../assets/TeamGPS/puma.avif';
+import laproImage from '../assets/TeamGPS/lapro.avif';
+import obertoImage from '../assets/TeamGPS/oberto.avif';
+import rubenImage from '../assets/TeamGPS/ruben.avif';
+import delfiImage from '../assets/TeamGPS/delfi.avif';
+import sebaImage from '../assets/TeamGPS/seba.avif';
+import paretoImage from '../assets/TeamGPS/pareto.avif';
+import luchaImage from '../assets/TeamGPS/lucha.avif';
+import ceccoImage from '../assets/TeamGPS/cecco.avif';
+import yazImage from '../assets/TeamGPS/yaz.avif';
+import molinariImage from '../assets/TeamGPS/molinari.avif';
+import paredesImage from '../assets/TeamGPS/paredes.avif';
+import chiaraImage from '../assets/TeamGPS/chiara.avif';
+import simonetImage from '../assets/TeamGPS/simonet.avif';
 
 const TeamGPSPORT = () => {
     const { language } = useLanguage();
