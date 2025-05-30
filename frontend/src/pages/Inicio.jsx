@@ -12,10 +12,7 @@ import garinoImg from '../assets/Inicio/Garino.avif';
 import deliaImg from '../assets/Inicio/Delia.avif';
 import scalaImg from '../assets/Inicio/scala.avif';
 import ramellaImg from '../assets/Inicio/ramella.avif';
-import lucasImg from '../assets/Inicio/lucas.avif';
-
-// Importar los componentes de la librería
-import { InstagramEmbed, XEmbed } from 'react-social-media-embed';
+import lucasImg from '../assets/Inicio/lucas.avif'
 
 
 const Inicio = () => {
@@ -27,16 +24,10 @@ const Inicio = () => {
     const carouselRef = useRef(null);
 
     const [descriptionVisible, setDescriptionVisible] = useState(false);
+    // const [addressVisible, setAddressVisible] = useState(false); // No longer needed
     const [contentVisible, setContentVisible] = useState(false);
     const [content1Visible, setContent1Visible] = useState(false);
     const [content2Visible, setContent2Visible] = useState(false);
-    // Nuevo estado para las publicaciones sociales
-    const [socialPosts, setSocialPosts] = useState([]);
-    const [loadingSocialPosts, setLoadingSocialPosts] = useState(true);
-    const [errorSocialPosts, setErrorSocialPosts] = useState(null);
-
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 
     const carouselImages = [
         { src: laproImg, alt: 'Laprovíttola' },
@@ -56,7 +47,7 @@ const Inicio = () => {
         },
         en: {
             linea1b: "#TeamGPSports",
-
+           
             contenido1: 'We are united by sports, but above all,by a way of living it.',
             contenido2: "GP Sports is a representation and management agency for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
         }
@@ -97,57 +88,9 @@ const Inicio = () => {
         setContent2Visible(false);
     }, [language]);
 
-    // Hook para obtener las publicaciones de redes sociales
-    useEffect(() => {
-        const fetchSocialPosts = async () => {
-            try {
-                // **Asegúrate de que esta URL sea la correcta para tu backend**
-                const response = await fetch(`${API_BASE_URL}/api/socialposts`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                setSocialPosts(data);
-            } catch (error) {
-                console.error("Failed to fetch social posts:", error);
-                setErrorSocialPosts(error);
-            } finally {
-                setLoadingSocialPosts(false);
-            }
-        };
-
-        fetchSocialPosts();
-    }, []); // Se ejecuta una vez al montar el componente
-
-    // Función auxiliar para renderizar la publicación social usando los componentes de la librería
-    const renderSocialPost = (post) => {
-        if (post.platform === 'instagram') {
-            return (
-                <InstagramEmbed
-                    url={post.url}
-                    width={328} // Ancho recomendado por la librería o ajustable
-                    key={post._id}
-                    // Puedes añadir props como `captioned`, `align`, `lazyLoad`
-                    // Consulta la documentación de react-social-media-embed para más opciones
-                />
-            );
-        } else if (post.platform === 'twitter') {
-            return (
-                <XEmbed // Para Twitter, ahora se usa XEmbed en vez de TwitterEmbed
-                    url={post.url}
-                    width={325} // Ancho recomendado o ajustable
-                    key={post._id}
-                    // Puedes añadir props como `twitterTweetEmbedProps` para opciones avanzadas del tweet
-                    // Consulta la documentación de react-social-media-embed
-                />
-            );
-        }
-        return null; // En caso de plataforma no reconocida
-    };
-
     return (
         <div className='inicio'>
-            {/* Sección del Carrusel (sin cambios) */}
+            {/* Carousel Section */}
             <div className="carousel-section">
                 <Carousel
                     ref={carouselRef}
@@ -180,21 +123,6 @@ const Inicio = () => {
                 </div>
             </div>
 
-            {/* Nueva sección para Publicaciones de Redes Sociales */}
-            <div className="social-posts-section">
-                {loadingSocialPosts && <p>Cargando publicaciones...</p>}
-                {errorSocialPosts && <p>Error al cargar publicaciones: {errorSocialPosts.message}</p>}
-                {!loadingSocialPosts && !errorSocialPosts && socialPosts.length === 0 && (
-                    <p>No hay publicaciones para mostrar aún.</p>
-                )}
-                <div className="social-posts-grid">
-                    {socialPosts.map(post => (
-                        <div key={post._id} className="social-post-item">
-                            {renderSocialPost(post)}
-                        </div>
-                    ))}
-                </div>
-            </div>
         </div>
     );
 };

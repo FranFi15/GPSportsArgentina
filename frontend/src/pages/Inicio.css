@@ -1,60 +1,85 @@
-/* General styles for Inicio.jsx if not already present */
+/* Ensure the main container accommodates all sections */
 .inicio {
-    /* Adjust padding, margin as needed for overall layout */
-    padding: 0;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0; /* Remove top padding if carousel is full height */
+    color: #ffffff;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
+    min-height: 100vh; /* Ensure it takes at least full viewport height */
 }
 
-/* Carousel Section */
+/* Styles for Carousel Section (new section) */
 .carousel-section {
-    position: relative;
+    margin-top: 60px;
     width: 100%;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden;
+    height: 100vh; /* Make carousel take full viewport height */
+    position: relative; /* CRITICAL: This is the reference for the absolute positioned overlay */
 }
 
-.carousel-section img {
+.carousel .slide {
+    background: transparent;
+}
+
+.carousel .slide > div{
+    opacity: 0; /* Default hidden */
+}
+.carousel .slide.selected > div{
+    opacity: 1; /* Show the selected slide */
+    transition: opacity 2s ease-in-out ;
+}
+
+.carousel img {
     width: 100%;
-    height: 100vh;
-    object-fit: cover; /* Ensures image covers the area without distortion */
-    display: block;
+    height: 100vh; /* Make images fill the carousel height */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    object-position: top;
 }
 
 .carousel-overlay {
-    position: absolute;
+    position: absolute; /* This makes the overlay static relative to .carousel-section */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column; /* To stack #TeamGPSports and Social Buttons */
     align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent overlay */
     color: white;
     text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
     z-index: 10; /* Ensure overlay is above carousel images */
 }
 
 .carousel-overlay .highlight {
-    font-family: "Roboto", sans-serif;
+    font-family: "Bebas Neue", sans-serif;
+    text-shadow: #000000 2px 2px 8px;
     font-weight: 900;
-    font-size: 10rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-size: 12rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
+    margin-bottom: 20px; /* Space between text and social buttons */
 }
 
-/* Description Section */
+/* Keep all styles for .description, .content, etc. as they were */
 .description {
-    padding: 40px 20px;
+    width: 90%;
+    margin: 200px 0 100px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     text-align: center;
-    max-width: 1000px;
-    margin: 40px auto;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    font-weight: 200;
+    font-size: 1.1rem;
+    line-height: 2rem;
+    text-align: justify;
 }
 
 .description.fade-in {
@@ -64,13 +89,15 @@
 
 .content {
     display: flex;
-    flex-direction: column; /* Stacks paragraphs vertically on small screens */
-    gap: 20px;
-    font-weight: 900;
-    text-transform: uppercase;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin: 20px;
     opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    transform: translateX(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .content.slide-in {
@@ -78,50 +105,110 @@
     transform: translateX(0);
 }
 
-.content1, .content2 {
-    font-size: 1.2em;
-    line-height: 1.6;
-    color: #333;
+.content1 {
+    width: 40%;
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: start;
+    text-transform: uppercase;
+    line-height: 3rem;
     opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    margin-top: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .content1.fade-in-left {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
+}
+
+.content2 {
+    width: 50%;
+    padding-left: 80px;
+    font-weight: 200;
+    font-size: 1.1rem;
+    margin: 0px 0 100px 0;
+    text-align: start;
+    line-height: 2rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .content2.fade-in-right {
     opacity: 1;
-    transform: translateX(0);
-}
-.social-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Space between grid items */
-    padding: 20px;
-    margin-top: 40px;
-}
-.social-post-item{
-    width: 32%;
-}
-
-@media (min-width: 768px) {
-    .content {
-        flex-direction: row; /* Arranges paragraphs side-by-side on larger screens */
-        text-align: left;
-    }
-    .content1, .content2 {
-        flex: 1; /* Each paragraph takes equal space */
-        padding: 0 10px;
-    }
+    transform: translateY(0);
 }
 
 
-/* Media queries for smaller screens if necessary, though grid handles much */
+
+/* Media Queries (Adjusted for carousel height and existing sections) */
 @media (max-width: 768px) {
-    .social-posts-grid {
-        grid-template-columns: 1fr; /* Stack items on very small screens if desired */
+    .inicio {
+        padding: 40px 0; /* Add padding back if content starts after carousel */
+    }
+    .carousel-section{
+        height: 110vh; /* Adjust height for smaller screens */
+    }
+
+    .carousel img {
+        object-fit: cover; /* Adjust height for smaller screens */
+    }
+    .carousel-overlay .highlight {
+        font-size: 4rem; /* Adjust for smaller screens */
+    }
+
+    .content {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .content1 {
+        width: 100%;
+        text-align: left;
+        border-right: none;
+    }
+
+    .content2 {
+        width: 100%;
+        padding-left: 0; /* Remove padding-left on smaller screens */
+    }
+
+    .content3 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-section, .carousel img {
+        margin-top: 0px;
+        height: 100vh; /* Further adjust height for mobile */
+    }
+    .carousel-overlay .highlight {
+        font-size: 3rem; /* Adjust for mobile */
+    }
+    .content {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .content1 {
+        font-size: 2rem;
+    }
+
+    .content2 {
+        font-size: 1.2rem;
+        line-height: 2rem;
+        margin: 0;
+    }
+
+    .description {
+        font-size: 0.9rem;
+        margin: 0;
     }
 }
