@@ -6,13 +6,13 @@ import "./Inicio.css";
 import SocialButtons from '../components/SocialButtons';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import laproImg from '../assets/Inicio/LaproI.png';
-import redivoImg from '../assets/Inicio/Redivo.png';
-import garinoImg from '../assets/Inicio/Garino.png';
-import deliaImg from '../assets/Inicio/Delia.png';
-import scalaImg from '../assets/Inicio/scala.png';
-import ramellaImg from '../assets/Inicio/ramella.png';
-import lucasImg from '../assets/Inicio/lucas.png';
+import laproImg from '../assets/Inicio/LaproI.avif';
+import redivoImg from '../assets/Inicio/Redivo.avif';
+import garinoImg from '../assets/Inicio/Garino.avif';
+import deliaImg from '../assets/Inicio/Delia.avif';
+import scalaImg from '../assets/Inicio/scala.avif';
+import ramellaImg from '../assets/Inicio/ramella.avif';
+import lucasImg from '../assets/Inicio/lucas.avif';
 
 // Importar los componentes de la librería
 import { InstagramEmbed, XEmbed } from 'react-social-media-embed';
