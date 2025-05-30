@@ -1,4 +1,3 @@
-// src/pages/AddEditPerson.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -12,18 +11,13 @@ const AddEditPerson = () => {
     nombre: '',
     apellido: '',
     dni: '',
-    fechaNacimiento: '',
+    fechaNacimiento: '', // Cambiado de 'edad' a 'fechaNacimiento'
     nacionalidad: '',
     categoria: '',
     equipo: '',
     posicion: '',
     inst: '',
     googleDriveLink: '',
-    // Ya no gestionamos los campos de redes sociales aquí directamente
-    // facebook: '',
-    // twitter: '',
-    // youtube: '',
-    // tiktok: '',
   });
   const [error, setError] = useState('');
 
@@ -33,7 +27,7 @@ const AddEditPerson = () => {
     const fetchPersona = async () => {
       setError('');
       try {
-        const url = tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores/${id}` : `${API_BASE_URL}/api/entrenadores/${id}`;
+        const url = tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores/${id}` :`${API_BASE_URL}/api/entrenadores/${id}`;
         const response = await fetch(url, {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -43,11 +37,7 @@ const AddEditPerson = () => {
           throw new Error(`Error al cargar ${tipo}`);
         }
         const data = await response.json();
-        setFormData({
-            ...formData, // Mantén los valores iniciales para los nuevos campos si no vienen de la API
-            ...data,
-            fechaNacimiento: data.fechaNacimiento ? data.fechaNacimiento.split('T')[0] : ''
-        });
+        setFormData(data);
       } catch (err) {
         setError(err.message);
       }
@@ -60,18 +50,13 @@ const AddEditPerson = () => {
         nombre: '',
         apellido: '',
         dni: '',
-        fechaNacimiento: '',
+        fechaNacimiento: '', // Inicializado como string vacía
         nacionalidad: '',
         categoria: '',
         equipo: '',
         posicion: '',
         inst: '',
         googleDriveLink: '',
-        // Ya no gestionamos los campos de redes sociales aquí directamente
-        // facebook: '',
-        // twitter: '',
-        // youtube: '',
-        // tiktok: '',
       });
     }
   }, [tipo, id, token, API_BASE_URL]);
@@ -84,10 +69,12 @@ const AddEditPerson = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    console.log('Token antes de la petición:', token);
+    console.log('Estado isAuthenticated:', isAuthenticated);
     try {
       const url = id ?
         (tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores/${id}` : `${API_BASE_URL}/api/entrenadores/${id}`) :
-        (tipo === 'jugador' ? `${API_BASE_URL}/api/jugadores` : `${API_BASE_URL}/api/entrenadores`);
+        (tipo === 'jugador' ?  `${API_BASE_URL}/api/jugadores`: `${API_BASE_URL}/api/entrenadores`);
       const method = id ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -128,16 +115,16 @@ const AddEditPerson = () => {
           <input type="number" id="dni" name="dni" className="form-control" value={formData.dni} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
-          <input type="date" id="fechaNacimiento" name="fechaNacimiento" className="form-control" value={formData.fechaNacimiento} onChange={handleChange} />
+          <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label> {/* Etiqueta actualizada */}
+          <input type="date" id="fechaNacimiento" name="fechaNacimiento" className="form-control" value={formData.fechaNacimiento} onChange={handleChange} /> {/* Tipo actualizado */}
         </div>
         <div className="form-group">
           <label htmlFor="nacionalidad">Nacionalidad:</label>
-          <input type="text" id="nacionalidad" name="nacionalidad" className="form-control" value={formData.nacionalidad} onChange={handleChange} />
+          <input type="text" id="nacionalidad" name="nacionalidad" className="form-control" value={formData.nacionalidad} onChange={handleChange}  />
         </div>
         <div className="form-group">
           <label htmlFor="categoria">Categoría:</label>
-          <input type="text" id="categoria" name="categoria" className="form-control" value={formData.categoria} onChange={handleChange} />
+          <input type="text" id="categoria" name="categoria" className="form-control" value={formData.categoria} onChange={handleChange}  />
         </div>
         <div className="form-group">
           <label htmlFor="equipo">Equipo:</label>
@@ -162,27 +149,25 @@ const AddEditPerson = () => {
             </div>
             <div className="form-group">
               <label htmlFor="googleDriveLink">Google Drive Link:</label>
-              <input type="text" id="googleDriveLink" name="googleDriveLink" className="form-control" value={formData.googleDriveLink} onChange={handleChange} />
+              <input type="text" id="googleDriveLink" name="googleDriveLink" className="form-control" value={formData.googleDriveLink} onChange={handleChange}/>
             </div>
           </>
         )}
         {tipo === 'entrenador' && (
           <>
-            <div className="form-group">
-              <label htmlFor="inst">Instagram:</label>
-              <input type="text" id="inst" name="inst" className="form-control" value={formData.inst} onChange={handleChange} />
-            </div>
-            <div className="form-group">
+          <div className="form-group">
+            <label htmlFor="inst">Instagram:</label>
+            <input type="text" id="inst" name="inst" className="form-control" value={formData.inst} onChange={handleChange} />
+          </div>
+          <div className="form-group">
               <label htmlFor="googleDriveLink">Google Drive Link:</label>
-              <input type="text" id="googleDriveLink" name="googleDriveLink" className="form-control" value={formData.googleDriveLink} onChange={handleChange} />
+              <input type="text" id="googleDriveLink" name="googleDriveLink" className="form-control" value={formData.googleDriveLink} onChange={handleChange}/>
             </div>
           </>
         )}
-
         <div className="form-actions">
           <button type="submit" className="submit-button">{id ? 'Guardar Cambios' : 'Agregar'}</button>
           <button type="button" className="cancel-button" onClick={() => navigate('/admin')}>Cancelar</button>
-          {/* BOTÓN DE REDES SOCIALES REMOVIDO DE AQUÍ */}
         </div>
       </form>
     </div>
