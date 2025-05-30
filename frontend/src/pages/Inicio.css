@@ -23,12 +23,12 @@
     background: transparent;
 }
 
-.carousel .slide > div{
+.carousel .slide > div {
     opacity: 0;
 }
-.carousel .slide.selected > div{
+.carousel .slide.selected > div {
     opacity: 1;
-    transition: opacity 2s ease-in-out ;
+    transition: opacity 2s ease-in-out;
 }
 
 .carousel img {
@@ -145,13 +145,13 @@
 /* Social Posts Section */
 .social-posts-section {
     width: 100%;
-    max-width: 1200px; /* Adjusted max-width for better fit with common screen sizes */
+    max-width: 1400px; /* Increased max-width to allow more columns on large screens */
     margin: 100px auto;
     padding: 40px 20px;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    background-color: #f9f9f9; /* Added a light background for separation */
+    background-color: #f9f9f9;
     color: #333;
     display: flex;
     flex-direction: column;
@@ -166,10 +166,13 @@
 }
 
 .social-posts-grid {
-    display: grid; /* Changed to CSS Grid */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Responsive columns */
+    display: grid;
+    /* Explicitly define columns for better control with embeds */
+    /* Adjust these values to control how many columns you want */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger min-width for embeds */
     gap: 30px; /* Space between grid items */
-    justify-items: center; /* Center items within their grid cells */
+    justify-content: center; /* Center the grid within the section if it doesn't fill max-width */
+    align-items: start; /* Align items to the start of their grid cell vertically */
     width: 100%; /* Ensure the grid takes full available width */
 }
 
@@ -181,20 +184,28 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align content to the top within the item */
+    align-items: center; /* Center the embed horizontally within the item */
     width: 100%; /* Take full width of its grid cell */
-    max-width: 380px; /* Limit individual item width for better presentation on large screens */
-    height: auto; /* Height adapts to content */
+    /* Remove fixed height if not absolutely necessary, let content dictate height */
+    /* height: auto; */ 
     padding: 15px;
     box-sizing: border-box;
-    align-items: center; 
-    text-align: center;
+
+    /* Important: Ensure the embed itself fits */
+    /* Targeting the embed directly, if possible, or ensure its parent can handle it */
+    & > div { /* This targets the direct child of social-post-item, which would be InstagramEmbed/XEmbed */
+        width: 100%; /* Allow embed to take full width of its container */
+        height: auto; /* Let embed determine its own height */
+        max-width: 100%; /* Ensure it doesn't overflow */
+        box-sizing: border-box; /* Include padding in its width if any */
+    }
 }
 
 /* Media Queries */
 @media (max-width: 1200px) {
     .social-posts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust min-width for columns */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Adjust min-width for columns */
         gap: 25px;
     }
 }
@@ -203,7 +214,7 @@
     .inicio {
         padding: 40px 0;
     }
-    .carousel-section{
+    .carousel-section {
         height: 110vh;
     }
 
@@ -239,21 +250,19 @@
         padding: 30px 0px;
         margin: 70px auto;
     }
-    .social-posts-section h2 {
-        font-size: 2.8rem;
-        margin-bottom: 40px;
-    }
     .social-posts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjusted for two columns on medium screens */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Aim for 2 columns */
         gap: 20px;
     }
     .social-post-item {
         padding: 10px;
+        max-width: none; /* Remove max-width on smaller screens */
     }
 }
 
 @media (max-width: 480px) {
-    .carousel-section, .carousel img {
+    .carousel-section,
+    .carousel img {
         margin-top: 0px;
         height: 100vh;
     }
@@ -295,5 +304,8 @@
     .social-posts-grid {
         grid-template-columns: 1fr; /* Single column on small screens */
         gap: 15px;
+    }
+    .social-post-item {
+        padding: 10px;
     }
 }
