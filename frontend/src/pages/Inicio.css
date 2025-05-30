@@ -165,11 +165,9 @@
 }
 
 .social-posts-grid {
-    display: grid;
-    /* This will create 4 columns of equal width when there's enough space.
-       The 'minmax' ensures that columns don't get smaller than 280px,
-       and if there isn't space for 4, it will wrap to fewer columns. */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 4fr));
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 30px; /* Space between cards */
     width: 100%; /* Ensure the grid takes full width of its parent (.social-posts-section) */
     justify-content: center; /* Center the grid items if they don't fill the row */
