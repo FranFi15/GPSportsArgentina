@@ -39,7 +39,8 @@
 }
 
 .carousel-overlay .highlight {
-    font-family: "Bebas Neue", sans-serif; /* Use a bold, modern font for emphasis */
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
     font-size: 15rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
@@ -104,28 +105,6 @@
         padding: 0 10px;
     }
 }
-/* --- Social Posts Section (New/Modified Styles for Catalog Layout) --- */
-.social-posts-section {
-    padding: 40px 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-    margin-top: 40px;
-}
-
-.social-posts-section p {
-    color: #555;
-    font-size: 1.1em;
-}
-
-.social-posts-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    justify-content: center; /* Center items in the grid */
-    gap: 20px; /* Space between items */
-}
-
-
 
 
 /* Media queries for smaller screens if necessary, though grid handles much */
