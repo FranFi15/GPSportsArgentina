@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     /* Ajusta la posición y el ancho si este formulario no está dentro de otro contenedor */
     /* Por ejemplo, si se usa como un componente de página completo */
     width: 100%; /* Por defecto al 100% del padre */

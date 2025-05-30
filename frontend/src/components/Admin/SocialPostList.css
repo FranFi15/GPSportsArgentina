@@ -7,9 +7,6 @@
     align-items: center;
     /* justify-content: center; /* Descomenta si quieres centrar verticalmente, pero puede interferir con el scroll */
     padding: 30px;
-    background-image: url("../../assets/fondo2.png"); /* Asegúrate de que esta ruta sea correcta */
-    background-size: cover;
-    background-position: center; /* Asegura que la imagen de fondo se vea bien */
     border-radius: 8px; /* Ajusta según el diseño de tu panel de admin */
     text-transform: uppercase;
     font-family: "Roboto", sans-serif;

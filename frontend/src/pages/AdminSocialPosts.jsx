@@ -133,19 +133,14 @@ const AdminSocialPosts = () => {
 
     return (
         <div className="admin-social-posts-container">
-            <h1 className="admin-social-posts-title">Gestión de Publicaciones de Redes Sociales</h1>
-
             {error && <p className="error-message">{error}</p>}
-
             <div className="social-form-section">
-                <h2 className="section-title">{editingPost ? 'Editar Publicación Existente' : 'Añadir Nueva Publicación'}</h2>
                 <SocialPostForm
                     initialData={editingPost}
                     onSubmit={editingPost ? handleUpdatePost : handleAddPost}
                     onCancel={cancelEditing}
                 />
             </div>
-
             <div className="social-list-section">
                 <h2 className="section-title">Publicaciones Actuales</h2>
                 {loading ? (

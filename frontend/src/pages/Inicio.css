@@ -155,6 +155,9 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     text-align: center; /* Centra el título y mensajes */
     color: #333; /* Color de texto oscuro para buen contraste */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
 }
 
 

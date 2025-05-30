@@ -70,7 +70,7 @@ const SocialPostForm = ({ initialData, onSubmit, onCancel }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="title">Título (Opcional):</label>
+                <label htmlFor="title">Título:</label>
                 <input
                     type="text"
                     id="title"
@@ -80,7 +80,7 @@ const SocialPostForm = ({ initialData, onSubmit, onCancel }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="description">Descripción (Opcional):</label>
+                <label htmlFor="description">Codigo:</label>
                 <textarea
                     id="description"
                     value={description}
