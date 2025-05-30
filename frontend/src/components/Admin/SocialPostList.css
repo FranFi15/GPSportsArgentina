@@ -1,0 +1,91 @@
+/* src/components/Admin/SocialPostList.css */
+.social-post-list-wrapper {
+    overflow-x: auto; /* Permite scroll horizontal en tablas grandes */
+}
+
+.social-posts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    min-width: 700px; /* Asegura que la tabla no sea demasiado estrecha */
+}
+
+.social-posts-table th,
+.social-posts-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.social-posts-table th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.social-posts-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.social-posts-table tbody tr:hover {
+    background-color: #e2f2ff; /* Un azul claro al pasar el ratón */
+    cursor: pointer;
+}
+
+.social-posts-table a {
+    color: #007bff;
+    text-decoration: none;
+    word-break: break-all; /* Rompe URLs largas */
+}
+
+.social-posts-table a:hover {
+    text-decoration: underline;
+}
+
+.actions-cell {
+    white-space: nowrap; /* Evita que los botones se envuelvan */
+    text-align: center;
+}
+
+.actions-cell button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions-cell button.edit-btn {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+.actions-cell button.edit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.actions-cell button.delete-btn {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}
+
+.actions-cell button.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.no-posts-message {
+    text-align: center;
+    color: #777;
+    font-size: 1.1em;
+    padding: 20px;
+    background-color: #fefefe;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+}
