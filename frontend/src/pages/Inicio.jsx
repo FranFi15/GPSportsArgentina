@@ -35,6 +35,8 @@ const Inicio = () => {
     const [loadingSocialPosts, setLoadingSocialPosts] = useState(true);
     const [errorSocialPosts, setErrorSocialPosts] = useState(null);
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
     const carouselImages = [
         { src: laproImg, alt: 'Laprovíttola' },
@@ -100,7 +102,7 @@ const Inicio = () => {
         const fetchSocialPosts = async () => {
             try {
                 // **Asegúrate de que esta URL sea la correcta para tu backend**
-                const response = await fetch('http://localhost:3000/api/socialposts');
+                const response = await fetch(`${API_BASE_URL}/api/socialposts`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
