@@ -192,9 +192,6 @@ const Inicio = () => {
                     {socialPosts.map(post => (
                         <div key={post._id} className="social-post-item">
                             {renderSocialPost(post)}
-                            {/* Puedes añadir un título o descripción si los guardas en tu DB y quieres mostrarlos */}
-                            {post.title && <h3 style={{marginTop: '10px'}}>{post.title}</h3>}
-                            {post.description && <p>{post.description}</p>}
                         </div>
                     ))}
                 </div>
