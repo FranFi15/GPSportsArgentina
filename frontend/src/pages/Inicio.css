@@ -1,41 +1,25 @@
-/* src/components/Inicio/Inicio.css */
-
+/* General styles for Inicio.jsx if not already present */
 .inicio {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* Adjust padding, margin as needed for overall layout */
     padding: 0;
-    color: #ffffff;
+    margin: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
-/* Styles for Carousel Section */
+/* Carousel Section */
 .carousel-section {
-    margin-top: 60px;
-    width: 100%;
-    height: 100vh;
     position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
 }
 
-.carousel .slide {
-    background: transparent;
-}
-
-.carousel .slide > div {
-    opacity: 0;
-}
-.carousel .slide.selected > div {
-    opacity: 1;
-    transition: opacity 2s ease-in-out;
-}
-
-.carousel img {
+.carousel-section img {
     width: 100%;
     height: 100vh;
-    object-fit: cover;
-    object-position: top;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    display: block;
 }
 
 .carousel-overlay {
@@ -44,43 +28,32 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.2);
+    align-items: center;
     color: white;
     text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-    z-index: 10;
+    z-index: 10; /* Ensure overlay is above carousel images */
 }
 
 .carousel-overlay .highlight {
-    font-family: "Bebas Neue", sans-serif;
-    text-shadow: #000000 2px 2px 8px;
-    font-weight: 900;
-    font-size: 12rem;
-    text-shadow: #000000 2px 2px 8px;
+    font-size: 3em;
+    font-weight: bold;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Styles for Description Section */
+/* Description Section */
 .description {
-    width: 90%;
-    margin: 200px 0 100px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    padding: 40px 20px;
     text-align: center;
+    max-width: 1000px;
+    margin: 40px auto;
     opacity: 0;
-    font-weight: 200;
-    font-size: 1.1rem;
-    line-height: 2rem;
-    text-align: justify;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .description.fade-in {
@@ -90,15 +63,11 @@
 
 .content {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0 20px;
-    margin: 20px;
+    flex-direction: column; /* Stacks paragraphs vertically on small screens */
+    gap: 20px;
     opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(-50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .content.slide-in {
@@ -106,206 +75,109 @@
     transform: translateX(0);
 }
 
-.content1 {
-    width: 40%;
-    font-size: 3rem;
-    font-weight: 900;
-    text-align: start;
-    text-transform: uppercase;
-    line-height: 3rem;
+.content1, .content2 {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
     opacity: 0;
-    margin-top: 0;
-    transform: translateY(-50px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .content1.fade-in-left {
     opacity: 1;
-    transform: translateY(0);
-}
-
-.content2 {
-    width: 50%;
-    padding-left: 80px;
-    font-weight: 200;
-    font-size: 1.1rem;
-    margin: 0px 0 100px 0;
-    text-align: start;
-    line-height: 2rem;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(0);
 }
 
 .content2.fade-in-right {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
 }
 
-/* Social Posts Section */
+@media (min-width: 768px) {
+    .content {
+        flex-direction: row; /* Arranges paragraphs side-by-side on larger screens */
+        text-align: left;
+    }
+    .content1, .content2 {
+        flex: 1; /* Each paragraph takes equal space */
+        padding: 0 10px;
+    }
+}
+
+/* --- Social Posts Section (New/Modified Styles for Catalog Layout) --- */
 .social-posts-section {
-    width: 100%;
-    max-width: 1400px; /* Increased max-width to allow more columns on large screens */
-    margin: 100px auto;
     padding: 40px 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
     background-color: #f9f9f9;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
+    text-align: center;
+    margin-top: 40px;
 }
 
 .social-posts-section p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.1em;
 }
 
 .social-posts-grid {
-    display: grid;
-    /* Explicitly define columns for better control with embeds */
-    /* Adjust these values to control how many columns you want */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger min-width for embeds */
-    gap: 30px; /* Space between grid items */
-    justify-content: center; /* Center the grid within the section if it doesn't fill max-width */
-    align-items: start; /* Align items to the start of their grid cell vertically */
-    width: 100%; /* Ensure the grid takes full available width */
+    display: grid; /* Use CSS Grid for a catalog layout */
+    /* Adjust column sizes for responsiveness:
+       - minmax(300px, 1fr) ensures each column is at least 300px wide,
+         and takes 1 fractional unit of available space.
+       - auto-fill creates as many columns as can fit.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px; /* Space between grid items */
+    max-width: 1200px; /* Limit overall grid width */
+    margin: 30px auto; /* Center the grid */
+    padding: 10px;
 }
 
 .social-post-item {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align content to the top within the item */
-    align-items: center; /* Center the embed horizontally within the item */
-    width: 100%; /* Take full width of its grid cell */
-    /* Remove fixed height if not absolutely necessary, let content dictate height */
-    /* height: auto; */ 
+    border-radius: 8px;
     padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox to center embed within the item */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    /* min-height: 400px; */ /* Optional: gives a consistent height to all cards. Adjust as needed. */
+    overflow: hidden; /* Important to hide scrollbars if embed overflows */
+}
+
+/* Styles to ensure embeds from react-social-media-embed are responsive */
+/* These target the internal structure created by react-social-media-embed */
+.social-post-item ._aa4c /* Instagram blockquote class */ {
+    max-width: 100% !important; /* Ensure it doesn't exceed parent width */
+    width: 100% !important; /* Force width if needed */
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
+    margin: 0 !important; /* Remove default margins from Instagram embed */
+    padding: 0 !important; /* Remove default padding */
+}
+
+/* For Twitter/X Embeds */
+.social-post-item .twitter-tweet {
+    max-width: 100% !important;
+    width: 100% !important;
     box-sizing: border-box;
-
-    /* Important: Ensure the embed itself fits */
-    /* Targeting the embed directly, if possible, or ensure its parent can handle it */
-    & > div { /* This targets the direct child of social-post-item, which would be InstagramEmbed/XEmbed */
-        width: 100%; /* Allow embed to take full width of its container */
-        height: auto; /* Let embed determine its own height */
-        max-width: 100%; /* Ensure it doesn't overflow */
-        box-sizing: border-box; /* Include padding in its width if any */
-    }
+    margin: 0 auto !important; /* Center the tweet */
 }
 
-/* Media Queries */
-@media (max-width: 1200px) {
-    .social-posts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Adjust min-width for columns */
-        gap: 25px;
-    }
+/* Target the iframe directly within the react-social-media-embed components
+   Note: The internal structure of these components can vary, so direct iframe
+   targeting might be less reliable than relying on the component's own
+   responsive properties. However, these are good fallbacks.
+*/
+.social-post-item iframe {
+    max-width: 100% !important;
+    height: auto !important; /* Allow height to adjust proportionally */
+    display: block; /* Removes extra space below inline elements */
+    margin: 0 auto; /* Center iframes if they don't fill 100% width */
 }
 
+/* Media queries for smaller screens if necessary, though grid handles much */
 @media (max-width: 768px) {
-    .inicio {
-        padding: 40px 0;
-    }
-    .carousel-section {
-        height: 110vh;
-    }
-
-    .carousel img {
-        object-fit: cover;
-    }
-    .carousel-overlay .highlight {
-        font-size: 4rem;
-    }
-
-    .content {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
-    .content1 {
-        width: 100%;
-        text-align: left;
-        border-right: none;
-    }
-
-    .content2 {
-        width: 100%;
-        padding-left: 0;
-    }
-
-    /* Media queries for social posts section */
-    .social-posts-section {
-        width: 95%;
-        padding: 30px 0px;
-        margin: 70px auto;
-    }
     .social-posts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Aim for 2 columns */
-        gap: 20px;
-    }
-    .social-post-item {
-        padding: 10px;
-        max-width: none; /* Remove max-width on smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .carousel-section,
-    .carousel img {
-        margin-top: 0px;
-        height: 100vh;
-    }
-    .carousel-overlay .highlight {
-        font-size: 3rem;
-    }
-    .content {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-    }
-    .content1 {
-        font-size: 2rem;
-    }
-
-    .content2 {
-        font-size: 1.2rem;
-        line-height: 2rem;
-        margin: 0;
-    }
-
-    .description {
-        font-size: 0.9rem;
-        margin: 0;
-    }
-
-    /* Media queries for social posts section */
-    .social-posts-section {
-        width: 100%;
-        padding: 20px 10px;
-        margin: 50px auto;
-        border-radius: 0;
-    }
-    .social-posts-section h2 {
-        font-size: 2.2rem;
-        margin-bottom: 30px;
-    }
-    .social-posts-grid {
-        grid-template-columns: 1fr; /* Single column on small screens */
-        gap: 15px;
-    }
-    .social-post-item {
-        padding: 10px;
+        grid-template-columns: 1fr; /* Stack items on very small screens if desired */
     }
 }
