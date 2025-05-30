@@ -142,11 +142,7 @@
     transform: translateY(0);
 }
 
----
 
-## Social Posts Section Styles (Catalog)
-
-```css
 .social-posts-section {
     width: 100%; /* Make it full width to maximize grid space */
     max-width: 1400px; /* Adjust max-width for more columns if needed */
@@ -173,7 +169,7 @@
     /* This will create 4 columns of equal width when there's enough space.
        The 'minmax' ensures that columns don't get smaller than 280px,
        and if there isn't space for 4, it will wrap to fewer columns. */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 4fr));
     gap: 30px; /* Space between cards */
     width: 100%; /* Ensure the grid takes full width of its parent (.social-posts-section) */
     justify-content: center; /* Center the grid items if they don't fill the row */
@@ -205,16 +201,8 @@
     margin: 0 auto !important; /* Center the embed within its container */
 }
 
-/* Optional: If you want to limit the height of embeds but still show them,
-   you might need more complex overflow handling or truncation for very long embeds.
-   For now, we let height be auto. */
 
 
----
-
-## Media Queries
-
-```css
 @media (max-width: 1200px) {
     /* Adjust grid for slightly smaller screens, perhaps 3 columns */
     .social-posts-grid {
