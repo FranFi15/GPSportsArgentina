@@ -41,7 +41,7 @@
 .carousel-overlay .highlight {
     font-family: "Roboto", sans-serif;
     font-weight: 900;
-    font-size: 15rem;
+    font-size: 12rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
@@ -93,6 +93,16 @@
 .content2.fade-in-right {
     opacity: 1;
     transform: translateX(0);
+}
+.social-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between grid items */
+    padding: 20px;
+    margin-top: 40px;
+}
+.social-post-item{
+    width: 32%;
 }
 
 @media (min-width: 768px) {
