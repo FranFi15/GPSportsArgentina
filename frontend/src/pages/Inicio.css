@@ -169,7 +169,6 @@
     flex-direction: row;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 30px; /* Space between cards */
-    width: 100%; /* Ensure the grid takes full width of its parent (.social-posts-section) */
     justify-content: center; /* Center the grid items if they don't fill the row */
 }
 
