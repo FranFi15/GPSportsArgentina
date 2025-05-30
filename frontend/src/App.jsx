@@ -15,7 +15,6 @@ import AddEditPerson from './components/Admin/AddEditPerson';
 import SelectPersonType from './components/Admin/SelectPersonType'; // Importa el nuevo componente
 import { LanguageProvider } from './context/LanguageContext';
 import  AuthProvider, { useAuth } from './context/AuthContext';
-import AdminSocialPosts from './pages/AdminSocialPosts';
 import './App.css';
 import Footer from './components/Footer';
 
@@ -45,7 +44,6 @@ function App() {
             <Route path="/admin/agregar" element={<PrivateRoute><SelectPersonType /></PrivateRoute>} /> {/* Nueva ruta para la selección de tipo */}
             <Route path="/admin/agregar/:tipo" element={<PrivateRoute><AddEditPerson /></PrivateRoute>} /> {/* Ruta para agregar jugador o entrenador */}
             <Route path="/admin/:tipo/editar/:id" element={<PrivateRoute><AddEditPerson /></PrivateRoute>} />
-            <Route path="/admin/socialposts" element={<PrivateRoute><AdminSocialPosts /></PrivateRoute>} />
           </Routes>
           <Footer/>
         </AuthProvider>
