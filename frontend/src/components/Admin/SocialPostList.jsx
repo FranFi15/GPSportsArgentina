@@ -19,10 +19,15 @@ const SocialPostList = () => {
         setError(null);
         try {
             const response = await fetch(`${API_BASE_URL}/api/socialposts`);
+            
+            // Fetch API no lanza error para respuestas HTTP como 404 o 500.
+            // Es crucial verificar response.ok para manejar errores del servidor.
             if (!response.ok) {
-                // Lanza un error si la respuesta no es OK (ej. 404, 500)
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                // Intentar parsear el cuerpo de la respuesta para obtener un mensaje más detallado
+                const errorData = await response.json().catch(() => ({ message: 'Error desconocido del servidor' }));
+                throw new Error(`HTTP error! Status: ${response.status}: ${errorData.message}`);
             }
+
             const data = await response.json();
             setSocialPosts(data);
         } catch (err) {
@@ -54,6 +59,30 @@ const SocialPostList = () => {
         }
     }, [socialPosts]); // Dependencia en socialPosts para re-evaluar si se necesita el script
 
+    // NUEVO useEffect para cargar el script de incrustación de Twitter (X)
+    useEffect(() => {
+        // Verifica si hay posts de Twitter/X con embedHtml para cargar el script
+        if (socialPosts.some(post => (post.platform === 'twitter' || post.platform === 'x') && post.embedHtml)) {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = "https://platform.twitter.com/widgets.js"; // URL del script de widgets de X
+            script.charset = "utf-8";
+            script.id = "twitter-widgets-script"; // Añadir un ID para evitar duplicados
+
+            // Solo añade el script si no existe ya en el DOM
+            if (!document.getElementById('twitter-widgets-script')) {
+                document.body.appendChild(script);
+            } else {
+                // Si el script ya existe, asegúrate de que los embeds se vuelvan a renderizar
+                // Esto es importante si los posts cambian sin que la página se recargue
+                if (window.twttr && window.twttr.widgets && typeof window.twttr.widgets.load === 'function') {
+                    window.twttr.widgets.load();
+                }
+            }
+        }
+    }, [socialPosts]);
+
+
     // Maneja la edición de una publicación
     const handleEdit = (post) => {
         setSelectedPost(post);
@@ -66,10 +95,16 @@ const SocialPostList = () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/api/socialposts/${id}`, {
                     method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Si tu API requiere autenticación (ej. token JWT), agrégalo aquí:
+                        // 'Authorization': `Bearer ${tuTokenDeAutenticacion}`
+                    },
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    const errorData = await response.json().catch(() => ({ message: 'Error desconocido al eliminar' }));
+                    throw new Error(`HTTP error! Status: ${response.status}: ${errorData.message}`);
                 }
 
                 // No es necesario parsear JSON para un DELETE exitoso si no hay cuerpo de respuesta
@@ -96,14 +131,14 @@ const SocialPostList = () => {
                 <p className="no-posts-message">No hay publicaciones sociales para mostrar aún.</p>
             )}
 
-            <div className="social-posts-grid">
+            <div className="social-posts-grid"> {/* Este div ahora funciona como un contenedor flex column */}
                 {socialPosts.map(post => (
-                    <div key={post._id} className="social-post-card">
+                    <div key={post._id} className="social-post-card"> {/* Cada post es una "tarjeta" en la lista */}
+                        {/* Información principal del post */}
                         <h3>{post.title || `Publicación de ${post.platform}`}</h3>
                         <p><span className="platform">Plataforma:</span> {post.platform}</p>
-                        {post.description && <p>{post.description}</p>}
                         
-                        {/* Asegúrate de que post.url exista si vas a mostrar el enlace */}
+                        {/* Enlace a la publicación original */}
                         {post.url && (
                             <a href={post.url} target="_blank" rel="noopener noreferrer" className="social-post-url">
                                 Ver publicación original
@@ -112,13 +147,21 @@ const SocialPostList = () => {
 
                         {/* Renderizado condicional del embed HTML si es Instagram */}
                         {post.platform === 'instagram' && post.embedHtml && (
-                            <div className="instagram-embed-container">
-                                {/* dangerouslySetInnerHTML es necesario para renderizar HTML crudo */}
+                            <div className="embed-container"> {/* Usa la clase genérica para embeds */}
+                                {/* dangerouslySetInnerHTML es necesario para renderizar HTML crudo del embed */}
                                 <div dangerouslySetInnerHTML={{ __html: post.embedHtml }} />
                             </div>
                         )}
-                        {/* Si tienes embeds HTML para otras plataformas (ej. Twitter/X) también se renderizarían aquí */}
 
+                        {/* Renderizado condicional del embed HTML si es Twitter/X */}
+                        {(post.platform === 'twitter' || post.platform === 'x') && post.embedHtml && (
+                            <div className="embed-container"> {/* Usa la clase genérica para embeds */}
+                                <div dangerouslySetInnerHTML={{ __html: post.embedHtml }} />
+                            </div>
+                        )}
+                        {/* Puedes añadir más lógica aquí para otros tipos de embeds si los manejas con embedHtml */}
+
+                        {/* Botones de acción */}
                         <div className="card-actions">
                             <button onClick={() => handleEdit(post)} className="edit-btn">
                                 Editar
@@ -131,6 +174,7 @@ const SocialPostList = () => {
                 ))}
             </div>
 
+            {/* Formulario de añadir/editar publicación */}
             {showForm && (
                 <SocialPostForm
                     onClose={() => {
