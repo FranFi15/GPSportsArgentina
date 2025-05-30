@@ -184,18 +184,8 @@
     height: auto; /* Height adapts to content */
     padding: 15px;
     box-sizing: border-box;
-    /* Added to help align embeds and content consistently */
     align-items: center; 
     text-align: center;
-}
-
-/* Ensure the embed content itself also respects max-width within the card */
-.social-post-item ._aa4c, /* Instagram embed internal class */
-.social-post-item blockquote.twitter-tweet, /* Twitter embed blockquote */
-.social-post-item .twitter-tweet-rendered { /* Twitter embed rendered container */
-    max-width: 100% !important; /* CRITICAL: Override inline styles if present */
-    width: 100% !important; /* Ensure they fill the card width */
-    margin: 0 auto !important; /* Center the embed within its container */
 }
 
 
