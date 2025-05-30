@@ -4,19 +4,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0; /* Remove top padding if carousel is full height */
+    padding: 0;
     color: #ffffff;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
-    min-height: 100vh; /* Ensure it takes at least full viewport height */
+    min-height: 100vh;
 }
 
 /* Styles for Carousel Section */
 .carousel-section {
-    margin-top: 60px; /* Ajusta según la altura de tu navbar si tienes una */
+    margin-top: 60px;
     width: 100%;
-    height: 100vh; /* Make carousel take full viewport height */
-    position: relative; /* CRITICAL: This is the reference for the absolute positioned overlay */
+    height: 100vh;
+    position: relative;
 }
 
 .carousel .slide {
@@ -24,45 +24,45 @@
 }
 
 .carousel .slide > div{
-    opacity: 0; /* Default hidden */
+    opacity: 0;
 }
 .carousel .slide.selected > div{
-    opacity: 1; /* Show the selected slide */
+    opacity: 1;
     transition: opacity 2s ease-in-out ;
 }
 
 .carousel img {
     width: 100%;
-    height: 100vh; /* Make images fill the carousel height */
-    object-fit: cover; /* Cover the area, cropping if necessary */
+    height: 100vh;
+    object-fit: cover;
     object-position: top;
 }
 
 .carousel-overlay {
-    position: absolute; /* This makes the overlay static relative to .carousel-section */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column; /* To stack #TeamGPSports and Social Buttons */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.2);
     color: white;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
-    z-index: 10; /* Ensure overlay is above carousel images */
+    z-index: 10;
 }
 
 .carousel-overlay .highlight {
     font-family: "Bebas Neue", sans-serif;
     text-shadow: #000000 2px 2px 8px;
     font-weight: 900;
-    font-size: 12rem; /* Adjust size as desired */
+    font-size: 12rem;
     text-shadow: #000000 2px 2px 8px;
-    margin-bottom: 20px; /* Space between text and social buttons */
+    margin-bottom: 20px;
 }
 
 /* Styles for Description Section */
@@ -80,7 +80,7 @@
     font-weight: 200;
     font-size: 1.1rem;
     line-height: 2rem;
-    text-align: justify; /* Consider 'left' or 'center' if 'justify' looks odd on some fonts */
+    text-align: justify;
 }
 
 .description.fade-in {
@@ -142,25 +142,25 @@
     transform: translateY(0);
 }
 
-/* --- */
-/* ESTILOS PARA LA SECCIÓN DE PUBLICACIONES SOCIALES (CATÁLOGO) */
-/* --- */
+---
 
+## Social Posts Section Styles (Catalog)
+
+```css
 .social-posts-section {
-    width: 90%; /* Ocupa el 90% del ancho del contenedor padre */
-    max-width: 1200px; /* Limita el ancho máximo para pantallas grandes */
-    margin: 100px auto; /* Espacio superior e inferior, y centrado horizontal */
-    padding: 40px 20px; /* Padding interno */
+    width: 100%; /* Make it full width to maximize grid space */
+    max-width: 1400px; /* Adjust max-width for more columns if needed */
+    margin: 100px auto;
+    padding: 40px 20px;
     border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    text-align: center; /* Centra el título y mensajes */
-    color: #333; /* Color de texto oscuro para buen contraste */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+    display: flex; /* Keep flex for overall section layout */
+    flex-direction: column; /* Stack title and grid */
+    align-items: center; /* Center content within the section */
+    box-sizing: border-box; /* Include padding in width */
 }
-
-
 
 .social-posts-section p {
     font-size: 1.1rem;
@@ -170,60 +170,72 @@
 
 .social-posts-grid {
     display: grid;
-    /* Grid responsivo: ajusta el número de columnas automáticamente */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 4fr));
-    gap: 30px; /* Espacio entre las tarjetas */
-    justify-content: center; /* Centra las tarjetas en el grid */
-    align-items: start; /* Alinea los elementos al inicio de su celda */
+    /* This will create 4 columns of equal width when there's enough space.
+       The 'minmax' ensures that columns don't get smaller than 280px,
+       and if there isn't space for 4, it will wrap to fewer columns. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Space between cards */
+    width: 100%; /* Ensure the grid takes full width of its parent (.social-posts-section) */
+    justify-content: center; /* Center the grid items if they don't fill the row */
 }
 
 .social-post-item {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra para efecto de tarjeta */
-    overflow: hidden; /* Asegura que el contenido incrustado no se desborde */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: auto; /* La altura se ajustará al contenido del embed */
-    padding: 15px; /* Espacio interno para que el embed no pegue al borde */
-    box-sizing: border-box; /* Incluye padding en el tamaño total */
+    height: auto; /* Height adapts to content */
+    padding: 15px;
+    box-sizing: border-box;
+    /* Added to help align embeds and content consistently */
+    align-items: center; 
+    text-align: center;
 }
 
-/* Estilos específicos para los embeds de Instagram y Twitter/X */
-/* Las librerías de embed a menudo generan sus propios iframes y divs internos.
-   Estos estilos intentan controlar el tamaño de esos elementos generados. */
-.social-post-item ._aa4c { /* Clase común en los embeds de Instagram */
-    max-width: 100% !important; /* Asegura que el embed no exceda el ancho de su contenedor */
-    margin: 0 auto !important; /* Centra el embed */
-    min-width: unset !important; /* Resetea posibles min-width */
+/* Ensure the embed content itself also respects max-width within the card */
+.social-post-item ._aa4c, /* Instagram embed internal class */
+.social-post-item blockquote.twitter-tweet, /* Twitter embed blockquote */
+.social-post-item .twitter-tweet-rendered { /* Twitter embed rendered container */
+    max-width: 100% !important; /* CRITICAL: Override inline styles if present */
+    width: 100% !important; /* Ensure they fill the card width */
+    margin: 0 auto !important; /* Center the embed within its container */
 }
 
-.social-post-item blockquote.twitter-tweet,
-.social-post-item .twitter-tweet-rendered {
-    width: 100% !important;
-    margin: 0 auto !important;
+/* Optional: If you want to limit the height of embeds but still show them,
+   you might need more complex overflow handling or truncation for very long embeds.
+   For now, we let height be auto. */
+
+
+---
+
+## Media Queries
+
+```css
+@media (max-width: 1200px) {
+    /* Adjust grid for slightly smaller screens, perhaps 3 columns */
+    .social-posts-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Still flexible, but minmax can be adjusted */
+        gap: 25px;
+    }
 }
-
-
-/* --- */
-/* MEDIA QUERIES */
-/* --- */
 
 @media (max-width: 768px) {
     .inicio {
-        padding: 40px 0; /* Add padding back if content starts after carousel */
+        padding: 40px 0;
     }
     .carousel-section{
-        height: 110vh; /* Adjust height for smaller screens */
+        height: 110vh;
     }
 
     .carousel img {
-        object-fit: cover; /* Adjust height for smaller screens */
+        object-fit: cover;
     }
     .carousel-overlay .highlight {
-        font-size: 4rem; /* Adjust for smaller screens */
+        font-size: 4rem;
     }
 
     .content {
@@ -242,16 +254,12 @@
 
     .content2 {
         width: 100%;
-        padding-left: 0; /* Remove padding-left on smaller screens */
+        padding-left: 0;
     }
 
-    .content3 { /* No veo .content3 en tu HTML, pero lo mantengo si lo usas en otro lado */
-        width: 100%;
-    }
-
-    /* Media queries para la sección de posts sociales */
+    /* Media queries for social posts section */
     .social-posts-section {
-        width: 95%; /* Más ancho en pantallas pequeñas */
+        width: 95%;
         padding: 30px 0px;
         margin: 70px auto;
     }
@@ -260,7 +268,8 @@
         margin-bottom: 40px;
     }
     .social-posts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(1fr)); /* Columnas más pequeñas */
+        /* On medium screens, target 2 columns */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
     }
     .social-post-item {
@@ -271,10 +280,10 @@
 @media (max-width: 480px) {
     .carousel-section, .carousel img {
         margin-top: 0px;
-        height: 100vh; /* Further adjust height for mobile */
+        height: 100vh;
     }
     .carousel-overlay .highlight {
-        font-size: 3rem; /* Adjust for mobile */
+        font-size: 3rem;
     }
     .content {
         flex-direction: column;
@@ -297,19 +306,20 @@
         margin: 0;
     }
 
-    /* Media queries para la sección de posts sociales */
+    /* Media queries for social posts section */
     .social-posts-section {
-        width: 100%; /* Ocupa todo el ancho en móviles */
+        width: 100%;
         padding: 20px 10px;
         margin: 50px auto;
-        border-radius: 0; /* Sin bordes redondeados en los extremos */
+        border-radius: 0;
     }
     .social-posts-section h2 {
         font-size: 2.2rem;
         margin-bottom: 30px;
     }
     .social-posts-grid {
-        grid-template-columns: 1fr; /* Una sola columna en móviles muy pequeños */
+        /* On small screens (mobile), target 1 column */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
 }
