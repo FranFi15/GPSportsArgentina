@@ -124,7 +124,7 @@
          and takes 1 fractional unit of available space.
        - auto-fill creates as many columns as can fit.
     */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 3fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px; /* Space between grid items */
     width:100%; /* Limit overall grid width */
     margin: 30px auto; /* Center the grid */
