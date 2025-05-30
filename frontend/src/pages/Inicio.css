@@ -1,4 +1,5 @@
-/* Ensure the main container accommodates all sections */
+/* src/components/Inicio/Inicio.css */
+
 .inicio {
     display: flex;
     flex-direction: column;
@@ -10,9 +11,9 @@
     min-height: 100vh; /* Ensure it takes at least full viewport height */
 }
 
-/* Styles for Carousel Section (new section) */
+/* Styles for Carousel Section */
 .carousel-section {
-    margin-top: 60px;
+    margin-top: 60px; /* Ajusta según la altura de tu navbar si tienes una */
     width: 100%;
     height: 100vh; /* Make carousel take full viewport height */
     position: relative; /* CRITICAL: This is the reference for the absolute positioned overlay */
@@ -64,7 +65,7 @@
     margin-bottom: 20px; /* Space between text and social buttons */
 }
 
-/* Keep all styles for .description, .content, etc. as they were */
+/* Styles for Description Section */
 .description {
     width: 90%;
     margin: 200px 0 100px 0;
@@ -79,7 +80,7 @@
     font-weight: 200;
     font-size: 1.1rem;
     line-height: 2rem;
-    text-align: justify;
+    text-align: justify; /* Consider 'left' or 'center' if 'justify' looks odd on some fonts */
 }
 
 .description.fade-in {
@@ -141,9 +142,80 @@
     transform: translateY(0);
 }
 
+/* --- */
+/* ESTILOS PARA LA SECCIÓN DE PUBLICACIONES SOCIALES (CATÁLOGO) */
+/* --- */
+
+.social-posts-section {
+    width: 90%; /* Ocupa el 90% del ancho del contenedor padre */
+    max-width: 1200px; /* Limita el ancho máximo para pantallas grandes */
+    margin: 100px auto; /* Espacio superior e inferior, y centrado horizontal */
+    padding: 40px 20px; /* Padding interno */
+    background-color: #f8f8f8; /* Un fondo claro para esta sección */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    text-align: center; /* Centra el título y mensajes */
+    color: #333; /* Color de texto oscuro para buen contraste */
+}
+
+.social-posts-section h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3.5rem; /* Título grande y prominente */
+    color: #cc6f04; /* Usa tu color naranja para el título */
+    margin-bottom: 50px; /* Espacio debajo del título */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.social-posts-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.social-posts-grid {
+    display: grid;
+    /* Grid responsivo: ajusta el número de columnas automáticamente */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px; /* Espacio entre las tarjetas */
+    justify-content: center; /* Centra las tarjetas en el grid */
+    align-items: start; /* Alinea los elementos al inicio de su celda */
+}
+
+.social-post-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra para efecto de tarjeta */
+    overflow: hidden; /* Asegura que el contenido incrustado no se desborde */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto; /* La altura se ajustará al contenido del embed */
+    padding: 15px; /* Espacio interno para que el embed no pegue al borde */
+    box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+/* Estilos específicos para los embeds de Instagram y Twitter/X */
+/* Las librerías de embed a menudo generan sus propios iframes y divs internos.
+   Estos estilos intentan controlar el tamaño de esos elementos generados. */
+.social-post-item ._aa4c { /* Clase común en los embeds de Instagram */
+    max-width: 100% !important; /* Asegura que el embed no exceda el ancho de su contenedor */
+    margin: 0 auto !important; /* Centra el embed */
+    min-width: unset !important; /* Resetea posibles min-width */
+}
+
+.social-post-item blockquote.twitter-tweet,
+.social-post-item .twitter-tweet-rendered {
+    width: 100% !important;
+    margin: 0 auto !important;
+}
 
 
-/* Media Queries (Adjusted for carousel height and existing sections) */
+/* --- */
+/* MEDIA QUERIES */
+/* --- */
+
 @media (max-width: 768px) {
     .inicio {
         padding: 40px 0; /* Add padding back if content starts after carousel */
@@ -178,8 +250,26 @@
         padding-left: 0; /* Remove padding-left on smaller screens */
     }
 
-    .content3 {
+    .content3 { /* No veo .content3 en tu HTML, pero lo mantengo si lo usas en otro lado */
         width: 100%;
+    }
+
+    /* Media queries para la sección de posts sociales */
+    .social-posts-section {
+        width: 95%; /* Más ancho en pantallas pequeñas */
+        padding: 30px 15px;
+        margin: 70px auto;
+    }
+    .social-posts-section h2 {
+        font-size: 2.8rem;
+        margin-bottom: 40px;
+    }
+    .social-posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Columnas más pequeñas */
+        gap: 20px;
+    }
+    .social-post-item {
+        padding: 10px;
     }
 }
 
@@ -210,5 +300,21 @@
     .description {
         font-size: 0.9rem;
         margin: 0;
+    }
+
+    /* Media queries para la sección de posts sociales */
+    .social-posts-section {
+        width: 100%; /* Ocupa todo el ancho en móviles */
+        padding: 20px 10px;
+        margin: 50px auto;
+        border-radius: 0; /* Sin bordes redondeados en los extremos */
+    }
+    .social-posts-section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    .social-posts-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móviles muy pequeños */
+        gap: 15px;
     }
 }
