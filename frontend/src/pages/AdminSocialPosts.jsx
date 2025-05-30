@@ -135,11 +135,6 @@ const AdminSocialPosts = () => {
         <div className="admin-social-posts-container">
             {error && <p className="error-message">{error}</p>}
             <div className="social-form-section">
-                <SocialPostForm
-                    initialData={editingPost}
-                    onSubmit={editingPost ? handleUpdatePost : handleAddPost}
-                    onCancel={cancelEditing}
-                />
             </div>
             <div className="social-list-section">
                 <h2 className="section-title">Publicaciones Actuales</h2>
