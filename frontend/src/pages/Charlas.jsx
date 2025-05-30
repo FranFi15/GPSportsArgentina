@@ -47,14 +47,14 @@ const Charlas = () => {
     ];
 
     return (
-        <davif className={`charlas-container ${isVisible ? 'fade-in' : ''}`}>
+        <div className={`charlas-container ${isVisible ? 'fade-in' : ''}`}>
             <h1 className="charlas-title">{textos[language].titulo}</h1>
             <p className="charlas-content">{textos[language].contenido}</p>
 
             <section className="charlas-gallery-section">
                 <Gallery items={galleryItems} />
             </section>
-        </davif
+        </div>
     );
 };
 
