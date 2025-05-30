@@ -7,6 +7,7 @@ import jugadorRoutes from './routes/jugadorRoutes.js';
 import entrenadorRoutes from './routes/entrenadorRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import personasRoutes from './routes/personasRoutes.js';
+import socialPostsRoutes from './routes/socialPostsRoutes.js'; 
 
 dotenv.config();
 
@@ -21,8 +22,6 @@ console.log('CORS_ORIGIN from .env:', process.env.CORS_ORIGIN);
 
 // Configuración de CORS
 const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
-
-
 
 console.log('Final CORS Origins allowed:', corsOrigins);
 
@@ -54,13 +53,13 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .then(() => console.log('Conectado a MongoDB'))
     .catch(err => console.error('Error de conexión a MongoDB:', err));
 
-// Rutas
+// Rutas de tu aplicación existentes
 app.use('/api/jugadores', jugadorRoutes);
 app.use('/api/entrenadores', entrenadorRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/personas', personasRoutes);
-
+app.use('/api/socialposts', socialPostsRoutes); 
 
 app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+    console.log(`Servidor corriendo correctamente`);
 });
