@@ -142,20 +142,21 @@
     transform: translateY(0);
 }
 
-
+/* Social Posts Section */
 .social-posts-section {
-    width: 100%; /* Make it full width to maximize grid space */
-    max-width: 1400px; /* Adjust max-width for more columns if needed */
+    width: 100%;
+    max-width: 1200px; /* Adjusted max-width for better fit with common screen sizes */
     margin: 100px auto;
     padding: 40px 20px;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background-color: #f9f9f9; /* Added a light background for separation */
     color: #333;
-    display: flex; /* Keep flex for overall section layout */
-    flex-direction: column; /* Stack title and grid */
-    align-items: center; /* Center content within the section */
-    box-sizing: border-box; /* Include padding in width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .social-posts-section p {
@@ -165,11 +166,11 @@
 }
 
 .social-posts-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    gap: 30px; /* Space between cards */
-    justify-content: center; /* Center the grid items if they don't fill the row */
+    display: grid; /* Changed to CSS Grid */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Responsive columns */
+    gap: 30px; /* Space between grid items */
+    justify-items: center; /* Center items within their grid cells */
+    width: 100%; /* Ensure the grid takes full available width */
 }
 
 .social-post-item {
@@ -181,7 +182,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 30%;;
+    width: 100%; /* Take full width of its grid cell */
+    max-width: 380px; /* Limit individual item width for better presentation on large screens */
     height: auto; /* Height adapts to content */
     padding: 15px;
     box-sizing: border-box;
@@ -189,12 +191,10 @@
     text-align: center;
 }
 
-
-
+/* Media Queries */
 @media (max-width: 1200px) {
-    /* Adjust grid for slightly smaller screens, perhaps 3 columns */
     .social-posts-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Still flexible, but minmax can be adjusted */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust min-width for columns */
         gap: 25px;
     }
 }
@@ -244,8 +244,7 @@
         margin-bottom: 40px;
     }
     .social-posts-grid {
-        /* On medium screens, target 2 columns */
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjusted for two columns on medium screens */
         gap: 20px;
     }
     .social-post-item {
@@ -294,8 +293,7 @@
         margin-bottom: 30px;
     }
     .social-posts-grid {
-        /* On small screens (mobile), target 1 column */
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column on small screens */
         gap: 15px;
     }
 }
