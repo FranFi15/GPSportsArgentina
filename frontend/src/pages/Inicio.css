@@ -171,7 +171,7 @@
 .social-posts-grid {
     display: grid;
     /* Grid responsivo: ajusta el número de columnas automáticamente */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 4fr));
     gap: 30px; /* Espacio entre las tarjetas */
     justify-content: center; /* Centra las tarjetas en el grid */
     align-items: start; /* Alinea los elementos al inicio de su celda */
