@@ -1,23 +1,64 @@
 /* src/components/Admin/SocialPostForm.css */
-.social-post-form {
+
+.social-post-form-container { /* Un nuevo contenedor para envolver el formulario si es necesario */
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
+    align-items: center;
+    /* Ajusta la posición y el ancho si este formulario no está dentro de otro contenedor */
+    /* Por ejemplo, si se usa como un componente de página completo */
+    width: 100%; /* Por defecto al 100% del padre */
+    padding: 20px; /* Padding general */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    font-family: "Roboto", sans-serif;
+    color: #ffffff; /* Color de texto predeterminado para este contenedor */
+}
+
+.social-post-form-container h2 {
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    width: 100%;
+    color: #cc6f04; /* Color de título de tu marca */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Sombra para el texto */
+}
+
+.social-post-form-container .form-error {
+    color: #ffcccc; /* Rojo claro para errores sobre fondo oscuro */
+    background-color: rgba(220, 53, 69, 0.2); /* Rojo semitransparente */
+    border: 1px solid rgba(220, 53, 69, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.social-post-form {
+    background-color: rgba(83, 83, 83, 0.6); /* Fondo semitransparente oscuro */
+    padding: 30px;
     border-radius: 8px;
-    background-color: #fdfdfd;
+    width: 100%;
+    max-width: 700px; /* Limita el ancho máximo para que no se extienda demasiado */
+    display: grid;
+    gap: 20px;
+    /* Configura la cuadrícula para columnas flexibles, similar a AddEditPerson */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
 }
 
 .form-group {
-    margin-bottom: 0; /* Espacio manejado por gap en el flexbox */
+    display: flex;
+    flex-direction: column;
+    /* El gap en el padre (.social-post-form) maneja el espaciado entre grupos */
 }
 
 .form-group label {
-    display: block;
     margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
+    font-weight: bold; /* Más audaz para que se vea bien en fondo oscuro */
+    color: #e0e0e0; /* Color claro para las etiquetas */
     font-size: 1em;
 }
 
@@ -25,45 +66,42 @@
 .form-group input[type="url"],
 .form-group textarea,
 .form-group select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    font-size: 1em;
+    width: 100%; /* Ajusta el ancho para llenar el espacio de la columna */
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo transparente para inputs */
+    border: none;
+    border-bottom: 1px solid #ffffff; /* Borde inferior blanco como el otro formulario */
+    color: #ffffff; /* Texto blanco en los inputs */
     box-sizing: border-box; /* Incluye padding y border en el ancho total */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #cc6f04; /* Color de enfoque de tu marca */
+    background-color: rgba(255, 255, 255, 0.2); /* Ligeramente más opaco al enfocar */
     outline: none;
+    box-shadow: none; /* Elimina el box-shadow azul predeterminado */
 }
 
 .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
+    min-height: 120px; /* Un poco más alto para el embed HTML */
+    resize: vertical; /* Permite redimensionar verticalmente */
 }
 
-.form-error {
-    color: #dc3545;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.9em;
+.form-group select option {
+    color: #333; /* Color de texto oscuro para opciones en dropdown */
+    background-color: #f0f0f0; /* Fondo claro para opciones en dropdown */
 }
 
 .form-actions {
+    grid-column: 1 / -1; /* Ocupa todas las columnas en el grid */
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 10px; /* Menos margen arriba, ya que el gap del grid ya espacia */
 }
 
 .form-actions .submit-btn,
@@ -75,24 +113,77 @@
     font-size: 1em;
     font-weight: 500;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white; /* Texto blanco para los botones */
 }
 
 .form-actions .submit-btn {
-    background-color: #007bff;
-    color: white;
+    background-color: #cc6f04; /* Color principal de tu marca */
 }
 
 .form-actions .submit-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-1px);
+    background-color: #a95b01; /* Tono más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Pequeño efecto de levantamiento */
 }
 
 .form-actions .cancel-btn {
-    background-color: #6c757d;
-    color: white;
+    background-color: #6c757d; /* Gris para el botón de cancelar */
 }
 
 .form-actions .cancel-btn:hover {
-    background-color: #5a6268;
-    transform: translateY(-1px);
+    background-color: #5a6268; /* Gris más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Pequeño efecto de levantamiento */
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .social-post-form-container {
+        padding: 15px;
+    }
+    .social-post-form-container h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    .social-post-form {
+        padding: 20px;
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+        max-width: 90%; /* Ocupa más ancho en móviles */
+    }
+    .form-group input[type="text"],
+    .form-group input[type="url"],
+    .form-group textarea,
+    .form-group select {
+        width: 100%; /* Asegura que ocupan el 100% en una sola columna */
+    }
+    .form-actions {
+        flex-direction: column; /* Apila los botones en móviles */
+        gap: 10px;
+        align-items: stretch; /* Estira los botones para que ocupen todo el ancho */
+    }
+    .form-actions .submit-btn,
+    .form-actions .cancel-btn {
+        width: 100%; /* Los botones ocupan el ancho completo */
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-post-form-container h2 {
+        font-size: 1.8rem;
+    }
+    .social-post-form {
+        padding: 15px;
+        margin: 0 auto;
+        border-radius: 0; /* Si quieres que se extienda completamente en los bordes */
+    }
+    .form-group label {
+        font-size: 0.95em;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="url"],
+    .form-group textarea,
+    .form-group select {
+        font-size: 0.9em;
+        padding: 10px;
+    }
 }

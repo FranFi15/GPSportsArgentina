@@ -1,91 +1,262 @@
 /* src/components/Admin/SocialPostList.css */
-.social-post-list-wrapper {
-    overflow-x: auto; /* Permite scroll horizontal en tablas grandes */
-}
 
-.social-posts-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    min-width: 700px; /* Asegura que la tabla no sea demasiado estrecha */
-}
-
-.social-posts-table th,
-.social-posts-table td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 15px;
-    text-align: left;
-    vertical-align: middle;
-}
-
-.social-posts-table th {
-    background-color: #e9ecef;
-    font-weight: 600;
-    color: #495057;
+/* Contenedor principal que simula el fondo y el padding de PersonList */
+.social-post-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; /* Descomenta si quieres centrar verticalmente, pero puede interferir con el scroll */
+    padding: 30px;
+    background-image: url("../../assets/fondo2.png"); /* Asegúrate de que esta ruta sea correcta */
+    background-size: cover;
+    background-position: center; /* Asegura que la imagen de fondo se vea bien */
+    border-radius: 8px; /* Ajusta según el diseño de tu panel de admin */
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la vista */
+    box-sizing: border-box;
 }
 
-.social-posts-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-.social-posts-table tbody tr:hover {
-    background-color: #e2f2ff; /* Un azul claro al pasar el ratón */
-    cursor: pointer;
-}
-
-.social-posts-table a {
-    color: #007bff;
-    text-decoration: none;
-    word-break: break-all; /* Rompe URLs largas */
-}
-
-.social-posts-table a:hover {
-    text-decoration: underline;
-}
-
-.actions-cell {
-    white-space: nowrap; /* Evita que los botones se envuelvan */
+.social-post-list-container h2 {
+    font-weight: 900;
+    font-size: 4rem;
     text-align: center;
+    margin-bottom: 25px;
+    color: #cc6f04; /* Color de tu marca */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Sombra para el texto */
 }
 
-.actions-cell button {
-    padding: 8px 15px;
-    margin: 0 5px;
+/* Estilo para el botón "Añadir Nueva Publicación" */
+.add-post-button {
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    background-color: #cc6f04; /* Color de tu marca */
+    color: white;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 1.1em;
+    font-weight: 500;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 30px; /* Espacio debajo del botón */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.actions-cell button.edit-btn {
-    background-color: #28a745; /* Verde */
-    color: white;
-}
-
-.actions-cell button.edit-btn:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-
-.actions-cell button.delete-btn {
-    background-color: #dc3545; /* Rojo */
-    color: white;
-}
-
-.actions-cell button.delete-btn:hover {
-    background-color: #c82333;
+.add-post-button:hover {
+    background-color: #a95b01;
     transform: translateY(-2px);
 }
 
 .no-posts-message {
     text-align: center;
-    color: #777;
-    font-size: 1.1em;
+    color: #e0e0e0; /* Color de texto claro para fondo oscuro */
+    font-size: 1.2em;
     padding: 20px;
-    background-color: #fefefe;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente para el mensaje */
     border-radius: 8px;
-    border: 1px dashed #ccc;
+    border: 1px dashed #666; /* Borde punteado más visible */
+    width: 80%;
+    max-width: 600px;
+    margin-top: 30px;
+}
+
+/* Adaptación de la cuadrícula de posts de SocialPostList.jsx */
+.social-posts-grid {
+    display: grid;
+    /* Responsivo: 2 columnas en desktop, 1 en móvil */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px; /* Espacio entre las tarjetas */
+    width: 100%; /* Ocupa el ancho completo del contenedor */
+    max-width: 1200px; /* Ancho máximo para la cuadrícula */
+    margin-top: 20px;
+    justify-content: center; /* Centra las tarjetas en el grid */
+    align-items: stretch; /* Asegura que las tarjetas tengan la misma altura */
+}
+
+.social-post-card {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente para la tarjeta */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #e0e0e0; /* Texto claro */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-post-card:hover {
+    transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.social-post-card h3 {
+    font-size: 1.3em;
+    color: #cc6f04; /* Color de tu marca para el título */
+    margin-bottom: 5px;
+    text-transform: capitalize; /* Capitaliza la primera letra, no todo mayúsculas */
+}
+
+.social-post-card p {
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #c0c0c0; /* Texto más claro para la descripción */
+    margin-bottom: 10px;
+}
+
+.social-post-card .platform {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.social-post-card .social-post-url {
+    color: #72aeff; /* Un azul para los enlaces, similar al de PersonList */
+    text-decoration: none;
+    word-break: break-all;
+    font-size: 0.9em;
+}
+
+.social-post-card .social-post-url:hover {
+    text-decoration: underline;
+}
+
+.social-post-card .instagram-embed-container {
+    width: 100%;
+    margin-top: 15px; /* Espacio entre el texto y el embed */
+    background-color: #fefefe; /* Fondo blanco para el embed de Instagram */
+    padding: 10px; /* Padding alrededor del embed */
+    border-radius: 6px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center; /* Centrar el embed de Instagram */
+    align-items: center;
+    /* Asegúrate de que los estilos en SocialPostList.jsx para .instagram-embed-container
+       como min-height, max-width, etc., también estén presentes si son necesarios.
+       Los embeds de Instagram pueden ser un poco difíciles de estilizar completamente.
+    */
+}
+
+/* Estilos para los iframes y elementos generados por Instagram para asegurar la responsividad */
+.social-post-card .instagram-embed-container iframe {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.social-post-card .instagram-embed-container div[data-instgrm-permalink] {
+    max-width: 100% !important;
+    margin: 0 auto !important; /* Centra el embed */
+}
+
+
+.social-post-card .card-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha de la tarjeta */
+    gap: 10px;
+    margin-top: auto; /* Empuja los botones hacia la parte inferior de la tarjeta */
+    padding-top: 15px; /* Espacio superior para separar de la descripción/embed */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separador visual */
+}
+
+.social-post-card .card-actions button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white; /* Texto blanco para los botones */
+    text-transform: uppercase;
+}
+
+.social-post-card .card-actions button.edit-btn {
+    background-color: #28a745; /* Verde */
+}
+
+.social-post-card .card-actions button.edit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.social-post-card .card-actions button.delete-btn {
+    background-color: #dc3545; /* Rojo */
+}
+
+.social-post-card .card-actions button.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+
+@media (max-width: 1024px) {
+    .social-post-list-container h2 {
+        font-size: 3.5rem;
+    }
+    .social-posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .social-post-list-container {
+        padding: 20px 15px;
+        border-radius: 0; /* Si quieres que ocupe todo el ancho en móviles */
+    }
+    .social-post-list-container h2 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+    }
+    .add-post-button {
+        padding: 10px 20px;
+        font-size: 1em;
+        margin-bottom: 25px;
+    }
+    .social-posts-grid {
+        grid-template-columns: 1fr; /* Una sola columna en tablet y móvil */
+        gap: 15px;
+        max-width: 100%;
+    }
+    .social-post-card {
+        padding: 15px;
+    }
+    .social-post-card h3 {
+        font-size: 1.2em;
+    }
+    .social-post-card p {
+        font-size: 0.9em;
+    }
+    .social-post-card .card-actions {
+        flex-direction: column; /* Apila los botones en móviles */
+        gap: 8px;
+        align-items: stretch; /* Estira los botones */
+    }
+    .social-post-card .card-actions button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-post-list-container h2 {
+        font-size: 2.2rem;
+    }
+    .social-post-list-container {
+        padding: 15px 10px;
+    }
+    .add-post-button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+    .social-post-card {
+        padding: 10px;
+    }
+    .social-post-card h3 {
+        font-size: 1.1em;
+    }
 }

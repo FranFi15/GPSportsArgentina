@@ -56,9 +56,6 @@ const SocialPostForm = ({ initialData, onSubmit, onCancel }) => {
                     <option value="">Selecciona una plataforma</option>
                     <option value="instagram">Instagram</option>
                     <option value="twitter">Twitter</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="tiktok">TikTok</option>
                 </select>
             </div>
             <div className="form-group">
