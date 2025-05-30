@@ -19,11 +19,11 @@ const AddEditPerson = () => {
     posicion: '',
     inst: '',
     googleDriveLink: '',
-    // Mantén estos campos para consistencia, aunque se gestionen en otra página
-    facebook: '',
-    twitter: '',
-    youtube: '',
-    tiktok: '',
+    // Ya no gestionamos los campos de redes sociales aquí directamente
+    // facebook: '',
+    // twitter: '',
+    // youtube: '',
+    // tiktok: '',
   });
   const [error, setError] = useState('');
 
@@ -43,11 +43,10 @@ const AddEditPerson = () => {
           throw new Error(`Error al cargar ${tipo}`);
         }
         const data = await response.json();
-        // Asegúrate de que todos los campos del formData existan en los datos de la API
         setFormData({
             ...formData, // Mantén los valores iniciales para los nuevos campos si no vienen de la API
             ...data,
-            fechaNacimiento: data.fechaNacimiento ? data.fechaNacimiento.split('T')[0] : '' // Formato para input type="date"
+            fechaNacimiento: data.fechaNacimiento ? data.fechaNacimiento.split('T')[0] : ''
         });
       } catch (err) {
         setError(err.message);
@@ -68,10 +67,11 @@ const AddEditPerson = () => {
         posicion: '',
         inst: '',
         googleDriveLink: '',
-        facebook: '',
-        twitter: '',
-        youtube: '',
-        tiktok: '',
+        // Ya no gestionamos los campos de redes sociales aquí directamente
+        // facebook: '',
+        // twitter: '',
+        // youtube: '',
+        // tiktok: '',
       });
     }
   }, [tipo, id, token, API_BASE_URL]);
@@ -108,11 +108,6 @@ const AddEditPerson = () => {
     } catch (err) {
       setError(err.message);
     }
-  };
-
-  // Función para redirigir a la gestión de redes sociales
-  const handleGoToSocialPosts = () => {
-    navigate('/admin/socialposts');
   };
 
   return (
@@ -187,10 +182,7 @@ const AddEditPerson = () => {
         <div className="form-actions">
           <button type="submit" className="submit-button">{id ? 'Guardar Cambios' : 'Agregar'}</button>
           <button type="button" className="cancel-button" onClick={() => navigate('/admin')}>Cancelar</button>
-          {/* ¡NUEVO BOTÓN DE ACCESO A REDES SOCIALES! */}
-          <button type="button" className="social-posts-button" onClick={handleGoToSocialPosts}>
-            Ir a Gestión de Redes Sociales
-          </button>
+          {/* BOTÓN DE REDES SOCIALES REMOVIDO DE AQUÍ */}
         </div>
       </form>
     </div>

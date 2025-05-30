@@ -3,56 +3,103 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    /* Usar min-height para que ocupe al menos la altura de la vista, pero pueda crecer */
+    min-height: calc(100vh - 180px); /* Ajusta esto si tu header/footer tienen otras alturas */
     width: 100%;
-    padding-top: 90px;
-    padding-bottom: 150px;
-    background-color: rgba(0, 0, 0, 0.6);
+    padding-top: 90px; /* Mantén el padding superior */
+    padding-bottom: 150px; /* Mantén el padding inferior */
+    background-color: rgba(0, 0, 0, 0.6); /* Color de fondo oscuro con transparencia */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-family: "Roboto", sans-serif;
-    color: #ffffff;
-  }
-  
-  .select-person-type-container h2 {
+    color: #ffffff; /* Texto blanco para contraste */
+}
+
+.select-person-type-container h2 {
     text-transform: uppercase;
     font-weight: 900;
     font-size: 2.5rem;
-  }
-  
-  .select-person-type-container .buttons-container {
+    margin-bottom: 30px; /* Añadido espacio debajo del título */
+}
+
+.select-person-type-container .buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-  }
-  
-  .select-person-type-container button {
+    gap: 15px; /* Espacio entre los botones */
+    width: 100%;
+    max-width: 500px; /* Limita el ancho de los botones para que no se extiendan demasiado */
+}
+
+.select-person-type-container button {
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
-    width: 500px;
-  }
-  
-  .select-person-type-container .add-jugador-button,.select-person-type-container .add-entrenador-button {
-    background-color: #cc6f04;
-    color: white;
-  }
-  
-  .select-person-type-container .add-jugador-button:hover,
-  .select-person-type-container .add-entrenador-button:hover {
-    background-color: #a95b01;
-  }
-  
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Asegura que todos los botones ocupen el ancho completo del buttons-container */
+    box-sizing: border-box; /* Asegura que padding y border no aumenten el ancho total */
+}
 
-  .select-person-type-container .cancel-button {
-    background-color: #6c757d;
+.select-person-type-container button:hover {
+    transform: translateY(-2px); /* Un ligero levantamiento al pasar el ratón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil al pasar el ratón */
+}
+
+.select-person-type-container .add-jugador-button,
+.select-person-type-container .add-entrenador-button {
+    background-color: #cc6f04; /* Color naranja oscuro para añadir */
     color: white;
-  }
-  
-  .select-person-type-container .cancel-button:hover {
-    background-color: #545b62;
-  }
+}
+
+.select-person-type-container .add-jugador-button:hover,
+.select-person-type-container .add-entrenador-button:hover {
+    background-color: #a95b01; /* Tono más oscuro al pasar el ratón */
+}
+
+/* Estilo para el nuevo botón de Redes Sociales */
+.select-person-type-container .social-posts-button {
+    background-color: #007bff; /* Un azul vibrante, como el de las redes */
+    color: white;
+}
+
+.select-person-type-container .social-posts-button:hover {
+    background-color: #0056b3; /* Tono de azul más oscuro al pasar el ratón */
+}
+
+.select-person-type-container .cancel-button {
+    background-color: #6c757d; /* Gris para cancelar/volver */
+    color: white;
+}
+
+.select-person-type-container .cancel-button:hover {
+    background-color: #545b62; /* Tono de gris más oscuro al pasar el ratón */
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .select-person-type-container {
+        padding-top: 60px;
+        padding-bottom: 100px;
+    }
+    .select-person-type-container h2 {
+        font-size: 2rem;
+    }
+    .buttons-container {
+        max-width: 90%; /* Ajusta el ancho en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .select-person-type-container h2 {
+        font-size: 1.8rem;
+    }
+    .buttons-container {
+        gap: 10px; /* Reduce el espacio entre botones */
+    }
+    .select-person-type-container button {
+        padding: 10px 15px; /* Reduce el padding de los botones */
+        font-size: 14px;
+    }
+}
