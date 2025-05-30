@@ -104,7 +104,6 @@
         padding: 0 10px;
     }
 }
-
 /* --- Social Posts Section (New/Modified Styles for Catalog Layout) --- */
 .social-posts-section {
     padding: 40px 20px;
@@ -127,7 +126,7 @@
     */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px; /* Space between grid items */
-    max-width: 1200px; /* Limit overall grid width */
+    width:90%; /* Limit overall grid width */
     margin: 30px auto; /* Center the grid */
     padding: 10px;
 }
@@ -145,35 +144,8 @@
     overflow: hidden; /* Important to hide scrollbars if embed overflows */
 }
 
-/* Styles to ensure embeds from react-social-media-embed are responsive */
-/* These target the internal structure created by react-social-media-embed */
-.social-post-item ._aa4c /* Instagram blockquote class */ {
-    max-width: 100% !important; /* Ensure it doesn't exceed parent width */
-    width: 100% !important; /* Force width if needed */
-    box-sizing: border-box; /* Include padding/border in element's total width/height */
-    margin: 0 !important; /* Remove default margins from Instagram embed */
-    padding: 0 !important; /* Remove default padding */
-}
 
-/* For Twitter/X Embeds */
-.social-post-item .twitter-tweet {
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box;
-    margin: 0 auto !important; /* Center the tweet */
-}
 
-/* Target the iframe directly within the react-social-media-embed components
-   Note: The internal structure of these components can vary, so direct iframe
-   targeting might be less reliable than relying on the component's own
-   responsive properties. However, these are good fallbacks.
-*/
-.social-post-item iframe {
-    max-width: 100% !important;
-    height: auto !important; /* Allow height to adjust proportionally */
-    display: block; /* Removes extra space below inline elements */
-    margin: 0 auto; /* Center iframes if they don't fill 100% width */
-}
 
 /* Media queries for smaller screens if necessary, though grid handles much */
 @media (max-width: 768px) {
