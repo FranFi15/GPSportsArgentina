@@ -24,10 +24,11 @@ const Inicio = () => {
     const carouselRef = useRef(null);
 
     const [descriptionVisible, setDescriptionVisible] = useState(false);
-    // const [addressVisible, setAddressVisible] = useState(false); // No longer needed
     const [contentVisible, setContentVisible] = useState(false);
     const [content1Visible, setContent1Visible] = useState(false);
     const [content2Visible, setContent2Visible] = useState(false);
+
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const carouselImages = [
         { src: laproImg, alt: 'Laprovíttola' },
@@ -52,6 +53,34 @@ const Inicio = () => {
             contenido2: "GP Sports is a representation and management agency for players, coaches, and athletes with over 30 years of experience in managing and negotiating contracts with clubs and companies worldwide. We support careers with a 360-degree concept, from contract negotiation to the commercial implementation of athletes, with a staff of professionals trained for each of the management areas. Our objective with our clients is to continue with the values that have characterized the company since its founding: planning, knowledge, passion, innovation, and commitment.",
         }
     };
+
+
+    useEffect(() => {
+        const warmupBackend = async () => {
+            const backendWarmupUrl = `${API_BASE_URL}/api/warmup`; 
+
+            try {
+                const response = await fetch(backendWarmupUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    console.log('Backend warm-up request successful!');
+                } else {
+                    // Advertencia si la respuesta no es 200 OK 
+                    console.warn(`Backend warm-up failed with status: ${response.status}`);
+                }
+            } catch (error) {
+                // Captura errores de red 
+                console.error('Error during backend warm-up request:', error);
+            }
+        };
+
+        warmupBackend();
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
