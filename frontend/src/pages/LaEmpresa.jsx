@@ -3,19 +3,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./LaEmpresa.css";
-import PartnersImage from '../assets/Agencia/mapa.png'; // Import your partners image
-import nastaLogo from "../assets/Agencia/NS.png";
-import playersGroupLogo from "../assets/Agencia/PGI.png"
-import oneWorldLogo from "../assets/Agencia/OW.png";
-import duranLogo from "../assets/Agencia/DM.png";
-import bestBallerLogo from "../assets/Agencia/BB.png";
-import carlosPrunesImg from '../assets/Agencia/cprunes.png';
-import matiasNovoaImg from '../assets/Agencia/novoa.png';
-import arielEslavaImg from '../assets/Agencia/eslava.png';
-import ricardoPrunesImg from '../assets/Agencia/rprunes.png';
-import gonzaloZamudioImg from '../assets/Agencia/contador.png';
-import edgardoMagnaghiImg from '../assets/Agencia/abogado.png';
-import franciscoFilippaImg from '../assets/Agencia/diseñador.png';
+import PartnersImage from '../assets/Agencia/mapa.avif'; // Import your partners image
+import nastaLogo from "../assets/Agencia/NS.avif";
+import playersGroupLogo from "../assets/Agencia/PGI.avif"
+import oneWorldLogo from "../assets/Agencia/OW.avif";
+import duranLogo from "../assets/Agencia/DM.avif";
+import bestBallerLogo from "../assets/Agencia/BB.avif";
+import carlosPrunesImg from '../assets/Agencia/cprunes.avif';
+import matiasNovoaImg from '../assets/Agencia/novoa.avif';
+import arielEslavaImg from '../assets/Agencia/eslava.avif';
+import ricardoPrunesImg from '../assets/Agencia/rprunes.avif';
+import gonzaloZamudioImg from '../assets/Agencia/contador.avif';
+import edgardoMagnaghiImg from '../assets/Agencia/abogado.avif';
+import franciscoFilippaImg from '../assets/Agencia/diseñador.avif';
 
 const LaEmpresa = () => {
     const { language } = useLanguage();
