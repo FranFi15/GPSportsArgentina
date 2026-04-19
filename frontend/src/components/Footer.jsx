@@ -17,7 +17,7 @@ const FooterSimple = () => {
       privacy: 'Política de Privacidad',
       termsText: `Las condiciones de acceso y uso del presente sitio web se rigen por la legalidad vigente y por el principio de buena fe comprometiéndose el usuario a realizar un buen uso de la web. No se permiten conductas que vayan contra la ley, los derechos o intereses de terceros.
 Ser usuario de la web de www.gpsports.com.ar implica que reconoce haber leído y aceptado las condiciones legales y lo que las extienda la normativa legal aplicable en esta materia. Si por el motivo que fuere no está de acuerdo con estas condiciones no continúe usando esta web.`,
-      designedBy: 'Diseñado por Francisco Filippa',
+      designedBy: 'Diseñado por ffdigitallab',
       rights: "Todos los derechos reservados.",
       addressLink: 'Ver en Google Maps'
     },
@@ -27,7 +27,7 @@ Ser usuario de la web de www.gpsports.com.ar implica que reconoce haber leído y
       privacy: 'Privacy Policy',
       termsText: `The conditions of access and use of this website are governed by current legislation and the principle of good faith, with the user committing to make good use of the web. Conduct that goes against the law, the rights or interests of third parties is not allowed.
 Being a user of the website www.gpsports.com.ar implies that you acknowledge having read and accepted the legal conditions and what extends the applicable legal regulations in this matter. If for any reason you do not agree with these conditions, do not continue using this website.`,
-      designedBy: 'Designed by Francisco Filippa',
+      designedBy: 'Designed by ffdigitallab',
       rights: "All rights reserved.",
       addressLink: 'View on Google Maps'
     },
