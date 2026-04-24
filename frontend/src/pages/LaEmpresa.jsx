@@ -3,8 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import "./LaEmpresa.css";
-import PartnersImage from '../assets/Agencia/mapa.avif'; // Import your partners image
-import nastaLogo from "../assets/Agencia/NS.avif";
+import PartnersImage from '../assets/Agencia/mapa.avif'; 
 import playersGroupLogo from "../assets/Agencia/PGI.avif"
 import oneWorldLogo from "../assets/Agencia/OW.avif";
 import duranLogo from "../assets/Agencia/DM.avif";
