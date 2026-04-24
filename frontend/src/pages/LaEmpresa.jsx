@@ -48,11 +48,6 @@ const LaEmpresa = () => {
                     image: arielEslavaImg
                 },
                 {
-                    name: "Ricardo Prunes",
-                    role: "Fútbol",
-                    image: ricardoPrunesImg
-                },
-                {
                     name: "Gonzalo Zamudio",
                     role: "Contador",
                     image: gonzaloZamudioImg
@@ -96,11 +91,6 @@ const LaEmpresa = () => {
                     name: "Ariel Eslava",
                     role: "Basketball",
                     image: arielEslavaImg
-                },
-                {
-                    name: "Ricardo Prunes",
-                    role: "Football",
-                    image: ricardoPrunesImg
                 },
                 {
                     name: "Gonzalo Zamudio",
