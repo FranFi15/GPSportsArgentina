@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { countries, countriesFromValue, flagSrc } from '../../data/countries';
@@ -27,6 +27,40 @@ const normalizeUrl = (value) => {
   return `https://${trimmed}`;
 };
 
+const coverLayout = (frameWidth, frameHeight, imageWidth, imageHeight) => {
+  const scale = Math.max(frameWidth / imageWidth, frameHeight / imageHeight);
+  return {
+    width: imageWidth * scale,
+    height: imageHeight * scale,
+  };
+};
+
+const clampOffset = (x, y, layout, frame) => ({
+  x: Math.min(0, Math.max(frame.width - layout.width, x)),
+  y: Math.min(0, Math.max(frame.height - layout.height, y)),
+});
+
+const cropImageFile = (image, frame, offset, layout) => new Promise((resolve, reject) => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 900;
+  canvas.height = 1200;
+  const context = canvas.getContext('2d');
+  context.drawImage(
+    image,
+    offset.x * (canvas.width / frame.width),
+    offset.y * (canvas.height / frame.height),
+    layout.width * (canvas.width / frame.width),
+    layout.height * (canvas.height / frame.height),
+  );
+  canvas.toBlob((blob) => {
+    if (!blob) {
+      reject(new Error('No se pudo recortar la foto.'));
+      return;
+    }
+    resolve(new File([blob], 'foto.jpg', { type: 'image/jpeg' }));
+  }, 'image/jpeg', 0.92);
+});
+
 const AddEditPerson = () => {
   const { tipo, id } = useParams();
   const navigate = useNavigate();
@@ -34,8 +68,15 @@ const AddEditPerson = () => {
   const [formData, setFormData] = useState(emptyForm);
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
+  const [naturalSize, setNaturalSize] = useState(null);
+  const [frameSize, setFrameSize] = useState({ width: 0, height: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
+  const frameRef = useRef(null);
+  const loadedImageRef = useRef(null);
+  const dragRef = useRef(null);
+  const positionedFor = useRef(null);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -46,8 +87,25 @@ const AddEditPerson = () => {
     }
     const url = URL.createObjectURL(imageFile);
     setPreviewUrl(url);
+    setNaturalSize(null);
+    const image = new Image();
+    image.onload = () => {
+      loadedImageRef.current = image;
+      setNaturalSize({ width: image.naturalWidth, height: image.naturalHeight });
+    };
+    image.src = url;
     return () => URL.revokeObjectURL(url);
   }, [imageFile]);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return undefined;
+    const measure = () => setFrameSize({ width: frame.clientWidth, height: frame.clientHeight });
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [previewUrl, formData.googleDriveLink]);
 
   useEffect(() => {
     const fetchPersona = async () => {
@@ -107,6 +165,31 @@ const AddEditPerson = () => {
     });
   };
 
+  const layout = useMemo(() => {
+    if (!naturalSize || !frameSize.width || !frameSize.height) return null;
+    return coverLayout(frameSize.width, frameSize.height, naturalSize.width, naturalSize.height);
+  }, [naturalSize, frameSize]);
+
+  useEffect(() => {
+    if (!layout || !frameSize.width || !naturalSize) return;
+    if (positionedFor.current !== naturalSize) {
+      positionedFor.current = naturalSize;
+      setOffset(clampOffset((frameSize.width - layout.width) / 2, 0, layout, frameSize));
+      return;
+    }
+    setOffset((current) => clampOffset(current.x, current.y, layout, frameSize));
+  }, [naturalSize, layout, frameSize]);
+
+  const movePhoto = (event) => {
+    if (!dragRef.current || !layout) return;
+    setOffset(clampOffset(
+      dragRef.current.originX + event.clientX - dragRef.current.pointerX,
+      dragRef.current.originY + event.clientY - dragRef.current.pointerY,
+      layout,
+      frameSize,
+    ));
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -134,8 +217,12 @@ const AddEditPerson = () => {
       let imageUrl = formData.googleDriveLink || '';
 
       if (imageFile) {
+        if (!layout || !loadedImageRef.current) {
+          throw new Error('Esperá a que cargue la foto para encuadrarla.');
+        }
+        const cropped = await cropImageFile(loadedImageRef.current, frameSize, offset, layout);
         const body = new FormData();
-        body.append('image', imageFile);
+        body.append('image', cropped);
         const uploadResponse = await fetch(`${API_BASE_URL}/api/upload`, {
           method: 'POST',
           headers: {
@@ -193,12 +280,37 @@ const AddEditPerson = () => {
       <form className="add-edit-person-form" onSubmit={handleSubmit}>
         <div className="form-group form-group-photo">
           <label htmlFor="foto">Foto</label>
-          <div className="photo-frame">
-            {shownPreview ? (
+          <div
+            className={`photo-frame${previewUrl ? ' photo-frame-adjust' : ''}`}
+            ref={frameRef}
+            onPointerDown={(event) => {
+              if (!previewUrl || !layout) return;
+              event.currentTarget.setPointerCapture(event.pointerId);
+              dragRef.current = {
+                pointerX: event.clientX,
+                pointerY: event.clientY,
+                originX: offset.x,
+                originY: offset.y,
+              };
+            }}
+            onPointerMove={movePhoto}
+            onPointerUp={() => { dragRef.current = null; }}
+            onPointerCancel={() => { dragRef.current = null; }}
+          >
+            {previewUrl && layout ? (
+              <img
+                src={previewUrl}
+                alt=""
+                className="photo-adjust"
+                draggable={false}
+                style={{ width: layout.width, height: layout.height, transform: `translate(${offset.x}px, ${offset.y}px)` }}
+              />
+            ) : shownPreview ? (
               <img src={shownPreview} alt="" className="photo-preview" />
             ) : (
               <span className="photo-placeholder">Sin foto</span>
             )}
+            {previewUrl && <span className="photo-adjust-hint">Arrastrá para encuadrar</span>}
           </div>
           <label className="file-picker">
             {imageFile ? imageFile.name : 'Elegir imagen'}
