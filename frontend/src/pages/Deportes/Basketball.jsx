@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useLanguage from '../../hooks/useLanguage';
 import './Basketball.css';
-import { FaInstagram } from 'react-icons/fa6'; // Import the Instagram icon
+import { FaChartSimple, FaInstagram, FaYoutube } from 'react-icons/fa6';
 import { countriesFromValue, flagSrc } from '../../data/countries';
 
 const Basketball = () => {
@@ -251,23 +251,31 @@ const Basketball = () => {
                                     </span>
                                 )}
                                 <span className="person-card-overlay">
-                                    {persona.equipo && <span className="basketball-person-team">{persona.equipo}</span>}
-                                    <span className="basketball-person-position">
-                                        {persona.tipo === 'jugador'
-                                            ? translatePosition(persona.posicion)
-                                            : textos[language].noPosition}
-                                    </span>
                                     <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
-                                    {(persona.inst || persona.eurobasket) && (
+                                    <span className="basketball-person-meta">
+                                        {persona.equipo && <span className="basketball-person-team">{persona.equipo}</span>}
+                                        {persona.equipo && <span className="meta-separator" aria-hidden="true">·</span>}
+                                        <span className="basketball-person-position">
+                                            {persona.tipo === 'jugador'
+                                                ? translatePosition(persona.posicion)
+                                                : textos[language].noPosition}
+                                        </span>
+                                    </span>
+                                    {(persona.inst || persona.eurobasket || persona.highlights) && (
                                         <span className="basketball-person-links">
                                             {persona.inst ? (
-                                                <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer">
-                                                    <FaInstagram className="instagram-icon" />
+                                                <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                                    <FaInstagram className="card-icon card-icon-instagram" />
                                                 </a>
                                             ) : null}
                                             {persona.eurobasket ? (
-                                                <a className="eurobasket-link" href={persona.eurobasket} target="_blank" rel="noopener noreferrer">
-                                                    Eurobasket
+                                                <a className="stats-link" href={persona.eurobasket} target="_blank" rel="noopener noreferrer" aria-label="Estadísticas">
+                                                    <FaChartSimple className="card-icon card-icon-stats" />
+                                                </a>
+                                            ) : null}
+                                            {persona.highlights ? (
+                                                <a href={persona.highlights} target="_blank" rel="noopener noreferrer" aria-label="Highlights">
+                                                    <FaYoutube className="card-icon card-icon-youtube" />
                                                 </a>
                                             ) : null}
                                         </span>

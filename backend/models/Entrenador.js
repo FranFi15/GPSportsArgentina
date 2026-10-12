@@ -10,6 +10,7 @@ const EntrenadorSchema = new mongoose.Schema({
   equipo: { type: String },
   inst: {type:String},
   eurobasket: { type: String, required: false },
+  highlights: { type: String, required: false },
   fechaAlta: { type: Date, default: Date.now },
   tipo: { type: String, default: 'entrenador' },
   googleDriveLink: { type: String, required: false },

@@ -143,8 +143,8 @@
 }
 
 .person-flag {
-    width: 34px;
-    height: 22px;
+    width: 40px;
+    height: 26px;
     object-fit: cover;
     border: 2px solid #ffffff;
     border-radius: 2px;
@@ -160,54 +160,71 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    padding: 72px 16px 18px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0) 100%);
+    padding: 120px 16px 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.72) 38%, rgba(0, 0, 0, 0.28) 68%, rgba(0, 0, 0, 0) 100%);
 }
 
 .basketball-person-name {
-    max-width: 90%;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.94);
-    color: #111111;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    line-height: 1.2;
+    max-width: 92%;
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
     text-transform: uppercase;
 }
 
-.basketball-person-team {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #ffffff;
+.basketball-person-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 92%;
 }
 
+.basketball-person-team,
 .basketball-person-position {
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.88);
-}
-
-
-.instagram-icon {
-    margin-top: 5px;
-    font-size: 1.8em; /* Icono más grande */
     color: #ffffff;
-    transition: color 0.3s ease-in-out;
 }
-.instagram-icon:hover {
-    color: #C13584; /* Color de Instagram */
+
+.meta-separator {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.card-icon-instagram {
+    fill-rule: evenodd;
+}
+
+.card-icon-instagram:hover {
+    color: #C13584;
+}
+
+.card-icon-stats:hover {
+    color: #cc6f04;
+}
+
+.card-icon-youtube:hover {
+    color: #ff3333;
 }
 
 .basketball-person-links {
     display: flex;
-    gap: 16px;
+    gap: 18px;
     align-items: center;
     justify-content: center;
-    margin-top: 8px;
+    margin-top: 4px;
 }
 
 .basketball-person-links a {
@@ -215,19 +232,6 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-}
-
-.eurobasket-link {
-    color: #ffffff;
-    font-size: 0.85em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border-bottom: 1px solid #cc6f04;
-}
-
-.eurobasket-link:hover {
-    color: #cc6f04;
 }
 
 

@@ -14,6 +14,7 @@ const emptyForm = {
   posicion: '',
   inst: '',
   eurobasket: '',
+  highlights: '',
   googleDriveLink: '',
 };
 
@@ -72,6 +73,7 @@ const AddEditPerson = () => {
           fechaNacimiento: toDateInput(data.fechaNacimiento),
           nacionalidad: countriesFromValue(data.nacionalidad).map((country) => country.code),
           eurobasket: data.eurobasket || '',
+          highlights: data.highlights || '',
           googleDriveLink: data.googleDriveLink || '',
         });
         setImageFile(null);
@@ -164,6 +166,7 @@ const AddEditPerson = () => {
           tipo,
           fechaNacimiento: toDateInput(formData.fechaNacimiento),
           eurobasket: normalizeUrl(formData.eurobasket),
+          highlights: normalizeUrl(formData.highlights),
           googleDriveLink: imageUrl,
         }),
       });
@@ -256,6 +259,18 @@ const AddEditPerson = () => {
             className="form-control"
             placeholder="https://www.eurobasket.com/..."
             value={formData.eurobasket || ''}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="highlights">Highlights:</label>
+          <input
+            type="text"
+            id="highlights"
+            name="highlights"
+            className="form-control"
+            placeholder="https://www.youtube.com/..."
+            value={formData.highlights || ''}
             onChange={handleChange}
           />
         </div>

@@ -11,6 +11,7 @@ const JugadorSchema = new mongoose.Schema({
   posicion: { type: String, enum: ['base', 'escolta', 'alero', 'ala-pivot', 'pivot'], required: true },
   inst: {type:String},
   eurobasket: { type: String, required: false },
+  highlights: { type: String, required: false },
   fechaAlta: { type: Date, default: Date.now },
   tipo: { type: String, default: 'jugador' },
   googleDriveLink: { type: String, required: false },
