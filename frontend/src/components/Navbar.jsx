@@ -11,8 +11,6 @@ const Navbar = () => {
     const [isDeportesDropdownOpen, setIsDeportesDropdownOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
-    const [showNavbar, setShowNavbar] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
 
     const textos = {
         es: { inicio: 'Inicio', laEmpresa: 'La Agencia', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', mkt: 'MKT', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
@@ -30,28 +28,8 @@ const Navbar = () => {
         window.scrollTo(0, 0); // Scroll to the top of the page
     }
 
-    useEffect(() => {
-        const controlNavbar = () => {
-            const currentScrollY = window.scrollY;
-
-            if (currentScrollY > lastScrollY && showNavbar) {
-                setShowNavbar(false);
-            } else if (currentScrollY < lastScrollY && !showNavbar) {
-                setShowNavbar(true);
-            }
-
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener('scroll', controlNavbar);
-
-        return () => {
-            window.removeEventListener('scroll', controlNavbar);
-        };
-    }, [lastScrollY, showNavbar]);
-
     return (
-        <nav className={`navbar-container ${!showNavbar ? 'navbar-hidden' : ''}`}>
+        <nav className="navbar-container">
             <Link to="/" className="navbar-logo-link" onClick={handleLinkClick}>
                 <img src={logo} alt="Logo" className="navbar-logo-img" />
             </Link>

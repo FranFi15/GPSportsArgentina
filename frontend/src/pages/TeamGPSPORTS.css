@@ -2,8 +2,6 @@
 .team-gpsports-container {
     font-family: 'Roboto', sans-serif;
     color: #fff;
-    background-attachment: fixed;
-    backdrop-filter: blur(5px);
     background-size: cover;
     padding: 40px;
     padding-top: 90px;

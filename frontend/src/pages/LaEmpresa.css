@@ -3,8 +3,6 @@
     width: 100%;
     padding: 60px 0;
     font-family: "Roboto", sans-serif;
-    background-attachment: fixed;
-    backdrop-filter: blur(5px);
     background-size: cover;
     color: #ffffff;
 }

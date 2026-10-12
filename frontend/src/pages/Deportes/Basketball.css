@@ -3,8 +3,6 @@
     padding: 150px 50px;
     background-color: #000;
     background-image: url('../src/assets/fondo3.png');
-    background-attachment: fixed;
-    backdrop-filter: blur(5px);
     background-size: cover;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(63, 45, 45, 0.1);
