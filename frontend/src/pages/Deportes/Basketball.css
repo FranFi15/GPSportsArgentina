@@ -88,14 +88,12 @@
 
 .basketball-person-list {
     list-style: none;
-    padding: 0; /* Elimina el padding de la lista principal */
+    padding: 0;
     margin: 0;
-    display: grid; /* Transforma la lista en una cuadrícula */
-    /* Define columnas responsivas: 
-       mínimo 280px por tarjeta, auto-ajustables para ocupar el espacio disponible */
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px; /* Espacio entre las tarjetas */
-    justify-content: center; /* Centra las tarjetas si no llenan toda la fila */
+    gap: 28px;
+    justify-content: center;
 }
 
 .basketball-person-header {
@@ -106,92 +104,91 @@
 }
 
 .basketball-person-item {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.75); /* Fondo más opaco para las tarjetas */
-    border-radius: 12px; /* Bordes más redondeados para las tarjetas */
-    padding: 20px; /* Más padding interno para el contenido de la tarjeta */
-    display: flex; /* Usa flexbox para organizar el contenido verticalmente */
-    flex-direction: column;
-    align-items: center; /* Centra el contenido horizontalmente dentro de la tarjeta */
-    text-align: center; /* Centra el texto */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transición para hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra para dar profundidad a la tarjeta */
-    height: 100%; /* Asegura que las tarjetas tengan la misma altura si el contenido lo permite, o usa min-height */
+    background-color: #1a1a1a;
+    border-radius: 28px;
+    display: block;
+    text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .basketball-person-item:hover {
-    background-color: #ec8c1e60; /* Color de fondo al pasar el ratón */
-    transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada al pasar el ratón */
+    transform: translateY(-6px);
 }
 
-/* Estilos para la imagen de la persona */
-.basketball-person-image {
-    width: 100%; /* La imagen ocupa todo el ancho disponible de la tarjeta */
-    margin-bottom: 15px; /* Espacio debajo de la imagen */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.person-thumbnail,
+.person-photo-fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.person-photo-wrap {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-}
-
-.person-photo-wrap--empty {
-    line-height: normal;
-    min-height: 36px;
+.person-thumbnail {
+    object-fit: cover;
+    object-position: center top;
 }
 
 .person-flags {
     position: absolute;
-    right: 2px;
-    bottom: 8px;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
     display: flex;
-    gap: 4px;
+    gap: 6px;
 }
 
 .person-flag {
-    width: 36px;
-    height: 24px;
+    width: 34px;
+    height: 22px;
     object-fit: cover;
     border: 2px solid #ffffff;
     border-radius: 2px;
 }
 
-.person-photo-wrap--empty .person-flags {
-    position: static;
-    justify-content: center;
+.person-card-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 72px 16px 18px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0) 100%);
 }
 
-.person-thumbnail {
-    width: 150px; /* Tamaño fijo para el thumbnail */
-    height: 150px; /* Altura fija para el thumbnail */
-    object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsionar */
-    border-radius: 50%; /* Hace la imagen redonda */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para la imagen */
-}
-
-
-/* Ajustes para los spans de información dentro de la tarjeta */
 .basketball-person-name {
-    font-size: 1.4em;
+    max-width: 90%;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #111111;
+    font-size: 0.82rem;
     font-weight: 700;
-    margin-bottom: 5px;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
 .basketball-person-team {
-    font-size: 1.1em;
-    color: #ddd;
-    margin-bottom: 5px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
 }
 
-.basketball-person-age {
-    font-size: 1em;
-    color: #ccc;
-    margin-bottom: 15px;
+.basketball-person-position {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
 }
 
 
@@ -244,12 +241,8 @@
         gap: 15px;
     }
     .basketball-person-list {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Más pequeñas en móvil */
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 20px;
-    }
-    .person-thumbnail {
-        width: 120px;
-        height: 120px;
     }
 }
 

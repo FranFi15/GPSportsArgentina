@@ -228,48 +228,50 @@ const Basketball = () => {
                             const selectedCountries = countriesFromValue(persona.nacionalidad);
                             return (
                             <li key={persona._id} className="basketball-person-item">
-                                <span className="basketball-person-image">
-                                    <span className={`person-photo-wrap${persona.googleDriveLink ? '' : ' person-photo-wrap--empty'}`}>
-                                        {persona.googleDriveLink && (
+                                {persona.googleDriveLink ? (
+                                    <img
+                                        src={persona.googleDriveLink}
+                                        alt={`${persona.nombre} ${persona.apellido}`}
+                                        className="person-thumbnail"
+                                    />
+                                ) : (
+                                    <span className="person-photo-fallback" />
+                                )}
+                                {selectedCountries.length > 0 && (
+                                    <span className="person-flags">
+                                        {selectedCountries.map((country) => (
                                             <img
-                                                src={persona.googleDriveLink}
-                                                alt={`${persona.nombre} ${persona.apellido}`}
-                                                className="person-thumbnail"
+                                                key={country.code}
+                                                className="person-flag"
+                                                src={flagSrc(country.code)}
+                                                srcSet={`${flagSrc(country.code, 160)} 2x`}
+                                                alt={language === 'en' ? country.en : country.es}
                                             />
-                                        )}
-                                        {selectedCountries.length > 0 && (
-                                            <span className="person-flags">
-                                                {selectedCountries.map((country) => (
-                                                    <img
-                                                        key={country.code}
-                                                        className="person-flag"
-                                                        src={flagSrc(country.code)}
-                                                        srcSet={`${flagSrc(country.code, 160)} 2x`}
-                                                        alt={language === 'en' ? country.en : country.es}
-                                                    />
-                                                ))}
-                                            </span>
-                                        )}
+                                        ))}
                                     </span>
-                                </span>
-                                <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
-                                <span className="basketball-person-team">{persona.equipo}</span>
-                                <span className="basketball-person-position"> {/* CAMBIO AQUÍ: Clase para la columna de posición */}
-                                    {persona.tipo === 'jugador'
-                                        ? translatePosition(persona.posicion) // Muestra la posición para jugadores
-                                        : textos[language].noPosition} {/* Muestra "N/A" o similar para entrenadores */}
-                                </span>
-                                <span className="basketball-person-links">
-                                    {persona.inst ? (
-                                        <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer">
-                                            <FaInstagram className="instagram-icon" />
-                                        </a>
-                                    ) : null}
-                                    {persona.eurobasket ? (
-                                        <a className="eurobasket-link" href={persona.eurobasket} target="_blank" rel="noopener noreferrer">
-                                            Eurobasket
-                                        </a>
-                                    ) : null}
+                                )}
+                                <span className="person-card-overlay">
+                                    {persona.equipo && <span className="basketball-person-team">{persona.equipo}</span>}
+                                    <span className="basketball-person-position">
+                                        {persona.tipo === 'jugador'
+                                            ? translatePosition(persona.posicion)
+                                            : textos[language].noPosition}
+                                    </span>
+                                    <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
+                                    {(persona.inst || persona.eurobasket) && (
+                                        <span className="basketball-person-links">
+                                            {persona.inst ? (
+                                                <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer">
+                                                    <FaInstagram className="instagram-icon" />
+                                                </a>
+                                            ) : null}
+                                            {persona.eurobasket ? (
+                                                <a className="eurobasket-link" href={persona.eurobasket} target="_blank" rel="noopener noreferrer">
+                                                    Eurobasket
+                                                </a>
+                                            ) : null}
+                                        </span>
+                                    )}
                                 </span>
                             </li>
                             );
