@@ -49,9 +49,9 @@ router.post('/', authenticateAdmin, uploadImage, async (req, res) => {
     const uploaded = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         {
-          folder: 'gpsports',
+          folder: req.query.preset === 'hero' ? 'gpsports/carousel' : 'gpsports',
           resource_type: 'image',
-          transformation: [{ width: 1200, crop: 'limit', quality: 'auto' }],
+          transformation: [{ width: req.query.preset === 'hero' ? 1920 : 1200, crop: 'limit', quality: 'auto' }],
         },
         (error, result) => {
           if (error) reject(error);

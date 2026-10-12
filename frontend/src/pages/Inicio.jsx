@@ -6,15 +6,7 @@ import "./Inicio.css";
 import SocialButtons from '../components/SocialButtons';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import laproImg from '../assets/Inicio/LaproI.avif';
-import redivoImg from '../assets/Inicio/Redivo.avif';
-import garinoImg from '../assets/Inicio/Garino.avif';
-import deliaImg from '../assets/Inicio/Delia.avif';
-import scalaImg from '../assets/Inicio/scala.avif';
-import ramellaImg from '../assets/Inicio/ramella.avif';
-import lucasImg from '../assets/Inicio/lucas.avif'
-import santander from '../assets/Inicio/santander.png';
-import duro from '../assets/Inicio/duro.png';
+import defaultCarouselImages from '../data/carouselDefaults';
 
 
 const Inicio = () => {
@@ -32,17 +24,7 @@ const Inicio = () => {
 
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    const carouselImages = [
-        { src: laproImg, alt: 'Laprovíttola' },
-        { src: redivoImg, alt: 'Redivo' },
-        { src: santander, alt: 'Santander' },
-        { src: garinoImg, alt: 'Garino' },
-        { src: scalaImg, alt: 'Scala' },
-        { src: ramellaImg, alt: 'Ramella' },
-        { src: lucasImg, alt: 'Lucas' },
-        { src: duro, alt: 'Duro' },
-        { src: deliaImg, alt: 'Delia' },
-    ];
+    const [carouselImages, setCarouselImages] = useState(defaultCarouselImages);
 
     const textos = {
         es: {
@@ -85,6 +67,31 @@ const Inicio = () => {
 
         warmupBackend();
     }, []);
+
+    useEffect(() => {
+        let cancelled = false;
+
+        const loadCarousel = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/carousel`);
+                if (!response.ok) return;
+                const slides = await response.json();
+                if (!cancelled && Array.isArray(slides) && slides.length) {
+                    setCarouselImages(slides.map((slide) => ({
+                        src: slide.url,
+                        alt: slide.alt || 'GP Sports',
+                    })));
+                }
+            } catch (error) {
+                console.warn('No se pudo cargar el carrusel:', error);
+            }
+        };
+
+        loadCarousel();
+        return () => {
+            cancelled = true;
+        };
+    }, [API_BASE_URL]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {

@@ -1,0 +1,156 @@
+.carousel-admin {
+    box-sizing: border-box;
+    width: min(960px, 100%);
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 140px 24px 80px;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+}
+
+.carousel-admin h2 {
+    margin: 0 0 12px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.carousel-admin-note,
+.carousel-admin-status {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.carousel-admin-error {
+    margin: 0 0 18px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(255, 77, 77, 0.12);
+    color: #ff8a8a;
+}
+
+.carousel-admin-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.carousel-admin-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    background: #111111;
+}
+
+.carousel-admin-item img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
+    background: #1a1a1a;
+}
+
+.carousel-admin-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.carousel-admin-fields label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.carousel-admin-fields input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 0;
+    font: inherit;
+    font-size: 1rem;
+    color: #ffffff;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.carousel-admin-fields input:focus {
+    outline: none;
+    border-bottom-color: #d4af37;
+}
+
+.carousel-admin-actions,
+.carousel-admin-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.carousel-admin-actions button,
+.carousel-admin-file,
+.carousel-admin-add,
+.carousel-admin-save,
+.carousel-admin-back {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: transparent;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.carousel-admin-add,
+.carousel-admin-actions button:first-child {
+    border: none;
+    background: #d4af37;
+    color: #111111;
+}
+
+.carousel-admin-remove {
+    border-color: rgba(255, 138, 138, 0.7);
+    color: #ff8a8a;
+}
+
+.carousel-admin-actions button:disabled,
+.carousel-admin-file:has(input:disabled),
+.carousel-admin-add:has(input:disabled),
+.carousel-admin-back:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+.carousel-admin-file input,
+.carousel-admin-add input {
+    display: none;
+}
+
+.carousel-admin-footer {
+    margin-top: 24px;
+}
+
+@media (max-width: 700px) {
+    .carousel-admin {
+        padding: 100px 16px 48px;
+    }
+
+    .carousel-admin-item {
+        grid-template-columns: 1fr;
+    }
+}

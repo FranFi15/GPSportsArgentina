@@ -13,6 +13,7 @@ import LoginPage from './components/Auth/LoginPage';
 import PersonList from './components/Admin/PersonList';
 import AddEditPerson from './components/Admin/AddEditPerson';
 import SelectPersonType from './components/Admin/SelectPersonType'; // Importa el nuevo componente
+import CarouselAdmin from './components/Admin/CarouselAdmin';
 import { LanguageProvider } from './context/LanguageContext';
 import  AuthProvider, { useAuth } from './context/AuthContext';
 import './App.css';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/admin" element={<PrivateRoute><PersonList /></PrivateRoute>} />
+            <Route path="/admin/carrusel" element={<PrivateRoute><CarouselAdmin /></PrivateRoute>} />
             <Route path="/admin/agregar" element={<PrivateRoute><SelectPersonType /></PrivateRoute>} /> {/* Nueva ruta para la selección de tipo */}
             <Route path="/admin/agregar/:tipo" element={<PrivateRoute><AddEditPerson /></PrivateRoute>} /> {/* Ruta para agregar jugador o entrenador */}
             <Route path="/admin/:tipo/editar/:id" element={<PrivateRoute><AddEditPerson /></PrivateRoute>} />
