@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import useLanguage from '../../hooks/useLanguage';
 import './Basketball.css';
 import { FaInstagram } from 'react-icons/fa6'; // Import the Instagram icon
+import { countriesFromValue, flagSrc } from '../../data/countries';
 
 const Basketball = () => {
     const [personas, setPersonas] = useState([]);
@@ -13,7 +13,6 @@ const Basketball = () => {
     const [filtroPosicion, setFiltroPosicion] = useState('todos');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
     const { language } = useLanguage();
 
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -225,16 +224,33 @@ const Basketball = () => {
                             <span className="person-position-header">{textos[language].posicion}</span> {/* CAMBIO AQUÍ: Encabezado de Posición */}
                             <span className="person-instagram-header">{textos[language].instagram}</span>
                         </li>
-                        {filteredPersonas.map(persona => (
+                        {filteredPersonas.map(persona => {
+                            const selectedCountries = countriesFromValue(persona.nacionalidad);
+                            return (
                             <li key={persona._id} className="basketball-person-item">
                                 <span className="basketball-person-image">
-                                    {persona.googleDriveLink && (
-                                        <img
-                                            src={persona.googleDriveLink}
-                                            alt={`${persona.nombre} ${persona.apellido}`}
-                                            className="person-thumbnail"
-                                        />
-                                    )}
+                                    <span className={`person-photo-wrap${persona.googleDriveLink ? '' : ' person-photo-wrap--empty'}`}>
+                                        {persona.googleDriveLink && (
+                                            <img
+                                                src={persona.googleDriveLink}
+                                                alt={`${persona.nombre} ${persona.apellido}`}
+                                                className="person-thumbnail"
+                                            />
+                                        )}
+                                        {selectedCountries.length > 0 && (
+                                            <span className="person-flags">
+                                                {selectedCountries.map((country) => (
+                                                    <img
+                                                        key={country.code}
+                                                        className="person-flag"
+                                                        src={flagSrc(country.code)}
+                                                        srcSet={`${flagSrc(country.code, 160)} 2x`}
+                                                        alt={language === 'en' ? country.en : country.es}
+                                                    />
+                                                ))}
+                                            </span>
+                                        )}
+                                    </span>
                                 </span>
                                 <span className="basketball-person-name">{formatName(persona.nombre)} {formatName(persona.apellido)}</span>
                                 <span className="basketball-person-team">{persona.equipo}</span>
@@ -243,17 +259,21 @@ const Basketball = () => {
                                         ? translatePosition(persona.posicion) // Muestra la posición para jugadores
                                         : textos[language].noPosition} {/* Muestra "N/A" o similar para entrenadores */}
                                 </span>
-                                <span className="basketball-person-instagram">
+                                <span className="basketball-person-links">
                                     {persona.inst ? (
                                         <a href={persona.inst.startsWith('http') ? persona.inst : `https://www.instagram.com/${persona.inst}`} target="_blank" rel="noopener noreferrer">
                                             <FaInstagram className="instagram-icon" />
                                         </a>
-                                    ) : (
-                                        '-'
-                                    )}
+                                    ) : null}
+                                    {persona.eurobasket ? (
+                                        <a className="eurobasket-link" href={persona.eurobasket} target="_blank" rel="noopener noreferrer">
+                                            Eurobasket
+                                        </a>
+                                    ) : null}
                                 </span>
                             </li>
-                        ))}
+                            );
+                        })}
                     </ul>
                 </>
             )}

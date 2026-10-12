@@ -134,6 +134,38 @@
     align-items: center;
 }
 
+.person-photo-wrap {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
+.person-photo-wrap--empty {
+    line-height: normal;
+    min-height: 36px;
+}
+
+.person-flags {
+    position: absolute;
+    right: 2px;
+    bottom: 8px;
+    display: flex;
+    gap: 4px;
+}
+
+.person-flag {
+    width: 36px;
+    height: 24px;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    border-radius: 2px;
+}
+
+.person-photo-wrap--empty .person-flags {
+    position: static;
+    justify-content: center;
+}
+
 .person-thumbnail {
     width: 150px; /* Tamaño fijo para el thumbnail */
     height: 150px; /* Altura fija para el thumbnail */
@@ -173,11 +205,32 @@
     color: #C13584; /* Color de Instagram */
 }
 
-.basketball-person-instagram a {
+.basketball-person-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.basketball-person-links a {
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+
+.eurobasket-link {
+    color: #ffffff;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #cc6f04;
+}
+
+.eurobasket-link:hover {
+    color: #cc6f04;
 }
 
 

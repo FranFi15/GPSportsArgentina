@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const authenticateAdmin = (req, res, next) => {
-  const token = req.header('Authorization');
+  const header = req.header('Authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7).trim() : header.trim();
 
   if (!token) {
     return res.status(401).json({ message: 'Acceso denegado. No se proporcionó token.' });
