@@ -72,6 +72,7 @@ const countryList = [
   { code: 'RU', es: 'Rusia', en: 'Russia', aliases: ['ruso', 'rusa'] },
   { code: 'SN', es: 'Senegal', en: 'Senegal', aliases: ['senegales'] },
   { code: 'RS', es: 'Serbia', en: 'Serbia', aliases: ['serbio', 'serbia'] },
+  { code: 'SY', es: 'Siria', en: 'Syria', aliases: ['sirio', 'siria'] },
   { code: 'ZA', es: 'Sudáfrica', en: 'South Africa', aliases: ['sudafricano'] },
   { code: 'SE', es: 'Suecia', en: 'Sweden', aliases: ['sueco', 'sueca'] },
   { code: 'CH', es: 'Suiza', en: 'Switzerland', aliases: ['suizo', 'suiza'] },
