@@ -128,16 +128,21 @@
 }
 
 .person-list-container ul.person-list li.person-item .person-image {
+    position: relative;
     width: 72px;
     height: 96px;
     border-radius: 14px;
     overflow: hidden;
     background: #1a1a1a;
+    flex-shrink: 0;
 }
 
 .person-list-container ul.person-list li.person-item .person-thumbnail {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    max-width: none;
     object-fit: cover;
     object-position: center top;
     display: block;

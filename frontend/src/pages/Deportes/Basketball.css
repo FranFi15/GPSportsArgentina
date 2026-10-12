@@ -115,15 +115,15 @@
     text-align: center;
 }
 
-.person-thumbnail,
-.person-photo-fallback {
+.basketball-person-item .person-thumbnail,
+.basketball-person-item .person-photo-fallback {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
 }
 
-.person-thumbnail {
+.basketball-person-item .person-thumbnail {
     object-fit: cover;
     object-position: center top;
     transition: transform 0.45s ease;
