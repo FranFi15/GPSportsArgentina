@@ -27,8 +27,8 @@ const normalizeUrl = (value) => {
   return `https://${trimmed}`;
 };
 
-const coverLayout = (frameWidth, frameHeight, imageWidth, imageHeight) => {
-  const scale = Math.max(frameWidth / imageWidth, frameHeight / imageHeight);
+const coverLayout = (frameWidth, frameHeight, imageWidth, imageHeight, zoom = 1) => {
+  const scale = Math.max(frameWidth / imageWidth, frameHeight / imageHeight) * zoom;
   return {
     width: imageWidth * scale,
     height: imageHeight * scale,
@@ -71,6 +71,7 @@ const AddEditPerson = () => {
   const [naturalSize, setNaturalSize] = useState(null);
   const [frameSize, setFrameSize] = useState({ width: 0, height: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const frameRef = useRef(null);
@@ -87,6 +88,7 @@ const AddEditPerson = () => {
     }
     const url = URL.createObjectURL(imageFile);
     setPreviewUrl(url);
+    setZoom(1);
     setNaturalSize(null);
     const image = new Image();
     image.onload = () => {
@@ -167,8 +169,8 @@ const AddEditPerson = () => {
 
   const layout = useMemo(() => {
     if (!naturalSize || !frameSize.width || !frameSize.height) return null;
-    return coverLayout(frameSize.width, frameSize.height, naturalSize.width, naturalSize.height);
-  }, [naturalSize, frameSize]);
+    return coverLayout(frameSize.width, frameSize.height, naturalSize.width, naturalSize.height, zoom);
+  }, [naturalSize, frameSize, zoom]);
 
   useEffect(() => {
     if (!layout || !frameSize.width || !naturalSize) return;
@@ -179,6 +181,22 @@ const AddEditPerson = () => {
     }
     setOffset((current) => clampOffset(current.x, current.y, layout, frameSize));
   }, [naturalSize, layout, frameSize]);
+
+  const changeZoom = (nextZoom) => {
+    const value = Math.min(2.5, Math.max(1, nextZoom));
+    if (layout && naturalSize && frameSize.width) {
+      const nextLayout = coverLayout(frameSize.width, frameSize.height, naturalSize.width, naturalSize.height, value);
+      const focusX = (-offset.x + frameSize.width / 2) / layout.width;
+      const focusY = (-offset.y + frameSize.height / 2) / layout.height;
+      setOffset(clampOffset(
+        frameSize.width / 2 - focusX * nextLayout.width,
+        frameSize.height / 2 - focusY * nextLayout.height,
+        nextLayout,
+        frameSize,
+      ));
+    }
+    setZoom(value);
+  };
 
   const movePhoto = (event) => {
     if (!dragRef.current || !layout) return;
@@ -312,6 +330,19 @@ const AddEditPerson = () => {
             )}
             {previewUrl && <span className="photo-adjust-hint">Arrastrá para encuadrar</span>}
           </div>
+          {previewUrl && (
+            <label className="photo-zoom">
+              Zoom
+              <input
+                type="range"
+                min="1"
+                max="2.5"
+                step="0.05"
+                value={zoom}
+                onChange={(event) => changeZoom(Number(event.target.value))}
+              />
+            </label>
+          )}
           <label className="file-picker">
             {imageFile ? imageFile.name : 'Elegir imagen'}
             <input id="foto" type="file" accept="image/*" onChange={handleImageChange} />

@@ -178,6 +178,28 @@
     text-transform: uppercase;
 }
 
+.add-edit-person-form .form-group > .photo-zoom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.photo-zoom input[type="range"] {
+    flex: 1;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    accent-color: #d4af37;
+    cursor: pointer;
+}
+
+.photo-zoom input[type="range"]:focus {
+    border: none;
+}
+
 .file-picker {
     display: flex;
     align-items: center;
