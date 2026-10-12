@@ -7,6 +7,7 @@ import SocialButtons from '../components/SocialButtons';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import defaultCarouselImages from '../data/carouselDefaults';
+import { frameStyle } from '../data/carouselFrame';
 
 
 const Inicio = () => {
@@ -80,6 +81,9 @@ const Inicio = () => {
                     setCarouselImages(slides.map((slide) => ({
                         src: slide.url,
                         alt: slide.alt || 'GP Sports',
+                        zoom: slide.zoom,
+                        x: slide.x,
+                        y: slide.y,
                     })));
                 }
             } catch (error) {
@@ -146,7 +150,7 @@ const Inicio = () => {
                 >
                     {carouselImages.map((image, index) => (
                         <div key={index}>
-                            <img src={image.src} alt={image.alt} />
+                            <img src={image.src} alt={image.alt} style={frameStyle(image)} />
                         </div>
                     ))}
                 </Carousel>

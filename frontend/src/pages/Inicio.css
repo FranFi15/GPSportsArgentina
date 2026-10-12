@@ -20,9 +20,11 @@
 
 .carousel .slide {
     background: transparent;
+    overflow: hidden;
 }
 
 .carousel .slide > div{
+    overflow: hidden;
     opacity: 0; /* Default hidden */
 }
 .carousel .slide.selected > div{

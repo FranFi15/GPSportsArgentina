@@ -42,7 +42,7 @@
 
 .carousel-admin-item {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: minmax(240px, 320px) 1fr;
     gap: 20px;
     padding: 16px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -50,13 +50,85 @@
     background: #111111;
 }
 
-.carousel-admin-item img {
+.carousel-admin-item img,
+.carousel-frame img {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: 100%;
+    aspect-ratio: auto;
     object-fit: cover;
-    object-position: center top;
+    border-radius: 0;
+    background: #1a1a1a;
+}
+
+.carousel-frame-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.carousel-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
     border-radius: 12px;
     background: #1a1a1a;
+    cursor: grab;
+    touch-action: none;
+}
+
+.carousel-frame:active {
+    cursor: grabbing;
+}
+
+.carousel-frame img {
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.carousel-pan {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+}
+
+.carousel-pan div {
+    display: flex;
+    gap: 28px;
+}
+
+.carousel-pan button {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.carousel-pan button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+.carousel-zoom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.carousel-zoom input {
+    flex: 1;
+    accent-color: #d4af37;
 }
 
 .carousel-admin-fields {
@@ -131,6 +203,7 @@
 .carousel-admin-actions button:disabled,
 .carousel-admin-file:has(input:disabled),
 .carousel-admin-add:has(input:disabled),
+.carousel-admin-save:disabled,
 .carousel-admin-back:disabled {
     opacity: 0.5;
     cursor: wait;

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import defaultCarouselImages from '../../data/carouselDefaults';
+import { clampFrame, defaultFrame, frameStyle } from '../../data/carouselFrame';
 import './CarouselAdmin.css';
 
 const MAX_SLIDES = 20;
@@ -14,6 +15,80 @@ const needsUpload = (url) => {
   } catch {
     return true;
   }
+};
+
+const withFrame = (slide) => ({
+  ...defaultFrame,
+  ...slide,
+  ...clampFrame(slide),
+});
+
+const SlideFrame = ({ slide, disabled, onChange }) => {
+  const frameRef = useRef(null);
+  const dragRef = useRef(null);
+  const frame = clampFrame(slide);
+
+  const nudge = (xDelta, yDelta) => {
+    onChange(clampFrame({
+      ...frame,
+      x: frame.x + xDelta,
+      y: frame.y + yDelta,
+    }));
+  };
+
+  return (
+    <div className="carousel-frame-editor">
+      <div
+        className="carousel-frame"
+        ref={frameRef}
+        onPointerDown={(event) => {
+          if (disabled) return;
+          event.currentTarget.setPointerCapture(event.pointerId);
+          dragRef.current = {
+            pointerX: event.clientX,
+            pointerY: event.clientY,
+            x: frame.x,
+            y: frame.y,
+          };
+        }}
+        onPointerMove={(event) => {
+          if (!dragRef.current || !frameRef.current) return;
+          const rect = frameRef.current.getBoundingClientRect();
+          const deltaX = ((event.clientX - dragRef.current.pointerX) / rect.width) * 100;
+          const deltaY = ((event.clientY - dragRef.current.pointerY) / rect.height) * 100;
+          onChange(clampFrame({
+            ...frame,
+            x: dragRef.current.x - deltaX,
+            y: dragRef.current.y - deltaY,
+          }));
+        }}
+        onPointerUp={() => { dragRef.current = null; }}
+        onPointerCancel={() => { dragRef.current = null; }}
+      >
+        <img src={slide.url} alt={slide.alt || ''} draggable={false} style={frameStyle(frame)} />
+      </div>
+      <div className="carousel-pan">
+        <button type="button" aria-label="Arriba" onClick={() => nudge(0, -8)} disabled={disabled}>↑</button>
+        <div>
+          <button type="button" aria-label="Izquierda" onClick={() => nudge(-8, 0)} disabled={disabled}>←</button>
+          <button type="button" aria-label="Derecha" onClick={() => nudge(8, 0)} disabled={disabled}>→</button>
+        </div>
+        <button type="button" aria-label="Abajo" onClick={() => nudge(0, 8)} disabled={disabled}>↓</button>
+      </div>
+      <label className="carousel-zoom">
+        Zoom
+        <input
+          type="range"
+          min="1"
+          max="2.5"
+          step="0.05"
+          value={frame.zoom}
+          disabled={disabled}
+          onChange={(event) => onChange(clampFrame({ ...frame, zoom: Number(event.target.value) }))}
+        />
+      </label>
+    </div>
+  );
 };
 
 const CarouselAdmin = () => {
@@ -33,14 +108,14 @@ const CarouselAdmin = () => {
         if (!response.ok) throw new Error('No se pudo cargar el carrusel.');
         const data = await response.json();
         if (Array.isArray(data) && data.length) {
-          setSlides(data.map((slide) => ({ url: slide.url, alt: slide.alt || '' })));
+          setSlides(data.map((slide) => withFrame({ url: slide.url, alt: slide.alt || '', zoom: slide.zoom, x: slide.x, y: slide.y })));
           setUsingDefaults(false);
           return;
         }
       } catch (err) {
         setError(err.message);
       }
-      setSlides(defaultCarouselImages.map((image) => ({ url: image.src, alt: image.alt })));
+      setSlides(defaultCarouselImages.map((image) => withFrame({ url: image.src, alt: image.alt })));
       setUsingDefaults(true);
     };
 
@@ -78,7 +153,13 @@ const CarouselAdmin = () => {
           const file = new File([blob], `${slide.alt || 'slide'}.${extension}`, { type: blob.type || 'image/avif' });
           url = await uploadFile(file);
         }
-        prepared.push({ url, alt: slide.alt || '' });
+        prepared.push({
+          url,
+          alt: slide.alt || '',
+          zoom: clampFrame(slide).zoom,
+          x: clampFrame(slide).x,
+          y: clampFrame(slide).y,
+        });
       }
 
       const response = await fetch(`${apiBaseUrl}/api/carousel`, {
@@ -93,10 +174,10 @@ const CarouselAdmin = () => {
       if (!response.ok) throw new Error(data.message || 'No se pudo guardar el carrusel.');
 
       if (!data.length) {
-        setSlides(defaultCarouselImages.map((image) => ({ url: image.src, alt: image.alt })));
+        setSlides(defaultCarouselImages.map((image) => withFrame({ url: image.src, alt: image.alt })));
         setUsingDefaults(true);
       } else {
-        setSlides(data.map((slide) => ({ url: slide.url, alt: slide.alt || '' })));
+        setSlides(data.map((slide) => withFrame(slide)));
         setUsingDefaults(false);
       }
       setStatus('Carrusel actualizado.');
@@ -138,7 +219,7 @@ const CarouselAdmin = () => {
   const replace = (index, file) => {
     if (busy || !file || !checkFile(file)) return;
     const next = slides.map((slide, itemIndex) => (
-      itemIndex === index ? { ...slide, file, url: URL.createObjectURL(file) } : slide
+      itemIndex === index ? withFrame({ ...slide, file, url: URL.createObjectURL(file), ...defaultFrame }) : slide
     ));
     setSlides(next);
     saveSlides(next);
@@ -150,9 +231,15 @@ const CarouselAdmin = () => {
       setError('El carrusel admite hasta 20 fotos.');
       return;
     }
-    const next = [...slides, { url: URL.createObjectURL(file), alt: '', file }];
+    const next = [...slides, withFrame({ url: URL.createObjectURL(file), alt: '', file, ...defaultFrame })];
     setSlides(next);
     saveSlides(next);
+  };
+
+  const updateFrame = (index, frame) => {
+    setSlides((current) => current.map((slide, itemIndex) => (
+      itemIndex === index ? { ...slide, ...clampFrame(frame) } : slide
+    )));
   };
 
   const updateAlt = (index, alt) => {
@@ -166,8 +253,8 @@ const CarouselAdmin = () => {
       <h2>Carrusel de inicio</h2>
       <p className="carousel-admin-note">
         {usingDefaults
-          ? 'Estas son las fotos que se ven ahora en el inicio. Al cambiar una, se guarda el carrusel completo.'
-          : 'Estas fotos son las que aparecen en el inicio.'}
+          ? 'Estas son las fotos del inicio. Ajustá el zoom y la posición. Al guardar, se guarda el carrusel completo.'
+          : 'Mové cada foto con las flechas o arrastrándola, cambiá el zoom y guardá.'}
       </p>
       {error && <p className="carousel-admin-error">{error}</p>}
       {status && <p className="carousel-admin-status">{status}</p>}
@@ -175,7 +262,11 @@ const CarouselAdmin = () => {
       <ul className="carousel-admin-list">
         {slides.map((slide, index) => (
           <li key={`${slide.url}-${index}`} className="carousel-admin-item">
-            <img src={slide.url} alt={slide.alt || ''} />
+            <SlideFrame
+              slide={slide}
+              disabled={busy}
+              onChange={(frame) => updateFrame(index, frame)}
+            />
             <div className="carousel-admin-fields">
               <label htmlFor={`slide-alt-${index}`}>Nombre</label>
               <input
@@ -220,7 +311,7 @@ const CarouselAdmin = () => {
           />
         </label>
         <button type="button" className="carousel-admin-save" onClick={() => saveSlides(slides)} disabled={busy}>
-          Guardar nombres
+          Guardar cambios
         </button>
         <button type="button" className="carousel-admin-back" onClick={() => navigate('/admin')} disabled={busy}>
           Volver

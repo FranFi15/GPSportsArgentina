@@ -29,9 +29,15 @@ router.put('/', authenticateAdmin, async (req, res) => {
     if (!url.startsWith('https://')) {
       return res.status(400).json({ message: 'Cada foto tiene que ser un enlace seguro.' });
     }
+    const zoom = Number(slide.zoom);
+    const x = Number(slide.x);
+    const y = Number(slide.y);
     cleaned.push({
       url,
       alt: typeof slide.alt === 'string' ? slide.alt.trim().slice(0, 80) : '',
+      zoom: Number.isFinite(zoom) ? Math.min(2.5, Math.max(1, zoom)) : 1,
+      x: Number.isFinite(x) ? Math.min(100, Math.max(0, x)) : 50,
+      y: Number.isFinite(y) ? Math.min(100, Math.max(0, y)) : 0,
     });
   }
 
