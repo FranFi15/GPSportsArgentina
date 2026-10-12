@@ -49,13 +49,13 @@
 
 .select-person-type-container .add-jugador-button,
 .select-person-type-container .add-entrenador-button {
-    background-color: #cc6f04; /* Color naranja oscuro para añadir */
+    background-color: #d4af37; /* Color naranja oscuro para añadir */
     color: white;
 }
 
 .select-person-type-container .add-jugador-button:hover,
 .select-person-type-container .add-entrenador-button:hover {
-    background-color: #a95b01; /* Tono más oscuro al pasar el ratón */
+    background-color: #b8922a; /* Tono más oscuro al pasar el ratón */
 }
 
 /* Estilo para el nuevo botón de Redes Sociales */

@@ -35,7 +35,7 @@
 
 /* Estilo específico para el botón activo (Iniciar Sesión) */
 .auth-buttons .active {
-  background-color: #cc6f04; /* Color de tu marca (naranja oscuro) */
+  background-color: #d4af37; /* Color de tu marca (naranja oscuro) */
   font-weight: bold; /* Texto en negrita para el botón que representa el estado actual */
 }
 
@@ -106,7 +106,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* Estilo al enfocar los campos de entrada (cuando el usuario hace clic o tabula sobre ellos) */
 .form-group input:focus {
   outline: none; /* Quita el contorno por defecto del navegador */
-  border-bottom: solid 1px #cc6f04; /* Cambia el color del borde inferior al color de tu marca */
+  border-bottom: solid 1px #d4af37; /* Cambia el color del borde inferior al color de tu marca */
 }
 
 /* Contenedor específico para el input de contraseña y el botón de alternar visibilidad */
@@ -163,7 +163,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Estilo del botón de Iniciar Sesión principal */
 .login-button {
-  background-color: #cc6f04; /* Color de tu marca */
+  background-color: #d4af37; /* Color de tu marca */
   color: white; /* Color del texto */
   padding: 15px 20px; /* Mayor padding para un botón más grande */
   border: none; /* Sin borde */
@@ -177,7 +177,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Efecto hover para el botón de Iniciar Sesión */
 .login-button:hover {
-  background-color: #a95b01; /* Color más oscuro al pasar el ratón */
+  background-color: #b8922a; /* Color más oscuro al pasar el ratón */
   transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
 }
 

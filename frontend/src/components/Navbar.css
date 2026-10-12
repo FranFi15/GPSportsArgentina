@@ -106,7 +106,7 @@
     left: 0; /* Comienza desde la izquierda */
     height: 1px; /* Grosor de la línea */
     width: 0; /* Ancho inicial CERO */
-    background-color: #cc6f04; /* Color de la línea */
+    background-color: #d4af37; /* Color de la línea */
     /* Transición para la propiedad width */
     transition: 0.3s ease-in-out;
   }
@@ -115,7 +115,7 @@
   .navbar-nav-link:hover,
   .navbar-dropdown-trigger:hover,
   .navbar-button:hover {
-    color: #cc6f04;
+    color: #d4af37;
      /* Mantenemos cambio de color de texto */
     /* border-bottom-color: black; -> ELIMINADO */
   }
@@ -153,7 +153,7 @@
       
   }
   .navbar-dropdown-menu .navbar-nav-link:hover {
-    color: #cc6f04;
+    color: #d4af37;
   }
   .navbar-language-buttons {
     display: flex; /* Para alinear los botones horizontalmente */
@@ -237,7 +237,7 @@
     .navbar-dropdown-trigger:hover,
     .navbar-button:hover {
        background-color: #f8f9fa;
-       color: #cc6f04;
+       color: #d4af37;
     }
   
     .navbar-language-buttons {

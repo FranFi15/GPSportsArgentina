@@ -191,20 +191,35 @@ const AddEditPerson = () => {
       <h2 className="add-edit-person-title">{id ? `Editar ${tipo}` : `Agregar Nuevo ${tipo}`}</h2>
       {error && <p className="error-message">{error}</p>}
       <form className="add-edit-person-form" onSubmit={handleSubmit}>
+        <div className="form-group form-group-photo">
+          <label htmlFor="foto">Foto</label>
+          <div className="photo-frame">
+            {shownPreview ? (
+              <img src={shownPreview} alt="" className="photo-preview" />
+            ) : (
+              <span className="photo-placeholder">Sin foto</span>
+            )}
+          </div>
+          <label className="file-picker">
+            {imageFile ? imageFile.name : 'Elegir imagen'}
+            <input id="foto" type="file" accept="image/*" onChange={handleImageChange} />
+          </label>
+        </div>
+        <div className="form-main">
         <div className="form-group">
-          <label htmlFor="nombre">Nombre:</label>
+          <label htmlFor="nombre">Nombre</label>
           <input type="text" id="nombre" name="nombre" className="form-control" value={formData.nombre} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label htmlFor="apellido">Apellido:</label>
+          <label htmlFor="apellido">Apellido</label>
           <input type="text" id="apellido" name="apellido" className="form-control" value={formData.apellido} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
+          <label htmlFor="fechaNacimiento">Fecha de nacimiento</label>
           <input type="date" id="fechaNacimiento" name="fechaNacimiento" className="form-control" value={formData.fechaNacimiento} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="nacionalidad">Nacionalidad:</label>
+          <label htmlFor="nacionalidad">Nacionalidad</label>
           <div className="nationality-field">
             {countriesFromValue(formData.nacionalidad).length > 0 && (
               <div className="nationality-selected">
@@ -226,16 +241,16 @@ const AddEditPerson = () => {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="categoria">Categoría:</label>
+          <label htmlFor="categoria">Categoría</label>
           <input type="text" id="categoria" name="categoria" className="form-control" value={formData.categoria} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="equipo">Equipo:</label>
+          <label htmlFor="equipo">Equipo</label>
           <input type="text" id="equipo" name="equipo" className="form-control" value={formData.equipo} onChange={handleChange} />
         </div>
         {tipo === 'jugador' && (
           <div className="form-group">
-            <label htmlFor="posicion">Posición:</label>
+            <label htmlFor="posicion">Posición</label>
             <select id="posicion" name="posicion" className="form-control" value={formData.posicion} onChange={handleChange} required>
               <option value="">Seleccionar</option>
               <option value="base">Base</option>
@@ -246,12 +261,13 @@ const AddEditPerson = () => {
             </select>
           </div>
         )}
-        <div className="form-group">
-          <label htmlFor="inst">Instagram:</label>
+        </div>
+        <div className="form-group form-group-wide">
+          <label htmlFor="inst">Instagram</label>
           <input type="text" id="inst" name="inst" className="form-control" value={formData.inst || ''} onChange={handleChange} />
         </div>
-        <div className="form-group">
-          <label htmlFor="eurobasket">Eurobasket:</label>
+        <div className="form-group form-group-wide">
+          <label htmlFor="eurobasket">Eurobasket</label>
           <input
             type="text"
             id="eurobasket"
@@ -262,8 +278,8 @@ const AddEditPerson = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="highlights">Highlights:</label>
+        <div className="form-group form-group-wide">
+          <label htmlFor="highlights">Highlights</label>
           <input
             type="text"
             id="highlights"
@@ -273,16 +289,6 @@ const AddEditPerson = () => {
             value={formData.highlights || ''}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-group form-group-photo">
-          <label htmlFor="foto">Foto:</label>
-          {shownPreview && (
-            <img src={shownPreview} alt="" className="photo-preview" />
-          )}
-          <label className="file-picker">
-            {imageFile ? imageFile.name : 'Elegir imagen'}
-            <input id="foto" type="file" accept="image/*" onChange={handleImageChange} />
-          </label>
         </div>
         <div className="form-actions">
           <button type="submit" className="submit-button" disabled={saving}>

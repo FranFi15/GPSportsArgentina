@@ -23,7 +23,7 @@
 
 .loading-spinner {
     border: 8px solid #f3f3f3; /* Light grey */
-    border-top: 8px solid #cc6f04; /* Blue */
+    border-top: 8px solid #d4af37; /* Blue */
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -81,7 +81,7 @@
 .basketball-filter-input:focus,
 .basketball-filter-select:focus {
     outline: none;
-    border-bottom-color: #cc6f04; /* Resalta el borde al enfocar */
+    border-bottom-color: #d4af37; /* Resalta el borde al enfocar */
 }
 
 /* --- CAMBIOS CLAVE PARA EL ASPECTO DE CATÁLOGO --- */
@@ -113,11 +113,6 @@
     border-radius: 28px;
     display: block;
     text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.basketball-person-item:hover {
-    transform: translateY(-6px);
 }
 
 .person-thumbnail,
@@ -131,6 +126,11 @@
 .person-thumbnail {
     object-fit: cover;
     object-position: center top;
+    transition: transform 0.45s ease;
+}
+
+.basketball-person-item:hover .person-thumbnail {
+    transform: scale(1.08);
 }
 
 .person-flags {
@@ -212,7 +212,7 @@
 }
 
 .card-icon-stats:hover {
-    color: #cc6f04;
+    color: #d4af37;
 }
 
 .card-icon-youtube:hover {

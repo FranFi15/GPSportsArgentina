@@ -98,7 +98,7 @@
     height: 150px; /* Size for the image */
     border-radius: 50%; /* Re-added border-radius for staff images */
     overflow: hidden;
-    border: 2px solid var(--color-primario, #f39c12); /* Re-added border for staff images */
+    border: 2px solid var(--color-primario, #d4af37); /* Re-added border for staff images */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;

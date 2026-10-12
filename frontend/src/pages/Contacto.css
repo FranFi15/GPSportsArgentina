@@ -162,12 +162,12 @@
 /* Estilo al enfocar los inputs y textareas */
 .form-group input:focus,
 .form-group textarea:focus {
-  border-bottom-color: #cc6f04; /* Color de tu marca al enfocar (como el login) */
+  border-bottom-color: #d4af37; /* Color de tu marca al enfocar (como el login) */
 }
 
 /* Estilo del botón de enviar mensaje */
 .contact-form button[type="submit"] {
-  background-color: #cc6f04; /* Color de tu marca (como el login) */
+  background-color: #d4af37; /* Color de tu marca (como el login) */
   color: #ffffff;
   border: none;
   padding: 15px 20px; /* Relleno como el botón de login */
@@ -183,7 +183,7 @@
 
 /* Efecto hover para el botón de enviar mensaje */
 .contact-form button[type="submit"]:hover {
-  background-color: #a95b01; /* Color más oscuro al pasar el ratón (como el login) */
+  background-color: #b8922a; /* Color más oscuro al pasar el ratón (como el login) */
   transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
 }
 
