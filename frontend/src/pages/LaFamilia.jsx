@@ -92,7 +92,6 @@ const LaFamilia = () => {
               </button>
             ))}
           </div>
-          {active?.caption && <p className="familia-caption">{active.caption}</p>}
           {photos.length > 0 && (
             <div className="familia-carousel">
               <Carousel
@@ -111,6 +110,10 @@ const LaFamilia = () => {
                   </div>
                 ))}
               </Carousel>
+              <div className="familia-overlay">
+                <h2>{active.title}</h2>
+                {active.caption && <p>{active.caption}</p>}
+              </div>
             </div>
           )}
         </section>
