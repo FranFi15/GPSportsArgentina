@@ -13,8 +13,8 @@ const Navbar = () => {
     const location = useLocation();
 
     const textos = {
-        es: { inicio: 'Inicio', laEmpresa: 'La Agencia', teamGPSport: '#TeamGPSports', laFamilia: 'La Familia', charlas: 'Conferencias', mkt: 'MKT', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
-        en: { inicio: 'Home', laEmpresa: 'The Agency', teamGPSport: '#TeamGPSports', laFamilia: 'The Family', charlas: 'Conferences', mkt: 'MKT', deportes: 'Sports', basketball: 'Basketball', contact: 'Contact', admin: 'Admin' }
+        es: { inicio: 'Inicio', laEmpresa: 'La Agencia', teamGPSport: '#TeamGPSports', laFamilia: 'Beyond The Game', charlas: 'Conferencias', mkt: 'MKT', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
+        en: { inicio: 'Home', laEmpresa: 'The Agency', teamGPSport: '#TeamGPSports', laFamilia: 'Beyond The Game', charlas: 'Conferences', mkt: 'MKT', deportes: 'Sports', basketball: 'Basketball', contact: 'Contact', admin: 'Admin' }
     };
 
     useEffect(() => {
