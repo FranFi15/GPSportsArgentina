@@ -12,7 +12,9 @@ const cleanAlbum = (body) => {
     return { error: 'El álbum necesita un título de hasta 80 caracteres.' };
   }
 
+  const titleEn = typeof body?.titleEn === 'string' ? body.titleEn.trim().slice(0, 80) : '';
   const caption = typeof body?.caption === 'string' ? body.caption.trim().slice(0, 300) : '';
+  const captionEn = typeof body?.captionEn === 'string' ? body.captionEn.trim().slice(0, 300) : '';
   if (!Array.isArray(body?.photos)) {
     return { error: 'Enviá las fotos del álbum.' };
   }
@@ -42,7 +44,7 @@ const cleanAlbum = (body) => {
     return { error: 'Agregá al menos una foto.' };
   }
 
-  return { album: { title, caption, photos } };
+  return { album: { title, titleEn, caption, captionEn, photos } };
 };
 
 router.get('/', async (req, res) => {

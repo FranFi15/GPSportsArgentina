@@ -62,6 +62,8 @@ const LaFamilia = () => {
 
   const active = albums.find((album) => album._id === activeId) || null;
   const photos = active?.photos || [];
+  const activeTitle = language === 'en' && active?.titleEn ? active.titleEn : active?.title;
+  const activeCaption = language === 'en' && active?.captionEn ? active.captionEn : active?.caption;
 
   return (
     <main className="la-familia">
@@ -88,7 +90,7 @@ const LaFamilia = () => {
                 className={`familia-pill${album._id === active?._id ? ' familia-pill-active' : ''}`}
                 onClick={() => setActiveId(album._id)}
               >
-                {album.title}
+                {language === 'en' && album.titleEn ? album.titleEn : album.title}
               </button>
             ))}
           </div>
@@ -106,13 +108,13 @@ const LaFamilia = () => {
               >
                 {photos.map((photo, index) => (
                   <div key={`${photo.url}-${index}`}>
-                    <img src={photo.url} alt={photo.alt || active.title} style={frameStyle(photo)} />
+                    <img src={photo.url} alt={photo.alt || activeTitle} style={frameStyle(photo)} />
                   </div>
                 ))}
               </Carousel>
               <div className="familia-overlay">
-                <h2>{active.title}</h2>
-                {active.caption && <p>{active.caption}</p>}
+                <h2>{activeTitle}</h2>
+                {activeCaption && <p>{activeCaption}</p>}
               </div>
             </div>
           )}

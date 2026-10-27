@@ -7,7 +7,7 @@ import './FamiliaAdmin.css';
 const MAX_PHOTOS = 40;
 const MAX_BYTES = 5 * 1024 * 1024;
 
-const emptyDraft = { title: '', caption: '', photos: [] };
+const emptyDraft = { title: '', titleEn: '', caption: '', captionEn: '', photos: [] };
 
 const PhotoFrame = ({ photo, disabled, onChange }) => {
   const frameRef = useRef(null);
@@ -95,7 +95,7 @@ const FamiliaAdmin = () => {
 
   useEffect(() => {
     if (isNew) {
-      setDraft({ title: '', caption: '', photos: [] });
+      setDraft({ ...emptyDraft, photos: [] });
       setError('');
       setLoading(false);
       return undefined;
@@ -114,7 +114,9 @@ const FamiliaAdmin = () => {
           if (!current) throw new Error('Álbum no encontrado.');
           setDraft({
             title: current.title || '',
+            titleEn: current.titleEn || '',
             caption: current.caption || '',
+            captionEn: current.captionEn || '',
             photos: (current.photos || []).map((photo) => ({
               url: photo.url,
               alt: photo.alt || '',
@@ -216,7 +218,9 @@ const FamiliaAdmin = () => {
         },
         body: JSON.stringify({
           title: draft.title.trim(),
+          titleEn: draft.titleEn.trim(),
           caption: draft.caption.trim(),
+          captionEn: draft.captionEn.trim(),
           photos,
         }),
       });
@@ -330,6 +334,16 @@ const FamiliaAdmin = () => {
         disabled={busy}
         required
       />
+      <label htmlFor="album-title-en">Título en inglés</label>
+      <input
+        id="album-title-en"
+        type="text"
+        value={draft.titleEn}
+        maxLength={80}
+        placeholder="Title in English"
+        onChange={(event) => setDraft((current) => ({ ...current, titleEn: event.target.value }))}
+        disabled={busy}
+      />
       <label htmlFor="album-caption">Nota</label>
       <input
         id="album-caption"
@@ -338,6 +352,16 @@ const FamiliaAdmin = () => {
         maxLength={300}
         placeholder="Ciudad, fecha o un detalle del encuentro"
         onChange={(event) => setDraft((current) => ({ ...current, caption: event.target.value }))}
+        disabled={busy}
+      />
+      <label htmlFor="album-caption-en">Nota en inglés</label>
+      <input
+        id="album-caption-en"
+        type="text"
+        value={draft.captionEn}
+        maxLength={300}
+        placeholder="City, date, or a detail of the visit"
+        onChange={(event) => setDraft((current) => ({ ...current, captionEn: event.target.value }))}
         disabled={busy}
       />
       <div className="familia-admin-toolbar">
