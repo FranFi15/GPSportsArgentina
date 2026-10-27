@@ -125,11 +125,15 @@ const LaFamilia = () => {
                       <>
                         <video
                           src={photo.url}
+                          muted
                           controls={playing}
                           playsInline
                           preload="metadata"
                           onPlay={() => setPlaying(true)}
                           onPause={() => setPlaying(false)}
+                          onVolumeChange={(event) => {
+                            if (!event.currentTarget.muted) event.currentTarget.muted = true;
+                          }}
                         />
                         <button
                           type="button"
@@ -137,7 +141,10 @@ const LaFamilia = () => {
                           aria-label="Reproducir"
                           onClick={(event) => {
                             event.stopPropagation();
-                            event.currentTarget.parentElement.querySelector('video')?.play()?.catch(() => {});
+                            const video = event.currentTarget.parentElement.querySelector('video');
+                            if (!video) return;
+                            video.muted = true;
+                            video.play()?.catch(() => {});
                           }}
                         />
                       </>
