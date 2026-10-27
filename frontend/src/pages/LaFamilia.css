@@ -1,0 +1,225 @@
+.la-familia {
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 140px 24px 80px;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+   
+}
+
+.la-familia-intro {
+    margin: 0 auto 64px;
+    padding: 40px;
+}
+
+.la-familia-kicker {
+    margin: 0;
+    color: #d4af37;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.la-familia-intro h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 10rem; /* Adjust size as desired */
+    text-shadow: #000000 2px 2px 8px;
+    opacity: 0;
+    animation: fade-in-down 2s ease-out forwards;
+}
+@keyframes fade-in-down {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.la-familia-intro p,
+.familia-detail > p {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 1.1rem;
+    font-weight: 200;
+    line-height: 2rem;
+}
+
+.la-familia-status {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.62);
+    text-align: center;
+}
+
+.familia-albums,
+.familia-detail {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.familia-albums,
+.familia-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.familia-album,
+.familia-photo {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    padding: 0;
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #111111;
+    cursor: pointer;
+}
+
+.familia-photo {
+    aspect-ratio: 1;
+}
+
+.familia-album img,
+.familia-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.familia-album:hover img,
+.familia-photo:hover img {
+    transform: scale(1.06);
+}
+
+.familia-album span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 56px 16px 16px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+    color: #ffffff;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    text-align: left;
+}
+
+.familia-album small {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.familia-back {
+    margin-bottom: 18px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.familia-back:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+.familia-detail h2 {
+    margin: 0 0 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+}
+
+.familia-detail > p {
+    max-width: 640px;
+    margin-bottom: 24px;
+}
+
+.familia-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.familia-lightbox img {
+    max-width: min(1100px, 72vw);
+    max-height: 86vh;
+    object-fit: contain;
+}
+
+.familia-lightbox-close,
+.familia-lightbox-nav {
+    position: absolute;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.familia-lightbox-close {
+    top: 24px;
+    right: 24px;
+}
+
+.familia-lightbox-prev {
+    left: 24px;
+}
+
+.familia-lightbox-next {
+    right: 24px;
+}
+
+@media (max-width: 700px) {
+    .la-familia {
+        padding: 110px 16px 48px;
+    }
+
+    .familia-lightbox img {
+        max-width: 92vw;
+    }
+
+    .familia-lightbox-prev,
+    .familia-lightbox-next {
+        bottom: 24px;
+        top: auto;
+    }
+
+    .familia-lightbox-prev {
+        left: 16px;
+    }
+
+    .familia-lightbox-next {
+        right: 16px;
+    }
+}

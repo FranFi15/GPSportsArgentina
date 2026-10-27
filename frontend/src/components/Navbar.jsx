@@ -13,8 +13,8 @@ const Navbar = () => {
     const location = useLocation();
 
     const textos = {
-        es: { inicio: 'Inicio', laEmpresa: 'La Agencia', teamGPSport: '#TeamGPSports', charlas: 'Conferencias', mkt: 'MKT', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
-        en: { inicio: 'Home', laEmpresa: 'The Agency', teamGPSport: '#TeamGPSports', charlas: 'Conferences', mkt: 'MKT', deportes: 'Sports', basketball: 'Basketball', contact: 'Contact', admin: 'Admin' }
+        es: { inicio: 'Inicio', laEmpresa: 'La Agencia', teamGPSport: '#TeamGPSports', laFamilia: 'La Familia', charlas: 'Conferencias', mkt: 'MKT', deportes: 'Deportes', basketball: 'Basketball', contact : 'Contacto', admin: 'Admin' },
+        en: { inicio: 'Home', laEmpresa: 'The Agency', teamGPSport: '#TeamGPSports', laFamilia: 'The Family', charlas: 'Conferences', mkt: 'MKT', deportes: 'Sports', basketball: 'Basketball', contact: 'Contact', admin: 'Admin' }
     };
 
     useEffect(() => {
@@ -54,6 +54,9 @@ const Navbar = () => {
                 </li>
                 <li className="navbar-nav-item">
                     <Link to="/team-gp-sport" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].teamGPSport}</Link>
+                </li>
+                <li className="navbar-nav-item">
+                    <Link to="/la-familia" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].laFamilia}</Link>
                 </li>
                 <li className="navbar-nav-item">
                     <Link to="/basketball" className="navbar-nav-link" onClick={handleLinkClick}>{textos[language].basketball}</Link>

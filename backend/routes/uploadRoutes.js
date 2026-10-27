@@ -47,11 +47,16 @@ router.post('/', authenticateAdmin, uploadImage, async (req, res) => {
 
   try {
     const uploaded = await new Promise((resolve, reject) => {
+      const presets = {
+        hero: { folder: 'gpsports/carousel', width: 1920 },
+        familia: { folder: 'gpsports/familia', width: 1600 },
+      };
+      const preset = presets[req.query.preset] || { folder: 'gpsports', width: 1200 };
       const stream = cloudinary.uploader.upload_stream(
         {
-          folder: req.query.preset === 'hero' ? 'gpsports/carousel' : 'gpsports',
+          folder: preset.folder,
           resource_type: 'image',
-          transformation: [{ width: req.query.preset === 'hero' ? 1920 : 1200, crop: 'limit', quality: 'auto' }],
+          transformation: [{ width: preset.width, crop: 'limit', quality: 'auto' }],
         },
         (error, result) => {
           if (error) reject(error);

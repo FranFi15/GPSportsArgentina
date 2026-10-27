@@ -14,6 +14,8 @@ import PersonList from './components/Admin/PersonList';
 import AddEditPerson from './components/Admin/AddEditPerson';
 import SelectPersonType from './components/Admin/SelectPersonType'; // Importa el nuevo componente
 import CarouselAdmin from './components/Admin/CarouselAdmin';
+import LaFamilia from './pages/LaFamilia';
+import FamiliaAdmin from './components/Admin/FamiliaAdmin';
 import { LanguageProvider } from './context/LanguageContext';
 import  AuthProvider, { useAuth } from './context/AuthContext';
 import './App.css';
@@ -35,6 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/la-empresa" element={<LaEmpresa />} />
+            <Route path="/la-familia" element={<LaFamilia />} />
             <Route path="/team-gp-sport" element={<TeamGPSPORTS />} />
             <Route path="/mkt-eventos" element={<MKT />} />
             <Route path="/charlas" element={<Charlas />} />
@@ -43,6 +46,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/admin" element={<PrivateRoute><PersonList /></PrivateRoute>} />
             <Route path="/admin/carrusel" element={<PrivateRoute><CarouselAdmin /></PrivateRoute>} />
+            <Route path="/admin/familia" element={<PrivateRoute><FamiliaAdmin /></PrivateRoute>} />
+            <Route path="/admin/familia/nuevo" element={<PrivateRoute><FamiliaAdmin /></PrivateRoute>} />
+            <Route path="/admin/familia/:id" element={<PrivateRoute><FamiliaAdmin /></PrivateRoute>} />
             <Route path="/admin/agregar" element={<PrivateRoute><SelectPersonType /></PrivateRoute>} /> {/* Nueva ruta para la selección de tipo */}
             <Route path="/admin/agregar/:tipo" element={<PrivateRoute><AddEditPerson /></PrivateRoute>} /> {/* Ruta para agregar jugador o entrenador */}
             <Route path="/admin/:tipo/editar/:id" element={<PrivateRoute><AddEditPerson /></PrivateRoute>} />

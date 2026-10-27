@@ -10,6 +10,7 @@ import personasRoutes from './routes/personasRoutes.js';
 import warmupRoutes from './routes/warmupRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import carouselRoutes from './routes/carouselRoutes.js';
+import albumRoutes from './routes/albumRoutes.js';
 
 dotenv.config();
 
@@ -65,6 +66,7 @@ app.use('/api/personas', personasRoutes);
 app.use('/api', warmupRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/carousel', carouselRoutes);
+app.use('/api/albums', albumRoutes);
 
 app.use((req, res, next) => {
     res.status(404).json({ message: `Ruta no encontrada: ${req.method} ${req.originalUrl}` });

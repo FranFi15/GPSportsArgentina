@@ -180,6 +180,7 @@ const PersonList = () => {
                 )}
                 <button className="add-new-button" onClick={() => navigate('/admin/agregar')}>Agregar Nuevo</button>
                 <button className="add-new-button" onClick={() => navigate('/admin/carrusel')}>Carrusel</button>
+                <button className="add-new-button" onClick={() => navigate('/admin/familia')}>La Familia</button>
                 <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
             </div>
 
