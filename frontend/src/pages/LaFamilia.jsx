@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import useLanguage from '../hooks/useLanguage';
@@ -37,6 +37,13 @@ const LaFamilia = () => {
   const [albums, setAlbums] = useState([]);
   const [status, setStatus] = useState('loading');
   const [activeId, setActiveId] = useState(null);
+  const [playing, setPlaying] = useState(false);
+  const carouselRef = useRef(null);
+
+  const stopVideos = () => {
+    carouselRef.current?.querySelectorAll('video').forEach((video) => video.pause());
+    setPlaying(false);
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -59,6 +66,10 @@ const LaFamilia = () => {
       albums.some((album) => album._id === current) ? current : albums[0]._id
     ));
   }, [albums]);
+
+  useEffect(() => {
+    setPlaying(false);
+  }, [activeId]);
 
   const active = albums.find((album) => album._id === activeId) || null;
   const photos = active?.photos || [];
@@ -97,7 +108,7 @@ const LaFamilia = () => {
             ))}
           </div>
           {photos.length > 0 && (
-            <div className="familia-carousel" key={active._id}>
+            <div className={`familia-carousel${playing ? ' is-playing' : ''}`} key={active._id} ref={carouselRef}>
               <Carousel
                 showArrows={photos.length > 1}
                 showIndicators={photos.length > 1}
@@ -106,10 +117,33 @@ const LaFamilia = () => {
                 showStatus={false}
                 swipeable
                 emulateTouch
+                onChange={stopVideos}
               >
                 {photos.map((photo, index) => (
-                  <div key={`${photo.url}-${index}`}>
-                    <img src={photo.url} alt={photo.alt || activeTitle} style={frameStyle(photo)} />
+                  <div className="familia-slide" key={`${photo.url}-${index}`}>
+                    {photo.kind === 'video' ? (
+                      <>
+                        <video
+                          src={photo.url}
+                          controls={playing}
+                          playsInline
+                          preload="metadata"
+                          onPlay={() => setPlaying(true)}
+                          onPause={() => setPlaying(false)}
+                        />
+                        <button
+                          type="button"
+                          className="familia-play"
+                          aria-label="Reproducir"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            event.currentTarget.parentElement.querySelector('video')?.play()?.catch(() => {});
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <img src={photo.url} alt={photo.alt || activeTitle} style={frameStyle(photo)} />
+                    )}
                   </div>
                 ))}
               </Carousel>

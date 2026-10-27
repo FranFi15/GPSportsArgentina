@@ -19,14 +19,14 @@ const cleanAlbum = (body) => {
     return { error: 'Enviá las fotos del álbum.' };
   }
   if (body.photos.length > MAX_PHOTOS) {
-    return { error: `Cada álbum admite hasta ${MAX_PHOTOS} fotos.` };
+    return { error: `Cada álbum admite hasta ${MAX_PHOTOS} fotos o videos.` };
   }
 
   const photos = [];
   for (const photo of body.photos) {
     const url = typeof photo?.url === 'string' ? photo.url.trim() : '';
     if (!url.startsWith('https://')) {
-      return { error: 'Cada foto tiene que ser un enlace seguro.' };
+      return { error: 'Cada foto o video tiene que ser un enlace seguro.' };
     }
     const zoom = Number(photo.zoom);
     const x = Number(photo.x);
@@ -34,6 +34,7 @@ const cleanAlbum = (body) => {
     photos.push({
       url,
       alt: typeof photo.alt === 'string' ? photo.alt.trim().slice(0, 80) : '',
+      kind: photo.kind === 'video' ? 'video' : 'image',
       zoom: Math.min(2.5, Math.max(1, Number.isFinite(zoom) ? zoom : 1)),
       x: Math.min(100, Math.max(0, Number.isFinite(x) ? x : 50)),
       y: Math.min(100, Math.max(0, Number.isFinite(y) ? y : 0)),
@@ -41,7 +42,7 @@ const cleanAlbum = (body) => {
   }
 
   if (!photos.length) {
-    return { error: 'Agregá al menos una foto.' };
+    return { error: 'Agregá al menos una foto o un video.' };
   }
 
   return { album: { title, titleEn, caption, captionEn, photos } };

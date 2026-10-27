@@ -6,6 +6,26 @@ import './FamiliaAdmin.css';
 
 const MAX_PHOTOS = 40;
 const MAX_BYTES = 5 * 1024 * 1024;
+const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
+
+const isVideoFile = (file) => {
+  if (file.type.startsWith('video/')) return true;
+  return !file.type && /\.(mp4|mov|m4v|webm)$/i.test(file.name);
+};
+
+const isImageFile = (file) => {
+  if (file.type.startsWith('image/')) return true;
+  return !file.type && /\.(jpe?g|png|gif|webp|avif)$/i.test(file.name);
+};
+
+const mediaLabel = (photos = []) => {
+  const videos = photos.filter((item) => item.kind === 'video').length;
+  const images = photos.length - videos;
+  const parts = [];
+  if (images) parts.push(`${images} ${images === 1 ? 'foto' : 'fotos'}`);
+  if (videos) parts.push(`${videos} ${videos === 1 ? 'video' : 'videos'}`);
+  return parts.join(' · ') || '0 fotos';
+};
 
 const emptyDraft = { title: '', titleEn: '', caption: '', captionEn: '', photos: [] };
 
@@ -21,6 +41,16 @@ const PhotoFrame = ({ photo, disabled, onChange }) => {
       y: frame.y + yDelta,
     }));
   };
+
+  if (photo.kind === 'video') {
+    return (
+      <div className="familia-frame-editor">
+        <div className="familia-frame familia-frame-video">
+          <video src={photo.url} controls playsInline preload="metadata" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="familia-frame-editor">
@@ -120,6 +150,7 @@ const FamiliaAdmin = () => {
             photos: (current.photos || []).map((photo) => ({
               url: photo.url,
               alt: photo.alt || '',
+              kind: photo.kind === 'video' ? 'video' : 'image',
               ...clampFrame(photo),
             })),
           });
@@ -144,7 +175,7 @@ const FamiliaAdmin = () => {
       body,
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.message || 'No se pudo subir la imagen.');
+    if (!response.ok) throw new Error(data.message || 'No se pudo subir el archivo.');
     return data.url;
   };
 
@@ -152,17 +183,30 @@ const FamiliaAdmin = () => {
     const files = [...fileList];
     if (!files.length) return;
     if (draft.photos.length + files.length > MAX_PHOTOS) {
-      setError(`Cada álbum admite hasta ${MAX_PHOTOS} fotos.`);
+      setError(`Cada álbum admite hasta ${MAX_PHOTOS} fotos o videos.`);
       return;
     }
     const next = [];
     for (const file of files) {
-      if (!file.type.startsWith('image/') || file.size > MAX_BYTES) {
+      const video = isVideoFile(file);
+      const image = isImageFile(file);
+      if (!video && !image) {
         next.forEach((photo) => URL.revokeObjectURL(photo.url));
-        setError(file.type.startsWith('image/') ? 'La imagen supera el límite de 5 MB.' : 'El archivo tiene que ser una imagen.');
+        setError('El archivo tiene que ser una imagen o un video.');
         return;
       }
-      next.push({ url: URL.createObjectURL(file), alt: '', file, ...defaultFrame });
+      if ((image && file.size > MAX_BYTES) || (video && file.size > MAX_VIDEO_BYTES)) {
+        next.forEach((photo) => URL.revokeObjectURL(photo.url));
+        setError(video ? 'El video supera el límite de 50 MB.' : 'La imagen supera el límite de 5 MB.');
+        return;
+      }
+      next.push({
+        url: URL.createObjectURL(file),
+        alt: '',
+        file,
+        kind: video ? 'video' : 'image',
+        ...defaultFrame,
+      });
     }
     setError('');
     setDraft((current) => ({ ...current, photos: [...current.photos, ...next] }));
@@ -199,7 +243,7 @@ const FamiliaAdmin = () => {
       return;
     }
     if (!draft.photos.length) {
-      setError('Agregá al menos una foto.');
+      setError('Agregá al menos una foto o un video.');
       return;
     }
     setBusy(true);
@@ -208,7 +252,12 @@ const FamiliaAdmin = () => {
       const photos = [];
       for (const photo of draft.photos) {
         const url = photo.file ? await uploadFile(photo.file) : photo.url;
-        photos.push({ url, alt: photo.alt || '', ...clampFrame(photo) });
+        photos.push({
+          url,
+          alt: photo.alt || '',
+          kind: photo.kind === 'video' ? 'video' : 'image',
+          ...clampFrame(photo),
+        });
       }
       const response = await fetch(isNew ? `${apiBaseUrl}/api/albums` : `${apiBaseUrl}/api/albums/${id}`, {
         method: isNew ? 'POST' : 'PUT',
@@ -297,12 +346,16 @@ const FamiliaAdmin = () => {
           {albums.map((album, index) => (
             <li key={album._id} className="familia-admin-card">
               <div className="familia-admin-cover">
-                {album.photos?.[0]?.url && <img src={album.photos[0].url} alt="" style={frameStyle(album.photos[0])} />}
+                {album.photos?.[0]?.kind === 'video' ? (
+                  <video src={album.photos[0].url} muted playsInline preload="metadata" />
+                ) : (
+                  album.photos?.[0]?.url && <img src={album.photos[0].url} alt="" style={frameStyle(album.photos[0])} />
+                )}
               </div>
               <div>
                 <h3>{album.title}</h3>
                 {album.caption && <p>{album.caption}</p>}
-                <p>{album.photos?.length || 0} fotos</p>
+                <p>{mediaLabel(album.photos)}</p>
                 <div className="familia-admin-actions">
                   <button type="button" onClick={() => moveAlbum(index, -1)} disabled={ordering || index === 0}>Subir</button>
                   <button type="button" onClick={() => moveAlbum(index, 1)} disabled={ordering || index === albums.length - 1}>Bajar</button>
@@ -366,10 +419,10 @@ const FamiliaAdmin = () => {
       />
       <div className="familia-admin-toolbar">
         <label className="familia-admin-gold familia-admin-file">
-          Agregar fotos
+          Agregar fotos o videos
           <input
             type="file"
-            accept="image/*"
+            accept="image/*,video/mp4,video/quicktime,video/webm,.mov,.mp4,.webm"
             multiple
             disabled={busy}
             onChange={(event) => {
@@ -379,6 +432,7 @@ const FamiliaAdmin = () => {
           />
         </label>
       </div>
+      <p className="familia-admin-note">Fotos hasta 5 MB. Videos hasta 50 MB, en MP4, MOV o WebM.</p>
       <ul className="familia-admin-photos">
         {draft.photos.map((photo, index) => (
           <li key={`${photo.url}-${index}`}>

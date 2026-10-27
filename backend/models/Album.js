@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const AlbumPhotoSchema = new mongoose.Schema({
   url: { type: String, required: true },
   alt: { type: String, default: '' },
+  kind: { type: String, enum: ['image', 'video'], default: 'image' },
   zoom: { type: Number, default: 1 },
   x: { type: Number, default: 50 },
   y: { type: Number, default: 0 },
