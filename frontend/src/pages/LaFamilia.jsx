@@ -88,16 +88,17 @@ const LaFamilia = () => {
                 role="tab"
                 aria-selected={album._id === active?._id}
                 className={`familia-pill${album._id === active?._id ? ' familia-pill-active' : ''}`}
-                onClick={() => setActiveId(album._id)}
+                onClick={() => {
+                  if (album._id !== activeId) setActiveId(album._id);
+                }}
               >
                 {language === 'en' && album.titleEn ? album.titleEn : album.title}
               </button>
             ))}
           </div>
           {photos.length > 0 && (
-            <div className="familia-carousel">
+            <div className="familia-carousel" key={active._id}>
               <Carousel
-                key={active._id}
                 showArrows={photos.length > 1}
                 showIndicators={photos.length > 1}
                 infiniteLoop={photos.length > 1}
