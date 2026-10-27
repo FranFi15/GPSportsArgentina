@@ -1,12 +1,81 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { clampFrame, defaultFrame, frameStyle } from '../../data/carouselFrame';
 import './FamiliaAdmin.css';
 
 const MAX_PHOTOS = 40;
 const MAX_BYTES = 5 * 1024 * 1024;
 
 const emptyDraft = { title: '', caption: '', photos: [] };
+
+const PhotoFrame = ({ photo, disabled, onChange }) => {
+  const frameRef = useRef(null);
+  const dragRef = useRef(null);
+  const frame = clampFrame(photo);
+
+  const nudge = (xDelta, yDelta) => {
+    onChange(clampFrame({
+      ...frame,
+      x: frame.x + xDelta,
+      y: frame.y + yDelta,
+    }));
+  };
+
+  return (
+    <div className="familia-frame-editor">
+      <div
+        className="familia-frame"
+        ref={frameRef}
+        onPointerDown={(event) => {
+          if (disabled) return;
+          event.currentTarget.setPointerCapture(event.pointerId);
+          dragRef.current = {
+            pointerX: event.clientX,
+            pointerY: event.clientY,
+            x: frame.x,
+            y: frame.y,
+          };
+        }}
+        onPointerMove={(event) => {
+          if (!dragRef.current || !frameRef.current) return;
+          const rect = frameRef.current.getBoundingClientRect();
+          const deltaX = ((event.clientX - dragRef.current.pointerX) / rect.width) * 100;
+          const deltaY = ((event.clientY - dragRef.current.pointerY) / rect.height) * 100;
+          onChange(clampFrame({
+            ...frame,
+            x: dragRef.current.x - deltaX,
+            y: dragRef.current.y - deltaY,
+          }));
+        }}
+        onPointerUp={() => { dragRef.current = null; }}
+        onPointerCancel={() => { dragRef.current = null; }}
+      >
+        <img src={photo.url} alt="" draggable={false} style={frameStyle(frame)} />
+      </div>
+      <div className="familia-pan">
+        <button type="button" aria-label="Arriba" onClick={() => nudge(0, -8)} disabled={disabled}>↑</button>
+        <div>
+          <button type="button" aria-label="Izquierda" onClick={() => nudge(-8, 0)} disabled={disabled}>←</button>
+          <button type="button" aria-label="Derecha" onClick={() => nudge(8, 0)} disabled={disabled}>→</button>
+        </div>
+        <button type="button" aria-label="Abajo" onClick={() => nudge(0, 8)} disabled={disabled}>↓</button>
+      </div>
+      <label className="familia-zoom">
+        Zoom
+        <input
+          type="range"
+          min="1"
+          max="2.5"
+          step="0.05"
+          value={frame.zoom}
+          disabled={disabled}
+          onChange={(event) => onChange(clampFrame({ ...frame, zoom: Number(event.target.value) }))}
+        />
+      </label>
+    </div>
+  );
+};
 
 const FamiliaAdmin = () => {
   const { id } = useParams();
@@ -45,7 +114,11 @@ const FamiliaAdmin = () => {
           setDraft({
             title: current.title || '',
             caption: current.caption || '',
-            photos: (current.photos || []).map((photo) => ({ url: photo.url, alt: photo.alt || '' })),
+            photos: (current.photos || []).map((photo) => ({
+              url: photo.url,
+              alt: photo.alt || '',
+              ...clampFrame(photo),
+            })),
           });
         }
       } catch (err) {
@@ -86,7 +159,7 @@ const FamiliaAdmin = () => {
         setError(file.type.startsWith('image/') ? 'La imagen supera el límite de 5 MB.' : 'El archivo tiene que ser una imagen.');
         return;
       }
-      next.push({ url: URL.createObjectURL(file), alt: '', file });
+      next.push({ url: URL.createObjectURL(file), alt: '', file, ...defaultFrame });
     }
     setError('');
     setDraft((current) => ({ ...current, photos: [...current.photos, ...next] }));
@@ -99,6 +172,15 @@ const FamiliaAdmin = () => {
     const [item] = photos.splice(index, 1);
     photos.splice(target, 0, item);
     setDraft((current) => ({ ...current, photos }));
+  };
+
+  const updateFrame = (index, frame) => {
+    setDraft((current) => ({
+      ...current,
+      photos: current.photos.map((photo, photoIndex) => (
+        photoIndex === index ? { ...photo, ...clampFrame(frame) } : photo
+      )),
+    }));
   };
 
   const removePhoto = (index) => {
@@ -123,7 +205,7 @@ const FamiliaAdmin = () => {
       const photos = [];
       for (const photo of draft.photos) {
         const url = photo.file ? await uploadFile(photo.file) : photo.url;
-        photos.push({ url, alt: photo.alt || '' });
+        photos.push({ url, alt: photo.alt || '', ...clampFrame(photo) });
       }
       const response = await fetch(isNew ? `${apiBaseUrl}/api/albums` : `${apiBaseUrl}/api/albums/${id}`, {
         method: isNew ? 'POST' : 'PUT',
@@ -180,7 +262,7 @@ const FamiliaAdmin = () => {
           {albums.map((album) => (
             <li key={album._id} className="familia-admin-card">
               <div className="familia-admin-cover">
-                {album.photos?.[0]?.url && <img src={album.photos[0].url} alt="" />}
+                {album.photos?.[0]?.url && <img src={album.photos[0].url} alt="" style={frameStyle(album.photos[0])} />}
               </div>
               <div>
                 <h3>{album.title}</h3>
@@ -243,7 +325,11 @@ const FamiliaAdmin = () => {
       <ul className="familia-admin-photos">
         {draft.photos.map((photo, index) => (
           <li key={`${photo.url}-${index}`}>
-            <img src={photo.url} alt="" />
+            <PhotoFrame
+              photo={photo}
+              disabled={busy}
+              onChange={(frame) => updateFrame(index, frame)}
+            />
             <div className="familia-admin-actions">
               <button type="button" onClick={() => movePhoto(index, -1)} disabled={busy || index === 0}>Subir</button>
               <button type="button" onClick={() => movePhoto(index, 1)} disabled={busy || index === draft.photos.length - 1}>Bajar</button>

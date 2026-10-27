@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import useLanguage from '../hooks/useLanguage';
+import { frameStyle } from '../data/carouselFrame';
 import './LaFamilia.css';
 
 const copy = {
@@ -14,14 +16,8 @@ const copy = {
     loading: 'Cargando encuentros...',
     empty: 'Los encuentros van a aparecer acá.',
     error: 'No se pudieron cargar los álbumes.',
-    back: 'Todos los álbumes',
-    photos: 'fotos',
-    close: 'Cerrar',
-    previous: 'Anterior',
-    next: 'Siguiente',
   },
   en: {
-
     title: 'Being close is also what defines us',
     paragraphs: [
       'At GP Sports we understand that representation goes far beyond contracts and negotiations. For us, every player, coach, and athlete is part of our family. And family is always looked after.',
@@ -31,11 +27,6 @@ const copy = {
     loading: 'Loading visits...',
     empty: 'The visits will appear here.',
     error: 'The albums could not be loaded.',
-    back: 'All albums',
-    photos: 'photos',
-    close: 'Close',
-    previous: 'Previous',
-    next: 'Next',
   },
 };
 
@@ -43,10 +34,9 @@ const LaFamilia = () => {
   const { language } = useLanguage();
   const text = copy[language] || copy.es;
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-  const [searchParams, setSearchParams] = useSearchParams();
   const [albums, setAlbums] = useState([]);
   const [status, setStatus] = useState('loading');
-  const [photoIndex, setPhotoIndex] = useState(null);
+  const [activeId, setActiveId] = useState(null);
 
   useEffect(() => {
     const load = async () => {
@@ -63,35 +53,19 @@ const LaFamilia = () => {
     load();
   }, [apiBaseUrl]);
 
-  const active = albums.find((album) => album._id === searchParams.get('album')) || null;
-
   useEffect(() => {
-    setPhotoIndex(null);
-  }, [active?._id]);
+    if (!albums.length) return;
+    setActiveId((current) => (
+      albums.some((album) => album._id === current) ? current : albums[0]._id
+    ));
+  }, [albums]);
 
-  useEffect(() => {
-    if (photoIndex === null) return undefined;
-    const onKey = (event) => {
-      if (event.key === 'Escape') setPhotoIndex(null);
-      if (!active?.photos?.length) return;
-      if (event.key === 'ArrowRight') setPhotoIndex((index) => (index + 1) % active.photos.length);
-      if (event.key === 'ArrowLeft') {
-        setPhotoIndex((index) => (index - 1 + active.photos.length) % active.photos.length);
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [photoIndex, active]);
-
-  const openAlbum = (id) => {
-    setSearchParams({ album: id });
-    window.scrollTo(0, 0);
-  };
+  const active = albums.find((album) => album._id === activeId) || null;
+  const photos = active?.photos || [];
 
   return (
     <main className="la-familia">
       <section className="la-familia-intro">
-        <p className="la-familia-kicker">{text.kicker}</p>
         <h1>{text.title}</h1>
         {text.paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
@@ -102,56 +76,44 @@ const LaFamilia = () => {
       {status === 'error' && <p className="la-familia-status">{text.error}</p>}
       {status === 'ready' && !albums.length && <p className="la-familia-status">{text.empty}</p>}
 
-      {status === 'ready' && albums.length > 0 && !active && (
-        <div className="familia-albums">
-          {albums.map((album) => (
-            <button key={album._id} type="button" className="familia-album" onClick={() => openAlbum(album._id)}>
-              {album.photos?.[0]?.url && <img src={album.photos[0].url} alt="" />}
-              <span>
+      {status === 'ready' && albums.length > 0 && (
+        <section className="familia-gallery">
+          <div className="familia-filters" role="tablist">
+            {albums.map((album) => (
+              <button
+                key={album._id}
+                type="button"
+                role="tab"
+                aria-selected={album._id === active?._id}
+                className={`familia-pill${album._id === active?._id ? ' familia-pill-active' : ''}`}
+                onClick={() => setActiveId(album._id)}
+              >
                 {album.title}
-                <small>{album.photos?.length || 0} {text.photos}</small>
-              </span>
-            </button>
-          ))}
-        </div>
-      )}
-
-      {active && (
-        <section className="familia-detail">
-          <button type="button" className="familia-back" onClick={() => setSearchParams({})}>
-            {text.back}
-          </button>
-          <h2>{active.title}</h2>
-          {active.caption && <p>{active.caption}</p>}
-          <div className="familia-photos">
-            {active.photos.map((photo, index) => (
-              <button key={`${photo.url}-${index}`} type="button" className="familia-photo" onClick={() => setPhotoIndex(index)}>
-                <img src={photo.url} alt={photo.alt || active.title} />
               </button>
             ))}
           </div>
+          {active?.caption && <p className="familia-caption">{active.caption}</p>}
+          {photos.length > 0 && (
+            <div className="familia-carousel">
+              <Carousel
+                key={active._id}
+                showArrows={photos.length > 1}
+                showIndicators={photos.length > 1}
+                infiniteLoop={photos.length > 1}
+                showThumbs={false}
+                showStatus={false}
+                swipeable
+                emulateTouch
+              >
+                {photos.map((photo, index) => (
+                  <div key={`${photo.url}-${index}`}>
+                    <img src={photo.url} alt={photo.alt || active.title} style={frameStyle(photo)} />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          )}
         </section>
-      )}
-
-      {active && photoIndex !== null && (
-        <div className="familia-lightbox" role="dialog" aria-modal="true" aria-label={active.title}>
-          <button type="button" className="familia-lightbox-close" onClick={() => setPhotoIndex(null)}>{text.close}</button>
-          <button
-            type="button"
-            className="familia-lightbox-nav familia-lightbox-prev"
-            onClick={() => setPhotoIndex((index) => (index - 1 + active.photos.length) % active.photos.length)}
-          >
-            {text.previous}
-          </button>
-          <img src={active.photos[photoIndex].url} alt={active.photos[photoIndex].alt || active.title} />
-          <button
-            type="button"
-            className="familia-lightbox-nav familia-lightbox-next"
-            onClick={() => setPhotoIndex((index) => (index + 1) % active.photos.length)}
-          >
-            {text.next}
-          </button>
-        </div>
       )}
     </main>
   );

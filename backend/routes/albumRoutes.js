@@ -25,9 +25,15 @@ const cleanAlbum = (body) => {
     if (!url.startsWith('https://')) {
       return { error: 'Cada foto tiene que ser un enlace seguro.' };
     }
+    const zoom = Number(photo.zoom);
+    const x = Number(photo.x);
+    const y = Number(photo.y);
     photos.push({
       url,
       alt: typeof photo.alt === 'string' ? photo.alt.trim().slice(0, 80) : '',
+      zoom: Math.min(2.5, Math.max(1, Number.isFinite(zoom) ? zoom : 1)),
+      x: Math.min(100, Math.max(0, Number.isFinite(x) ? x : 50)),
+      y: Math.min(100, Math.max(0, Number.isFinite(y) ? y : 0)),
     });
   }
 

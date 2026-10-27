@@ -37,8 +37,7 @@
     }
 }
 
-.la-familia-intro p,
-.familia-detail > p {
+.la-familia-intro p {
     margin: 0 0 18px;
     color: rgba(255, 255, 255, 0.86);
     font-size: 1.1rem;
@@ -47,157 +46,104 @@
 }
 
 .la-familia-status {
-    width: min(760px, 100%);
+    width: min(1100px, 100%);
     margin: 0 auto;
     color: rgba(255, 255, 255, 0.62);
     text-align: center;
 }
 
-.familia-albums,
-.familia-detail {
+.familia-gallery {
     width: min(1100px, 100%);
     margin: 0 auto;
 }
 
-.familia-albums,
-.familia-photos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 18px;
-}
-
-.familia-album,
-.familia-photo {
-    position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    padding: 0;
-    border: 0;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #111111;
-    cursor: pointer;
-}
-
-.familia-photo {
-    aspect-ratio: 1;
-}
-
-.familia-album img,
-.familia-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.45s ease;
-}
-
-.familia-album:hover img,
-.familia-photo:hover img {
-    transform: scale(1.06);
-}
-
-.familia-album span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.familia-filters {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 56px 16px 16px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
-    color: #ffffff;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 2rem;
-    letter-spacing: 0.04em;
-    text-align: left;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 22px;
 }
 
-.familia-album small {
+.familia-pill {
+    position: relative;
+    display: inline-block;
+    margin: 0 6px;
+    padding: 5px 10px 7px;
+    border: none;
+    border-radius: 0;
+    background: none;
+    color: #ffffff;
     font-family: "Roboto", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.75);
-}
-
-.familia-back {
-    margin-bottom: 18px;
-    padding: 10px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 999px;
-    background: transparent;
-    color: #ffffff;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 0.98rem;
+    font-weight: 800;
     cursor: pointer;
+    transition: color 0.2s ease-in-out;
 }
 
-.familia-back:hover {
-    border-color: #d4af37;
+.familia-pill::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background-color: #d4af37;
+    transition: width 0.3s ease-in-out;
+}
+
+.familia-pill:hover,
+.familia-pill-active {
     color: #d4af37;
 }
 
-.familia-detail h2 {
-    margin: 0 0 8px;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 400;
-    letter-spacing: 0.04em;
+.familia-pill:hover::after,
+.familia-pill-active::after {
+    width: 100%;
 }
 
-.familia-detail > p {
-    max-width: 640px;
-    margin-bottom: 24px;
+.familia-caption {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1.1rem;
+    font-weight: 200;
+    line-height: 1.7;
+    text-align: center;
 }
 
-.familia-lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.92);
+.familia-carousel {
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #111111;
 }
 
-.familia-lightbox img {
-    max-width: min(1100px, 72vw);
-    max-height: 86vh;
-    object-fit: contain;
+.familia-carousel .carousel .slide,
+.familia-carousel .carousel .slide > div,
+.familia-carousel .carousel .slide.selected > div {
+    background: #111111;
+    opacity: 1;
+    transition: none;
 }
 
-.familia-lightbox-close,
-.familia-lightbox-nav {
-    position: absolute;
-    padding: 10px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.45);
-    color: #ffffff;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    cursor: pointer;
+.familia-carousel .carousel .slide > div {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
 }
 
-.familia-lightbox-close {
-    top: 24px;
-    right: 24px;
+.familia-carousel .carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.familia-lightbox-prev {
-    left: 24px;
+.familia-carousel .control-arrow {
+    background: rgba(0, 0, 0, 0.35);
 }
 
-.familia-lightbox-next {
-    right: 24px;
+.familia-carousel .control-dots .dot {
+    background: #d4af37;
+    box-shadow: none;
 }
 
 @media (max-width: 700px) {
@@ -205,21 +151,7 @@
         padding: 110px 16px 48px;
     }
 
-    .familia-lightbox img {
-        max-width: 92vw;
-    }
-
-    .familia-lightbox-prev,
-    .familia-lightbox-next {
-        bottom: 24px;
-        top: auto;
-    }
-
-    .familia-lightbox-prev {
-        left: 16px;
-    }
-
-    .familia-lightbox-next {
-        right: 16px;
+    .la-familia-intro h1 {
+        font-size: 4rem;
     }
 }
