@@ -12,6 +12,7 @@ const AlbumSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
   caption: { type: String, default: '', trim: true },
   photos: { type: [AlbumPhotoSchema], default: [] },
+  order: { type: Number, default: 0 },
 }, { timestamps: true });
 
 export default mongoose.model('Album', AlbumSchema);

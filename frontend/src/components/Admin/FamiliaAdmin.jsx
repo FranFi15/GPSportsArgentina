@@ -90,6 +90,7 @@ const FamiliaAdmin = () => {
   const [draft, setDraft] = useState(emptyDraft);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [ordering, setOrdering] = useState(false);
   const [loading, setLoading] = useState(!isNew);
 
   useEffect(() => {
@@ -229,6 +230,36 @@ const FamiliaAdmin = () => {
     }
   };
 
+  const moveAlbum = async (index, direction) => {
+    const target = index + direction;
+    if (ordering || target < 0 || target >= albums.length) return;
+    const previous = albums;
+    const next = [...albums];
+    const [item] = next.splice(index, 1);
+    next.splice(target, 0, item);
+    setAlbums(next);
+    setOrdering(true);
+    setError('');
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/albums/reorder`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ids: next.map((album) => album._id) }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'No se pudo cambiar el orden.');
+      if (Array.isArray(data)) setAlbums(data);
+    } catch (err) {
+      setAlbums(previous);
+      setError(err.message);
+    } finally {
+      setOrdering(false);
+    }
+  };
+
   const removeAlbum = async (album) => {
     if (!window.confirm(`¿Eliminar el álbum "${album.title}"?`)) return;
     setError('');
@@ -250,7 +281,7 @@ const FamiliaAdmin = () => {
       <div className="familia-admin-page">
       <div className="familia-admin">
         <h2>La Familia</h2>
-        <p className="familia-admin-note">Creá, editá o eliminá los álbumes que se ven en La Familia.</p>
+        <p className="familia-admin-note">Creá, ordená, editá o eliminá los álbumes que se ven en La Familia.</p>
         {error && <p className="familia-admin-error">{error}</p>}
         <div className="familia-admin-toolbar">
           <button type="button" className="familia-admin-gold" onClick={() => navigate('/admin/familia/nuevo')}>Nuevo álbum</button>
@@ -259,7 +290,7 @@ const FamiliaAdmin = () => {
         {loading && <p className="familia-admin-note">Cargando álbumes...</p>}
         {!loading && !albums.length && !error && <p className="familia-admin-note">Todavía no hay álbumes.</p>}
         <ul className="familia-admin-list">
-          {albums.map((album) => (
+          {albums.map((album, index) => (
             <li key={album._id} className="familia-admin-card">
               <div className="familia-admin-cover">
                 {album.photos?.[0]?.url && <img src={album.photos[0].url} alt="" style={frameStyle(album.photos[0])} />}
@@ -269,6 +300,8 @@ const FamiliaAdmin = () => {
                 {album.caption && <p>{album.caption}</p>}
                 <p>{album.photos?.length || 0} fotos</p>
                 <div className="familia-admin-actions">
+                  <button type="button" onClick={() => moveAlbum(index, -1)} disabled={ordering || index === 0}>Subir</button>
+                  <button type="button" onClick={() => moveAlbum(index, 1)} disabled={ordering || index === albums.length - 1}>Bajar</button>
                   <button type="button" className="familia-admin-gold" onClick={() => navigate(`/admin/familia/${album._id}`)}>Editar</button>
                   <button type="button" className="familia-admin-danger" onClick={() => removeAlbum(album)}>Eliminar</button>
                 </div>

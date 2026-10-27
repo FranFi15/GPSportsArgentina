@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import Album from '../models/Album.js';
 import authenticateAdmin from '../middleware/authMiddleware.js';
 
@@ -46,7 +47,7 @@ const cleanAlbum = (body) => {
 
 router.get('/', async (req, res) => {
   try {
-    const albums = await Album.find().sort({ createdAt: -1 });
+    const albums = await Album.find().sort({ order: 1, createdAt: -1 });
     res.json(albums);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -68,10 +69,33 @@ router.post('/', authenticateAdmin, async (req, res) => {
   if (error) return res.status(400).json({ message: error });
 
   try {
-    const created = await Album.create(album);
+    const count = await Album.countDocuments();
+    const created = await Album.create({ ...album, order: count });
     res.status(201).json(created);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+router.put('/reorder', authenticateAdmin, async (req, res) => {
+  const ids = Array.isArray(req.body?.ids) ? req.body.ids : null;
+  if (!ids?.length || ids.some((id) => !mongoose.Types.ObjectId.isValid(id))) {
+    return res.status(400).json({ message: 'Enviá el orden de los álbumes.' });
+  }
+
+  try {
+    const existing = await Album.find().select('_id');
+    const known = new Set(existing.map((album) => String(album._id)));
+    const unique = new Set(ids.map(String));
+    if (unique.size !== ids.length || known.size !== ids.length || ids.some((id) => !known.has(String(id)))) {
+      return res.status(400).json({ message: 'El orden no coincide con los álbumes.' });
+    }
+
+    await Promise.all(ids.map((id, index) => Album.updateOne({ _id: id }, { order: index })));
+    const albums = await Album.find().sort({ order: 1, createdAt: -1 });
+    res.json(albums);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 
